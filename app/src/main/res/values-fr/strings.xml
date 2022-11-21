@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="main_activity_message">Le premier bien immobilier enregistré vaut&#160;</string>
+    <string name="house_value_text">Voici la valeur d\'un bien :</string>
+    <string name="zero_value">0</string>
+</resources>
