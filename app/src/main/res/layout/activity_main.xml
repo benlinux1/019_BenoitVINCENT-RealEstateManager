@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.openclassrooms.realestatemanager.MainActivity"
+    tools:context="com.benlinux.realestatemanager.ui.activities.MainActivity"
     android:gravity="center">
 
     <LinearLayout
@@ -20,13 +20,13 @@
             android:id="@+id/activity_main_activity_text_view_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Voici la valeur d'un bien : "/>
+            android:text="@string/house_value_text"/>
 
         <TextView
             android:id="@+id/activity_main_activity_text_view_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text="@string/zero_value"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -35,4 +35,4 @@
     </LinearLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

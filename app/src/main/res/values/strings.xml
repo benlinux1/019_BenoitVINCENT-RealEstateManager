@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">Real Estate Manager</string>
+    <string name="app_name" translatable="false">Real Estate Manager</string>
+    <string name="main_activity_message">The first property costs&#160;</string>
+    <string name="house_value_text">Here is the cost of a property:&#160;</string>
+    <string name="zero_value">0</string>
 </resources>
