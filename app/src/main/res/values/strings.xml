@@ -1,6 +1,92 @@
 <resources>
     <string name="app_name" translatable="false">Real Estate Manager</string>
+
+    // NAVIGATION
+    <string name="navigation_list_view">List View</string>
+    <string name="navigation_map_view">Map View</string>
+    <string name="navigation_add_property">Add Property</string>
+
+    <string name="bottom_navigation_list_view">List View</string>
+    <string name="bottom_navigation_map_view">Map View</string>
+    <string name="bottom_navigation_add_property">Add Property</string>
+
+    // FRAGMENTS LABELS
+    <string name="list_fragment_label">Properties List</string>
+    <string name="map_fragment_label">Properties Map</string>
+    <string name="add_property_fragment_label">New property</string>
+
+
+    // MAIN ACTIVITY
     <string name="main_activity_message">The first property costs&#160;</string>
-    <string name="house_value_text">Here is the cost of a property:&#160;</string>
+    <string name="house_value_text">Here is the cost of a property :&#160;</string>
     <string name="zero_value">0</string>
+
+    // NAVIGATION DRAWER
+    <string name="user_name" translatable="false">John SMITH</string>
+    <string name="user_email" translatable="false">jsmith.1337@gmail.com</string>
+    <string name="drawer_title_login">LOG IN</string>
+    <string name="drawer_title_settings">SETTINGS</string>
+    <string name="drawer_title_logout">LOGOUT</string>
+    <string name="info_no_email_found">Email not found</string>
+    <string name="info_no_username_found">Username not found</string>
+    <string name="logo" translatable="false">Real Estate Manager logo</string>
+
+    // Used in NavigationDrawer
+    <string name="navigation_drawer_open" translatable="false">Start</string>
+    <string name="navigation_drawer_close" translatable="false">Close</string>
+
+    // AUTHENTICATION
+    <string name="login" translatable="false">Connexion</string>
+    <string name="error_not_connected">User must be logged !</string>
+    <string name="error_authentication_canceled">Authentication canceled&#8230;</string>
+    <string name="error_no_internet">No internet connexion !</string>
+    <string name="error_unknown_error">An unknown error occurred&#8230;</string>
+    <string name="connection_succeed">Authentication completed !</string>
+    <string name="disconnection_succeed">Logout completed !</string>
+    <string name="disconnection_failed">Error during logout… Try again</string>
+
+    // PROPERTY DETAILS
+    <string name="property_details_update_button">Update property button</string>
+    <string name="property_details_information_title">Duplex</string>
+    <string name="details_information_subtitle">Manhattan</string>
+    <string name="details_surface_title">Surface :&#160;</string>
+    <string name="details_surface_text">750 m²</string>
+    <string name="details_rooms_title">Number of rooms:&#160;</string>
+    <string name="details_rooms_text">10</string>
+    <string name="details_bathrooms_title">Number of bathrooms :&#160;</string>
+    <string name="details_bathrooms_text">2</string>
+    <string name="details_bedrooms_title">Number of bedrooms:&#160;</string>
+    <string name="details_bedrooms_text">6</string>
+    <string name="details_location_title">Location</string>
+    <string name="details_street_text">12 rue de la Paix</string>
+    <string name="details_location_complement_text">Appt 8 – 9ème étage</string>
+    <string name="details_postal_code_text">75000</string>
+    <string name="details_city_text">PARIS</string>
+    <string name="details_location_state_text">FRANCE</string>
+    <string name="property_details_description_title">Description</string>
+    <string name="property_details_description_text">Property description</string>
+    <string name="details_price_title">Price :&#160;</string>
+    <string name="details_price_text">$ 29 872 000</string>
+    <string name="add_type_flat">Flat</string>
+    <string name="add_type_house">House</string>
+    <string name="add_type_duplex">Duplex</string>
+    <string name="add_type_penthouse">Penthouse</string>
+    <string name="add_property_name">Title</string>
+    <string name="choose_property_type">Please select a property type</string>
+    <string name="add_property_area">Area</string>
+    <string name="add_status_1">Available</string>
+    <string name="add_status_2">Sold</string>
+    <string name="add_price_text">Price</string>
+    <string name="add_surface_text">Surface</string>
+    <string name="add_property_description_text">Anchored by a vast marble gallery with sweeping staircase, th entertaining floor includes a baronial living room facing Park Avenue, handsome library with oringinal paneling, and tremendous dining room; all of which enjoy fireplaces. The state-of-the-art Saint Charles designed kitchen includes a sunny breakfast room and staff quarters. Upstairs, the expansive master suite overlooks Park Avenue and includes two marble baths, two dressing rooms, and two offices. Additionally, the are three large bedrooms with en-suite baths and a media room.</string>
+    <string name="property_picture_content_description">Picture of the property</string>
+    <string name="add_pictures_title">Pictures gallery</string>
+    <string name="property_picture_description">Lounge 1</string>
+    <string name="add_property_creation_date">Creation date</string>
+    <string name="add_property_sold_date">Date of sale</string>
+    <string name="save_button_text">Save property</string>
+    <string name="choose_property_status">Please select a property status</string>
+    <string name="add_property_description">Description</string>
+    <string name="add_new_picture">Add a new picture</string>
+
 </resources>

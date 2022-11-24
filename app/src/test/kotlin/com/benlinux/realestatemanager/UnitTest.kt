@@ -15,6 +15,7 @@ class UnitTest {
 
     @Test
     @Throws(Exception::class)
+    // Euro to dollar conversion
     fun amountInEuroIsConvertedToDollarAndRounded() {
         val euroAmount1 = 2
         val euroAmount2 = 224
@@ -27,6 +28,7 @@ class UnitTest {
 
     @Test
     @Throws(Exception::class)
+    // Date format to defined pattern
     fun currentDateIsFormattedToPattern() {
         val today = Date()
         val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")

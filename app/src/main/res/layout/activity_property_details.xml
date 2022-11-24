@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/property_details_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEFF0"
+    tools:context="com.benlinux.realestatemanager.ui.activities.PropertyDetailsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/property_details_main_picture"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:adjustViewBounds="true"
+            android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_details_photo_camera_24" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/property_details_update_button"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/property_details_main_picture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/property_details_main_picture"
+            android:contentDescription="@string/property_details_update_button"
+            app:backgroundTint="#FFFFFF"
+            app:srcCompat="@drawable/ic_details_edit_24" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/property_details_information_section"
+            style="@style/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintTop_toBottomOf="@id/property_details_main_picture">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/property_details_information_title"
+                    style="@style/cardMainTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/property_details_information_title" />
+
+                <TextView
+                    android:id="@+id/property_details_information_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/property_details_information_title"
+                    tools:text="@string/details_information_subtitle" />
+
+                <View
+                    android:id="@+id/property_details_separator"
+                    android:layout_width="160dp"
+                    android:layout_height="1dp"
+                    android:foregroundGravity="center"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_information_subtitle"
+                    android:layout_marginVertical="16dp" />
+
+                <TextView
+                    android:id="@+id/property_details_surface_title"
+                    style="@style/cardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:drawableStart="@drawable/ic_details_surface_24"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_separator"
+                    tools:text="@string/details_surface_title" />
+
+                <TextView
+                    android:id="@+id/property_details_surface_text"
+                    style="@style/cardText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/property_details_surface_title"
+                    app:layout_constraintTop_toTopOf="@+id/property_details_surface_title"
+                    app:layout_constraintBottom_toBottomOf="@+id/property_details_surface_title"
+                    tools:text="@string/details_surface_text" />
+
+                <TextView
+                    android:id="@+id/property_details_rooms_title"
+                    style="@style/cardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_details_rooms_24"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_surface_text"
+                    tools:text="@string/details_rooms_title" />
+
+                <TextView
+                    android:id="@+id/property_details_rooms_text"
+                    style="@style/cardText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/property_details_rooms_title"
+                    app:layout_constraintTop_toTopOf="@+id/property_details_rooms_title"
+                    app:layout_constraintBottom_toBottomOf="@+id/property_details_rooms_title"
+                    tools:text="@string/details_rooms_text" />
+
+                <TextView
+                    android:id="@+id/property_details_bathrooms_title"
+                    style="@style/cardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_details_bathrooms_24"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_rooms_text"
+                    tools:text="@string/details_bathrooms_title" />
+
+                <TextView
+                    android:id="@+id/property_details_bathrooms_text"
+                    style="@style/cardText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/property_details_bathrooms_title"
+                    app:layout_constraintTop_toTopOf="@+id/property_details_bathrooms_title"
+                    app:layout_constraintBottom_toBottomOf="@+id/property_details_bathrooms_title"
+                    tools:text="@string/details_bathrooms_text" />
+
+                <TextView
+                    android:id="@+id/property_details_bedrooms_title"
+                    style="@style/cardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_details_bathrooms_24"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_bathrooms_text"
+                    tools:text="@string/details_bedrooms_title" />
+
+                <TextView
+                    android:id="@+id/property_details_bedrooms_text"
+                    style="@style/cardText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/property_details_bedrooms_title"
+                    app:layout_constraintTop_toTopOf="@+id/property_details_bedrooms_title"
+                    app:layout_constraintBottom_toBottomOf="@+id/property_details_bedrooms_title"
+                    tools:text="@string/details_bedrooms_text" />
+
+                <TextView
+                    android:id="@+id/property_details_price_title"
+                    style="@style/cardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_details_price_24"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_bedrooms_text"
+                    tools:text="@string/details_price_title" />
+
+                <TextView
+                    android:id="@+id/property_details_price_text"
+                    style="@style/cardText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/property_details_price_title"
+                    app:layout_constraintTop_toTopOf="@+id/property_details_price_title"
+                    app:layout_constraintBottom_toBottomOf="@+id/property_details_price_title"
+                    tools:text="@string/details_price_text" />
+
+                <ImageView
+                    android:id="@+id/property_details_location_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/cardTitle"
+                    android:src="@drawable/ic_details_location_24"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_price_text"/>
+
+
+
+                <TextView
+                    android:id="@+id/property_details_location_title"
+                    style="@style/cardTitle"
+                    android:paddingStart="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/property_details_location_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_price_text"
+                    tools:text="@string/details_location_title" />
+
+                <TextView
+                    android:id="@+id/property_details_location_street"
+                    style="@style/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_title"
+                    tools:text="@string/details_street_text" />
+
+                <TextView
+                    android:id="@+id/property_details_location_complement"
+                    style="@style/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_street"
+                    tools:text="@string/details_location_complement_text" />
+
+                <TextView
+                    android:id="@+id/property_details_location_postal_code"
+                    style="@style/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_complement"
+                    tools:text="@string/details_postal_code_text" />
+
+                <TextView
+                    android:id="@+id/property_details_location_city"
+                    style="@style/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_postal_code"
+                    tools:text="@string/details_city_text" />
+
+                <TextView
+                    android:id="@+id/property_details_location_state"
+                    style="@style/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_city"
+                    tools:text="@string/details_location_state_text" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/details_description_section"
+            style="@style/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/property_details_information_section">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:id="@+id/property_details_description_title"
+                    style="@style/cardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="@string/property_details_description_title" />
+
+
+                <TextView
+                    android:id="@+id/property_details_description_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/property_details_description_title"
+                    app:layout_constraintTop_toBottomOf="@id/property_details_description_title"
+                    tools:text="@string/property_details_description_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

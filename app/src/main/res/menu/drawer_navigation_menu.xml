@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view" >
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/drawer_navigation_login"
+            android:icon="@drawable/ic_drawer_navigation_login_24"
+            android:title="@string/drawer_title_login" />
+        <item
+            android:id="@+id/drawer_navigation_settings"
+            android:icon="@drawable/ic_drawer_navigation_settings_24"
+            android:title="@string/drawer_title_settings"
+            android:visible="false"/>
+        <item
+            android:id="@+id/drawer_navigation_logout"
+            android:icon="@drawable/ic_drawer_navigation_logout_24"
+            android:title="@string/drawer_title_logout"
+            android:visible="false"/>
+
+    </group>
+
+</menu>

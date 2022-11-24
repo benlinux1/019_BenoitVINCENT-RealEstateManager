@@ -3,4 +3,79 @@
     <string name="main_activity_message">Le premier bien immobilier enregistré vaut&#160;</string>
     <string name="house_value_text">Voici la valeur d\'un bien :</string>
     <string name="zero_value">0</string>
+
+    // NAVIGATION
+    <string name="navigation_list_view">Liste</string>
+    <string name="navigation_map_view">Carte</string>
+    <string name="navigation_add_property">Ajouter un bien</string>
+
+    <string name="bottom_navigation_list_view">Liste</string>
+    <string name="bottom_navigation_map_view">Carte</string>
+    <string name="bottom_navigation_add_property">Ajouter un bien</string>
+
+    // FRAGMENTS LABELS
+    <string name="list_fragment_label">Liste des biens immobiliers</string>
+    <string name="map_fragment_label">Carte des biens immobiliers</string>
+    <string name="add_property_fragment_label">Ajouter un bien immobilier</string>
+
+    // NAVIGATION DRAWER
+    <string name="drawer_title_login">CONNEXION</string>
+    <string name="drawer_title_settings">PRÉFÉRENCES</string>
+    <string name="drawer_title_logout">DÉCONNEXION</string>
+    <string name="info_no_email_found">Adresse e-mail non trouvée</string>
+    <string name="info_no_username_found">Nom d\'utilisateur non trouvé</string>
+
+    // AUTHENTICATION
+    <string name="error_not_connected">Vous devez être authentifié(e)</string>
+    <string name="error_authentication_canceled">Connexion annulée</string>
+    <string name="error_no_internet">Aucune connexion internet !</string>
+    <string name="error_unknown_error">Une erreur s\'est produite</string>
+    <string name="connection_succeed">"Vous êtes désormais connecté(e) "</string>
+    <string name="disconnection_succeed">Vous êtes désormais déconnecté(e)</string>
+    <string name="disconnection_failed">Erreur pendant la déconnexion, réessayez svp</string>
+
+    // PROPERTY DETAILS
+    <string name="property_details_update_button">Bouton pour mettre à jour le bien immobilier</string>
+    <string name="property_details_information_title">Duplex</string>
+    <string name="details_information_subtitle">Manhattan</string>
+    <string name="details_surface_title">Surface :&#160;</string>
+    <string name="details_surface_text">750 m²</string>
+    <string name="details_rooms_title">Nombre de pièces:&#160;</string>
+    <string name="details_rooms_text">10</string>
+    <string name="details_bathrooms_title">Nombre de salles de bain:&#160;</string>
+    <string name="details_bathrooms_text">2</string>
+    <string name="details_bedrooms_title">Nombre de chambres:&#160;</string>
+    <string name="details_bedrooms_text">6</string>
+    <string name="details_price_title">Prix :&#160;</string>
+    <string name="details_price_text">$ 29 872 000</string>
+    <string name="details_location_title">Location</string>
+    <string name="details_street_text">12 rue de la Paix</string>
+    <string name="details_location_complement_text">Appt 8 – 9ème étage</string>
+    <string name="details_postal_code_text">75000</string>
+    <string name="details_city_text">PARIS</string>
+    <string name="details_location_state_text">FRANCE</string>
+    <string name="property_details_description_title">Description</string>
+    <string name="property_details_description_text">Description du bien</string>
+    <string name="add_type_flat">Appartement</string>
+    <string name="add_type_house">Maison</string>
+    <string name="add_type_duplex">Duplex</string>
+    <string name="add_type_penthouse">Villa</string>
+    <string name="add_property_name">Titre</string>
+    <string name="choose_property_type">Sélectionnez un type de bien</string>
+    <string name="add_property_area">Secteur</string>
+    <string name="add_status_1">Disponible</string>
+    <string name="add_status_2">Vendu</string>
+    <string name="add_price_text">Prix</string>
+    <string name="add_surface_text">Superficie</string>
+    <string name="add_property_description_text">Anchored by a vast marble gallery with sweeping staircase, th entertaining floor includes a baronial living room facing Park Avenue, handsome library with oringinal paneling, and tremendous dining room; all of which enjoy fireplaces. The state-of-the-art Saint Charles designed kitchen includes a sunny breakfast room and staff quarters. Upstairs, the expansive master suite overlooks Park Avenue and includes two marble baths, two dressing rooms, and two offices. Additionally, the are three large bedrooms with en-suite baths and a media room.</string>
+    <string name="property_picture_content_description">Photo du bien</string>
+    <string name="add_pictures_title">Galerie Photo</string>
+    <string name="property_picture_description">Séjour 1</string>
+    <string name="add_property_creation_date">Date de création</string>
+    <string name="add_property_sold_date">Date de vente</string>
+    <string name="save_button_text">Enregistrer</string>
+    <string name="choose_property_status">Statut actuel du bien :&#160;</string>
+    <string name="add_property_description">Description</string>
+    <string name="add_new_picture">Ajouter une photo</string>
+
 </resources>

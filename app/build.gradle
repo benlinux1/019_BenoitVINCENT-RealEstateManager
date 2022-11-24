@@ -6,6 +6,7 @@ android {
     defaultConfig {
         applicationId "com.benlinux.realestatemanager"
         minSdkVersion 19
+        multiDexEnabled true
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
@@ -25,7 +26,42 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    // Material Design
+    implementation 'com.google.android.material:material:1.7.0'
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:30.4.1')
+    implementation 'com.google.firebase:firebase-analytics'
+
+    // FIREBASE UI
+    implementation 'com.firebaseui:firebase-ui-auth:8.0.1'
+    implementation "com.google.android.gms:play-services-auth:20.4.0"
+
+    // FIRESTORE DATABASE
+    implementation 'com.google.firebase:firebase-firestore:24.4.1'
+
+    // FIREBASE STORAGE
+    implementation 'com.firebaseui:firebase-ui-storage:7.1.1'
+
+    // GLIDE
+    implementation ("com.github.bumptech.glide:glide:4.11.0") {
+        exclude group: "com.android.support"
+    }
+
+    // GOOGLE MAP SDK
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.maps.android:android-maps-utils:2.4.0'
+
+    // Easy Permissions Library
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+
 }
