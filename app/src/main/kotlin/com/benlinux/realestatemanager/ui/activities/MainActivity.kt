@@ -9,34 +9,46 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.navigateUp
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.benlinux.realestatemanager.R
+import com.benlinux.realestatemanager.ui.fragments.AddPropertyFragment
+import com.benlinux.realestatemanager.ui.fragments.ListFragment
+import com.benlinux.realestatemanager.ui.fragments.MapFragment
 import com.benlinux.realestatemanager.utils.isInternetAvailable
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 
-class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    private lateinit var bottomNavView: BottomNavigationView
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var drawerNavView: NavigationView
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var mapFragment: MapFragment
+    private lateinit var addPropertyFragment: AddPropertyFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        mapFragment = MapFragment()
+        addPropertyFragment = AddPropertyFragment()
+
+
         setViews()
         checkInternetConnection()
-        configureNavigation()
+        setUpBottomNavigation()
+        setUpDrawerNavigation()
         configureDrawerLayout()
-
     }
 
     private fun setViews() {
@@ -48,6 +60,7 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     }
 
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         // Handle back click to close menu
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -62,32 +75,53 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         return navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    // Configure Drawer & Bottom Navigation
-    private fun configureNavigation() {
+
+    // Configure Drawer Navigation
+    private fun setUpDrawerNavigation() {
 
         // Set navigation views
-        val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
-        drawerNavView = findViewById<NavigationView>(R.id.activity_main_nav_view)
-        drawerLayout = findViewById<DrawerLayout>(R.id.activity_main_drawer_layout)
+        drawerNavView = findViewById(R.id.activity_main_nav_view)
+        drawerLayout = findViewById(R.id.activity_main_drawer_layout)
 
         // Set navigation controller
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         // Build and configure App bar
         appBarConfiguration = AppBarConfiguration.Builder(navController.graph) //Pass the ids of fragments from nav_graph which you don't want to show back button in toolbar
-                .setOpenableLayout(drawerLayout)
-                .build()
-
-        //Setup toolbar with back button and drawer icon according to appBarConfiguration
-        setupActionBarWithNavController(this, navController, appBarConfiguration)
+            .setOpenableLayout(drawerLayout)
+            .build()
 
         // Setup Navigation for drawer & bottom bar
-        setupWithNavController(bottomNavView, navController)
+        setupActionBarWithNavController(navController, drawerLayout)
         setupWithNavController(drawerNavView, navController)
 
         // Listener for selected item
         drawerNavView.setNavigationItemSelectedListener(this)
+    }
+
+
+    private fun setUpBottomNavigation() {
+        bottomNavView = findViewById(R.id.bottom_nav_view)
+        navController = findNavController(R.id.nav_host_fragment)
+        bottomNavView.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_list_view -> openFragment(ListFragment())
+                R.id.navigation_map_view -> openFragment(MapFragment())
+                R.id.navigation_add_property -> openFragment(AddPropertyFragment())
+
+                else -> {
+                }
+            }
+            true
+        }
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 
     // Configure Drawer Layout with toggle
@@ -107,19 +141,25 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.drawer_navigation_login -> {
-                val lunchActivityIntent = Intent(this, LoginActivity::class.java)
-                startActivity(lunchActivityIntent)
+                val loginActivityIntent = Intent(this, LoginActivity::class.java)
+                startActivity(loginActivityIntent)
             }
             R.id.drawer_navigation_settings -> {
                 val settingsActivityIntent = Intent(this, SettingsActivity::class.java)
                 startActivity(settingsActivityIntent)
             }
-            R.id.drawer_navigation_logout -> logout()
+            R.id.drawer_navigation_logout -> {
+                logout()
+            }
+
             else -> {}
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
+
+
+
 
     // Logout from firebase
     private fun logout() {

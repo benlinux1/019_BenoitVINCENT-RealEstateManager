@@ -16,6 +16,7 @@
     </style>
 
 
+    <!-- PROPERTY DETAILS CARD VIEW-->
     <style name="cardView">
         <item name="background">@color/colorWhite</item>
         <item name="elevation">4dp</item>
@@ -25,13 +26,16 @@
         <item name="android:paddingBottom">12dp</item>
     </style>
 
+    <!-- PROPERTY DETAILS MAIN TITLE-->
     <style name="cardMainTitle" >
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:textSize">18sp</item>
+
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!-- PROPERTY DETAILS SECTIONS TITLES-->
     <style name="cardTitle" >
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginTop">8dp</item>
@@ -39,26 +43,39 @@
         <item name="android:drawablePadding">12dp</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 
+    <!-- PROPERTY DETAILS CARD TEXTS-->
     <style name="cardText">
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginStart">4dp</item>
     </style>
 
+    <!-- PROPERTY DETAILS LOCATION SECTION-->
     <style name="location">
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingStart">4dp</item>
     </style>
 
+    <!-- BOTTOM NAVIGATION -->
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">14sp</item>
 
     </style>
 
+    <!-- BOTTOM NAVIGATION WHEN ACTIVE -->
     <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">15sp</item>
+    </style>
+
+    <!-- ADD PROPERTY FIELDS TITLES -->
+    <style name="fieldTitle" >
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 

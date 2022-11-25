@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DA_ANDROID_REAL_ESTATE_MANAGER.iml" filepath="$PROJECT_DIR$/.idea/modules/DA_ANDROID_REAL_ESTATE_MANAGER.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DA_ANDROID_REAL_ESTATE_MANAGER.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DA_ANDROID_REAL_ESTATE_MANAGER.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DA_ANDROID_REAL_ESTATE_MANAGER.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DA_ANDROID_REAL_ESTATE_MANAGER.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DA_ANDROID_REAL_ESTATE_MANAGER.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DA_ANDROID_REAL_ESTATE_MANAGER.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DA_ANDROID_REAL_ESTATE_MANAGER.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DA_ANDROID_REAL_ESTATE_MANAGER.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RealEstateManager.iml" filepath="$PROJECT_DIR$/.idea/modules/RealEstateManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RealEstateManager.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RealEstateManager.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RealEstateManager.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RealEstateManager.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RealEstateManager.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RealEstateManager.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RealEstateManager.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RealEstateManager.app.unitTest.iml" />
     </modules>
   </component>
 </project>

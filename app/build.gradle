@@ -1,8 +1,13 @@
-apply plugin: 'com.android.application'
-apply plugin: 'org.jetbrains.kotlin.android'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'com.google.gms.google-services'
+}
 
 android {
     compileSdkVersion 33
+
     defaultConfig {
         applicationId "com.benlinux.realestatemanager"
         minSdkVersion 19
@@ -10,6 +15,12 @@ android {
         targetSdkVersion 33
         versionCode 1
         versionName "1.0"
+
+        // Added to get secret MAPS API key
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        buildConfigField "String", "MAPS_API_KEY", "\"${properties.getProperty('MAPS_API_KEY')}\""
+
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
@@ -36,8 +47,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.7.0'
 
     //Firebase
-    implementation platform('com.google.firebase:firebase-bom:30.4.1')
-    implementation 'com.google.firebase:firebase-analytics'
+    implementation platform('com.google.firebase:firebase-bom:31.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // FIREBASE UI
     implementation 'com.firebaseui:firebase-ui-auth:8.0.1'

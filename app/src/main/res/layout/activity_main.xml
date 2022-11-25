@@ -19,18 +19,17 @@
 
 
         <!-- Main Fragment (List / Map / Add Property) -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/nav_host_fragment_activity_main"
+        <fragment
+            android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             app:defaultNavHost="true"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:navGraph="@navigation/bottom_navigation" />
-
 
         <!-- Bottom Navigation Bar -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -47,6 +46,9 @@
             app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
             app:itemTextAppearanceInactive="@style/BottomNavigationView"
             app:itemIconSize="24dp" />
+
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -76,8 +78,8 @@
             android:id="@+id/activity_main_nav_view_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:layout_marginBottom="20dp"
+            android:src="@mipmap/drawer_logo"
+            android:layout_marginBottom="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

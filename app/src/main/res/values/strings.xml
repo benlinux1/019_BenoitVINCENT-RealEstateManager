@@ -89,4 +89,10 @@
     <string name="add_property_description">Description</string>
     <string name="add_new_picture">Add a new picture</string>
 
+    // PROPERTY LIST
+    <string name="list_properties_title">Here is the list of our properties</string>
+
+    // LOGIN ACTIVITY
+    <string name="login_title">Here is the login activity</string>
+
 </resources>

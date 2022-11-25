@@ -30,38 +30,41 @@
                 android:layout_marginTop="8dp"
                 android:hint="@string/add_property_name">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/add_name_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/add_property_name"
                     android:inputType="textShortMessage"
-                    android:imeOptions="actionDone" />
+                    android:imeOptions="actionDone"
+                    android:autofillHints=""/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/add_area_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="@string/add_property_area">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/add_area_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/add_property_area"
                     android:inputType="textShortMessage"
-                    android:imeOptions="actionDone" />
+                    android:imeOptions="actionDone"
+                    android:autofillHints="" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/add_type_layout_title"
+                style="@style/fieldTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -69,25 +72,27 @@
                 android:gravity="center"
                 android:text="@string/choose_property_type"/>
 
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+
             <RadioGroup
-                android:id="@+id/add_type_radioGroup"
-                android:layout_width="match_parent"
+                android:id="@+id/add_type_radioGroup1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_type_layout_title">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:ignore="UselessParent"
-                    android:gravity="center">
 
                     <RadioButton
                         android:id="@+id/add_type_radiobutton_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         android:text="@string/add_type_flat"
                         android:checked="true"/>
 
@@ -96,39 +101,49 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/add_type_house"
-                        android:layout_marginStart="36dp"
-                        android:layout_toEndOf="@id/add_type_radiobutton_1"/>
+                        app:layout_constraintTop_toBottomOf="@id/add_type_radiobutton_1"
+                        app:layout_constraintStart_toEndOf="@id/add_type_radiobutton_1" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/add_type_radioGroup2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="20dp"
+                android:layout_toRightOf="@id/add_type_radioGroup1">
 
                     <RadioButton
                         android:id="@+id/add_type_radiobutton_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/add_type_duplex"
-                        android:layout_below="@id/add_type_radiobutton_1"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <RadioButton
                         android:id="@+id/add_type_radiobutton_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
                         android:text="@string/add_type_penthouse"
-                        android:layout_below="@id/add_type_radiobutton_2"
-                        android:layout_toEndOf="@id/add_type_radiobutton_3"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                </RelativeLayout>
-
-            </RadioGroup>
+                </RadioGroup>
+            </RelativeLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/add_price_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="@string/add_price_text">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/add_price_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -136,19 +151,20 @@
                     android:drawableStart="@drawable/ic_details_price_24"
                     android:hint="@string/add_price_text"
                     android:inputType="textShortMessage"
-                    android:imeOptions="actionDone" />
+                    android:imeOptions="actionDone"
+                    android:autofillHints="" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/add_surface_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="@string/add_surface_text">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/add_surface_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -157,7 +173,8 @@
                     android:drawablePadding="8dp"
                     android:hint="@string/add_surface_text"
                     android:inputType="textShortMessage"
-                    android:imeOptions="actionDone" />
+                    android:imeOptions="actionDone"
+                    android:autofillHints="" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -171,27 +188,28 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/add_description_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent"
                     android:hint="@string/add_property_description">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <EditText
                         android:id="@+id/add_description_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:minLines="5"
-                        android:hint="@string/add_property_description_text"
                         android:inputType="textMultiLine"
-                        android:imeOptions="actionDone" />
+                        android:imeOptions="actionDone"
+                        android:autofillHints="" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/add_status_layout_title"
+                style="@style/fieldTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -238,6 +256,7 @@
 
                 <TextView
                     android:id="@+id/add_pictures_title"
+                    style="@style/fieldTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -251,10 +270,13 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginStart="12dp"
                     android:src="@drawable/ic_add_photo_24"
+                    android:drawableTint="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="@id/add_pictures_title"
                     app:layout_constraintTop_toBottomOf="@id/add_pictures_title"
-                    android:contentDescription="@string/add_new_picture" />
+                    android:contentDescription="@string/add_new_picture"
+                    app:tint="@color/colorPrimary" />
 
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -275,19 +297,21 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/add_date_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="@string/add_property_creation_date">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/add_date_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:drawableStart="@drawable/ic_calendar_24"
+                    android:drawableTint="@color/colorPrimary"
                     android:drawablePadding="12dp"
+                    android:autofillHints=""
                     android:hint="@string/add_property_creation_date"
                     android:inputType="textShortMessage"
                     android:imeOptions="actionDone" />
@@ -296,22 +320,24 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/add_sold_date_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="@string/add_property_sold_date">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/add_sold_date_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:drawableStart="@drawable/ic_calendar_24"
+                    android:drawableTint="@color/colorPrimary"
                     android:drawablePadding="12dp"
                     android:hint="@string/add_property_sold_date"
                     android:inputType="textShortMessage"
-                    android:imeOptions="actionDone" />
+                    android:imeOptions="actionDone"
+                    android:autofillHints=""/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -326,7 +352,7 @@
                 android:textColor="@color/colorWhite"
                 android:layout_gravity="center"
                 app:cornerRadius="12dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginVertical="8dp"
                 android:text="@string/save_button_text"/>
 
         </LinearLayout>

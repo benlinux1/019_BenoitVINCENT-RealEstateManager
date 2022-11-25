@@ -14,7 +14,7 @@
 
 
     <item
-        android:id="@+id/navigation_workmates"
+        android:id="@+id/navigation_add_property"
         android:icon="@drawable/ic_navigation_add_property_24"
         android:title="@string/navigation_add_property" />
 
