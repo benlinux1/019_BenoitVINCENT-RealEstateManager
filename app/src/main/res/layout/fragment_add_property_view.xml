@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/add_property_fragment"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="#EBEFF0"
     tools:context=".ui.fragments.AddPropertyFragment">
 
@@ -301,7 +301,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/add_property_creation_date">
+                android:hint="@string/add_property_creation_date"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/add_date_input"
@@ -324,7 +325,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/add_property_sold_date">
+                android:hint="@string/add_property_sold_date"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/add_sold_date_input"

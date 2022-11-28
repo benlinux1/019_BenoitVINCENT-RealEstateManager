@@ -6,18 +6,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
+import com.benlinux.realestatemanager.injections.ViewModelFactory
+import com.benlinux.realestatemanager.repository.PropertyRepository
+import com.benlinux.realestatemanager.ui.adapters.ListAdapter
 import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.ui.models.Realtor
+import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.google.android.material.divider.MaterialDividerItemDecoration
 
 class ListFragment: Fragment() {
 
+
+
+    // The recycler view that contains properties
     private lateinit var mRecyclerView: RecyclerView
+    // List of all current properties of the application
     private lateinit var mProperties: MutableList<Property>
-    private lateinit var adapter: com.benlinux.realestatemanager.ui.adapters.ListAdapter
+    // The adapter which handles the list of properties
+    private lateinit var adapter: ListAdapter
+    // The viewModel that contains data
+    private lateinit var propertyViewModel: PropertyViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_list_view, container, false)
@@ -26,6 +38,11 @@ class ListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //configRecyclerView()
+    }
+
+    // Configuring ViewModel from ViewModelFactory
+    private fun configureViewModel() {
+
     }
 
     /**

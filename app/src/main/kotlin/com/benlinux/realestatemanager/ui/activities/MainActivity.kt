@@ -17,16 +17,19 @@ package com.benlinux.realestatemanager.ui.activities
  import androidx.navigation.ui.NavigationUI.setupWithNavController
  import androidx.navigation.ui.onNavDestinationSelected
  import androidx.navigation.ui.setupActionBarWithNavController
+ import androidx.recyclerview.widget.RecyclerView
  import com.benlinux.realestatemanager.R
+ import com.benlinux.realestatemanager.ui.adapters.ListAdapter
  import com.benlinux.realestatemanager.ui.fragments.AddPropertyFragment
  import com.benlinux.realestatemanager.ui.fragments.MapFragment
+ import com.benlinux.realestatemanager.ui.models.Property
  import com.benlinux.realestatemanager.utils.isInternetAvailable
  import com.google.android.material.bottomnavigation.BottomNavigationView
  import com.google.android.material.navigation.NavigationView
  import java.util.*
 
 
-open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var bottomNavView: BottomNavigationView
     private lateinit var drawerLayout: DrawerLayout
@@ -36,36 +39,35 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
     private lateinit var mapFragment: MapFragment
     private lateinit var addPropertyFragment: AddPropertyFragment
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mapFragment = MapFragment()
-        addPropertyFragment = AddPropertyFragment()
-
-        setViews()
+        setFragments()
         configureToolBar()
         checkInternetConnection()
         setUpDrawerNavigation()
         setUpBottomNavigation()
         configureDrawerLayoutToggle()
+
     }
 
-
-    private fun setViews() {
-
+    // Set fragments views (map, add property)
+    private fun setFragments() {
+        mapFragment = MapFragment()
+        addPropertyFragment = AddPropertyFragment()
     }
 
     private fun checkInternetConnection() {
         isInternetAvailable(applicationContext)
     }
 
-    // Set custom Toolbar
+    // Setup custom Toolbar
     private fun configureToolBar() {
-
         val toolbar = findViewById<Toolbar>(R.id.main_toolbar)
         setSupportActionBar(toolbar)
-        Objects.requireNonNull(supportActionBar)?.elevation  = 16f
+        supportActionBar?.elevation  = 16f
     }
 
 
@@ -85,10 +87,10 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
             .setOpenableLayout(drawerLayout)
             .build()
 
-        // Setup Navigation for drawer & bottom bar
+        // Setup action bar navigation for drawer
         setupActionBarWithNavController(navController, drawerLayout)
 
-        // Setup Drawer Navigation
+        // Setup Drawer Navigation with its items
         drawerNavView.setNavigationItemSelectedListener(this)
     }
 
@@ -133,8 +135,8 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
         return true
     }
 
+    // Handles hamburger and back button click
     override fun onSupportNavigateUp(): Boolean {
-        // Replace navigation up button with nav drawer button when on start destination
         return navigateUp(navController, appBarConfiguration)
     }
 

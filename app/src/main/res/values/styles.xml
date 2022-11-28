@@ -12,7 +12,7 @@
     <style name="DrawerTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorControlNormal">@color/colorWhite</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <!-- STYLE HAMBURGER / BACK ARROW IN TOOLBAR -->

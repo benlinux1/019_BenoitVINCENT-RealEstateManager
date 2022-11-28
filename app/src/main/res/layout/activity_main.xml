@@ -24,7 +24,8 @@
 
 
         <!-- Main Fragment (List / Map / Add Property) -->
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
+
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
@@ -52,10 +53,6 @@
             app:itemTextAppearanceInactive="@style/BottomNavigationView"
             app:itemIconSize="24dp" />
 
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Drawer NavigationView that includes header and menu -->
@@ -70,9 +67,9 @@
     app:layout_constraintLeft_toLeftOf="parent"
     app:menu="@menu/drawer_navigation_menu"
     app:itemIconPadding="8dp"
-    android:background="@color/colorPrimary"
-    app:itemTextColor="@color/colorWhite"
-    app:itemIconTint="@color/colorWhite">
+    android:background="@color/colorWhite"
+    app:itemTextColor="@color/colorPrimary"
+    app:itemIconTint="@color/colorPrimary">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
