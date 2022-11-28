@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_list_view"
+        android:id="@+id/list_fragment"
         android:icon="@drawable/ic_navigation_list_view_24"
         android:title="@string/navigation_list_view" />
 
 
     <item
-        android:id="@+id/navigation_map_view"
+        android:id="@+id/map_fragment"
         android:icon="@drawable/ic_navigation_map_view_24"
         android:title="@string/navigation_map_view" />
 
 
     <item
-        android:id="@+id/navigation_add_property"
+        android:id="@+id/add_property_fragment"
         android:icon="@drawable/ic_navigation_add_property_24"
         android:title="@string/navigation_add_property" />
 

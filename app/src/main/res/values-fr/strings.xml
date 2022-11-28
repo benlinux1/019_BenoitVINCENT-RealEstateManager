@@ -78,4 +78,10 @@
     <string name="add_property_description">Description</string>
     <string name="add_new_picture">Ajouter une photo</string>
 
+    // PROPERTY LIST
+    <string name="list_properties_title">Voici la liste de nos biens immobiliers</string>
+
+    // LOGIN ACTIVITY
+    <string name="login_title">Voici la page de connexion</string>
+
 </resources>

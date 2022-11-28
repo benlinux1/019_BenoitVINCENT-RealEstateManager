@@ -7,7 +7,7 @@
     android:id="@+id/activity_main_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false"
+    android:fitsSystemWindows="true"
     tools:openDrawer="start"
     tools:context="com.benlinux.realestatemanager.ui.activities.MainActivity">
 
@@ -17,6 +17,11 @@
         tools:context="com.benlinux.realestatemanager.ui.activities.MainActivity"
         android:gravity="center">
 
+        <!-- Toolbar -->
+        <include
+            layout="@layout/toolbar_main"
+            android:id="@+id/main_toolbar" />
+
 
         <!-- Main Fragment (List / Map / Add Property) -->
         <fragment
@@ -25,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_toolbar"
             app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -61,7 +66,7 @@
     android:layout_gravity="start"
     android:fitsSystemWindows="true"
     app:headerLayout="@layout/activity_main_nav_header"
-    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/main_toolbar"
     app:layout_constraintLeft_toLeftOf="parent"
     app:menu="@menu/drawer_navigation_menu"
     app:itemIconPadding="8dp"

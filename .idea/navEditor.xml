@@ -8,7 +8,7 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="bottom_navigation_add_property">
+                  <entry key="add_property_fragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -20,7 +20,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="bottom_navigation_list_view">
+                  <entry key="list_fragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -32,7 +32,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="bottom_navigation_map_view">
+                  <entry key="map_fragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">

@@ -1,29 +1,29 @@
 package com.benlinux.realestatemanager.ui.activities
 
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.os.Bundle
-import android.view.MenuItem
-import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.navigateUp
-import androidx.navigation.ui.NavigationUI.setupWithNavController
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.benlinux.realestatemanager.R
-import com.benlinux.realestatemanager.ui.fragments.AddPropertyFragment
-import com.benlinux.realestatemanager.ui.fragments.ListFragment
-import com.benlinux.realestatemanager.ui.fragments.MapFragment
-import com.benlinux.realestatemanager.utils.isInternetAvailable
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
+ import android.annotation.SuppressLint
+ import android.content.Intent
+ import android.os.Bundle
+ import android.view.MenuItem
+ import android.widget.Toast
+ import androidx.appcompat.app.ActionBarDrawerToggle
+ import androidx.appcompat.app.AppCompatActivity
+ import androidx.appcompat.widget.Toolbar
+ import androidx.core.view.GravityCompat
+ import androidx.drawerlayout.widget.DrawerLayout
+ import androidx.navigation.NavController
+ import androidx.navigation.fragment.NavHostFragment
+ import androidx.navigation.ui.AppBarConfiguration
+ import androidx.navigation.ui.NavigationUI.navigateUp
+ import androidx.navigation.ui.NavigationUI.setupWithNavController
+ import androidx.navigation.ui.onNavDestinationSelected
+ import androidx.navigation.ui.setupActionBarWithNavController
+ import com.benlinux.realestatemanager.R
+ import com.benlinux.realestatemanager.ui.fragments.AddPropertyFragment
+ import com.benlinux.realestatemanager.ui.fragments.MapFragment
+ import com.benlinux.realestatemanager.utils.isInternetAvailable
+ import com.google.android.material.bottomnavigation.BottomNavigationView
+ import com.google.android.material.navigation.NavigationView
+ import java.util.*
 
 
 open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -43,13 +43,14 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
         mapFragment = MapFragment()
         addPropertyFragment = AddPropertyFragment()
 
-
         setViews()
+        configureToolBar()
         checkInternetConnection()
-        setUpBottomNavigation()
         setUpDrawerNavigation()
-        configureDrawerLayout()
+        setUpBottomNavigation()
+        configureDrawerLayoutToggle()
     }
+
 
     private fun setViews() {
 
@@ -59,33 +60,25 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
         isInternetAvailable(applicationContext)
     }
 
+    // Set custom Toolbar
+    private fun configureToolBar() {
 
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        // Handle back click to close menu
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        // Replace navigation up button with nav drawer button when on start destination
-        return navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp()
+        val toolbar = findViewById<Toolbar>(R.id.main_toolbar)
+        setSupportActionBar(toolbar)
+        Objects.requireNonNull(supportActionBar)?.elevation  = 16f
     }
 
 
     // Configure Drawer Navigation
     private fun setUpDrawerNavigation() {
 
-        // Set navigation views
-        drawerNavView = findViewById(R.id.activity_main_nav_view)
-        drawerLayout = findViewById(R.id.activity_main_drawer_layout)
-
         // Set navigation controller
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
+        // Set drawer navigation views
+        drawerNavView = findViewById(R.id.activity_main_nav_view)
+        drawerLayout = findViewById(R.id.activity_main_drawer_layout)
 
         // Build and configure App bar
         appBarConfiguration = AppBarConfiguration.Builder(navController.graph) //Pass the ids of fragments from nav_graph which you don't want to show back button in toolbar
@@ -94,38 +87,14 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         // Setup Navigation for drawer & bottom bar
         setupActionBarWithNavController(navController, drawerLayout)
-        setupWithNavController(drawerNavView, navController)
 
-        // Listener for selected item
+        // Setup Drawer Navigation
         drawerNavView.setNavigationItemSelectedListener(this)
     }
 
 
-    private fun setUpBottomNavigation() {
-        bottomNavView = findViewById(R.id.bottom_nav_view)
-        navController = findNavController(R.id.nav_host_fragment)
-        bottomNavView.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.navigation_list_view -> openFragment(ListFragment())
-                R.id.navigation_map_view -> openFragment(MapFragment())
-                R.id.navigation_add_property -> openFragment(AddPropertyFragment())
-
-                else -> {
-                }
-            }
-            true
-        }
-    }
-
-    private fun openFragment(fragment: Fragment) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-    }
-
     // Configure Drawer Layout with toggle
-    private fun configureDrawerLayout() {
+    private fun configureDrawerLayoutToggle() {
         val toggle = ActionBarDrawerToggle(
             this,
             drawerLayout,
@@ -134,6 +103,12 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+    }
+
+    private fun setUpBottomNavigation() {
+        // Setup bottom navigation (action bar title & back button)
+        bottomNavView = findViewById(R.id.bottom_nav_view)
+        setupWithNavController(bottomNavView, navController)
     }
 
     // Handle Navigation Item Click
@@ -152,13 +127,16 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
                 logout()
             }
 
-            else -> {}
+            else -> item.onNavDestinationSelected(navController)
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
-
+    override fun onSupportNavigateUp(): Boolean {
+        // Replace navigation up button with nav drawer button when on start destination
+        return navigateUp(navController, appBarConfiguration)
+    }
 
 
     // Logout from firebase

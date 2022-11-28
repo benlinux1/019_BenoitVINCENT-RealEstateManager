@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,10 +9,17 @@
     </style>
 
     <!-- STYLE NAV DRAWER HEADER -->
-    <style name="DrawerTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="DrawerTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorControlNormal">@color/colorWhite</item>
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!-- STYLE HAMBURGER / BACK ARROW IN TOOLBAR -->
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="color">@android:color/white</item>
     </style>
 
 
@@ -77,6 +84,8 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
+
+
 
 
 

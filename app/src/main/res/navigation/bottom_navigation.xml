@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_navigation"
-    app:startDestination="@+id/bottom_navigation_list_view">
+    app:startDestination="@+id/list_fragment">
 
     <fragment
-        android:id="@+id/bottom_navigation_list_view"
+        android:id="@+id/list_fragment"
         android:name="com.benlinux.realestatemanager.ui.fragments.ListFragment"
         android:label="@string/list_fragment_label"
         tools:layout="@layout/fragment_list_view" />
 
     <fragment
-        android:id="@+id/bottom_navigation_map_view"
+        android:id="@+id/map_fragment"
         android:name="com.benlinux.realestatemanager.ui.fragments.MapFragment"
         android:label="@string/map_fragment_label"
         tools:layout="@layout/fragment_map_view" />
 
 
     <fragment
-        android:id="@+id/bottom_navigation_add_property"
+        android:id="@+id/add_property_fragment"
         android:name="com.benlinux.realestatemanager.ui.fragments.AddPropertyFragment"
         android:label="@string/add_property_fragment_label"
         tools:layout="@layout/fragment_add_property_view" />
