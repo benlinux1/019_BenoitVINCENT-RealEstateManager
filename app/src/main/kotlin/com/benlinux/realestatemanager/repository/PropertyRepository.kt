@@ -13,7 +13,7 @@ class PropertyRepository(propertyDao: PropertyDao) {
     }
 
     // --- GET PROPERTIES LIST---
-    fun getAllProperties(): LiveData<List<Property>> {
+    fun getAllProperties(): LiveData<MutableList<Property?>> {
         return propertyDao.getAllProperties()
     }
 

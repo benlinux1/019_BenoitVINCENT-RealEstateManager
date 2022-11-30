@@ -13,7 +13,7 @@ class RealtorRepository(realtorDao: RealtorDao) {
     }
 
     // --- GET PROPERTIES LIST---
-    fun getAllRealtors(): LiveData<List<Realtor>> {
+    fun getAllRealtors(): LiveData<MutableList<Realtor>> {
         return realtorDao.getAllRealtors()
     }
 

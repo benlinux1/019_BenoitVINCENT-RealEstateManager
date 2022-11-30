@@ -26,7 +26,7 @@ abstract class REMDatabase : RoomDatabase() {
             if (instance == null)
                 instance = Room.databaseBuilder(
                     ctx.applicationContext, REMDatabase::class.java,
-                    "note_database"
+                    "rem_database"
                 )
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)

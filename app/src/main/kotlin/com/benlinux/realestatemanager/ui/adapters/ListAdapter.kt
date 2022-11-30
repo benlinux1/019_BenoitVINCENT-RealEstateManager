@@ -1,5 +1,6 @@
 package com.benlinux.realestatemanager.ui.adapters
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,10 @@ import com.benlinux.realestatemanager.ui.activities.PropertyDetailsActivity
 import com.benlinux.realestatemanager.ui.models.Property
 import java.util.*
 
-class ListAdapter(properties: List<Property>) :
+@SuppressLint("NotifyDataSetChanged")
+class ListAdapter(properties: MutableList<Property?>) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
-    RecyclerView.Adapter<ListAdapter.ViewHolder>() {
-    private var mProperties: List<Property>
+    private var mProperties: List<Property?>
 
     /**
      * Instantiates a new ListAdapter.
@@ -32,7 +33,7 @@ class ListAdapter(properties: List<Property>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // bind property according to position in the list
-        holder.bind(mProperties[position])
+        mProperties[position]?.let { holder.bind(it) }
 
         // TODO : Call metrics for tab or smartphone to define onClick action
         // Launch Property Details according to its Id
@@ -46,8 +47,13 @@ class ListAdapter(properties: List<Property>) :
         }
     }
 
+    fun updateProperties(properties: List<Property?>) {
+        mProperties = properties
+        notifyDataSetChanged()
+    }
 
-    fun getItem(i: Int): Property {
+
+    fun getItem(i: Int): Property? {
         return mProperties[i]
     }
 

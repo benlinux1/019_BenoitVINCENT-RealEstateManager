@@ -30,7 +30,7 @@ interface RealtorDao {
     fun deleteRealtorById(id: Int): Int
 
     @Query("select * from realtor_table order by realtor_id asc")
-    fun getAllRealtors(): LiveData<List<Realtor>>
+    fun getAllRealtors(): LiveData<MutableList<Realtor>>
 
     // Gets a given realtor by id
     @Query("SELECT * FROM realtor_table WHERE realtor_id = :id")

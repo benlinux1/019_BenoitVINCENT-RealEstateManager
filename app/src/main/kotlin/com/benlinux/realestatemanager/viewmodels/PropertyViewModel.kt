@@ -10,7 +10,7 @@ import java.util.concurrent.Executor
 
 class PropertyViewModel(propertyDataSource: PropertyRepository, realtorDataSource: RealtorRepository, executor: Executor) : ViewModel()  {
 
-    var currentProperties: LiveData<List<Property>>? = null
+    var currentProperties: LiveData<MutableList<Property?>>? = null
 
     // REPOSITORIES
     private val propertyDataSource: PropertyRepository
@@ -24,15 +24,12 @@ class PropertyViewModel(propertyDataSource: PropertyRepository, realtorDataSourc
         this.executor = executor
     }
 
-    // INIT PROPERTIES LIST
-    fun init() {
-        this.currentProperties = getPropertiesList()
+    // GET PROPERTIES LIST
+    fun getPropertiesList(): LiveData<MutableList<Property?>> {
+        currentProperties = this.propertyDataSource.getAllProperties()
+        return currentProperties as LiveData<MutableList<Property?>>
     }
 
-    // GET PROPERTIES LIST
-    fun getPropertiesList(): LiveData<List<Property>> {
-        return propertyDataSource.getAllProperties()
-    }
 
     // CREATE A NEW PROPERTY
     fun createProperty(property: Property) {
@@ -56,7 +53,7 @@ class PropertyViewModel(propertyDataSource: PropertyRepository, realtorDataSourc
 
 
     // Get realtors list
-    private fun getRealtorsList(): LiveData<List<Realtor>> {
+    private fun getRealtorsList(): LiveData<MutableList<Realtor>> {
         return realtorDataSource.getAllRealtors()
     }
 

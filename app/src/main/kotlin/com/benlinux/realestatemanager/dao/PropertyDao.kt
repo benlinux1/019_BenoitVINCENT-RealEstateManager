@@ -34,7 +34,7 @@ interface PropertyDao {
 
     // Get all properties from the table
     @Query("select * from property_table order by property_id asc")
-    fun getAllProperties(): LiveData<List<Property>>
+    fun getAllProperties(): LiveData<MutableList<Property?>>
 
     // Gets a given property by id
     @Query("SELECT * FROM property_table WHERE property_id = :id")

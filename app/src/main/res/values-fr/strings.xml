@@ -80,6 +80,7 @@
 
     // PROPERTY LIST
     <string name="list_properties_title">Voici la liste de nos biens immobiliers</string>
+    <string name="no_property_found">Aucun bien immobilier trouvé pour le moment</string>
 
     // LOGIN ACTIVITY
     <string name="login_title">Voici la page de connexion</string>

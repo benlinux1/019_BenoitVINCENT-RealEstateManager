@@ -94,5 +94,6 @@
 
     // LOGIN ACTIVITY
     <string name="login_title">Here is the login activity</string>
+    <string name="no_property_found">No property found at this time</string>
 
 </resources>
