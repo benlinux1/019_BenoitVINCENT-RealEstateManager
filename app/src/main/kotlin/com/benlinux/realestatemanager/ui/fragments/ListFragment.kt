@@ -5,21 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
-import com.benlinux.realestatemanager.dao.PropertyDao
 import com.benlinux.realestatemanager.injections.ViewModelFactory
-import com.benlinux.realestatemanager.repository.PropertyRepository
 import com.benlinux.realestatemanager.ui.adapters.ListAdapter
 import com.benlinux.realestatemanager.ui.models.Property
-import com.benlinux.realestatemanager.ui.models.Realtor
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.google.android.material.divider.MaterialDividerItemDecoration
 
@@ -48,9 +41,8 @@ class ListFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentView = inflater.inflate(R.layout.fragment_list_view, container, false)
-
         configureViewModel()
-        configRecyclerView()
+        configureRecyclerView()
         return fragmentView
     }
 
@@ -62,17 +54,21 @@ class ListFragment: Fragment() {
     // Configuring ViewModel from ViewModelFactory
     private fun configureViewModel() {
 
-        // Define activity (for context)
-         val activity = requireNotNull(this.activity)
-
         // Define ViewModel
          propertyViewModel = ViewModelProvider(this,
-             ViewModelFactory.getInstance(activity.applicationContext)!!
+             ViewModelFactory.getInstance(requireContext())!!
          )[PropertyViewModel::class.java]
 
+
+
+
         // Set observer on properties list
-        propertyViewModel.getPropertiesList().observe(viewLifecycleOwner) {
-            mProperties = it
+        propertyViewModel.currentProperties?.observe(viewLifecycleOwner) { listOfProperties ->
+            mProperties = listOfProperties
+
+            // Define and configure adapter (MUST BE CALLED HERE FOR DATA REFRESH)
+            adapter = ListAdapter(mProperties)
+            mRecyclerView.adapter = adapter
         }
     }
 
@@ -80,7 +76,7 @@ class ListFragment: Fragment() {
     /**
      * Init the recyclerView that contains properties list
      */
-    private fun configRecyclerView() {
+    private fun configureRecyclerView() {
 
         // Define layout & dividers
         mRecyclerView = fragmentView.findViewById(R.id.list_properties)
@@ -88,9 +84,19 @@ class ListFragment: Fragment() {
         val divider = MaterialDividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
         mRecyclerView.addItemDecoration(divider)
 
-        // Define and configure adapter
-        adapter = ListAdapter(mProperties)
-        mRecyclerView.adapter = adapter
+        /** ADD PROPERTY EXAMPLE IN THE LIST (Functional)
+        val propertyExample = Property(
+            id = 4, name ="Ma super villa", type ="flat", price = 1200000, area ="Quartier de dingue",
+            realtor = Realtor(1, "***", "Ben", "Linux", ""), isAvailable = true )
+
+        // Add property to viewModel list
+        propertyViewModel.createProperty(propertyExample)
+
+        */
+
+        // DELETE PROPERTY EXAMPLE FROM ROOM DATABASE
+        // propertyViewModel.deletePropertyById(4)
+
     }
 
     // Set textViews according to properties list size

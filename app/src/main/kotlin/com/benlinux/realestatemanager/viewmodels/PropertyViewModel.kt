@@ -22,6 +22,7 @@ class PropertyViewModel(propertyDataSource: PropertyRepository, realtorDataSourc
         this.propertyDataSource = propertyDataSource
         this.realtorDataSource = realtorDataSource
         this.executor = executor
+        getPropertiesList()
     }
 
     // GET PROPERTIES LIST
