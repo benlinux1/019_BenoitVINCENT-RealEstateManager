@@ -1,6 +1,5 @@
 package com.benlinux.realestatemanager.ui.adapters
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -13,18 +12,16 @@ import com.benlinux.realestatemanager.ui.activities.PropertyDetailsActivity
 import com.benlinux.realestatemanager.ui.models.Property
 import java.util.*
 
-class ListAdapter(properties: List<Property>, context: Context) :
+class ListAdapter(properties: List<Property>) :
 
     RecyclerView.Adapter<ListAdapter.ViewHolder>() {
     private var mProperties: List<Property>
-    private val localContext: Context
 
     /**
      * Instantiates a new ListAdapter.
      */
     init {
         mProperties = properties
-        localContext = context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -115,7 +112,7 @@ class ListAdapter(properties: List<Property>, context: Context) :
             title.text = property.name
 
             // Set place_id (from Places API)
-            id.text = property.id
+            id.text = property.id.toString()
 
             // Set property picture
             /**

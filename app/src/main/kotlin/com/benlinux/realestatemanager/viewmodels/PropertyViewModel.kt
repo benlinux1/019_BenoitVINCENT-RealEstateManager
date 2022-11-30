@@ -8,13 +8,9 @@ import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.ui.models.Realtor
 import java.util.concurrent.Executor
 
-class PropertyViewModel(
-    propertyDataSource: PropertyRepository,
-    realtorDataSource: RealtorRepository,
-    executor: Executor
-) :
-    ViewModel() {
-    private var currentProperties: LiveData<List<Property>>? = null
+class PropertyViewModel(propertyDataSource: PropertyRepository, realtorDataSource: RealtorRepository, executor: Executor) : ViewModel()  {
+
+    var currentProperties: LiveData<List<Property>>? = null
 
     // REPOSITORIES
     private val propertyDataSource: PropertyRepository
@@ -34,7 +30,7 @@ class PropertyViewModel(
     }
 
     // GET PROPERTIES LIST
-    private fun getPropertiesList(): LiveData<List<Property>> {
+    fun getPropertiesList(): LiveData<List<Property>> {
         return propertyDataSource.getAllProperties()
     }
 
@@ -61,7 +57,7 @@ class PropertyViewModel(
 
     // Get realtors list
     private fun getRealtorsList(): LiveData<List<Realtor>> {
-        return realtorDataSource.getAllRealtors();
+        return realtorDataSource.getAllRealtors()
     }
 
 

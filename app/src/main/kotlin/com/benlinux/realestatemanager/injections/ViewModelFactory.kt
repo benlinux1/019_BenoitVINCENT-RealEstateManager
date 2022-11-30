@@ -14,7 +14,7 @@ import java.util.concurrent.Executors
  * ViewModelFactory created to declare ViewModel in MainActivity
  * Used to instantiate correctly PropertyViewModel class
  */
-class ViewModelFactory private constructor(context: Context) : ViewModelProvider.Factory {
+class ViewModelFactory constructor(context: Context) : ViewModelProvider.Factory {
     private val propertyDataSource: PropertyRepository
     private val realtorDataSource : RealtorRepository
     private val executor: Executor

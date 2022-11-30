@@ -5,6 +5,8 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 33
 
@@ -75,8 +77,20 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     // ROOM
-    implementation "androidx.room:room-runtime:2.4.3"
-    annotationProcessor "androidx.room:room-compiler:2.4.3"
+    //The Room persistence library provides an abstraction layer over SQLite
+    def roomVersion = "2.4.3"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt "androidx.room:room-compiler:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$roomVersion"
+
+    // lifecycle scope
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
 
     // VIEW MODEL & LIVE DATA
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'

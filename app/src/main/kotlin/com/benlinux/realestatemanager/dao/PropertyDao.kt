@@ -25,19 +25,19 @@ interface PropertyDao {
     fun deleteProperty(property: Property)
 
     // Delete all properties in the table
-    @Query("delete from realtor_table")
+    @Query("delete from property_table")
     fun deleteAllProperties()
 
     // Deletes a given property in the table
-    @Query("DELETE FROM realtor_table WHERE id = :id")
+    @Query("DELETE FROM property_table WHERE property_id = :id")
     fun deletePropertyById(id: Int): Int
 
     // Get all properties from the table
-    @Query("select * from realtor_table order by id asc")
+    @Query("select * from property_table order by property_id asc")
     fun getAllProperties(): LiveData<List<Property>>
 
     // Gets a given property by id
-    @Query("SELECT * FROM property_table WHERE id = :id")
+    @Query("SELECT * FROM property_table WHERE property_id = :id")
     fun getPropertyById(id: Int): LiveData<Property>
 
 }
