@@ -85,4 +85,11 @@
     // LOGIN ACTIVITY
     <string name="login_title">Voici la page de connexion</string>
 
+
+    // ADD PROPERTY FRAGMENT
+    <string name="length_error">Ce champ doit contenir au moins 3 caractères</string>
+    <string name="empty_error">Merci de compléter ce champ</string>
+    <string name="empty_pictures_list_error">Veuillez ajouter au moins une photo</string>
+    <string name="numbers_error">This value doesn\'t seem to be correct...</string>
+
 </resources>

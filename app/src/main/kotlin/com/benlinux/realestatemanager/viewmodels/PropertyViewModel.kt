@@ -33,7 +33,7 @@ class PropertyViewModel(propertyDataSource: PropertyRepository, realtorDataSourc
 
 
     // CREATE A NEW PROPERTY
-    fun createProperty(property: Property) {
+    fun saveProperty(property: Property) {
         executor.execute { propertyDataSource.createProperty(property) }
     }
 

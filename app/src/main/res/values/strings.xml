@@ -95,5 +95,10 @@
     // LOGIN ACTIVITY
     <string name="login_title">Here is the login activity</string>
     <string name="no_property_found">No property found at this time</string>
+    <string name="length_error">This field must contain at least 3 characters</string>
+    <string name="empty_error">Please complete this field</string>
+    <string name="empty_pictures_list_error">Please add at least 1 picture</string>
+    <string name="numbers_error">This value doesn\'t seem to be correct...</string>
+
 
 </resources>

@@ -12,7 +12,7 @@ import java.util.*
  * @return
  */
 @SuppressLint("SimpleDateFormat")
-fun getTodayDate(): String? {
+fun getTodayDate(): String {
     val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
     return dateFormat.format(Date())
 }

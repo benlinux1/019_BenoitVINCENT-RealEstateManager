@@ -186,6 +186,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_surface_layout">
 
+                <RadioButton
+                    android:id="@+id/add_status_radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/add_status_1" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/add_description_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -230,13 +237,6 @@
                 tools:ignore="UselessParent">
 
                 <RadioButton
-                    android:id="@+id/add_status_radioButton1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add_status_1"
-                    android:checked="true"/>
-
-                <RadioButton
                     android:id="@+id/add_status_radioButton2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -278,6 +278,19 @@
                     android:contentDescription="@string/add_new_picture"
                     app:tint="@color/colorPrimary" />
 
+                <TextView
+                    android:id="@+id/empty_error_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/empty_pictures_list_error"
+                    android:textSize="14sp"
+                    android:textColor="@color/design_default_color_error"
+                    app:layout_constraintStart_toEndOf="@id/add_pictures_button"
+                    app:layout_constraintTop_toTopOf="@id/add_pictures_button"
+                    app:layout_constraintBottom_toBottomOf="@id/add_pictures_button"
+                    android:layout_marginStart="16dp"
+                    android:visibility="gone"/>
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/add_pictures_list"
@@ -293,6 +306,79 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/add_rooms_spinner_layout"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:gravity = "center">
+
+                <TextView
+                    android:id="@+id/add_number_rooms_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Number of rooms"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize = "20dp" />
+
+                <Spinner
+                    android:id="@+id/add_number_rooms_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/add_bedrooms_spinner_layout"
+                android:layout_marginBottom="8dp"
+                android:gravity = "center">
+
+                <TextView
+                    android:id="@+id/add_number_bedrooms_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Number of bedrooms"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize = "20dp" />
+
+                <Spinner
+                    android:id="@+id/add_number_bedrooms_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/add_bathrooms_spinner_layout"
+                android:layout_marginBottom="8dp"
+                android:gravity = "center">
+
+                <TextView
+                    android:id="@+id/add_number_bathrooms_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Number of bathrooms"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize = "20dp" />
+
+                <Spinner
+                    android:id="@+id/add_number_bathrooms_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
 
 
             <com.google.android.material.textfield.TextInputLayout

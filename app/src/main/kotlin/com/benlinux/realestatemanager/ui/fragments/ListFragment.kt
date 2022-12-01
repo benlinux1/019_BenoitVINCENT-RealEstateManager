@@ -59,9 +59,6 @@ class ListFragment: Fragment() {
              ViewModelFactory.getInstance(requireContext())!!
          )[PropertyViewModel::class.java]
 
-
-
-
         // Set observer on properties list
         propertyViewModel.currentProperties?.observe(viewLifecycleOwner) { listOfProperties ->
             mProperties = listOfProperties
@@ -84,7 +81,7 @@ class ListFragment: Fragment() {
         val divider = MaterialDividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
         mRecyclerView.addItemDecoration(divider)
 
-        /** ADD PROPERTY EXAMPLE IN THE LIST (Functional)
+        /** ADD / DELETE PROPERTY EXAMPLE IN THE LIST (Functional)
         val propertyExample = Property(
             id = 4, name ="Ma super villa", type ="flat", price = 1200000, area ="Quartier de dingue",
             realtor = Realtor(1, "***", "Ben", "Linux", ""), isAvailable = true )
@@ -92,10 +89,11 @@ class ListFragment: Fragment() {
         // Add property to viewModel list
         propertyViewModel.createProperty(propertyExample)
 
+        // DELETE PROPERTY EXAMPLE FROM ROOM DATABASE
+        propertyViewModel.deletePropertyById(4)
+
         */
 
-        // DELETE PROPERTY EXAMPLE FROM ROOM DATABASE
-        // propertyViewModel.deletePropertyById(4)
 
     }
 
