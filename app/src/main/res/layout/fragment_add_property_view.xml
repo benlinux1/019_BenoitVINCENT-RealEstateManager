@@ -186,13 +186,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_surface_layout">
 
-                <RadioButton
-                    android:id="@+id/add_status_radioButton1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/add_status_1" />
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/add_description_layout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -235,6 +228,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="UselessParent">
+
+                <RadioButton
+                    android:id="@+id/add_status_radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/add_status_1" />
 
                 <RadioButton
                     android:id="@+id/add_status_radioButton2"
