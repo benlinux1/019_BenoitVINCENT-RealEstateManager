@@ -10,51 +10,50 @@ import com.google.android.material.textfield.TextInputLayout
  * Validate text field with regex & set input layout error
  */
 fun validateField(field: String, layoutError: TextInputLayout): Boolean {
-    val titleRegex = Regex("^[a-zA-Z0-9éèàêîïôö ]*$")
+    val titleRegex = Regex("^[a-zA-Z0-9éèàêîïôö ]*\$")
     return if (field.matches(titleRegex) && field.trim { it <= ' ' }.length > 2) {
         layoutError.error = null
         true
     } else {
-        layoutError.error = R.string.length_error.toString()
+        layoutError.error = "This field must contain at least 3 characters"
         false
     }
 }
 
 fun validateNumbers(field: String, layoutError: TextInputLayout): Boolean {
-    val titleRegex = Regex("^[0-9]*$")
-    return if (field.matches(titleRegex) && field.trim { it <= ' ' }.length > 2) {
+    val numberRegex = Regex("^[1-9]+[0-9]*\$")
+    return if (field.matches(numberRegex) ) {
         layoutError.error = null
         true
     } else {
-        layoutError.error = R.string.numbers_error.toString()
+        layoutError.error = "This field doesn't seem to contain correct value"
         false
     }
 }
 
 
+
 /**
  * Set error in layout fields when inpu is empty
  */
-fun checkIfFieldsAreNotEmpty(
-    areaLayout: TextInputLayout,
-    priceLayout: TextInputLayout,
-    surfaceLayout: TextInputLayout,
-    descriptionLayout: TextInputLayout,
-    picturesList: RecyclerView,
-    picturesError: TextView
-): Boolean {
-    if (areaLayout.editText!!.text.toString() == "") {
-        areaLayout.error = R.string.empty_error.toString()
-    } else if (priceLayout.editText!!.text.toString() == "") {
-        priceLayout.error = R.string.empty_error.toString()
-    } else if (surfaceLayout.editText!!.text.toString() == "") {
-        surfaceLayout.error = R.string.empty_error.toString()
-    } else if (descriptionLayout.editText!!.text.toString() == "") {
-        descriptionLayout.error = R.string.empty_error.toString()
-    } else if (picturesList.toString() == "") {
-        picturesError.visibility = View.VISIBLE
+fun checkIfFieldsIsNotEmpty(fieldLayout: TextInputLayout): Boolean {
+    val errorText = "Please complete this field"
+    return if (fieldLayout.editText!!.text.toString() == "") {
+        fieldLayout.error = errorText
+        false
     } else {
-        return true
+        fieldLayout.error = null
+        true
     }
-    return false
+}
+
+
+fun checkIfPictureIsPresent(picturesList: RecyclerView, picturesError: TextView): Boolean {
+    return if (picturesList.toString() == "") {
+        picturesError.visibility = View.VISIBLE
+        false
+    } else {
+        picturesError.visibility = View.GONE
+        true
+    }
 }

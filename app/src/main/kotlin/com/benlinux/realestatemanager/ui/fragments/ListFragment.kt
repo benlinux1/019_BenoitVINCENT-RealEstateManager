@@ -91,8 +91,9 @@ class ListFragment: Fragment() {
 
         // DELETE PROPERTY EXAMPLE FROM ROOM DATABASE
         propertyViewModel.deletePropertyById(4)
-
         */
+
+
 
 
     }

@@ -1,5 +1,6 @@
 package com.benlinux.realestatemanager.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,13 +14,9 @@ import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
-import com.benlinux.realestatemanager.utils.checkIfFieldsAreNotEmpty
-import com.benlinux.realestatemanager.utils.checkIfPropertyTypeIsChecked
-import com.benlinux.realestatemanager.utils.getTodayDate
-import com.benlinux.realestatemanager.utils.validateField
+import com.benlinux.realestatemanager.utils.*
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.google.android.material.textfield.TextInputLayout
-import java.util.Date
 
 
 class AddPropertyFragment: Fragment() {
@@ -38,10 +35,14 @@ class AddPropertyFragment: Fragment() {
 
     private lateinit var titleLayout: TextInputLayout
     private lateinit var title: EditText
-    private lateinit var area: TextInputLayout
-    private lateinit var price: TextInputLayout
-    private lateinit var surface: TextInputLayout
-    private lateinit var description: TextInputLayout
+    private lateinit var areaLayout: TextInputLayout
+    private lateinit var area: EditText
+    private lateinit var priceLayout: TextInputLayout
+    private lateinit var price: EditText
+    private lateinit var surfaceLayout: TextInputLayout
+    private lateinit var surface: EditText
+    private lateinit var descriptionLayout: TextInputLayout
+    private lateinit var description: EditText
     private lateinit var picturesRecyclerView: RecyclerView
     private lateinit var emptyRecyclerViewText: TextView
 
@@ -86,8 +87,9 @@ class AddPropertyFragment: Fragment() {
             if (checkPropertyFields()) {
                 createProperty()
                 propertyViewModel.saveProperty(property)
+                Log.d("PROPERTY CREATED", property.toString())
             } else {
-
+                Log.d("PROPERTY NOT CREATED", "Not validated")
             }
         }
     }
@@ -96,36 +98,48 @@ class AddPropertyFragment: Fragment() {
     private fun setViews() {
         titleLayout = fragmentView.findViewById(R.id.add_name_layout)
         title = fragmentView.findViewById(R.id.add_name_input)
-        area = fragmentView.findViewById(R.id.add_area_layout)
-        price = fragmentView.findViewById(R.id.add_price_layout)
-        surface = fragmentView.findViewById(R.id.add_surface_layout)
-        description = fragmentView.findViewById(R.id.add_description_layout)
+        areaLayout = fragmentView.findViewById(R.id.add_area_layout)
+        area = fragmentView.findViewById(R.id.add_area_input)
+        priceLayout = fragmentView.findViewById(R.id.add_price_layout)
+        price = fragmentView.findViewById(R.id.add_price_input)
+        surfaceLayout = fragmentView.findViewById(R.id.add_surface_layout)
+        surface = fragmentView.findViewById(R.id.add_surface_input)
+        descriptionLayout = fragmentView.findViewById(R.id.add_description_layout)
+        description = fragmentView.findViewById(R.id.add_description_text)
         picturesRecyclerView = fragmentView.findViewById(R.id.add_pictures_list)
         emptyRecyclerViewText = fragmentView.findViewById(R.id.empty_error_text)
         saveButton = fragmentView.findViewById(R.id.create)
     }
 
     private fun createProperty() {
-        property.name = titleLayout.editText.toString()
-        property.area = area.editText.toString()
+        property.name = title.text.toString()
+        property.area = area.text.toString()
         property.type = getPropertyType()
         getPropertyPrice()
         getPropertySurface()
-        property.description = description.editText.toString()
+        property.description = description.text.toString()
         property.isAvailable = isPropertyAvailable()
         property.creationDate = getTodayDate()
         property.pictures = picturesList
     }
 
 
+    @SuppressLint("DiscouragedApi")
     private fun checkPropertyFields(): Boolean {
-        return (checkIfFieldsAreNotEmpty(area, price, surface, description, picturesRecyclerView, emptyRecyclerViewText )
-            && validateField(title.toString(), titleLayout))
+        return (checkIfFieldsIsNotEmpty(areaLayout)
+            && validateNumbers(price.text.toString(), priceLayout)
+            && validateNumbers(surface.text.toString(), surfaceLayout)
+            && checkIfFieldsIsNotEmpty(descriptionLayout)
+            && validateField(title.text.toString(), titleLayout))
     }
+
+
+
 
     private fun addPicture(picture: Picture) {
 
     }
+
 
     private fun setRoomsSpinners() {
         // Room spinner
@@ -212,7 +226,7 @@ class AddPropertyFragment: Fragment() {
     }
 
     private fun getPropertyPrice() {
-        val priceValue = price.editText.toString()
+        val priceValue = price.text.toString()
         try {
             property.price = priceValue.toInt()
         } catch (e: NumberFormatException) {
@@ -221,7 +235,7 @@ class AddPropertyFragment: Fragment() {
     }
 
     private fun getPropertySurface() {
-        val surfaceValue = surface.editText.toString()
+        val surfaceValue = surface.text.toString()
         try {
             property.surface = surfaceValue.toInt()
         } catch (e: NumberFormatException) {
@@ -230,7 +244,7 @@ class AddPropertyFragment: Fragment() {
     }
 
     private fun isPropertyAvailable(): Boolean {
-        val available: RadioButton = fragmentView.findViewById(R.id.add_status_radioGroup)
+        val available: RadioButton = fragmentView.findViewById(R.id.add_status_radioButton1)
         return available.isChecked
     }
 }

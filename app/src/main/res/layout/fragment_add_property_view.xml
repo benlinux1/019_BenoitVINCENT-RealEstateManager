@@ -150,7 +150,7 @@
                     android:ems="10"
                     android:drawableStart="@drawable/ic_details_price_24"
                     android:hint="@string/add_price_text"
-                    android:inputType="textShortMessage"
+                    android:inputType="number"
                     android:imeOptions="actionDone"
                     android:autofillHints="" />
 
@@ -172,7 +172,7 @@
                     android:drawableStart="@drawable/ic_details_surface_24"
                     android:drawablePadding="8dp"
                     android:hint="@string/add_surface_text"
-                    android:inputType="textShortMessage"
+                    android:inputType="number"
                     android:imeOptions="actionDone"
                     android:autofillHints="" />
 
@@ -435,7 +435,6 @@
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:enabled="false"
                 android:backgroundTint="@color/colorPrimary"
                 android:textColor="@color/colorWhite"
                 android:layout_gravity="center"
