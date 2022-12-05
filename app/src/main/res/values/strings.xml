@@ -67,6 +67,17 @@
     <string name="property_details_description_text">Property description</string>
     <string name="details_price_title">Price :&#160;</string>
     <string name="details_price_text">$ 29 872 000</string>
+
+
+    // PROPERTY LIST
+    <string name="list_properties_title">Here is the list of our properties</string>
+    <string name="no_property_found">No property found at this time</string>
+
+
+    // LOGIN ACTIVITY
+    <string name="login_title">Here is the login activity</string>
+
+    // ADD PROPERTY ACTIVITY
     <string name="add_type_flat">Flat</string>
     <string name="add_type_house">House</string>
     <string name="add_type_duplex">Duplex</string>
@@ -88,17 +99,18 @@
     <string name="choose_property_status">Please select a property status</string>
     <string name="add_property_description">Description</string>
     <string name="add_new_picture">Add a new picture</string>
-
-    // PROPERTY LIST
-    <string name="list_properties_title">Here is the list of our properties</string>
-
-    // LOGIN ACTIVITY
-    <string name="login_title">Here is the login activity</string>
-    <string name="no_property_found">No property found at this time</string>
     <string name="length_error">This field must contain at least 3 characters</string>
     <string name="empty_error">Please complete this field</string>
     <string name="empty_pictures_list_error">Please add at least 1 picture</string>
-    <string name="numbers_error">This value doesn\'t seem to be correct...</string>
+    <string name="numbers_error">This value doesn\'t seem to be correct…</string>
+    <string name="add_property">add property button</string>
+    <string name="add_property_activity_title">Add a new property</string>
+    <string name="spinner_number_rooms">Number of rooms :</string>
+    <string name="spinner_number_bedrooms">Number of bedrooms :</string>
+    <string name="spinner_number_bathrooms">Number of bathrooms :</string>
+    <string name="allow_photo_access">Please allow pictures access</string>
+    <string name="picture_enabled">You can choose a picture !</string>
+    <string name="no_image_chosen">No image chosen</string>
 
 
 </resources>

@@ -19,8 +19,8 @@
 
         <!-- Toolbar -->
         <include
-            layout="@layout/toolbar_main"
-            android:id="@+id/main_toolbar" />
+            android:id="@+id/main_toolbar"
+            layout="@layout/toolbar_main" />
 
 
         <!-- Main Fragment (List / Map / Add Property) -->
@@ -36,6 +36,18 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:navGraph="@navigation/bottom_navigation" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_property_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="16dp"
+            app:backgroundTint="@color/colorAccent"
+            app:srcCompat="@drawable/ic_add_property_24"
+            android:contentDescription="@string/add_property" />
 
         <!-- Bottom Navigation Bar -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -55,7 +67,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Drawer NavigationView that includes header and menu -->
+    <!-- Drawer NavigationView that includes header and menu -->
     <com.google.android.material.navigation.NavigationView
     android:id="@+id/activity_main_nav_view"
     android:layout_width="wrap_content"

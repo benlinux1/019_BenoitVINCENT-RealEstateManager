@@ -25,6 +25,7 @@ package com.benlinux.realestatemanager.ui.activities
  import com.benlinux.realestatemanager.ui.models.Property
  import com.benlinux.realestatemanager.utils.isInternetAvailable
  import com.google.android.material.bottomnavigation.BottomNavigationView
+ import com.google.android.material.floatingactionbutton.FloatingActionButton
  import com.google.android.material.navigation.NavigationView
  import java.util.*
 
@@ -39,6 +40,8 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     private lateinit var mapFragment: MapFragment
     private lateinit var addPropertyFragment: AddPropertyFragment
 
+    private lateinit var addPropertyButton: FloatingActionButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +53,7 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         setUpDrawerNavigation()
         setUpBottomNavigation()
         configureDrawerLayoutToggle()
+        setAddButton()
 
     }
 
@@ -57,6 +61,16 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     private fun setFragments() {
         mapFragment = MapFragment()
         addPropertyFragment = AddPropertyFragment()
+    }
+
+    // Set Add Property Floating action Button
+    private fun setAddButton() {
+        addPropertyButton = findViewById(R.id.add_property_button)
+        addPropertyButton.setOnClickListener {
+            val addPropertyActivityIntent = Intent(this, AddPropertyActivity::class.java)
+            startActivity(addPropertyActivityIntent)
+            finish()
+        }
     }
 
     private fun checkInternetConnection() {

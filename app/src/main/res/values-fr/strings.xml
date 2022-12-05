@@ -56,6 +56,17 @@
     <string name="details_location_state_text">FRANCE</string>
     <string name="property_details_description_title">Description</string>
     <string name="property_details_description_text">Description du bien</string>
+
+
+    // PROPERTY LIST
+    <string name="list_properties_title">Voici la liste de nos biens immobiliers</string>
+    <string name="no_property_found">Aucun bien immobilier trouvé pour le moment</string>
+
+    // LOGIN ACTIVITY
+    <string name="login_title">Voici la page de connexion</string>
+
+
+    // ADD PROPERTY FRAGMENT
     <string name="add_type_flat">Appartement</string>
     <string name="add_type_house">Maison</string>
     <string name="add_type_duplex">Duplex</string>
@@ -77,19 +88,17 @@
     <string name="choose_property_status">Statut actuel du bien :&#160;</string>
     <string name="add_property_description">Description</string>
     <string name="add_new_picture">Ajouter une photo</string>
-
-    // PROPERTY LIST
-    <string name="list_properties_title">Voici la liste de nos biens immobiliers</string>
-    <string name="no_property_found">Aucun bien immobilier trouvé pour le moment</string>
-
-    // LOGIN ACTIVITY
-    <string name="login_title">Voici la page de connexion</string>
-
-
-    // ADD PROPERTY FRAGMENT
     <string name="length_error">Ce champ doit contenir au moins 3 caractères</string>
     <string name="empty_error">Merci de compléter ce champ</string>
     <string name="empty_pictures_list_error">Veuillez ajouter au moins une photo</string>
-    <string name="numbers_error">This value doesn\'t seem to be correct...</string>
+    <string name="numbers_error">Cette valeur semble incorrecte…</string>
+    <string name="add_property">bouton pour ajouter une propriété</string>
+    <string name="add_property_activity_title">Nouvelle propriété</string>
+    <string name="spinner_number_rooms">Nombre de pièces :</string>
+    <string name="spinner_number_bedrooms">Nombre de chambres :</string>
+    <string name="spinner_number_bathrooms">Nombre de salles de bain :</string>
+    <string name="allow_photo_access">Please allow pictures access</string>
+    <string name="picture_enabled">You can choose a picture !</string>
+    <string name="no_image_chosen">No image chosen</string>
 
 </resources>
