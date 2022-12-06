@@ -97,8 +97,13 @@
     <string name="spinner_number_rooms">Nombre de pièces :</string>
     <string name="spinner_number_bedrooms">Nombre de chambres :</string>
     <string name="spinner_number_bathrooms">Nombre de salles de bain :</string>
-    <string name="allow_photo_access">Please allow pictures access</string>
-    <string name="picture_enabled">You can choose a picture !</string>
-    <string name="no_image_chosen">No image chosen</string>
+    <string name="allow_photo_access">Autorisez l\'accès à vos images</string>
+    <string name="picture_enabled">Vous pouvez choisir une photo !</string>
+    <string name="no_image_chosen">Aucune image sélectionnée</string>
+    <string name="add_room_name_title">Ajoutez un titre à cette photo</string>
+    <string name="add_room_name_text">Titre de la photo</string>
+    <string name="cancel_button">RETOUR</string>
+    <string name="validate_button">AJOUTER</string>
+    <string name="add_picture_dialog_title">APERCU DE VOTRE IMAGE</string>
 
 </resources>

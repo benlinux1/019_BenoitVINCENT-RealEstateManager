@@ -17,7 +17,7 @@ data class Property(
     var description: String = "",
     @Embedded
     @Ignore
-    var pictures: List<Picture> = listOf(),
+    var pictures: MutableList<Picture?> = mutableListOf(),
     var address: String = "",
     var isAvailable: Boolean = true,
     var creationDate: String = "29/11/2022",

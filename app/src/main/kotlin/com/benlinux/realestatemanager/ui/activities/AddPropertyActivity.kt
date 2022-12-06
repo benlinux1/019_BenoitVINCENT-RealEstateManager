@@ -22,6 +22,7 @@ import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.activities.AddPropertyActivity.Enum.Companion.PERMS
 import com.benlinux.realestatemanager.ui.activities.AddPropertyActivity.Enum.Companion.RC_IMAGE_PERMS
+import com.benlinux.realestatemanager.ui.adapters.PictureAdapter
 import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.utils.*
@@ -41,7 +42,7 @@ class AddPropertyActivity: AppCompatActivity() {
     private lateinit var typeRadioGroup2: RadioGroup
 
     // Property pictures list
-    private var picturesList: MutableList<Picture> = mutableListOf()
+    private var picturesList: MutableList<Picture?> = mutableListOf()
 
     // Save button
     private lateinit var saveButton: Button
@@ -64,6 +65,9 @@ class AddPropertyActivity: AppCompatActivity() {
     private lateinit var description: EditText
     private lateinit var picturesRecyclerView: RecyclerView
     private lateinit var emptyRecyclerViewText: TextView
+
+    // The adapter which handles the list of pictures
+    private lateinit var pictureAdapter: PictureAdapter
 
     // Created Property
     private var property: Property = Property()
@@ -99,6 +103,7 @@ class AddPropertyActivity: AppCompatActivity() {
         setBathroomsSpinners()
         setListenerOnCreateButton()
         setAddPictureButtonListener()
+        configureRecyclerView()
     }
 
     // Toolbar configuration
@@ -418,8 +423,16 @@ class AddPropertyActivity: AppCompatActivity() {
     // Add picture to pictures list
     private fun addPicture(picture: Picture) {
         picturesList.add(picture)
-
+        pictureAdapter.updatePictures(picturesList)
     }
 
-    // TODO: configure recyclerView to display property added pictures
+    /**
+     * Init the recyclerView that contains pictures list
+     */
+    private fun configureRecyclerView() {
+        // Define layout & adapter
+        picturesRecyclerView = findViewById(R.id.add_pictures_list)
+        pictureAdapter = PictureAdapter(picturesList, this )
+        picturesRecyclerView.adapter = pictureAdapter
+    }
 }
