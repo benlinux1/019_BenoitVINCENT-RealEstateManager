@@ -11,6 +11,10 @@
         android:layout_height="match_parent"
         android:layout_margin="4dp" >
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
         <ImageView
             android:id="@+id/property_picture_item"
             android:layout_width="80dp"
@@ -34,6 +38,8 @@
             app:layout_constraintBottom_toBottomOf="@id/property_picture_item"
             app:layout_constraintStart_toStartOf="@id/property_picture_item"
             app:layout_constraintEnd_toEndOf="@id/property_picture_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 

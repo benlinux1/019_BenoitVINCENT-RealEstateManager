@@ -1,7 +1,7 @@
 package com.benlinux.realestatemanager.ui.activities
 
 import android.Manifest
-import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -25,6 +26,8 @@ import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.utils.*
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputLayout
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -38,7 +41,7 @@ class AddPropertyActivity: AppCompatActivity() {
     private lateinit var typeRadioGroup2: RadioGroup
 
     // Property pictures list
-    private var picturesList: List<Picture> = mutableListOf()
+    private var picturesList: MutableList<Picture> = mutableListOf()
 
     // Save button
     private lateinit var saveButton: Button
@@ -73,6 +76,7 @@ class AddPropertyActivity: AppCompatActivity() {
     // Picture URL
     private var uriImageSelected: Uri? = null
 
+    // Constants
     annotation class Enum {
         companion object {
             // Permissions for picture picking
@@ -82,13 +86,11 @@ class AddPropertyActivity: AppCompatActivity() {
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_proprerty)
 
         setToolbar()
-
         setTypeRadioButtons()
         configureViewModel()
         setViews()
@@ -99,6 +101,7 @@ class AddPropertyActivity: AppCompatActivity() {
         setAddPictureButtonListener()
     }
 
+    // Toolbar configuration
     private fun setToolbar() {
         val mToolbar = findViewById<Toolbar>(R.id.main_toolbar)
         setSupportActionBar(mToolbar)
@@ -150,6 +153,7 @@ class AddPropertyActivity: AppCompatActivity() {
     private fun setViews() {
         titleLayout = findViewById(R.id.add_name_layout)
         title = findViewById(R.id.add_name_input)
+        title.requestFocus()
         areaLayout = findViewById(R.id.add_area_layout)
         area = findViewById(R.id.add_area_input)
         priceLayout = findViewById(R.id.add_price_layout)
@@ -178,7 +182,6 @@ class AddPropertyActivity: AppCompatActivity() {
     }
 
     // Fields validation
-    @SuppressLint("DiscouragedApi")
     private fun checkPropertyFields(): Boolean {
         return (checkIfFieldsIsNotEmpty(areaLayout)
                 && validateNumbers(price.text.toString(), priceLayout)
@@ -186,8 +189,6 @@ class AddPropertyActivity: AppCompatActivity() {
                 && checkIfFieldsIsNotEmpty(descriptionLayout)
                 && validateField(title.text.toString(), titleLayout))
     }
-
-
 
     // Add picture action
     private fun setAddPictureButtonListener() {
@@ -309,6 +310,7 @@ class AddPropertyActivity: AppCompatActivity() {
         }
     }
 
+    // Get property availability
     private fun isPropertyAvailable(): Boolean {
         val available: RadioButton = findViewById(R.id.add_status_radioButton1)
         return available.isChecked
@@ -327,6 +329,7 @@ class AddPropertyActivity: AppCompatActivity() {
     // When photo access is granted
     @AfterPermissionGranted(RC_IMAGE_PERMS)
     private fun updateAvatarPicture() {
+        // Ask permission
         if (!EasyPermissions.hasPermissions(this, PERMS)) {
             EasyPermissions.requestPermissions(
                 this,
@@ -336,6 +339,7 @@ class AddPropertyActivity: AppCompatActivity() {
             )
             return
         }
+        // When permission granted, allow picking action
         Toast.makeText(this, getString(R.string.picture_enabled), Toast.LENGTH_SHORT).show()
         val pickPhotoIntent =
             Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -343,7 +347,7 @@ class AddPropertyActivity: AppCompatActivity() {
     }
 
     // Create callback when user pick a photo on his device
-    private val actionPick = registerForActivityResult<Intent, ActivityResult>(
+    private val actionPick = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result -> onPickPhotoResult(result) }
 
@@ -352,15 +356,70 @@ class AddPropertyActivity: AppCompatActivity() {
         if (result.resultCode == RESULT_OK) { //SUCCESS
             assert(result.data != null)
             this.uriImageSelected = result.data!!.data
-            /**
-             * TODO: For dialog content view
-            Glide.with(this) //SHOWING PREVIEW OF IMAGE
-                .load(this.uriImageSelected)
-                .apply(RequestOptions.circleCropTransform())
-                .into(picturePreview)
-            */
+
+            // Show dialog window for picture information
+            result.data!!.data?.let {
+                showAddPictureDialog(this, it
+                )
+            }
+
         } else {
             Toast.makeText(this, getString(R.string.no_image_chosen), Toast.LENGTH_SHORT).show()
         }
     }
+
+    // When picture is selected from device, create dialog window
+    private fun showAddPictureDialog(mContext: Context, imagePreview: Uri) {
+        // Builder & custom view
+        val builder = AlertDialog.Builder(mContext, R.style.CustomAlertDialog)
+        val customView = layoutInflater.inflate(R.layout.custom_dialog_add_picture,null)
+        builder.setView(customView)
+        builder.setCancelable(true)
+        val dialogWindow = builder.create()
+
+        // Custom view picture
+        val imageView: ImageView = customView.findViewById(R.id.property_new_picture_preview)
+        // Custom view room name
+        val roomName: EditText = customView.findViewById(R.id.add_room_name_input)
+        roomName.requestFocus()
+        // Negative button
+        val negativeButton: Button = customView.findViewById(R.id.picture_dialog_negative_button)
+        // Positive button
+        val positiveButton: Button = customView.findViewById(R.id.picture_dialog_positive_button)
+
+        // Picture preview
+        Glide.with(this)
+            .load(imagePreview)
+            .apply(RequestOptions.centerInsideTransform())
+            .into(imageView)
+
+        // Positive button & actions
+        positiveButton.setOnClickListener {
+            // Picture Data Creation
+            val picture = Picture(imagePreview.toString(), roomName.text.toString())
+            // Add picture
+            addPicture(picture)
+            // Remove dialog window
+            dialogWindow.dismiss()
+            // Clear title focus to stay on pictures recyclerview
+            title.clearFocus()
+            roomSpinner.requestFocus()
+        }
+
+        // Negative button & actions
+        negativeButton.setOnClickListener {
+            // Picture Data Creation
+            dialogWindow.cancel() }
+
+        // Display dialog
+        dialogWindow.show()
+    }
+
+    // Add picture to pictures list
+    private fun addPicture(picture: Picture) {
+        picturesList.add(picture)
+
+    }
+
+    // TODO: configure recyclerView to display property added pictures
 }

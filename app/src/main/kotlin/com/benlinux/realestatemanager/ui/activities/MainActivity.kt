@@ -17,12 +17,8 @@ package com.benlinux.realestatemanager.ui.activities
  import androidx.navigation.ui.NavigationUI.setupWithNavController
  import androidx.navigation.ui.onNavDestinationSelected
  import androidx.navigation.ui.setupActionBarWithNavController
- import androidx.recyclerview.widget.RecyclerView
  import com.benlinux.realestatemanager.R
- import com.benlinux.realestatemanager.ui.adapters.ListAdapter
- import com.benlinux.realestatemanager.ui.fragments.AddPropertyFragment
  import com.benlinux.realestatemanager.ui.fragments.MapFragment
- import com.benlinux.realestatemanager.ui.models.Property
  import com.benlinux.realestatemanager.utils.isInternetAvailable
  import com.google.android.material.bottomnavigation.BottomNavigationView
  import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,7 +34,6 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var mapFragment: MapFragment
-    private lateinit var addPropertyFragment: AddPropertyFragment
 
     private lateinit var addPropertyButton: FloatingActionButton
 
@@ -60,7 +55,6 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     // Set fragments views (map, add property)
     private fun setFragments() {
         mapFragment = MapFragment()
-        addPropertyFragment = AddPropertyFragment()
     }
 
     // Set Add Property Floating action Button

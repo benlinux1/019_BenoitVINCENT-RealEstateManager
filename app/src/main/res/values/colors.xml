@@ -4,5 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorSecondary">#B3E5FC</color>
+    <color name="colorIndigo">#E8EAF6</color>
     <color name="backgroundTransparent">#80000000</color>
+
 </resources>

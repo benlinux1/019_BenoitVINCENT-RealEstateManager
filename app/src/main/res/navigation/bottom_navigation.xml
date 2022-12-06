@@ -18,10 +18,4 @@
         tools:layout="@layout/fragment_map_view" />
 
 
-    <fragment
-        android:id="@+id/add_property_fragment"
-        android:name="com.benlinux.realestatemanager.ui.fragments.AddPropertyFragment"
-        android:label="@string/add_property_fragment_label"
-        tools:layout="@layout/fragment_add_property_view" />
-
 </navigation>

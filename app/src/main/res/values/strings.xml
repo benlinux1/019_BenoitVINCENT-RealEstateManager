@@ -111,6 +111,11 @@
     <string name="allow_photo_access">Please allow pictures access</string>
     <string name="picture_enabled">You can choose a picture !</string>
     <string name="no_image_chosen">No image chosen</string>
+    <string name="add_room_name_title">Please add room name</string>
+    <string name="add_room_name_text">Room name</string>
+    <string name="cancel_button">CANCEL</string>
+    <string name="validate_button">ADD PICTURE</string>
+    <string name="add_picture_dialog_title">PICTURE PREVIEW</string>
 
 
 </resources>

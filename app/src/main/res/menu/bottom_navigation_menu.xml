@@ -13,10 +13,4 @@
         android:title="@string/navigation_map_view" />
 
 
-    <item
-        android:id="@+id/add_property_fragment"
-        android:icon="@drawable/ic_navigation_add_property_24"
-        android:title="@string/navigation_add_property" />
-
-
 </menu>

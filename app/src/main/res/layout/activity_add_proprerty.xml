@@ -43,7 +43,9 @@
                     android:ems="10"
                     android:hint="@string/add_property_name"
                     android:inputType="textShortMessage"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:autofillHints=""/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -63,7 +65,7 @@
                     android:ems="10"
                     android:hint="@string/add_property_area"
                     android:inputType="textShortMessage"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
                     android:autofillHints="" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -73,7 +75,7 @@
                 style="@style/fieldTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:text="@string/choose_property_type"/>
@@ -157,7 +159,7 @@
                     android:drawableStart="@drawable/ic_details_price_24"
                     android:hint="@string/add_price_text"
                     android:inputType="number"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
                     android:autofillHints="" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -179,7 +181,7 @@
                     android:drawablePadding="8dp"
                     android:hint="@string/add_surface_text"
                     android:inputType="number"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
                     android:autofillHints="" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -207,7 +209,7 @@
                         android:layout_height="wrap_content"
                         android:minLines="5"
                         android:inputType="textMultiLine"
-                        android:imeOptions="actionDone"
+                        android:imeOptions="actionNext"
                         android:autofillHints="" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -308,7 +310,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/add_pictures_button"
                     tools:itemCount="5"
-                    tools:listitem="@layout/fragment_property_picture" />
+                    tools:listitem="@layout/item_property_picture" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -325,7 +327,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/add_rooms_spinner_layout"
                     app:layout_constraintTop_toBottomOf="@id/add_pictures_list"
-                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="8dp"
                     android:gravity = "center">
 
@@ -427,7 +428,7 @@
                     android:autofillHints=""
                     android:hint="@string/add_property_creation_date"
                     android:inputType="textShortMessage"
-                    android:imeOptions="actionDone" />
+                    android:imeOptions="actionNext" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -450,7 +451,7 @@
                     android:drawablePadding="12dp"
                     android:hint="@string/add_property_sold_date"
                     android:inputType="textShortMessage"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
                     android:autofillHints=""/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -470,21 +471,6 @@
 
         </LinearLayout>
 
-        <!-- Bottom Navigation Bar -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:menu="@menu/bottom_navigation_menu"
-            app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
-            app:itemTextAppearanceInactive="@style/BottomNavigationView"
-            app:itemIconSize="24dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

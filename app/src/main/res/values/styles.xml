@@ -92,6 +92,11 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    // Custom Alert Dialog Style
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/rounded_corner</item>
+    </style>
+
 
 
 
