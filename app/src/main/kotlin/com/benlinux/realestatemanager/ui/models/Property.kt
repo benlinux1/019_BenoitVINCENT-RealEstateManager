@@ -1,10 +1,10 @@
 package com.benlinux.realestatemanager.ui.models
 
 import androidx.room.*
+import com.benlinux.realestatemanager.utils.converters.Converters
 
 @Entity(tableName = "property_table")
 @SuppressWarnings(RoomWarnings.PRIMARY_KEY_FROM_EMBEDDED_IS_DROPPED)
-
 data class Property(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "property_id")
@@ -15,15 +15,13 @@ data class Property(
     var price: Int = 0,
     var surface: Int = 0,
     var description: String = "",
-    @Embedded
-    @Ignore
+    @TypeConverters(Converters::class)
     var pictures: MutableList<Picture?> = mutableListOf(),
     var address: String = "",
     var isAvailable: Boolean = true,
     var creationDate: String = "29/11/2022",
     var soldDate: String = "",
-    @Embedded
-    @Ignore
+    @TypeConverters(Converters::class)
     var realtor: Realtor = Realtor(0, "", "", "", "", ""),
     var numberOfRooms: Int = 0,
     var numberOfBathrooms: Int = 0,

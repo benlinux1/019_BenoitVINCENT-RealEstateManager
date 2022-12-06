@@ -1,6 +1,7 @@
 package com.benlinux.realestatemanager.ui.adapters
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -11,18 +12,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.ui.activities.PropertyDetailsActivity
 import com.benlinux.realestatemanager.ui.models.Property
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import java.util.*
 
 @SuppressLint("NotifyDataSetChanged")
-class ListAdapter(properties: MutableList<Property?>) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
+class ListAdapter(properties: MutableList<Property?>, context: Context) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
     private var mProperties: List<Property?>
+    private var localContext: Context
 
     /**
      * Instantiates a new ListAdapter.
      */
     init {
         mProperties = properties
+        localContext = context
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -66,7 +71,7 @@ class ListAdapter(properties: MutableList<Property?>) : RecyclerView.Adapter<Lis
      * ViewHolder for properties items in the properties list
      * @author BenLinux1
      */
-    public final inner class ViewHolder(itemView: View) :
+    inner class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         /**
          * The square picture of the property
@@ -97,7 +102,6 @@ class ListAdapter(properties: MutableList<Property?>) : RecyclerView.Adapter<Lis
 
         /**
          * Instantiates a new Property ViewHolder.
-         * @param itemView the view of the prperty item
          */
         init {
             picture = itemView.findViewById(R.id.item_property_picture)
@@ -121,10 +125,10 @@ class ListAdapter(properties: MutableList<Property?>) : RecyclerView.Adapter<Lis
             id.text = property.id.toString()
 
             // Set property picture
-            /**
-            if (!property.pictures.isEmpty())
+
+            if (property.pictures.isNotEmpty())
                 Glide.with(localContext)
-                    .load(property.pictures[0])
+                    .load(property.pictures[0]?.url)
                     .apply(RequestOptions.centerCropTransform())
                     .into(picture)
             else
@@ -132,7 +136,7 @@ class ListAdapter(properties: MutableList<Property?>) : RecyclerView.Adapter<Lis
                     .load(R.mipmap.no_photo)
                     .apply(RequestOptions.centerCropTransform())
                     .into(picture)
-            */
+
 
             // Set property area
             area.text = property.area

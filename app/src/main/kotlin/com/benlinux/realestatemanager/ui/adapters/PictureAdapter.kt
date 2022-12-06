@@ -96,7 +96,6 @@ class PictureAdapter(pictures: MutableList<Picture?>, context: Context) : Recycl
             // Set title
             title.text = picture.room
 
-
             // Set property picture
             if (picture.url.isNotEmpty()) {
                 Glide.with(localContext)

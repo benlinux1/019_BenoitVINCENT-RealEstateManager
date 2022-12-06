@@ -25,6 +25,7 @@ import com.benlinux.realestatemanager.ui.activities.AddPropertyActivity.Enum.Com
 import com.benlinux.realestatemanager.ui.adapters.PictureAdapter
 import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
+import com.benlinux.realestatemanager.ui.models.Realtor
 import com.benlinux.realestatemanager.utils.*
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.bumptech.glide.Glide
@@ -148,6 +149,9 @@ class AddPropertyActivity: AppCompatActivity() {
                 createProperty()
                 propertyViewModel.saveProperty(property)
                 Log.d("PROPERTY CREATED", property.toString())
+                val mainActivityIntent = Intent(this, MainActivity::class.java)
+                startActivity(mainActivityIntent)
+                finish()
             } else {
                 Log.d("PROPERTY NOT CREATED", "Not validated")
             }
@@ -183,6 +187,9 @@ class AddPropertyActivity: AppCompatActivity() {
         property.description = description.text.toString()
         property.isAvailable = isPropertyAvailable()
         property.creationDate = getTodayDate()
+        property.pictures = picturesList
+        // TODO : get current realtor
+        property.realtor = Realtor(0, "", "", "", "", "")
         property.pictures = picturesList
     }
 
@@ -435,4 +442,6 @@ class AddPropertyActivity: AppCompatActivity() {
         pictureAdapter = PictureAdapter(picturesList, this )
         picturesRecyclerView.adapter = pictureAdapter
     }
+
+    // TODO : set address location with geocoder
 }

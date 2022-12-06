@@ -64,7 +64,7 @@ class ListFragment: Fragment() {
             mProperties = listOfProperties
 
             // Define and configure adapter (MUST BE CALLED HERE FOR DATA REFRESH)
-            adapter = ListAdapter(mProperties)
+            adapter = ListAdapter(mProperties, requireContext())
             mRecyclerView.adapter = adapter
         }
     }
