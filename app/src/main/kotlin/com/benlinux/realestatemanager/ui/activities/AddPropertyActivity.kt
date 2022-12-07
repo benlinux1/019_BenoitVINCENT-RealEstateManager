@@ -36,7 +36,7 @@ import pub.devrel.easypermissions.EasyPermissions
 import java.util.*
 
 
-class AddPropertyActivity: AppCompatActivity() {
+open class AddPropertyActivity: AppCompatActivity() {
 
     // Property type radio buttons
     private lateinit var typeRadioGroup1: RadioGroup
@@ -108,7 +108,7 @@ class AddPropertyActivity: AppCompatActivity() {
     }
 
     // Toolbar configuration
-    private fun setToolbar() {
+    fun setToolbar() {
         val mToolbar = findViewById<Toolbar>(R.id.main_toolbar)
         setSupportActionBar(mToolbar)
         mToolbar.title = resources.getString(R.string.add_property_activity_title)

@@ -3,9 +3,10 @@ package com.benlinux.realestatemanager.ui.models
 import androidx.room.*
 import com.benlinux.realestatemanager.utils.converters.Converters
 
+
 @Entity(tableName = "property_table")
 @SuppressWarnings(RoomWarnings.PRIMARY_KEY_FROM_EMBEDDED_IS_DROPPED)
-data class Property(
+data class Property (
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "property_id")
     var id: Int = 0,
@@ -26,5 +27,6 @@ data class Property(
     var numberOfRooms: Int = 0,
     var numberOfBathrooms: Int = 0,
     var numberOfBedrooms: Int = 0
+
 )
 

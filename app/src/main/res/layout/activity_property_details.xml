@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/property_details_activity"
+    android:id="@+id/property_details_main_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#EBEFF0"
+    android:layout_height="wrap_content"
     tools:context="com.benlinux.realestatemanager.ui.activities.PropertyDetailsActivity">
+
+    <!-- Toolbar -->
+    <include
+        android:id="@+id/main_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        layout="@layout/toolbar_main" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+        android:background="#EBEFF0">
 
         <ImageView
             android:id="@+id/property_details_main_picture"
             android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:adjustViewBounds="true"
+            android:layout_height="220dp"
             android:importantForAccessibility="no"
             android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_toolbar"
             tools:src="@drawable/ic_details_photo_camera_24" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -49,15 +63,16 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="12dp">
+                android:paddingVertical="12dp">
 
                 <TextView
                     android:id="@+id/property_details_information_title"
                     style="@style/cardMainTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -65,9 +80,10 @@
                     tools:text="@string/property_details_information_title" />
 
                 <TextView
-                    android:id="@+id/property_details_information_subtitle"
+                    android:id="@+id/property_details_information_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/property_details_information_title"
@@ -81,7 +97,7 @@
                     android:background="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_information_subtitle"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_information_area"
                     android:layout_marginVertical="16dp" />
 
                 <TextView
@@ -91,9 +107,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:drawableStart="@drawable/ic_details_surface_24"
-                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_separator"
-                    tools:text="@string/details_surface_title" />
+                    android:text="@string/details_surface_title" />
 
                 <TextView
                     android:id="@+id/property_details_surface_text"
@@ -113,7 +129,7 @@
                     android:drawableStart="@drawable/ic_details_rooms_24"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_surface_text"
-                    tools:text="@string/details_rooms_title" />
+                    android:text="@string/details_rooms_title" />
 
                 <TextView
                     android:id="@+id/property_details_rooms_text"
@@ -133,7 +149,7 @@
                     android:drawableStart="@drawable/ic_details_bathrooms_24"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_rooms_text"
-                    tools:text="@string/details_bathrooms_title" />
+                    android:text="@string/details_bathrooms_title" />
 
                 <TextView
                     android:id="@+id/property_details_bathrooms_text"
@@ -153,7 +169,7 @@
                     android:drawableStart="@drawable/ic_details_bathrooms_24"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_bathrooms_text"
-                    tools:text="@string/details_bedrooms_title" />
+                    android:text="@string/details_bedrooms_title" />
 
                 <TextView
                     android:id="@+id/property_details_bedrooms_text"
@@ -173,7 +189,7 @@
                     android:drawableStart="@drawable/ic_details_price_24"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_bedrooms_text"
-                    tools:text="@string/details_price_title" />
+                    android:text="@string/details_price_title" />
 
                 <TextView
                     android:id="@+id/property_details_price_text"
@@ -194,17 +210,15 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_price_text"/>
 
-
-
                 <TextView
                     android:id="@+id/property_details_location_title"
-                    style="@style/cardTitle"
-                    android:paddingStart="4dp"
+                    style="@style/cardLocationTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingEnd="4dp"
                     app:layout_constraintStart_toEndOf="@id/property_details_location_icon"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_price_text"
-                    tools:text="@string/details_location_title" />
+                    android:text="@string/details_location_title" />
 
                 <TextView
                     android:id="@+id/property_details_location_street"
@@ -250,9 +264,8 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_location_city"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     tools:text="@string/details_location_state_text" />
-
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -265,24 +278,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="68dp"
             app:cardCornerRadius="4dp"
-            app:layout_constraintTop_toBottomOf="@+id/property_details_information_section">
+            app:layout_constraintTop_toBottomOf="@+id/property_details_information_section"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp">
 
                 <TextView
                     android:id="@+id/property_details_description_title"
                     style="@style/cardTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/property_details_description_title"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/property_details_description_title" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
 
                 <TextView
@@ -290,6 +304,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/property_details_description_title"
                     app:layout_constraintTop_toBottomOf="@id/property_details_description_title"
                     tools:text="@string/property_details_description_text" />
@@ -297,4 +313,5 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

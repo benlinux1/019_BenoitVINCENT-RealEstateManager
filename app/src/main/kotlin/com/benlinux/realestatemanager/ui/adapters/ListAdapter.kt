@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import java.util.*
 
+
 @SuppressLint("NotifyDataSetChanged")
 class ListAdapter(properties: MutableList<Property?>, context: Context) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
@@ -47,7 +48,7 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
                 propertyItem.context,
                 PropertyDetailsActivity::class.java
             )
-            propertyDetailsActivityIntent.putExtra("PLACE_ID", holder.itemView.id)
+            propertyDetailsActivityIntent.putExtra("PROPERTY_ID", holder.id.text)
             propertyItem.context.startActivity(propertyDetailsActivityIntent)
         }
     }
@@ -81,7 +82,7 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
         /**
          * The TextView displaying the id of the property (invisible)
          */
-        private val id: TextView
+        val id: TextView
 
         /**
          * The TextView displaying the title of the property
@@ -141,10 +142,11 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
             // Set property area
             area.text = property.area
 
-            // Set property price
+            // Set property price with thousand separator
+            val formattedPrice = String.format("%,d", property.price)
             price.text = buildString {
                 append("$ ")
-                append(property.price.toString())
+                append(formattedPrice)
             }
         }
     }

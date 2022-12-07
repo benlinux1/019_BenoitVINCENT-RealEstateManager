@@ -1,477 +1,493 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/add_property_fragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#EBEFF0"
-    tools:context=".ui.activities.AddPropertyActivity">
+    android:layout_height="wrap_content">
+
+    <!-- Toolbar -->
+    <include
+        android:id="@+id/main_toolbar"
+        layout="@layout/toolbar_main" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar">
 
-        <!-- Toolbar -->
-        <include
-            android:id="@+id/main_toolbar"
-            layout="@layout/toolbar_main" />
-
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/add_property_fragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="18dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-            app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
-            android:gravity="center_horizontal">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="56dp"
+            android:background="#EBEFF0"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".ui.activities.AddPropertyActivity">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_name_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/add_property_name">
+                android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/add_name_input"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/add_property_name"
-                    android:inputType="textShortMessage"
-                    android:imeOptions="actionNext"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:autofillHints=""/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_area_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/add_property_area">
-
-                <EditText
-                    android:id="@+id/add_area_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/add_property_area"
-                    android:inputType="textShortMessage"
-                    android:imeOptions="actionNext"
-                    android:autofillHints="" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/add_type_layout_title"
-                style="@style/fieldTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:text="@string/choose_property_type"/>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-
-                <RadioGroup
-                    android:id="@+id/add_type_radioGroup1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:orientation="vertical"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
+
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/add_type_layout_title">
-
-
-                    <RadioButton
-                        android:id="@+id/add_type_radiobutton_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:text="@string/add_type_flat"
-                        android:checked="true"/>
-
-                    <RadioButton
-                        android:id="@+id/add_type_radiobutton_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/add_type_house"
-                        app:layout_constraintTop_toBottomOf="@id/add_type_radiobutton_1"
-                        app:layout_constraintStart_toEndOf="@id/add_type_radiobutton_1" />
-
-                </RadioGroup>
-
-                <RadioGroup
-                    android:id="@+id/add_type_radioGroup2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_toRightOf="@id/add_type_radioGroup1">
-
-                    <RadioButton
-                        android:id="@+id/add_type_radiobutton_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/add_type_duplex"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                    <RadioButton
-                        android:id="@+id/add_type_radiobutton_4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/add_type_penthouse"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </RadioGroup>
-            </RelativeLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_price_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/add_price_text">
-
-                <EditText
-                    android:id="@+id/add_price_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:drawableStart="@drawable/ic_details_price_24"
-                    android:hint="@string/add_price_text"
-                    android:inputType="number"
-                    android:imeOptions="actionNext"
-                    android:autofillHints="" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_surface_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/add_surface_text">
-
-                <EditText
-                    android:id="@+id/add_surface_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:drawableStart="@drawable/ic_details_surface_24"
-                    android:drawablePadding="8dp"
-                    android:hint="@string/add_surface_text"
-                    android:inputType="number"
-                    android:imeOptions="actionNext"
-                    android:autofillHints="" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
-                android:id="@+id/add_description_section"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_surface_layout">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/add_description_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:hint="@string/add_property_description">
+                    app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
+                    android:gravity="center_horizontal">
 
-                    <EditText
-                        android:id="@+id/add_description_text"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/add_name_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:minLines="5"
-                        android:inputType="textMultiLine"
-                        android:imeOptions="actionNext"
-                        android:autofillHints="" />
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/add_property_name">
 
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
+                        <EditText
+                            android:id="@+id/add_name_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="@string/add_property_name"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:autofillHints=""/>
 
-            <TextView
-                android:id="@+id/add_status_layout_title"
-                style="@style/fieldTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:text="@string/choose_property_status"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            <RadioGroup
-                android:id="@+id/add_status_radioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                android:gravity="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="UselessParent">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/add_area_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/add_property_area">
 
-                <RadioButton
-                    android:id="@+id/add_status_radioButton1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/add_status_1" />
+                        <EditText
+                            android:id="@+id/add_area_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="@string/add_property_area"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"
+                            android:autofillHints="" />
 
-                <RadioButton
-                    android:id="@+id/add_status_radioButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/add_status_2" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-            </RadioGroup>
+                    <TextView
+                        android:id="@+id/add_type_layout_title"
+                        style="@style/fieldTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:text="@string/choose_property_type"/>
 
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/add_pictures_section"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="20dp">
-
-                <TextView
-                    android:id="@+id/add_pictures_title"
-                    style="@style/fieldTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/add_pictures_title"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/add_pictures_button"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="12dp"
-                    android:src="@drawable/ic_add_photo_24"
-                    android:drawableTint="@color/colorPrimary"
-                    app:layout_constraintStart_toStartOf="@id/add_pictures_title"
-                    app:layout_constraintTop_toBottomOf="@id/add_pictures_title"
-                    android:contentDescription="@string/add_new_picture"
-                    app:tint="@color/colorPrimary" />
-
-                <TextView
-                    android:id="@+id/empty_error_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/empty_pictures_list_error"
-                    android:textSize="14sp"
-                    android:textColor="@color/design_default_color_error"
-                    app:layout_constraintStart_toEndOf="@id/add_pictures_button"
-                    app:layout_constraintTop_toTopOf="@id/add_pictures_button"
-                    app:layout_constraintBottom_toBottomOf="@id/add_pictures_button"
-                    android:layout_marginStart="16dp"
-                    android:visibility="gone"/>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/add_pictures_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/add_pictures_button"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/item_property_picture" />
+                        <RadioGroup
+                            android:id="@+id/add_type_radioGroup1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/add_type_layout_title">
+
+
+                            <RadioButton
+                                android:id="@+id/add_type_radiobutton_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:text="@string/add_type_flat"
+                                android:checked="true"/>
+
+                            <RadioButton
+                                android:id="@+id/add_type_radiobutton_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/add_type_house"
+                                app:layout_constraintTop_toBottomOf="@id/add_type_radiobutton_1"
+                                app:layout_constraintStart_toEndOf="@id/add_type_radiobutton_1" />
+
+                        </RadioGroup>
+
+                        <RadioGroup
+                            android:id="@+id/add_type_radioGroup2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_toRightOf="@id/add_type_radioGroup1">
+
+                            <RadioButton
+                                android:id="@+id/add_type_radiobutton_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/add_type_duplex"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
+
+                            <RadioButton
+                                android:id="@+id/add_type_radiobutton_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/add_type_penthouse"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </RadioGroup>
+                    </RelativeLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/add_price_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/add_price_text">
+
+                        <EditText
+                            android:id="@+id/add_price_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:drawableStart="@drawable/ic_details_price_24"
+                            android:hint="@string/add_price_text"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:autofillHints="" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/add_surface_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/add_surface_text">
+
+                        <EditText
+                            android:id="@+id/add_surface_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:drawableStart="@drawable/ic_details_surface_24"
+                            android:drawablePadding="8dp"
+                            android:hint="@string/add_surface_text"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            android:autofillHints="" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:id="@+id/add_description_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/add_surface_layout">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/add_description_layout"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:hint="@string/add_property_description">
+
+                            <EditText
+                                android:id="@+id/add_description_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minLines="5"
+                                android:inputType="textMultiLine"
+                                android:imeOptions="actionNext"
+                                android:autofillHints="" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/add_status_layout_title"
+                        style="@style/fieldTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:text="@string/choose_property_status"/>
+
+                    <RadioGroup
+                        android:id="@+id/add_status_radioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UselessParent">
+
+                        <RadioButton
+                            android:id="@+id/add_status_radioButton1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/add_status_1" />
+
+                        <RadioButton
+                            android:id="@+id/add_status_radioButton2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="@string/add_status_2" />
+
+                    </RadioGroup>
+
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/add_pictures_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp">
+
+                        <TextView
+                            android:id="@+id/add_pictures_title"
+                            style="@style/fieldTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/add_pictures_title"
+                            android:textSize="18sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/add_pictures_button"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="12dp"
+                            android:src="@drawable/ic_add_photo_24"
+                            android:drawableTint="@color/colorPrimary"
+                            app:layout_constraintStart_toStartOf="@id/add_pictures_title"
+                            app:layout_constraintTop_toBottomOf="@id/add_pictures_title"
+                            android:contentDescription="@string/add_new_picture"
+                            app:tint="@color/colorPrimary" />
+
+                        <TextView
+                            android:id="@+id/empty_error_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/empty_pictures_list_error"
+                            android:textSize="14sp"
+                            android:textColor="@color/design_default_color_error"
+                            app:layout_constraintStart_toEndOf="@id/add_pictures_button"
+                            app:layout_constraintTop_toTopOf="@id/add_pictures_button"
+                            app:layout_constraintBottom_toBottomOf="@id/add_pictures_button"
+                            android:layout_marginStart="16dp"
+                            android:visibility="gone"/>
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/add_pictures_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/add_pictures_button"
+                            tools:itemCount="5"
+                            tools:listitem="@layout/item_property_picture" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="center">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/add_rooms_spinner_layout"
+                            app:layout_constraintTop_toBottomOf="@id/add_pictures_list"
+                            android:layout_marginBottom="8dp"
+                            android:gravity = "center">
+
+                            <TextView
+                                android:id="@+id/add_number_rooms_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/spinner_number_rooms"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize = "16sp" />
+
+                            <Spinner
+                                android:id="@+id/add_number_rooms_count"
+                                style="@style/Widget.AppCompat.Spinner.DropDown"
+                                android:theme="@style/Spinner"
+                                android:layout_width="70dp"
+                                android:foregroundTint="@color/colorAccent"
+                                android:layout_height="wrap_content"
+                                android:gravity="left" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="@id/add_rooms_spinner_layout"
+                            app:layout_constraintTop_toBottomOf="@id/add_rooms_spinner_layout"
+                            android:id="@+id/add_bedrooms_spinner_layout"
+                            android:layout_marginBottom="8dp">
+
+                            <TextView
+                                android:id="@+id/add_number_bedrooms_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/spinner_number_bedrooms"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize = "16sp" />
+
+                            <Spinner
+                                android:id="@+id/add_number_bedrooms_count"
+                                style="@style/Widget.AppCompat.Spinner.DropDown"
+                                android:theme="@style/Spinner"
+                                android:layout_width="70dp"
+                                android:foregroundTint="@color/colorAccent"
+                                android:layout_height="wrap_content"
+                                android:gravity="left" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/add_bathrooms_spinner_layout"
+                            android:layout_marginBottom="8dp"
+                            app:layout_constraintTop_toBottomOf="@id/add_bedrooms_spinner_layout"
+                            app:layout_constraintStart_toStartOf="@id/add_rooms_spinner_layout">
+
+                            <TextView
+                                android:id="@+id/add_number_bathrooms_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/spinner_number_bathrooms"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize = "16sp" />
+
+                            <Spinner
+                                android:id="@+id/add_number_bathrooms_count"
+                                style="@style/Widget.AppCompat.Spinner.DropDown"
+                                android:theme="@style/Spinner"
+                                android:layout_width="70dp"
+                                android:foregroundTint="@color/colorAccent"
+                                android:layout_height="wrap_content"
+                                android:gravity="left" />
+
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/add_date_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/add_property_creation_date"
+                        android:visibility="gone">
+
+                        <EditText
+                            android:id="@+id/add_date_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:drawableStart="@drawable/ic_calendar_24"
+                            android:drawableTint="@color/colorPrimary"
+                            android:drawablePadding="12dp"
+                            android:autofillHints=""
+                            android:hint="@string/add_property_creation_date"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/add_sold_date_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/add_property_sold_date"
+                        android:visibility="gone">
+
+                        <EditText
+                            android:id="@+id/add_sold_date_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:drawableStart="@drawable/ic_calendar_24"
+                            android:drawableTint="@color/colorPrimary"
+                            android:drawablePadding="12dp"
+                            android:hint="@string/add_property_sold_date"
+                            android:inputType="textShortMessage"
+                            android:imeOptions="actionNext"
+                            android:autofillHints=""/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <Button
+                        android:id="@+id/create"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:textColor="@color/colorWhite"
+                        android:layout_gravity="center"
+                        app:cornerRadius="12dp"
+                        android:layout_marginVertical="8dp"
+                        android:text="@string/save_button_text"/>
+
+                </LinearLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:layout_gravity="center">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/add_rooms_spinner_layout"
-                    app:layout_constraintTop_toBottomOf="@id/add_pictures_list"
-                    android:layout_marginBottom="8dp"
-                    android:gravity = "center">
-
-                    <TextView
-                        android:id="@+id/add_number_rooms_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/spinner_number_rooms"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize = "16sp" />
-
-                    <Spinner
-                        android:id="@+id/add_number_rooms_count"
-                        style="@style/Widget.AppCompat.Spinner.DropDown"
-                        android:theme="@style/Spinner"
-                        android:layout_width="70dp"
-                        android:foregroundTint="@color/colorAccent"
-                        android:layout_height="wrap_content"
-                        android:gravity="left" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/add_rooms_spinner_layout"
-                    app:layout_constraintTop_toBottomOf="@id/add_rooms_spinner_layout"
-                    android:id="@+id/add_bedrooms_spinner_layout"
-                    android:layout_marginBottom="8dp">
-
-                    <TextView
-                        android:id="@+id/add_number_bedrooms_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/spinner_number_bedrooms"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize = "16sp" />
-
-                    <Spinner
-                        android:id="@+id/add_number_bedrooms_count"
-                        style="@style/Widget.AppCompat.Spinner.DropDown"
-                        android:theme="@style/Spinner"
-                        android:layout_width="70dp"
-                        android:foregroundTint="@color/colorAccent"
-                        android:layout_height="wrap_content"
-                        android:gravity="left" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/add_bathrooms_spinner_layout"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintTop_toBottomOf="@id/add_bedrooms_spinner_layout"
-                    app:layout_constraintStart_toStartOf="@id/add_rooms_spinner_layout">
-
-                    <TextView
-                        android:id="@+id/add_number_bathrooms_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/spinner_number_bathrooms"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize = "16sp" />
-
-                    <Spinner
-                        android:id="@+id/add_number_bathrooms_count"
-                        style="@style/Widget.AppCompat.Spinner.DropDown"
-                        android:theme="@style/Spinner"
-                        android:layout_width="70dp"
-                        android:foregroundTint="@color/colorAccent"
-                        android:layout_height="wrap_content"
-                        android:gravity="left" />
-
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_date_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/add_property_creation_date"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/add_date_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:drawableStart="@drawable/ic_calendar_24"
-                    android:drawableTint="@color/colorPrimary"
-                    android:drawablePadding="12dp"
-                    android:autofillHints=""
-                    android:hint="@string/add_property_creation_date"
-                    android:inputType="textShortMessage"
-                    android:imeOptions="actionNext" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_sold_date_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="@string/add_property_sold_date"
-                android:visibility="gone">
-
-                <EditText
-                    android:id="@+id/add_sold_date_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:drawableStart="@drawable/ic_calendar_24"
-                    android:drawableTint="@color/colorPrimary"
-                    android:drawablePadding="12dp"
-                    android:hint="@string/add_property_sold_date"
-                    android:inputType="textShortMessage"
-                    android:imeOptions="actionNext"
-                    android:autofillHints=""/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <Button
-                android:id="@+id/create"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
-                android:textColor="@color/colorWhite"
-                android:layout_gravity="center"
-                app:cornerRadius="12dp"
-                android:layout_marginVertical="8dp"
-                android:text="@string/save_button_text"/>
-
-        </LinearLayout>
-
-
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
