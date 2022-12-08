@@ -51,11 +51,11 @@
     <string name="details_information_subtitle">Manhattan</string>
     <string name="details_surface_title">Surface :&#160;</string>
     <string name="details_surface_text">750 m²</string>
-    <string name="details_rooms_title">Number of rooms:&#160;</string>
+    <string name="details_rooms_title">Number of rooms :&#160;</string>
     <string name="details_rooms_text">10</string>
     <string name="details_bathrooms_title">Number of bathrooms :&#160;</string>
     <string name="details_bathrooms_text">2</string>
-    <string name="details_bedrooms_title">Number of bedrooms:&#160;</string>
+    <string name="details_bedrooms_title">Number of bedrooms :&#160;</string>
     <string name="details_bedrooms_text">6</string>
     <string name="details_location_title">Location</string>
     <string name="details_street_text">12 rue de la Paix</string>

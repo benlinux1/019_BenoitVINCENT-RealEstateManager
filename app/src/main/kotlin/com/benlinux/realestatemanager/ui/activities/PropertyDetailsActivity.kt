@@ -60,7 +60,6 @@ class PropertyDetailsActivity: AppCompatActivity() {
         retrievePropertyId()
         configureViewModel()
         retrievePropertyData()
-        //setPropertyData()
     }
 
     // Retrieve property id
@@ -140,20 +139,29 @@ class PropertyDetailsActivity: AppCompatActivity() {
             }
 
             // Display or Hide number of rooms / bathrooms / bedrooms according to data
-            if (property!!.numberOfRooms != 0) {
+            if (property!!.numberOfRooms > 0) {
                 numberOfRooms.text = property!!.numberOfRooms.toString()
-                numberOfRooms.visibility = View.VISIBLE
-            } else numberOfRooms.visibility = View.GONE ; titleRooms.visibility = View.GONE
+                titleRooms.visibility = View.VISIBLE
+            } else {
+                numberOfRooms.visibility = View.GONE
+                titleRooms.visibility = View.GONE
+            }
 
-            if (property!!.numberOfBedrooms != 0) {
+            if (property!!.numberOfBedrooms > 0) {
                 numberOfBedrooms.text = property!!.numberOfBedrooms.toString()
-                numberOfBedrooms.visibility = View.VISIBLE
-            } else numberOfBedrooms.visibility = View.GONE ; titleBedrooms.visibility = View.GONE
+                titleBedrooms.visibility = View.VISIBLE
+            } else {
+                numberOfBedrooms.visibility = View.GONE
+                titleBedrooms.visibility = View.GONE
+            }
 
-            if (property!!.numberOfBathrooms != 0) {
+            if (property!!.numberOfBathrooms > 0) {
                 numberOfBathrooms.text = property!!.numberOfBathrooms.toString()
-                numberOfBathrooms.visibility = View.VISIBLE
-            } else numberOfBathrooms.visibility = View.GONE ; titleBathrooms.visibility = View.GONE
+                titleBathrooms.visibility = View.VISIBLE
+            } else {
+                numberOfBathrooms.visibility = View.GONE
+                titleBathrooms.visibility = View.GONE
+            }
 
             description.text = property!!.description
 

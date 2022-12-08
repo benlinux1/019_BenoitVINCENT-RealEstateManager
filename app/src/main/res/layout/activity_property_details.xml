@@ -166,8 +166,9 @@
                     style="@style/cardTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_details_bathrooms_24"
+                    android:drawableStart="@drawable/ic_details_bedrooms_24"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    android:drawableTint="@color/colorPrimary"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_bathrooms_text"
                     android:text="@string/details_bedrooms_title" />
 
