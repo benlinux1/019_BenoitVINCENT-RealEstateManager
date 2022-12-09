@@ -18,7 +18,8 @@ data class Property (
     var description: String = "",
     @TypeConverters(Converters::class)
     var pictures: MutableList<Picture?> = mutableListOf(),
-    var address: String = "",
+    @TypeConverters(Converters::class)
+    var address: PropertyAddress = PropertyAddress("", "", "", "", "",""),
     var isAvailable: Boolean = true,
     var creationDate: String = "29/11/2022",
     var soldDate: String = "",

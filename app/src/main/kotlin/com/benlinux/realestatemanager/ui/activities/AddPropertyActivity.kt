@@ -25,6 +25,7 @@ import com.benlinux.realestatemanager.ui.activities.AddPropertyActivity.Enum.Com
 import com.benlinux.realestatemanager.ui.adapters.PictureAdapter
 import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
+import com.benlinux.realestatemanager.ui.models.PropertyAddress
 import com.benlinux.realestatemanager.ui.models.Realtor
 import com.benlinux.realestatemanager.utils.*
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
@@ -66,6 +67,20 @@ open class AddPropertyActivity: AppCompatActivity() {
     private lateinit var description: EditText
     private lateinit var picturesRecyclerView: RecyclerView
     private lateinit var emptyRecyclerViewText: TextView
+    private lateinit var addressTitle: TextView
+    private lateinit var streetNumberLayout: TextInputLayout
+    private lateinit var streetNumber: EditText
+    private lateinit var streetNameLayout: TextInputLayout
+    private lateinit var streetName: EditText
+    private lateinit var addressComplementLayout: TextInputLayout
+    private lateinit var addressComplement: EditText
+    private lateinit var postalCodeLayout: TextInputLayout
+    private lateinit var postalCode: EditText
+    private lateinit var cityLayout: TextInputLayout
+    private lateinit var city: EditText
+    private lateinit var countryLayout: TextInputLayout
+    private lateinit var country: EditText
+
 
     // The adapter which handles the list of pictures
     private lateinit var pictureAdapter: PictureAdapter
@@ -175,6 +190,19 @@ open class AddPropertyActivity: AppCompatActivity() {
         emptyRecyclerViewText = findViewById(R.id.empty_error_text)
         saveButton = findViewById(R.id.create)
         addPictureButton = findViewById(R.id.add_pictures_button)
+        addressTitle = findViewById(R.id.add_address_layout_title)
+        streetNumberLayout = findViewById(R.id.add_street_number_layout)
+        streetNumber = findViewById(R.id.add_street_number_input)
+        streetNameLayout = findViewById(R.id.add_street_name_layout)
+        streetName = findViewById(R.id.add_street_name_input)
+        addressComplementLayout = findViewById(R.id.add_address_complement_layout)
+        addressComplement = findViewById(R.id.add_address_complement_input)
+        postalCodeLayout = findViewById(R.id.add_postal_code_layout)
+        postalCode = findViewById(R.id.add_postal_code_input)
+        cityLayout = findViewById(R.id.add_city_layout)
+        city = findViewById(R.id.add_city_input)
+        countryLayout = findViewById(R.id.add_country_layout)
+        country = findViewById(R.id.add_country_input)
     }
 
     // Create property action that retrieves all data
@@ -191,6 +219,7 @@ open class AddPropertyActivity: AppCompatActivity() {
         // TODO : get current realtor
         property.realtor = Realtor(0, "", "", "", "", "")
         property.pictures = picturesList
+        property.address = getPropertyAddress()
     }
 
     // Fields validation
@@ -199,7 +228,12 @@ open class AddPropertyActivity: AppCompatActivity() {
                 && validateNumbers(price.text.toString(), priceLayout)
                 && validateNumbers(surface.text.toString(), surfaceLayout)
                 && checkIfFieldsIsNotEmpty(descriptionLayout)
-                && validateField(title.text.toString(), titleLayout))
+                && validateField(title.text.toString(), titleLayout)
+                && validateNumbers(streetNumber.text.toString(), streetNumberLayout)
+                && validateField(streetName.text.toString(), streetNameLayout)
+                && validateNumbers(postalCode.text.toString(), postalCodeLayout)
+                && validateField(city.text.toString(), cityLayout)
+                && validateField(country.text.toString(), countryLayout))
     }
 
     // Add picture action
@@ -444,4 +478,14 @@ open class AddPropertyActivity: AppCompatActivity() {
     }
 
     // TODO : set address location with geocoder
+    private fun getPropertyAddress(): PropertyAddress {
+        return PropertyAddress(
+                streetNumber.text.toString(),
+                streetName.text.toString(),
+                addressComplement.text.toString(),
+                postalCode.text.toString(),
+                city.text.toString(),
+                country.text.toString()
+        )
+    }
 }

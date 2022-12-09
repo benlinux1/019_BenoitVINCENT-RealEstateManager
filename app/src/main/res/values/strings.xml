@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">Real Estate Manager</string>
 
     // NAVIGATION
@@ -113,9 +113,16 @@
     <string name="no_image_chosen">No image chosen</string>
     <string name="add_room_name_title">Please add room name</string>
     <string name="add_room_name_text">Room name</string>
-    <string name="cancel_button">CANCEL</string>
+    <string name="cancel_button" tools:ignore="ButtonCase">CANCEL</string>
     <string name="validate_button">ADD PICTURE</string>
     <string name="add_picture_dialog_title">PICTURE PREVIEW</string>
+    <string name="add_property_address_title">Property address</string>
+    <string name="add_property_street_number">Street number</string>
+    <string name="add_property_street_name">Street name</string>
+    <string name="add_address_complement">Address complement</string>
+    <string name="add_postal_code">Postal code</string>
+    <string name="add_property_city">City</string>
+    <string name="add_property_country">Country</string>
 
 
 </resources>

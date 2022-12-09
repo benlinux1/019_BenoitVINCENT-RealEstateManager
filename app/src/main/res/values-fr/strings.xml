@@ -40,15 +40,15 @@
     <string name="details_information_subtitle">Manhattan</string>
     <string name="details_surface_title">Surface :&#160;</string>
     <string name="details_surface_text">750 m²</string>
-    <string name="details_rooms_title">Nombre de pièces:&#160;</string>
+    <string name="details_rooms_title">Nombre de pièces :&#160;</string>
     <string name="details_rooms_text">10</string>
-    <string name="details_bathrooms_title">Nombre de salles de bain:&#160;</string>
+    <string name="details_bathrooms_title">Nombre de salles de bain :&#160;</string>
     <string name="details_bathrooms_text">2</string>
-    <string name="details_bedrooms_title">Nombre de chambres:&#160;</string>
+    <string name="details_bedrooms_title">Nombre de chambres :&#160;</string>
     <string name="details_bedrooms_text">6</string>
     <string name="details_price_title">Prix :&#160;</string>
     <string name="details_price_text">$ 29 872 000</string>
-    <string name="details_location_title">Location</string>
+    <string name="details_location_title">Localisation</string>
     <string name="details_street_text">12 rue de la Paix</string>
     <string name="details_location_complement_text">Appt 8 – 9ème étage</string>
     <string name="details_postal_code_text">75000</string>
@@ -105,5 +105,12 @@
     <string name="cancel_button">RETOUR</string>
     <string name="validate_button">AJOUTER</string>
     <string name="add_picture_dialog_title">APERCU DE VOTRE IMAGE</string>
+    <string name="add_property_address_title">Adresse du bien</string>
+    <string name="add_property_street_number">Numéro de rue</string>
+    <string name="add_property_street_name">Nom de rue / voie</string>
+    <string name="add_address_complement">Complément d\'adresse</string>
+    <string name="add_postal_code">Code postal</string>
+    <string name="add_property_city">Ville</string>
+    <string name="add_property_country">Pays</string>
 
 </resources>

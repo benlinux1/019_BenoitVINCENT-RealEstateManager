@@ -34,6 +34,12 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private lateinit var numberOfBedrooms: TextView
     private lateinit var price: TextView
     private lateinit var description: TextView
+    private lateinit var streetNumberAndStreetName: TextView
+    private lateinit var complement: TextView
+    private lateinit var postalCode: TextView
+    private lateinit var city: TextView
+    private lateinit var country: TextView
+
 
     /**
     // Address
@@ -102,7 +108,11 @@ class PropertyDetailsActivity: AppCompatActivity() {
         titleRooms = findViewById(R.id.property_details_rooms_title)
         titleBedrooms = findViewById(R.id.property_details_bedrooms_title)
         titleBathrooms = findViewById(R.id.property_details_bathrooms_title)
-
+        streetNumberAndStreetName = findViewById(R.id.property_details_location_street)
+        complement = findViewById(R.id.property_details_location_complement)
+        postalCode = findViewById(R.id.property_details_location_postal_code)
+        city = findViewById(R.id.property_details_location_city)
+        country = findViewById(R.id.property_details_location_country)
     }
 
     // Configuring ViewModel from ViewModelFactory
@@ -171,6 +181,20 @@ class PropertyDetailsActivity: AppCompatActivity() {
                     .load(property!!.pictures[0]?.url)
                     .apply(RequestOptions.centerCropTransform())
                     .into(mainPicture)
+
+            // Address
+            streetNumberAndStreetName.text = buildString {
+                append(property!!.address.streetNumber)
+                append(" ")
+                append(property!!.address.streetName)
+            }
+            if (property!!.address.complement.isNotEmpty()) {
+                    complement.text = property!!.address.complement
+                    complement.visibility = View.VISIBLE
+            } else { complement.visibility = View.GONE }
+            postalCode.text = property!!.address.postalCode
+            city.text = property!!.address.city
+            country.text = property!!.address.country.uppercase()
         }
 
     }

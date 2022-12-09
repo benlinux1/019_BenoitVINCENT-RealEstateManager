@@ -10,6 +10,7 @@ import com.benlinux.realestatemanager.dao.PropertyDao
 import com.benlinux.realestatemanager.dao.RealtorDao
 import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
+import com.benlinux.realestatemanager.ui.models.PropertyAddress
 import com.benlinux.realestatemanager.ui.models.Realtor
 import com.benlinux.realestatemanager.utils.converters.Converters
 import com.benlinux.realestatemanager.utils.subscribeOnBackground
@@ -57,21 +58,24 @@ abstract class REMDatabase : RoomDatabase() {
                     mutableListOf(Picture(
                         "https://media.cntraveler.com/photos/60f88f63c28e94c67dd51fbd/master/pass/airbnb%2019839441.jpeg",
                         "Lounge")),
-                    "12 rue de la Paix - 75000 Paris", true, "28/11/2022", "",
+                    PropertyAddress("12", "rue de la Paix", "", "75000", "Paris","France"),
+                    true, "28/11/2022", "",
                     Realtor(1, "ben@test.com", "******", "Ben", "Linux",""), 0,0,0  )
                 )
                 propertyDao.insertProperty(Property(2, "Duplex", "Fabulous duplex", "London", 2200000,
                     300, "Fabulous Duplex in London with tremendous options...", mutableListOf(Picture(
                         "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80",
                         "Exterior")),
-                    "10 Downing Street - London SW1A 2AB", true, "28/11/2022", "",
+                    PropertyAddress("10", "Downing Street", "", "SW1 2AB", "London","England"),
+                    true, "28/11/2022", "",
                     Realtor(1, "ben@test.com", "******", "Ben", "Linux",""),0,0,0)
                 )
                 propertyDao.insertProperty(Property(3, "Penthouse", "Exceptional penthouse", "Manhattan", 5200000,
                     300, "Exceptional penthouse in Manhattan with tremendous options...", mutableListOf(Picture(
                         "https://media.architecturaldigest.com/photos/5c0817ec1b58382d031ba321/2:1/w_4800,h_2400,c_limit/Eighty%20Seven%20Park%20Penthouse%20Family%20Room.jpg",
                         "Lounge")),
-                    "66 Perry Street - New York, NY 10014", true, "28/11/2022", "",
+                    PropertyAddress("66", "Perry Street", "", "NY 10014", "New York", "United States"),
+                    true, "28/11/2022", "",
                     Realtor(2, "franck@test.com", "******", "Franck", "Black",""),0,0,0 )
                 )
                 realtorDao.insertRealtor(Realtor(1, "ben@test.com", "******", "Ben", "Linux","") )

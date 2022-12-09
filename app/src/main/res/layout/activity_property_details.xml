@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingVertical="12dp">
+                android:paddingVertical="16dp">
 
                 <TextView
                     android:id="@+id/property_details_information_title"
@@ -73,7 +73,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -226,7 +225,6 @@
                     style="@style/location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_location_title"
                     tools:text="@string/details_street_text" />
@@ -254,18 +252,18 @@
                     style="@style/location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_postal_code"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintStart_toEndOf="@+id/property_details_location_postal_code"
+                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_complement"
                     tools:text="@string/details_city_text" />
 
                 <TextView
-                    android:id="@+id/property_details_location_state"
+                    android:id="@+id/property_details_location_country"
                     style="@style/location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_location_city"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     tools:text="@string/details_location_state_text" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,6 +13,7 @@ import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.adapters.ListAdapter
 import com.benlinux.realestatemanager.ui.models.Property
+import com.benlinux.realestatemanager.utils.getLatLngFromAddress
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.google.android.material.divider.MaterialDividerItemDecoration
 
@@ -48,7 +49,8 @@ class ListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setTextViews()
+        val address = "7 avenue de Glattbach"
+        getLatLngFromAddress(address, requireContext())
     }
 
     // Configuring ViewModel from ViewModelFactory
@@ -66,6 +68,7 @@ class ListFragment: Fragment() {
             // Define and configure adapter (MUST BE CALLED HERE FOR DATA REFRESH)
             adapter = ListAdapter(mProperties, requireContext())
             mRecyclerView.adapter = adapter
+            setTextViews()
         }
     }
 
@@ -102,7 +105,7 @@ class ListFragment: Fragment() {
     private fun setTextViews() {
         mLabelNoProperty = fragmentView.findViewById(R.id.no_property_label)
         mFragmentTitle = fragmentView.findViewById(R.id.list_properties_title)
-        if (mProperties.size == 0) {
+        if (mProperties.isEmpty()) {
             // Display "No property found"
             mLabelNoProperty.visibility = View.VISIBLE
             // Hide list title
