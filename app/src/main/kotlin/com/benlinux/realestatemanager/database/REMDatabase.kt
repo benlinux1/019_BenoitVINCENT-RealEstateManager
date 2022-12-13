@@ -66,7 +66,7 @@ abstract class REMDatabase : RoomDatabase() {
                     300, "Fabulous Duplex in London with tremendous options...", mutableListOf(Picture(
                         "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80",
                         "Exterior")),
-                    PropertyAddress("10", "Downing Street", "", "SW1 2AB", "London","England"),
+                    PropertyAddress("10", "Downing Street", "", "SW1", "London","United Kingdom"),
                     true, "28/11/2022", "",
                     Realtor(1, "ben@test.com", "******", "Ben", "Linux",""),0,0,0)
                 )
@@ -77,6 +77,15 @@ abstract class REMDatabase : RoomDatabase() {
                     PropertyAddress("66", "Perry Street", "", "NY 10014", "New York", "United States"),
                     true, "28/11/2022", "",
                     Realtor(2, "franck@test.com", "******", "Franck", "Black",""),0,0,0 )
+                )
+                propertyDao.insertProperty(Property(4, "Penthouse", "Unbelievable penthouse", "GooglePlex", 4300000,
+                    300, "Unbelievable penthouse near GooglePlex with tremendous options...",
+                    mutableListOf(Picture(
+                        "https://s.hdnux.com/photos/01/23/56/41/21948520/4/rawImage.jpg",
+                        "Exterior")),
+                    PropertyAddress("1024", "Alta avenue", "", "94043", "Mountain View","United States"),
+                    true, "13/12/2022", "",
+                    Realtor(1, "ben@test.com", "******", "Ben", "Linux",""), 0,0,0  )
                 )
                 realtorDao.insertRealtor(Realtor(1, "ben@test.com", "******", "Ben", "Linux","") )
                 realtorDao.insertRealtor(Realtor(2, "franck@test.com", "******", "Franck", "Black","") )

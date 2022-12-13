@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.injections.ViewModelFactory
+import com.benlinux.realestatemanager.ui.activities.MainActivity
 import com.benlinux.realestatemanager.ui.adapters.ListAdapter
 import com.benlinux.realestatemanager.ui.models.Property
-import com.benlinux.realestatemanager.utils.getLatLngFromAddress
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.google.android.material.divider.MaterialDividerItemDecoration
 
@@ -44,13 +44,14 @@ class ListFragment: Fragment() {
         fragmentView = inflater.inflate(R.layout.fragment_list_view, container, false)
         configureViewModel()
         configureRecyclerView()
+        // Show Add Property Button
+        (activity as MainActivity).showAddButton()
         return fragmentView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val address = "7 avenue de Glattbach"
-        getLatLngFromAddress(address, requireContext())
+
     }
 
     // Configuring ViewModel from ViewModelFactory

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    android:layout_marginHorizontal="8dp"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp"
+    android:gravity="center"
+    android:elevation="8dp"
+    android:background="@drawable/background_info_window"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff000000"
+        android:text="@string/add_property_name"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/street"
+        android:text="@string/details_street_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/colorPrimary" />
+
+
+    <TextView
+        android:id="@+id/postalCodeAndCity"
+        android:text="@string/details_postal_code_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/price"
+        android:text="@string/details_price_text"
+        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/property_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff7f7f7f"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/seeDetailsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/colorWhite"
+        android:text="See details"
+        android:textAllCaps="false" />
+
+</LinearLayout>

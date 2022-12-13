@@ -4,6 +4,7 @@ package com.benlinux.realestatemanager.ui.activities
  import android.content.Intent
  import android.os.Bundle
  import android.view.MenuItem
+ import android.view.View
  import android.widget.Toast
  import androidx.appcompat.app.ActionBarDrawerToggle
  import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ package com.benlinux.realestatemanager.ui.activities
  import com.benlinux.realestatemanager.R
  import com.benlinux.realestatemanager.ui.fragments.MapFragment
  import com.benlinux.realestatemanager.utils.isInternetAvailable
+ import com.google.android.gms.maps.model.LatLng
  import com.google.android.material.bottomnavigation.BottomNavigationView
  import com.google.android.material.floatingactionbutton.FloatingActionButton
  import com.google.android.material.navigation.NavigationView
@@ -36,6 +38,8 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     private lateinit var mapFragment: MapFragment
 
     private lateinit var addPropertyButton: FloatingActionButton
+
+    var realtorLocation: LatLng? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -158,5 +162,14 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         Toast.makeText(this, getString(R.string.disconnection_failed), Toast.LENGTH_SHORT)
             .show()
     }
+
+    fun showAddButton() {
+        addPropertyButton.visibility = View.VISIBLE
+    }
+
+    fun hideAddButton() {
+        addPropertyButton.visibility = View.GONE
+    }
+
 
 }
