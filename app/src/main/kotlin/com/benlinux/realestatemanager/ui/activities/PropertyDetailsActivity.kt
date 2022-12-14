@@ -85,6 +85,7 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
         // When map is loaded
         mGoogleMap = googleMap
         googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+        googleMap.uiSettings.isMapToolbarEnabled = false
 
     }
 
@@ -251,7 +252,7 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
             // Center & zoom camera on property location
             googleMap.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(
-                    latLng, 15F
+                    latLng, 15f
                 )
             )
         }
