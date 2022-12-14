@@ -15,7 +15,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -54,7 +53,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
     // List of all current properties in the application
     private var mProperties: MutableList<Property?> = mutableListOf()
 
-    private var propertiesAreSet: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -103,6 +101,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
     }
 
+    // Retrieve properties and set markers on google map for each
     private fun setProperties() {
         // Set observer on properties list
         propertyViewModel.currentProperties?.observe(viewLifecycleOwner) { listOfProperties ->
@@ -165,12 +164,10 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
                 isPermissionGranted = if (isGranted) { // If permission is granted
                     Log.d("LOG_TAG", "permission granted by the user")
-                    Toast.makeText(requireContext(), "Location permissions are granted", Toast.LENGTH_LONG).show()
                     true
 
                 } else { // If permission is not granted
                     Log.d("LOG_TAG", "permission denied by the user")
-                    Toast.makeText(requireContext(), "Permissions not granted", Toast.LENGTH_LONG).show()
                     false
                 }
             }
@@ -186,7 +183,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         // Else, location has been granted
         } else {
             isPermissionGranted = true
-            Toast.makeText(requireContext(), "Location permissions granted yet", Toast.LENGTH_LONG).show()
             Log.d("LOG_TAG", "permission granted by the user yet")
         }
         return isPermissionGranted
@@ -442,12 +438,16 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+
     // Set custom marker for each property in properties list
     private fun setMarkersForProperties(googleMap: GoogleMap, properties: MutableList<Property?>) {
 
         mGoogleMap = googleMap
 
+        // Define custom marker icon
+        val propertyMarker = R.drawable.marker_property
+
+        // Customize marker title, position, snippet & icon for each property
         for (property: Property? in properties) {
             val title = property?.name
             val address = property!!.address
@@ -460,14 +460,15 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                 .title(title)
                 .position(latLng!!)
                 .snippet(price)
-                .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.ic_map_marker))
+                .icon(BitmapDescriptorFactory.fromResource(propertyMarker))
 
             // Set place id in tag (used to retrieve place info in details activity)
             googleMap.addMarker(markerOptions)?.tag = propertyId
         }
     }
 
-    // Convert drawable resource to bitmap (used for map marker)
+    /**
+    // Convert drawable resource to bitmap (can be used for map marker in .icon())
     private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
         return ContextCompat.getDrawable(context, vectorResId)?.run {
             setBounds(0, 0, intrinsicWidth, intrinsicHeight)
@@ -476,6 +477,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
             BitmapDescriptorFactory.fromBitmap(bitmap)
         }
     }
+    */
 
 
 
