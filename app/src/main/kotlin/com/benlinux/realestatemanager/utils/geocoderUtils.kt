@@ -207,13 +207,24 @@ private fun getFormattedAddressFromLatLng(latLng: LatLng, context: Context): Pro
         val mStreetNumber = addressResult.subThoroughfare
         val mStreetName = addressResult.thoroughfare
         val mPostalCode = addressResult.postalCode
-        val mCity = addressResult.locality
+        var mCity = addressResult.locality
+        Log.d("Locality", "onGeocode: ${addressResult.locality}")
+        if (addressResult.locality == null) {
+            mCity = addressResult.subLocality
+            Log.d("SubLocality", "onGeocode: ${addressResult.subLocality}")
+            if (addressResult.subLocality == null) {
+                mCity = addressResult.subAdminArea
+                Log.d("SubAdminArea", "onGeocode: ${addressResult.subAdminArea}")
+            }
+        }
         val mCountry = addressResult.countryName
 
-        propertyAddress = PropertyAddress(mStreetNumber, mStreetName, "", mPostalCode, mCity, mCountry)
+        propertyAddress =
+            PropertyAddress(mStreetNumber, mStreetName, "", mPostalCode, mCity, mCountry)
 
     } catch (e: Exception) {
         e.printStackTrace()
     }
+
     return propertyAddress
 }

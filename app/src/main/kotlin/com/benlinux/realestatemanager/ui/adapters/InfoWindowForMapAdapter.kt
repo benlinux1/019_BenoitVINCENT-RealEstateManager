@@ -28,15 +28,16 @@ class InfoWindowForMapAdapter(var context: Context) :
         // Get reference to the TextView to set the id of the property
         val propertyId = view.findViewById<TextView>(R.id.property_id)
 
-        // Getting the restaurant's position from marker
+        // Getting the property's position from marker position
         val latLng: LatLng = marker.position
 
+        // Getting the property's price from marker snippet
         val price: String? = marker.snippet
 
-        // Getting the restaurant's address from marker
+        // Getting the property's formatted address according to marker position
         val formattedAddress: PropertyAddress? = getAddressFromLocation(latLng, context)
 
-        // Get reference to the TextView to set restaurant's name
+        // Get reference to the TextView to set property's title
         val propertyTitle = view.findViewById<TextView>(R.id.title)
 
         // Get reference to the TextView to set street & street number
@@ -45,13 +46,13 @@ class InfoWindowForMapAdapter(var context: Context) :
         // Get reference to the TextView to set postal code & city
         val propertyPostalCodeAndCity = view.findViewById<TextView>(R.id.postalCodeAndCity)
 
+        // Get reference to the TextView to set price
         val propertyPrice = view.findViewById<TextView>(R.id.price)
 
         // Get reference to the info window button
         val seeDetailsButton = view.findViewById<Button>(R.id.seeDetailsButton)
-
-
-        // Disable details button if place doesn't get id
+        
+        // Disable details button if place doesn't get id (used for user location)
         if (marker.tag == null) {
             seeDetailsButton.visibility = View.GONE
             propertyPrice.visibility = View.GONE
@@ -59,22 +60,24 @@ class InfoWindowForMapAdapter(var context: Context) :
             propertyId.text = marker.tag.toString()
         }
 
-        // Set restaurant's name
-        propertyTitle.text = marker.title
+        // Set title to uppercase
+        propertyTitle.text = marker.title?.uppercase()
 
-        // Set restaurant's formatted street number and street name
+        // Set property's formatted street number and street name
         propertyStreetNumberAndName.text = buildString {
             append(formattedAddress?.streetNumber)
             append(" ")
             append(formattedAddress?.streetName)
         }
 
-        // Set restaurant's formatted postal code and city
+        // Set property's formatted postal code and city
         propertyPostalCodeAndCity.text = buildString {
             append(formattedAddress?.postalCode)
             append(" ")
             append(formattedAddress?.city)
         }
+
+        // Hide address fields if formatted address return null
         if (formattedAddress == null) {
             propertyStreetNumberAndName.visibility = View.GONE
             propertyPostalCodeAndCity.visibility = View.GONE
@@ -87,10 +90,7 @@ class InfoWindowForMapAdapter(var context: Context) :
             append(" $")
         }
 
-
         // Returning the view containing InfoWindow contents
         return view
     }
-
-
 }

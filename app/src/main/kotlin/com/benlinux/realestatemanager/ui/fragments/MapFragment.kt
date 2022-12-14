@@ -54,6 +54,8 @@ class MapFragment: Fragment(), OnMapReadyCallback {
     // List of all current properties in the application
     private var mProperties: MutableList<Property?> = mutableListOf()
 
+    private var propertiesAreSet: Boolean = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         // Init location client
@@ -94,17 +96,20 @@ class MapFragment: Fragment(), OnMapReadyCallback {
             ViewModelFactory.getInstance(requireContext())!!
         )[PropertyViewModel::class.java]
 
-        // Set observer on properties list
-        propertyViewModel.currentProperties?.observe(viewLifecycleOwner) { listOfProperties ->
-            mProperties = listOfProperties
-            setMarkersForProperties(mGoogleMap, mProperties)
-        }
-
         // Set observer on user location
         propertyViewModel.currentLocation?.observe(viewLifecycleOwner) { location ->
             userLocation = location
         }
 
+    }
+
+    private fun setProperties() {
+        // Set observer on properties list
+        propertyViewModel.currentProperties?.observe(viewLifecycleOwner) { listOfProperties ->
+            mProperties = listOfProperties
+            // Set markers for each property on google map
+            setMarkersForProperties(mGoogleMap, mProperties)
+        }
     }
 
     // Google map callback
@@ -126,11 +131,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         }
 
         // update UI with or without blue point location and map centering button
-
-        // update UI with or without blue point location and map centering button
         updateLocationUI()
-
-        // Set map listeners
 
         // Set map listeners
         setListenerOnMapClick(googleMap)
@@ -142,6 +143,9 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
         // Set click listener on Info window
         setInfoWindowClickListener(googleMap)
+
+        // Set properties with markers
+        setProperties()
 
     }
 
