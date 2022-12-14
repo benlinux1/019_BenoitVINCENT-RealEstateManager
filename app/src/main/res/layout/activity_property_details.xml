@@ -201,70 +201,101 @@
                     app:layout_constraintBottom_toBottomOf="@+id/property_details_price_title"
                     tools:text="@string/details_price_text" />
 
-                <ImageView
-                    android:id="@+id/property_details_location_icon"
-                    android:layout_width="wrap_content"
+                <!-- LOCATION CONTAINER -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/property_details_location_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/cardTitle"
-                    android:src="@drawable/ic_details_location_24"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_price_text"/>
-
-                <TextView
-                    android:id="@+id/property_details_location_title"
-                    style="@style/cardLocationTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingEnd="4dp"
-                    app:layout_constraintStart_toEndOf="@id/property_details_location_icon"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/property_details_price_text"
-                    android:text="@string/details_location_title" />
+                    >
 
-                <TextView
-                    android:id="@+id/property_details_location_street"
-                    style="@style/location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_title"
-                    tools:text="@string/details_street_text" />
+                    <ImageView
+                        android:id="@+id/property_details_location_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/cardTitle"
+                        android:src="@drawable/ic_details_location_24"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_price_text"/>
 
-                <TextView
-                    android:id="@+id/property_details_location_complement"
-                    style="@style/location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_street"
-                    tools:text="@string/details_location_complement_text" />
+                    <TextView
+                        android:id="@+id/property_details_location_title"
+                        style="@style/cardLocationTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="4dp"
+                        app:layout_constraintStart_toEndOf="@id/property_details_location_icon"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_price_text"
+                        android:text="@string/details_location_title" />
 
-                <TextView
-                    android:id="@+id/property_details_location_postal_code"
-                    style="@style/location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_complement"
-                    tools:text="@string/details_postal_code_text" />
+                    <TextView
+                        android:id="@+id/property_details_location_street"
+                        style="@style/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="140dp"
+                        app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_location_title"
+                        tools:text="@string/details_street_text" />
 
-                <TextView
-                    android:id="@+id/property_details_location_city"
-                    style="@style/location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    app:layout_constraintStart_toEndOf="@+id/property_details_location_postal_code"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_complement"
-                    tools:text="@string/details_city_text" />
+                    <TextView
+                        android:id="@+id/property_details_location_complement"
+                        style="@style/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="140dp"
+                        app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_location_street"
+                        tools:text="@string/details_location_complement_text" />
 
-                <TextView
-                    android:id="@+id/property_details_location_country"
-                    style="@style/location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_location_city"
-                    tools:text="@string/details_location_state_text" />
+                    <TextView
+                        android:id="@+id/property_details_location_postal_code_and_city"
+                        style="@style/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxWidth="140dp"
+                        app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_location_complement"
+                        tools:text="@string/details_postal_code_text" />
+
+
+                    <TextView
+                        android:id="@+id/property_details_location_country"
+                        style="@style/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@+id/property_details_location_title"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_location_postal_code_and_city"
+                        tools:text="@string/details_location_state_text" />
+
+                    <!-- MAP CONTAINER -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/property_details_information_section"
+                        style="@style/cardView"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:cardCornerRadius="4dp"
+                        app:layout_constraintStart_toEndOf="@id/property_details_location_street"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/property_details_location_country"
+                        app:layout_constraintTop_toTopOf="@id/property_details_location_title">
+
+                        <!-- MAP with marker fragment -->
+                        <fragment
+                            android:name="com.google.android.gms.maps.SupportMapFragment"
+                            android:id="@+id/map"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

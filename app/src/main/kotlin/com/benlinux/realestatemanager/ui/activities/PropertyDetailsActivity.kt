@@ -1,5 +1,6 @@
 package com.benlinux.realestatemanager.ui.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,11 +14,20 @@ import androidx.lifecycle.ViewModelProvider
 import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.models.Property
+import com.benlinux.realestatemanager.utils.getLatLngFromPropertyFormattedAddress
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
-class PropertyDetailsActivity: AppCompatActivity() {
+
+class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
 
 
     // Views
@@ -36,25 +46,16 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private lateinit var description: TextView
     private lateinit var streetNumberAndStreetName: TextView
     private lateinit var complement: TextView
-    private lateinit var postalCode: TextView
-    private lateinit var city: TextView
+    private lateinit var postalCodeAndCity: TextView
     private lateinit var country: TextView
-
-
-    /**
-    // Address
-    private lateinit var streetNumber: TextView
-    private lateinit var streetName: TextView
-    private lateinit var postalCode: TextView
-    private lateinit var city: TextView
-    private lateinit var nation: TextView
-    */
 
     // The viewModel that contains data
     private lateinit var propertyViewModel: PropertyViewModel
 
     // The displayed property
     private var property: Property? = null
+
+    private lateinit var mGoogleMap: GoogleMap
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,9 +64,28 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
         setToolbar()
         setViews()
+        setMap()
         retrievePropertyId()
         configureViewModel()
         retrievePropertyData()
+
+    }
+
+    // Set google map
+    private fun setMap() {
+        // Define map fragment
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment!!.getMapAsync(this)
+    }
+
+    // Google map callback
+    @SuppressLint("PotentialBehaviorOverride")
+    override fun onMapReady(googleMap: GoogleMap) {
+        // When map is loaded
+        mGoogleMap = googleMap
+        googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+
     }
 
     // Retrieve property id
@@ -110,8 +130,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
         titleBathrooms = findViewById(R.id.property_details_bathrooms_title)
         streetNumberAndStreetName = findViewById(R.id.property_details_location_street)
         complement = findViewById(R.id.property_details_location_complement)
-        postalCode = findViewById(R.id.property_details_location_postal_code)
-        city = findViewById(R.id.property_details_location_city)
+        postalCodeAndCity = findViewById(R.id.property_details_location_postal_code_and_city)
         country = findViewById(R.id.property_details_location_country)
     }
 
@@ -127,7 +146,9 @@ class PropertyDetailsActivity: AppCompatActivity() {
         // Set observer on current property
         propertyViewModel.currentProperty?.observe(this) { actualProperty ->
             property = actualProperty
-            setPropertyData() }
+            setPropertyData()
+            setMarkersForProperty(mGoogleMap)
+        }
     }
 
     private fun setPropertyData() {
@@ -183,20 +204,56 @@ class PropertyDetailsActivity: AppCompatActivity() {
                     .into(mainPicture)
 
             // Address
+            // Street number & street name
             streetNumberAndStreetName.text = buildString {
                 append(property!!.address.streetNumber)
                 append(" ")
                 append(property!!.address.streetName)
             }
+            // Complement
             if (property!!.address.complement.isNotEmpty()) {
                     complement.text = property!!.address.complement
                     complement.visibility = View.VISIBLE
             } else { complement.visibility = View.GONE }
-            postalCode.text = property!!.address.postalCode
-            city.text = property!!.address.city
+
+            // Postal code & city
+            postalCodeAndCity.text = buildString {
+                append(property!!.address.postalCode)
+                append(" ")
+                append(property!!.address.city)
+            }
+
+            // Country
             country.text = property!!.address.country.uppercase()
         }
-
     }
 
+    // Set custom marker for displayed property on map
+    private fun setMarkersForProperty(googleMap: GoogleMap) {
+
+        mGoogleMap = googleMap
+
+        // Define custom marker icon
+        val propertyMarker = R.drawable.marker_property
+
+        // Customize marker position & icon
+        if (property != null) {
+            val latLng: LatLng? = getLatLngFromPropertyFormattedAddress(property!!.address, this)
+
+            // Then, define marker options (property's position & icon)
+            val markerOptions = MarkerOptions()
+                .position(latLng!!)
+                .icon(BitmapDescriptorFactory.fromResource(propertyMarker))
+
+            // Set marker
+            googleMap.addMarker(markerOptions)
+
+            // Center & zoom camera on property location
+            googleMap.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    latLng, 15F
+                )
+            )
+        }
+    }
 }
