@@ -8,7 +8,7 @@
     tools:context=".ui.activities.SignupActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/signup_logo"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:adjustViewBounds="true"
@@ -21,7 +21,7 @@
         android:contentDescription="@string/logo"
         android:src="@mipmap/ic_launcher"/>
 
-    <EditText android:id="@+id/editTextEmail"
+    <EditText android:id="@+id/signup_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_baseline_email_24"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.290"/>
 
-    <EditText android:id="@+id/editTextFirstName"
+    <EditText android:id="@+id/signup_FirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_baseline_person_24"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
         app:layout_constraintVertical_bias="0.052"/>
 
-    <EditText android:id="@+id/editTextLastName"
+    <EditText android:id="@+id/signup_lastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_baseline_person_24"
@@ -76,7 +76,7 @@
         app:layout_constraintVertical_bias="0.052"/>
 
 
-    <EditText android:id="@+id/editTextPassword"
+    <EditText android:id="@+id/signup_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextLastName"
         app:layout_constraintVertical_bias="0.052"/>
 
-    <Button android:id="@+id/signUpButton"
+    <Button android:id="@+id/signup_button"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -110,9 +110,9 @@
         />
 
     <TextView
+        android:id="@+id/signup_signIn_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewSignIn"
         android:text="Existing User ? Sign In"
         android:textSize="20sp"
         android:textColor="@color/colorPrimary"
