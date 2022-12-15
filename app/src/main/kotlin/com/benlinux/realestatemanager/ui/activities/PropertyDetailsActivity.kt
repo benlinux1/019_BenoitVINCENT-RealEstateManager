@@ -11,8 +11,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.injections.ViewModelFactory
+import com.benlinux.realestatemanager.ui.adapters.PictureAdapter
+import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.utils.getLatLngFromPropertyFormattedAddress
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
@@ -48,6 +51,9 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
     private lateinit var complement: TextView
     private lateinit var postalCodeAndCity: TextView
     private lateinit var country: TextView
+    private lateinit var picturesRecyclerView: RecyclerView
+    private lateinit var picturesList: MutableList<Picture?>
+    private lateinit var pictureAdapter: PictureAdapter
 
     // The viewModel that contains data
     private lateinit var propertyViewModel: PropertyViewModel
@@ -149,7 +155,25 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
             property = actualProperty
             setPropertyData()
             setMarkersForProperty(mGoogleMap)
+            retrievePropertyPictures()
+            configureRecyclerView()
         }
+    }
+
+    private fun retrievePropertyPictures() {
+        picturesList = mutableListOf()
+        if (this.property != null) {
+            for (picture: Picture? in property!!.pictures) {
+                picturesList.add(picture)
+            }
+        }
+    }
+
+    private fun configureRecyclerView() {
+        // Define layout & adapter
+        picturesRecyclerView = findViewById(R.id.details_pictures_list)
+        pictureAdapter = PictureAdapter(picturesList, this )
+        picturesRecyclerView.adapter = pictureAdapter
     }
 
     private fun setPropertyData() {
