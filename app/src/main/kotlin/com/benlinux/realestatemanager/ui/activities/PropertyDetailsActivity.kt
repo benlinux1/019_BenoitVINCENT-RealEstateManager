@@ -1,6 +1,5 @@
 package com.benlinux.realestatemanager.ui.activities
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,17 +20,13 @@ import com.benlinux.realestatemanager.utils.getLatLngFromPropertyFormattedAddres
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
-class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
-
+class PropertyDetailsActivity: AppCompatActivity() {
 
     // Views
     private lateinit var mainPicture: ImageView
@@ -61,7 +56,9 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
     // The displayed property
     private var property: Property? = null
 
+    // The mapview and map that shows property location
     private lateinit var mGoogleMap: GoogleMap
+    private lateinit var mapView: MapView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,28 +68,25 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
         setToolbar()
         setViews()
         setMap()
+        setViewModel()
         retrievePropertyId()
-        configureViewModel()
-        retrievePropertyData()
+        retrieveAndSetPropertyData()
 
     }
 
-    // Set google map
+    // Initialize map view and google map
     private fun setMap() {
-        // Define map fragment
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment!!.getMapAsync(this)
-    }
-
-    // Google map callback
-    @SuppressLint("PotentialBehaviorOverride")
-    override fun onMapReady(googleMap: GoogleMap) {
-        // When map is loaded
-        mGoogleMap = googleMap
-        googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-        googleMap.uiSettings.isMapToolbarEnabled = false
-
+        mapView = findViewById(R.id.map)
+        with(mapView) {
+            // Initialise the MapView
+            onCreate(null)
+            // Set the map ready callback to receive the GoogleMap object
+            getMapAsync{
+                MapsInitializer.initialize(applicationContext)
+                mGoogleMap = it
+                it.uiSettings.isMapToolbarEnabled = false
+            }
+        }
     }
 
     // Retrieve property id
@@ -122,6 +116,7 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
         return super.onOptionsItemSelected(item)
     }
 
+    // Set all text views
     private fun setViews() {
         mainPicture = findViewById(R.id.property_details_main_picture)
         title = findViewById(R.id.property_details_information_title)
@@ -142,24 +137,26 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
     }
 
     // Configuring ViewModel from ViewModelFactory
-    private fun configureViewModel() {
+    private fun setViewModel() {
         // Define ViewModel
         val viewModelFactory = ViewModelFactory(this.application)
         propertyViewModel = ViewModelProvider(this, viewModelFactory)[PropertyViewModel::class.java]
     }
 
-    private fun retrievePropertyData() {
+    // Retrieve and set all property data
+    private fun retrieveAndSetPropertyData() {
         propertyViewModel.getPropertyById(propertyId!!.toInt() )
         // Set observer on current property
         propertyViewModel.currentProperty?.observe(this) { actualProperty ->
             property = actualProperty
             setPropertyData()
-            setMarkersForProperty(mGoogleMap)
             retrievePropertyPictures()
-            configureRecyclerView()
+            configurePhotoGallery()
+            setMarkersForProperty(mGoogleMap)
         }
     }
 
+    // Retrieve property's pictures and add each of them in pictures list
     private fun retrievePropertyPictures() {
         picturesList = mutableListOf()
         if (this.property != null) {
@@ -169,13 +166,15 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun configureRecyclerView() {
+    // Configure Pictures Gallery
+    private fun configurePhotoGallery() {
         // Define layout & adapter
         picturesRecyclerView = findViewById(R.id.details_pictures_list)
         pictureAdapter = PictureAdapter(picturesList, this )
         picturesRecyclerView.adapter = pictureAdapter
     }
 
+    // Set property data in all text views
     private fun setPropertyData() {
         if (this.property != null) {
             title.text = property!!.name
@@ -203,6 +202,7 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
                 titleRooms.visibility = View.GONE
             }
 
+            // Bedrooms
             if (property!!.numberOfBedrooms > 0) {
                 numberOfBedrooms.text = property!!.numberOfBedrooms.toString()
                 titleBedrooms.visibility = View.VISIBLE
@@ -211,6 +211,7 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
                 titleBedrooms.visibility = View.GONE
             }
 
+            // Bathrooms
             if (property!!.numberOfBathrooms > 0) {
                 numberOfBathrooms.text = property!!.numberOfBathrooms.toString()
                 titleBathrooms.visibility = View.VISIBLE
@@ -219,6 +220,7 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
                 titleBathrooms.visibility = View.GONE
             }
 
+            // Description
             description.text = property!!.description
 
             // Main picture
@@ -280,5 +282,26 @@ class PropertyDetailsActivity: AppCompatActivity(), OnMapReadyCallback {
                 )
             )
         }
+    }
+
+    // Lifecycles
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
     }
 }
