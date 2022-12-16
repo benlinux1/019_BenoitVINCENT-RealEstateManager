@@ -3,13 +3,11 @@ package com.benlinux.realestatemanager.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.benlinux.realestatemanager.repository.PropertyRepository
-import com.benlinux.realestatemanager.repository.RealtorRepository
 import com.benlinux.realestatemanager.ui.models.Property
-import com.benlinux.realestatemanager.ui.models.Realtor
 import com.google.android.gms.maps.model.LatLng
 import java.util.concurrent.Executor
 
-class PropertyViewModel(propertyDataSource: PropertyRepository, realtorDataSource: RealtorRepository, executor: Executor) : ViewModel()  {
+class PropertyViewModel(propertyDataSource: PropertyRepository, executor: Executor) : ViewModel()  {
 
     var currentProperties: LiveData<MutableList<Property?>>? = null
     var currentProperty: LiveData<Property>? = null
@@ -18,13 +16,11 @@ class PropertyViewModel(propertyDataSource: PropertyRepository, realtorDataSourc
 
     // REPOSITORIES
     private val propertyDataSource: PropertyRepository
-    private val realtorDataSource : RealtorRepository
     private val executor: Executor
 
     // DATA
     init {
         this.propertyDataSource = propertyDataSource
-        this.realtorDataSource = realtorDataSource
         this.executor = executor
         getPropertiesList()
     }
@@ -64,13 +60,4 @@ class PropertyViewModel(propertyDataSource: PropertyRepository, realtorDataSourc
         executor.execute { propertyDataSource.deleteProperty(property) }
     }
 
-    // Get realtors list
-    private fun getRealtorsList(): LiveData<MutableList<Realtor>> {
-        return realtorDataSource.getAllRealtors()
-    }
-
-    // Get a given Realtor by Id
-    fun getRealtorById(id: Int): LiveData<Realtor> {
-        return realtorDataSource.getRealtorById(id)
-    }
 }

@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.benlinux.realestatemanager.database.REMDatabase
 import com.benlinux.realestatemanager.repository.PropertyRepository
-import com.benlinux.realestatemanager.repository.RealtorRepository
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
@@ -16,19 +15,17 @@ import java.util.concurrent.Executors
  */
 class ViewModelFactory constructor(context: Context) : ViewModelProvider.Factory {
     private val propertyDataSource: PropertyRepository
-    private val realtorDataSource : RealtorRepository
     private val executor: Executor
 
     init {
         val database: REMDatabase = REMDatabase.getInstance(context)
         propertyDataSource = PropertyRepository(database.propertyDao())
-        realtorDataSource = RealtorRepository(database.realtorDao())
         executor = Executors.newSingleThreadExecutor()
     }
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PropertyViewModel::class.java)) {
-            return PropertyViewModel(propertyDataSource, realtorDataSource, executor) as T
+            return PropertyViewModel(propertyDataSource, executor) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

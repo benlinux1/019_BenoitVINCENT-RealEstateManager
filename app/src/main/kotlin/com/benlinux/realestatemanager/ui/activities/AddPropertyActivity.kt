@@ -217,7 +217,7 @@ open class AddPropertyActivity: AppCompatActivity() {
         property.creationDate = getTodayDate()
         property.pictures = picturesList
         // TODO : get current realtor
-        property.realtor = Realtor(0, "", "", "", "", "")
+        property.realtor = Realtor("0", "", "", "", "")
         property.pictures = picturesList
         property.address = getPropertyAddress()
     }

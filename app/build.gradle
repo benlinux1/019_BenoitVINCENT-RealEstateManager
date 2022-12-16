@@ -6,7 +6,7 @@ plugins {
 }
 
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion 33
@@ -43,6 +43,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'

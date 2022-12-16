@@ -19,6 +19,7 @@ package com.benlinux.realestatemanager.ui.activities
  import androidx.navigation.ui.onNavDestinationSelected
  import androidx.navigation.ui.setupActionBarWithNavController
  import com.benlinux.realestatemanager.R
+ import com.benlinux.realestatemanager.data.userManager.UserManager
  import com.benlinux.realestatemanager.ui.fragments.MapFragment
  import com.benlinux.realestatemanager.utils.isInternetAvailable
  import com.google.android.gms.maps.model.LatLng
@@ -42,6 +43,7 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
     var realtorLocation: LatLng? = null
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -53,6 +55,18 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         setUpBottomNavigation()
         configureDrawerLayoutToggle()
         setAddButton()
+
+    }
+
+    private fun isUserConnected(): Boolean {
+        return UserManager.isCurrentUserLogged()
+    }
+
+    private fun setUserDataInDrawer() {
+
+    }
+
+    private fun setOptionsInDrawer(){
 
     }
 
@@ -155,12 +169,14 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
     // Logout from firebase
     private fun logout() {
-        // On success, close activity & go to login
-        Toast.makeText(this, getString(R.string.disconnection_succeed), Toast.LENGTH_SHORT)
-            .show()
-        // On failure, show error toast
-        Toast.makeText(this, getString(R.string.disconnection_failed), Toast.LENGTH_SHORT)
-            .show()
+        UserManager.signOut(this)
+            .addOnSuccessListener {
+                Toast.makeText(this, getString(R.string.disconnection_succeed), Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                // On failure, show error toast
+                Toast.makeText(this, getString(R.string.disconnection_failed), Toast.LENGTH_SHORT).show()
+            }
     }
 
     fun showAddButton() {
