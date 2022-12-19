@@ -1,0 +1,79 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Margins -->
+    <dimen name="zero">0dp</dimen>
+    <dimen name="zero_margin">0dp</dimen>
+    <dimen name="drawer_margin">28dp</dimen>
+
+    <dimen name="very_large_margin">60dp</dimen>
+    <dimen name="default_large_margin">40dp</dimen>
+    <dimen name="default_medium_margin">20dp</dimen>
+    <dimen name="default_margin">16dp</dimen>
+    <dimen name="small_plus_margin">12dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="very_small_margin">4dp</dimen>
+
+    <!-- Paddings -->
+    <dimen name="default_large_padding">24dp</dimen>
+    <dimen name="default_medium_padding">20dp</dimen>
+    <dimen name="default_padding">12dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+
+    <dimen name="default_drawable_padding">12dp</dimen>
+    <dimen name="drawable_padding_medium">16dp</dimen>
+
+    <!-- Text sizes -->
+    <dimen name="high_title_size">34sp</dimen>
+    <dimen name="default_title_size">22sp</dimen>
+
+    <dimen name="high_text_size">21sp</dimen>
+    <dimen name="higher_text_size">19sp</dimen>
+    <dimen name="default_text_size">17sp</dimen>
+    <dimen name="smaller_text_size">15sp</dimen>
+    <dimen name="default_text_size_mini">12sp</dimen>
+
+    <!-- Cards -->
+    <dimen name="default_elevation_size">8dp</dimen>
+
+    <!-- User Profile -->
+    <dimen name="user_avatar_size">160dp</dimen>
+    <dimen name="profile_button_width">260dp</dimen>
+
+
+    <!-- Recycler view -->
+    <dimen name="list_restaurant_picture">100dp</dimen>
+    <dimen name="recycler_view_margin_top">8dp</dimen>
+    <dimen name="recycler_view_margin_bottom">20dp</dimen>
+    <dimen name="recycler_view_margin_horizontal">20dp</dimen>
+    <dimen name="property_item_height">140dp</dimen>
+
+    <!-- Bottom navigation icons & text -->
+    <dimen name="design_bottom_navigation_text_size_active" >19sp</dimen>
+    <dimen name="design_bottom_navigation_text_size_inactive" >16sp</dimen>
+    <dimen name="bottom_navigation_icon_size" tools:override="true">40dp</dimen>
+    <dimen name="design_bottom_navigation_height" tools:override="true">80dp</dimen>
+
+    <!-- Property Details -->
+    <dimen name="property_details_picture_height" >360dp</dimen>
+    <dimen name="spinner_width">100dp</dimen>
+    <dimen name="property_details_separator_width" >160dp</dimen>
+
+    <!-- Custom dialog -->
+    <dimen name="dialog_button_width">180dp</dimen>
+
+    <!-- Login Activity -->
+    <dimen name="logo_dimens">120dp</dimen>
+
+    <!-- Drawer Header -->
+    <dimen name="drawer_header_height">180dp</dimen>
+    <dimen name="drawer_header_avatar_size">48dp</dimen>
+
+    <!-- Item Picture -->
+    <dimen name="item_picture_size">120dp</dimen>
+    <dimen name="item_picture_description_height">30dp</dimen>
+
+
+</resources>

@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:padding="@dimen/default_large_padding"
     android:gravity="center"
     android:layout_gravity="center"
     tools:context=".ui.activities.AddPropertyActivity">
@@ -16,11 +16,11 @@
         style="@style/fieldTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/small_margin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="18sp"
+        android:textSize="@dimen/default_subtitle_size"
         android:gravity="center"
         android:text="@string/add_picture_dialog_title"/>
 
@@ -28,7 +28,7 @@
         android:layout_height="100dp"
         android:layout_width="100dp"
         android:id="@+id/property_new_picture_preview"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/default_margin"
         app:layout_constraintTop_toBottomOf="@id/dialog_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,11 +42,11 @@
         style="@style/fieldTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/small_margin"
         app:layout_constraintTop_toBottomOf="@id/property_new_picture_preview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="18sp"
+        android:textSize="@dimen/default_subtitle_size"
         android:gravity="center"
         android:text="@string/add_room_name_title"/>
 
@@ -55,7 +55,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/small_margin"
         app:layout_constraintTop_toBottomOf="@+id/add_room_name_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/default_margin"
         app:layout_constraintTop_toBottomOf="@id/add_name_layout"
         app:layout_constraintStart_toStartOf="parent"
         android:orientation="horizontal"
@@ -86,17 +86,19 @@
 
         <Button
             android:id="@+id/picture_dialog_negative_button"
-            android:layout_width="140dp"
+            android:layout_width="@dimen/dialog_button_width"
             android:layout_height="wrap_content"
-            android:text="@string/cancel_button" >
+            android:text="@string/cancel_button"
+            style="?android:attr/buttonBarButtonStyle">
         </Button>
 
         <Button
             android:id="@+id/picture_dialog_positive_button"
-            android:layout_width="140dp"
+            android:layout_width="@dimen/dialog_button_width"
             android:layout_height="wrap_content"
             android:text="@string/validate_button"
-            android:layout_marginStart="12dp">
+            android:layout_marginStart="12dp"
+            style="?android:attr/buttonBarButtonStyle">
         </Button>
 
 

@@ -59,7 +59,7 @@
     <string name="details_bedrooms_text">6</string>
     <string name="details_location_title">Location</string>
     <string name="details_street_text">12 rue de la Paix</string>
-    <string name="details_location_complement_text">Appt 8 – 9ème étage</string>
+    <string name="details_location_complement_text">Appartement 8 – 9ème étage</string>
     <string name="details_postal_code_text">75000</string>
     <string name="details_city_text">PARIS</string>
     <string name="details_location_state_text">FRANCE</string>
@@ -123,6 +123,8 @@
     <string name="add_postal_code">Postal code</string>
     <string name="add_property_city">City</string>
     <string name="add_property_country">Country</string>
+
+    <string name="see_details_button">See details</string>
 
 
 </resources>

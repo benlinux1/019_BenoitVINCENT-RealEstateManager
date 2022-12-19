@@ -34,8 +34,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +48,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/small_margin"
                         android:hint="@string/add_property_name">
 
                         <EditText
@@ -71,7 +71,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/small_margin"
                         android:hint="@string/add_property_area">
 
                         <EditText
@@ -93,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/default_subtitle_size"
                         android:gravity="center"
                         android:text="@string/choose_property_type"/>
 
@@ -106,7 +106,7 @@
                             android:id="@+id/add_type_radioGroup1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="@dimen/small_margin"
                             android:orientation="vertical"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/add_type_layout_title">
@@ -136,8 +136,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="@dimen/small_margin"
+                            android:layout_marginStart="@dimen/default_medium_margin"
                             android:layout_toRightOf="@id/add_type_radioGroup1">
 
                             <RadioButton
@@ -166,7 +166,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/small_margin"
                         android:hint="@string/add_price_text">
 
                         <EditText
@@ -174,6 +174,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
+                            android:drawablePadding="@dimen/default_drawable_padding"
                             android:drawableStart="@drawable/ic_details_price_24"
                             android:hint="@string/add_price_text"
                             android:inputType="number"
@@ -188,7 +189,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/small_margin"
                         android:hint="@string/add_surface_text">
 
                         <EditText
@@ -197,7 +198,7 @@
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:drawableStart="@drawable/ic_details_surface_24"
-                            android:drawablePadding="8dp"
+                            android:drawablePadding="@dimen/default_drawable_padding"
                             android:hint="@string/add_surface_text"
                             android:inputType="number"
                             android:imeOptions="actionNext"
@@ -219,7 +220,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toTopOf="parent"
                             android:hint="@string/add_property_description">
 
@@ -241,8 +242,8 @@
                         style="@style/fieldTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textSize="18sp"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:textSize="@dimen/default_subtitle_size"
                         android:gravity="center"
                         android:text="@string/choose_property_status"/>
 
@@ -250,7 +251,7 @@
                         android:id="@+id/add_status_radioGroup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/small_margin"
                         android:orientation="horizontal"
                         android:gravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -269,7 +270,7 @@
                             android:id="@+id/add_status_radioButton2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginStart="@dimen/default_medium_margin"
                             android:text="@string/add_status_2" />
 
                     </RadioGroup>
@@ -281,25 +282,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="@dimen/default_medium_margin">
 
                         <TextView
                             android:id="@+id/add_pictures_title"
                             style="@style/fieldTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="@dimen/small_margin"
                             android:text="@string/add_pictures_title"
-                            android:textSize="18sp"
+                            android:textSize="@dimen/default_subtitle_size"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/add_pictures_button"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginStart="12dp"
+                            android:layout_width="@dimen/add_property_picture"
+                            android:layout_height="@dimen/add_property_picture"
+                            android:layout_marginTop="@dimen/small_margin"
+                            android:layout_marginStart="@dimen/small_plus_margin"
                             android:src="@drawable/ic_add_photo_24"
                             android:drawableTint="@color/colorPrimary"
                             app:layout_constraintStart_toStartOf="@id/add_pictures_title"
@@ -312,12 +313,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/empty_pictures_list_error"
-                            android:textSize="14sp"
+                            android:textSize="@dimen/higher_text_size"
                             android:textColor="@color/design_default_color_error"
                             app:layout_constraintStart_toEndOf="@id/add_pictures_button"
                             app:layout_constraintTop_toTopOf="@id/add_pictures_button"
                             app:layout_constraintBottom_toBottomOf="@id/add_pictures_button"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="@dimen/default_margin"
                             android:visibility="gone"/>
 
 
@@ -327,7 +328,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/add_pictures_button"
                             tools:itemCount="5"
@@ -340,7 +341,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="@dimen/default_margin"
                         android:layout_gravity="center">
 
                         <!-- ROOMS NUMBER -->
@@ -350,7 +351,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/add_rooms_spinner_layout"
                             app:layout_constraintTop_toBottomOf="@id/add_pictures_list"
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginBottom="@dimen/small_margin"
                             android:gravity = "center">
 
                             <TextView
@@ -359,13 +360,13 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/spinner_number_rooms"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize = "16sp" />
+                                android:textSize="@dimen/high_text_size" />
 
                             <Spinner
                                 android:id="@+id/add_number_rooms_count"
                                 style="@style/Widget.AppCompat.Spinner.DropDown"
                                 android:theme="@style/Spinner"
-                                android:layout_width="70dp"
+                                android:layout_width="@dimen/spinner_width"
                                 android:foregroundTint="@color/colorAccent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left" />
@@ -380,7 +381,7 @@
                             app:layout_constraintStart_toStartOf="@id/add_rooms_spinner_layout"
                             app:layout_constraintTop_toBottomOf="@id/add_rooms_spinner_layout"
                             android:id="@+id/add_bedrooms_spinner_layout"
-                            android:layout_marginBottom="8dp">
+                            android:layout_marginBottom="@dimen/small_margin">
 
                             <TextView
                                 android:id="@+id/add_number_bedrooms_text"
@@ -388,13 +389,13 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/spinner_number_bedrooms"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize = "16sp" />
+                                android:textSize="@dimen/high_text_size" />
 
                             <Spinner
                                 android:id="@+id/add_number_bedrooms_count"
                                 style="@style/Widget.AppCompat.Spinner.DropDown"
                                 android:theme="@style/Spinner"
-                                android:layout_width="70dp"
+                                android:layout_width="@dimen/spinner_width"
                                 android:foregroundTint="@color/colorAccent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left" />
@@ -407,7 +408,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/add_bathrooms_spinner_layout"
-                            android:layout_marginBottom="8dp"
+                            android:layout_marginBottom="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_bedrooms_spinner_layout"
                             app:layout_constraintStart_toStartOf="@id/add_rooms_spinner_layout">
 
@@ -417,13 +418,13 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/spinner_number_bathrooms"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize = "16sp" />
+                                android:textSize="@dimen/high_text_size" />
 
                             <Spinner
                                 android:id="@+id/add_number_bathrooms_count"
                                 style="@style/Widget.AppCompat.Spinner.DropDown"
                                 android:theme="@style/Spinner"
-                                android:layout_width="70dp"
+                                android:layout_width="@dimen/spinner_width"
                                 android:foregroundTint="@color/colorAccent"
                                 android:layout_height="wrap_content"
                                 android:gravity="left" />
@@ -438,7 +439,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/small_margin"
                         android:hint="@string/add_property_creation_date"
                         android:visibility="gone">
 
@@ -449,7 +450,7 @@
                             android:ems="10"
                             android:drawableStart="@drawable/ic_calendar_24"
                             android:drawableTint="@color/colorPrimary"
-                            android:drawablePadding="12dp"
+                            android:drawablePadding="@dimen/default_drawable_padding"
                             android:autofillHints=""
                             android:hint="@string/add_property_creation_date"
                             android:inputType="textShortMessage"
@@ -463,7 +464,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/small_margin"
                         android:hint="@string/add_property_sold_date"
                         android:visibility="gone">
 
@@ -474,7 +475,7 @@
                             android:ems="10"
                             android:drawableStart="@drawable/ic_calendar_24"
                             android:drawableTint="@color/colorPrimary"
-                            android:drawablePadding="12dp"
+                            android:drawablePadding="@dimen/default_drawable_padding"
                             android:hint="@string/add_property_sold_date"
                             android:inputType="textShortMessage"
                             android:imeOptions="actionNext"
@@ -495,8 +496,8 @@
                             style="@style/fieldTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:textSize="18sp"
+                            android:layout_marginTop="@dimen/default_margin"
+                            android:textSize="@dimen/default_subtitle_size"
                             android:gravity="start"
                             app:layout_constraintTop_toTopOf="parent"
                             android:text="@string/add_property_address_title"/>
@@ -507,7 +508,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_address_layout_title"
                             android:hint="@string/add_property_street_number">
 
@@ -531,7 +532,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_street_number_layout"
                             android:hint="@string/add_property_street_name">
 
@@ -553,7 +554,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_street_name_layout"
                             android:hint="@string/add_address_complement">
 
@@ -575,7 +576,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_address_complement_layout"
                             android:hint="@string/add_postal_code">
 
@@ -598,7 +599,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_postal_code_layout"
                             android:hint="@string/add_property_city">
 
@@ -620,7 +621,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_city_layout"
                             android:hint="@string/add_property_country">
 
@@ -647,17 +648,15 @@
                         android:textColor="@color/colorWhite"
                         android:layout_gravity="center"
                         app:cornerRadius="12dp"
-                        android:layout_marginVertical="8dp"
+                        android:layout_marginVertical="@dimen/small_margin"
                         android:text="@string/save_button_text"/>
 
                 </LinearLayout>
 
-
-
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

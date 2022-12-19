@@ -7,59 +7,80 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.LoginActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
     <ImageView
         android:id="@+id/login_logo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="@dimen/logo_dimens"
+        android:layout_height="@dimen/logo_dimens"
         android:adjustViewBounds="true"
-        android:layout_marginTop="40dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/logo"
         android:cropToPadding="false"
         android:scaleType="fitXY"
-        android:contentDescription="@string/logo"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_logo" />
 
     <EditText
         android:id="@+id/login_email"
-        android:layout_width="260dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:paddingHorizontal="16dp"
-        android:drawablePadding="16dp"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:paddingHorizontal="@dimen/default_margin"
+        android:drawablePadding="@dimen/drawable_padding_medium"
         android:drawableTint="@color/colorPrimary"
         android:background="@drawable/rounded_corner"
         android:drawableStart="@drawable/ic_baseline_email_24"
-        android:paddingVertical="4dp"
-        android:ems="10"
+        android:paddingVertical="@dimen/small_padding"
+        android:ems="15"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:textSize="15sp"
+        android:textSize="@dimen/higher_text_size"
         android:imeOptions="actionNext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_logo" />
+        app:layout_constraintBottom_toBottomOf="@id/guideline_input" />
 
     <EditText
         android:id="@+id/login_password"
-        android:layout_width="260dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:paddingHorizontal="16dp"
-        android:drawablePadding="16dp"
+        android:layout_marginTop="@dimen/default_margin"
+        android:paddingHorizontal="@dimen/default_medium_padding"
+        android:drawablePadding="@dimen/drawable_padding_medium"
         android:drawableTint="@color/colorPrimary"
         android:background="@drawable/rounded_corner"
         android:drawableStart="@drawable/ic_baseline_person_24"
-        android:paddingVertical="4dp"
-        android:ems="10"
+        android:paddingVertical="@dimen/small_padding"
+        android:ems="15"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textSize="15sp"
+        android:textSize="@dimen/higher_text_size"
         android:imeOptions="actionNext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_email" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline_input" />
 
     <Button
         android:id="@+id/login_button"
@@ -69,12 +90,11 @@
         android:backgroundTint="@color/colorPrimary"
         android:text="Sign In"
         android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        android:layout_marginBottom="40dp"
+        android:textSize="@dimen/default_subtitle_size"
         app:cornerRadius="12dp"
-        android:paddingVertical="8dp"
-        android:paddingHorizontal="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingVertical="@dimen/default_padding"
+        android:paddingHorizontal="@dimen/default_large_padding"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_link"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_password" />
@@ -84,12 +104,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Not Registered ? Sign Up"
-        android:textSize="20sp"
+        android:textSize="@dimen/default_subtitle_size"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_link"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_link" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

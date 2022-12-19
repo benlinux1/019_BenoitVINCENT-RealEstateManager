@@ -7,13 +7,14 @@
     android:id="@+id/property_details_main_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.benlinux.realestatemanager.ui.activities.PropertyDetailsActivity">
+    tools:context=".ui.activities.PropertyDetailsActivity">
 
     <!-- Toolbar -->
     <include
         android:id="@+id/main_toolbar"
         app:layout_constraintTop_toTopOf="parent"
         layout="@layout/toolbar_main" />
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -23,381 +24,400 @@
         app:layout_constraintEnd_toEndOf="parent">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-        android:background="#EBEFF0">
-
-        <ImageView
-            android:id="@+id/property_details_main_picture"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:importantForAccessibility="no"
-            android:scaleType="centerCrop"
-            app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-            tools:src="@drawable/ic_details_photo_camera_24" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/property_details_update_button"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginEnd="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintBottom_toBottomOf="@+id/property_details_main_picture"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/property_details_main_picture"
-            android:contentDescription="@string/property_details_update_button"
-            app:backgroundTint="#FFFFFF"
-            app:srcCompat="@drawable/ic_details_edit_24" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/property_details_information_section"
-            style="@style/cardView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="4dp"
-            app:layout_constraintTop_toBottomOf="@id/property_details_main_picture">
+            app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+            android:background="@color/colorIndigo">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <ImageView
+                android:id="@+id/property_details_main_picture"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/property_details_picture_height"
+                android:importantForAccessibility="no"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+                tools:src="@drawable/ic_details_photo_camera_24" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/property_details_update_button"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="@+id/property_details_main_picture"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/property_details_main_picture"
+                android:contentDescription="@string/property_details_update_button"
+                app:backgroundTint="@color/colorWhite"
+                app:srcCompat="@drawable/ic_details_edit_24" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/property_details_information_section"
+                style="@style/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingVertical="16dp">
+                android:layout_marginTop="@dimen/default_margin"
+                app:cardCornerRadius="4dp"
+                app:layout_constraintTop_toBottomOf="@id/property_details_main_picture">
 
-                <TextView
-                    android:id="@+id/property_details_information_title"
-                    style="@style/cardMainTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimary"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/property_details_information_title" />
 
-                <TextView
-                    android:id="@+id/property_details_information_area"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/property_details_information_title"
-                    tools:text="@string/details_information_subtitle" />
-
-                <View
-                    android:id="@+id/property_details_separator"
-                    android:layout_width="160dp"
-                    android:layout_height="1dp"
-                    android:foregroundGravity="center"
-                    android:background="@color/colorPrimary"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_information_area"
-                    android:layout_marginVertical="16dp" />
-
-                <TextView
-                    android:id="@+id/property_details_surface_title"
-                    style="@style/cardTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawableStart="@drawable/ic_details_surface_24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_separator"
-                    android:text="@string/details_surface_title" />
-
-                <TextView
-                    android:id="@+id/property_details_surface_text"
-                    style="@style/cardText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/property_details_surface_title"
-                    app:layout_constraintTop_toTopOf="@+id/property_details_surface_title"
-                    app:layout_constraintBottom_toBottomOf="@+id/property_details_surface_title"
-                    tools:text="@string/details_surface_text" />
-
-                <TextView
-                    android:id="@+id/property_details_rooms_title"
-                    style="@style/cardTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_details_rooms_24"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_surface_text"
-                    android:text="@string/details_rooms_title" />
-
-                <TextView
-                    android:id="@+id/property_details_rooms_text"
-                    style="@style/cardText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/property_details_rooms_title"
-                    app:layout_constraintTop_toTopOf="@+id/property_details_rooms_title"
-                    app:layout_constraintBottom_toBottomOf="@+id/property_details_rooms_title"
-                    tools:text="@string/details_rooms_text" />
-
-                <TextView
-                    android:id="@+id/property_details_bathrooms_title"
-                    style="@style/cardTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_details_bathrooms_24"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_rooms_text"
-                    android:text="@string/details_bathrooms_title" />
-
-                <TextView
-                    android:id="@+id/property_details_bathrooms_text"
-                    style="@style/cardText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/property_details_bathrooms_title"
-                    app:layout_constraintTop_toTopOf="@+id/property_details_bathrooms_title"
-                    app:layout_constraintBottom_toBottomOf="@+id/property_details_bathrooms_title"
-                    tools:text="@string/details_bathrooms_text" />
-
-                <TextView
-                    android:id="@+id/property_details_bedrooms_title"
-                    style="@style/cardTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_details_bedrooms_24"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:drawableTint="@color/colorPrimary"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_bathrooms_text"
-                    android:text="@string/details_bedrooms_title" />
-
-                <TextView
-                    android:id="@+id/property_details_bedrooms_text"
-                    style="@style/cardText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/property_details_bedrooms_title"
-                    app:layout_constraintTop_toTopOf="@+id/property_details_bedrooms_title"
-                    app:layout_constraintBottom_toBottomOf="@+id/property_details_bedrooms_title"
-                    tools:text="@string/details_bedrooms_text" />
-
-                <TextView
-                    android:id="@+id/property_details_price_title"
-                    style="@style/cardTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_details_price_24"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_bedrooms_text"
-                    android:text="@string/details_price_title" />
-
-                <TextView
-                    android:id="@+id/property_details_price_text"
-                    style="@style/cardText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/property_details_price_title"
-                    app:layout_constraintTop_toTopOf="@+id/property_details_price_title"
-                    app:layout_constraintBottom_toBottomOf="@+id/property_details_price_title"
-                    tools:text="@string/details_price_text" />
-
-                <!-- LOCATION CONTAINER -->
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/property_details_location_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/property_details_price_text"
-                    >
+                    android:layout_gravity="center"
+                    android:paddingVertical="@dimen/default_medium_padding">
 
-                    <ImageView
-                        android:id="@+id/property_details_location_icon"
+
+                    <TextView
+                        android:id="@+id/property_details_information_title"
+                        style="@style/cardMainTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/cardTitle"
-                        android:src="@drawable/ic_details_location_24"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/property_details_price_text"/>
-
-                    <LinearLayout
-                        android:id="@+id/property_details_location_data"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="12dp"
-                        app:layout_constraintStart_toEndOf="@id/property_details_location_icon"
-                        app:layout_constraintTop_toTopOf="@id/property_details_location_icon">
-
-                        <TextView
-                            android:id="@+id/property_details_location_title"
-                            android:textStyle="bold"
-                            android:textSize="16sp"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/details_location_title" />
-
-                        <TextView
-                            android:id="@+id/property_details_location_street"
-                            style="@style/location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxWidth="130dp"
-                            tools:text="@string/details_street_text" />
-
-                        <TextView
-                            android:id="@+id/property_details_location_complement"
-                            style="@style/location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxWidth="130dp"
-                            tools:text="@string/details_location_complement_text" />
-
-                        <TextView
-                            android:id="@+id/property_details_location_postal_code_and_city"
-                            style="@style/location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxWidth="130dp"
-                            tools:text="@string/details_postal_code_text" />
-
-
-                        <TextView
-                            android:id="@+id/property_details_location_country"
-                            style="@style/location"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:maxWidth="130dp"
-                            tools:text="@string/details_location_state_text" />
-
-                    </LinearLayout>
-
-                    <!-- MAP CONTAINER -->
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/property_details_map_section"
-                        style="@style/cardView"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:cardCornerRadius="4dp"
-                        app:layout_constraintStart_toEndOf="@id/property_details_location_data"
+                        android:textColor="@color/colorPrimary"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="@id/property_details_location_data"
-                        app:layout_constraintTop_toTopOf="@id/property_details_location_data">
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/property_details_information_title" />
+
+                    <TextView
+                        android:id="@+id/property_details_information_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/property_details_information_title"
+                        tools:text="@string/details_information_subtitle" />
+
+                    <View
+                        android:id="@+id/property_details_separator"
+                        android:layout_width="@dimen/property_details_separator_width"
+                        android:layout_height="1dp"
+                        android:foregroundGravity="center"
+                        android:background="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_information_area"
+                        android:layout_marginVertical="@dimen/default_margin" />
+
+                    <TextView
+                        android:id="@+id/property_details_surface_title"
+                        style="@style/cardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin"
+                        android:drawableStart="@drawable/ic_details_surface_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_separator"
+                        android:text="@string/details_surface_title" />
+
+                    <TextView
+                        android:id="@+id/property_details_surface_text"
+                        style="@style/cardText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/property_details_surface_title"
+                        app:layout_constraintTop_toTopOf="@+id/property_details_surface_title"
+                        app:layout_constraintBottom_toBottomOf="@+id/property_details_surface_title"
+                        tools:text="@string/details_surface_text" />
+
+                    <TextView
+                        android:id="@+id/property_details_rooms_title"
+                        style="@style/cardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_details_rooms_24"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_surface_text"
+                        android:text="@string/details_rooms_title" />
+
+                    <TextView
+                        android:id="@+id/property_details_rooms_text"
+                        style="@style/cardText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/property_details_rooms_title"
+                        app:layout_constraintTop_toTopOf="@+id/property_details_rooms_title"
+                        app:layout_constraintBottom_toBottomOf="@+id/property_details_rooms_title"
+                        tools:text="@string/details_rooms_text" />
+
+                    <TextView
+                        android:id="@+id/property_details_bathrooms_title"
+                        style="@style/cardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_details_bathrooms_24"
+                        android:text="@string/details_bathrooms_title"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_rooms_text" />
+
+                    <TextView
+                        android:id="@+id/property_details_bathrooms_text"
+                        style="@style/cardText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/property_details_bathrooms_title"
+                        app:layout_constraintTop_toTopOf="@+id/property_details_bathrooms_title"
+                        app:layout_constraintBottom_toBottomOf="@+id/property_details_bathrooms_title"
+                        tools:text="@string/details_bathrooms_text" />
+
+                    <TextView
+                        android:id="@+id/property_details_bedrooms_title"
+                        style="@style/cardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_details_bedrooms_24"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        android:drawableTint="@color/colorPrimary"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_bathrooms_text"
+                        android:text="@string/details_bedrooms_title" />
+
+                    <TextView
+                        android:id="@+id/property_details_bedrooms_text"
+                        style="@style/cardText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/property_details_bedrooms_title"
+                        app:layout_constraintTop_toTopOf="@+id/property_details_bedrooms_title"
+                        app:layout_constraintBottom_toBottomOf="@+id/property_details_bedrooms_title"
+                        tools:text="@string/details_bedrooms_text" />
+
+                    <TextView
+                        android:id="@+id/property_details_price_title"
+                        style="@style/cardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_details_price_24"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_bedrooms_text"
+                        android:text="@string/details_price_title" />
+
+                    <TextView
+                        android:id="@+id/property_details_price_text"
+                        style="@style/cardText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/property_details_price_title"
+                        app:layout_constraintTop_toTopOf="@+id/property_details_price_title"
+                        app:layout_constraintBottom_toBottomOf="@+id/property_details_price_title"
+                        tools:text="@string/details_price_text" />
+
+                    <!-- LOCATION CONTAINER -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/property_details_location_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_price_text">
+
+                        <!-- Guideline for 55% vertical separator -->
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/location_section_guideline1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.55" />
+
+                        <!-- Location Icon -->
+                        <ImageView
+                            android:id="@+id/property_details_location_icon"
+                            style="@style/cardTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_details_location_24"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/property_details_price_text" />
+
+                        <LinearLayout
+                            android:id="@+id/property_details_location_data"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/small_plus_margin"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toStartOf="@id/location_section_guideline1"
+                            app:layout_constraintStart_toEndOf="@id/property_details_location_icon"
+                            app:layout_constraintTop_toTopOf="@id/property_details_location_icon">
+
+                            <TextView
+                                android:id="@+id/property_details_location_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/details_location_title"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/high_text_size"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/property_details_location_street"
+                                style="@style/location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="@string/details_street_text" />
+
+                            <TextView
+                                android:id="@+id/property_details_location_complement"
+                                style="@style/location"
+                                android:layout_width="match_parent"
+                                android:lineBreakStyle="normal"
+                                android:maxLines="2"
+                                android:layout_height="wrap_content"
+                                tools:text="@string/details_location_complement_text" />
+
+                            <TextView
+                                android:id="@+id/property_details_location_postal_code_and_city"
+                                style="@style/location"
+                                android:maxLines="2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="@string/details_postal_code_text" />
 
 
-                        <!-- MAP with marker fragment -->
-                        <com.google.android.gms.maps.MapView
-                            android:name="com.google.android.gms.maps.SupportMapFragment"
-                            android:id="@+id/map"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            map:cameraZoom="15"
-                            map:liteMode="true"/>
-                    </androidx.cardview.widget.CardView>
+                            <TextView
+                                android:id="@+id/property_details_location_country"
+                                style="@style/location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:text="@string/details_location_state_text" />
+
+                        </LinearLayout>
+
+                        <!-- MAP CONTAINER -->
+                        <LinearLayout
+                            android:layout_width="@dimen/zero"
+                            android:layout_height="@dimen/zero"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/property_details_location_data"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <!-- Card view container -->
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/property_details_map_section"
+                                android:layout_marginStart="@dimen/small_margin"
+                                android:layout_marginEnd="@dimen/default_margin"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="8dp">
+
+                                <!-- Map View -->
+                                <com.google.android.gms.maps.MapView
+                                    android:id="@+id/map"
+                                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    map:cameraZoom="15"
+                                    map:liteMode="true" />
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-        <!-- PROPERTY DETAILS PICTURES -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/details_pictures_section"
-            style="@style/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="4dp"
-            android:paddingVertical="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/property_details_information_section"
-            app:layout_constraintBottom_toTopOf="@+id/details_description_section">
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/details_pictures_title"
-                    style="@style/cardTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/add_pictures_title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/details_pictures_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="12dp"
-                    android:paddingBottom="8dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/details_pictures_title"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/item_property_picture" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/details_description_section"
-            style="@style/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="68dp"
-            app:cardCornerRadius="4dp"
-            app:layout_constraintTop_toBottomOf="@+id/details_pictures_section"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- PROPERTY DETAILS PICTURES -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/details_pictures_section"
+                style="@style/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp">
-
-                <TextView
-                    android:id="@+id/property_details_description_title"
-                    style="@style/cardTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/property_details_description_title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                android:layout_marginTop="@dimen/default_margin"
+                app:cardCornerRadius="4dp"
+                android:paddingVertical="@dimen/default_padding"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/property_details_information_section"
+                app:layout_constraintBottom_toTopOf="@+id/details_description_section">
 
 
-                <TextView
-                    android:id="@+id/property_details_description_text"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/details_pictures_title"
+                        style="@style/cardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:text="@string/add_pictures_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/details_pictures_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/default_padding"
+                        android:paddingBottom="@dimen/default_padding"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:layout_marginTop="@dimen/small_margin"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/details_pictures_title"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/item_property_picture" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/details_description_section"
+                style="@style/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginBottom="68dp"
+                app:cardCornerRadius="4dp"
+                app:layout_constraintTop_toBottomOf="@+id/details_pictures_section"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginHorizontal="16dp"
-                    android:gravity="start"
-                    android:lineBreakStyle="strict"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/property_details_description_title"
-                    tools:text="@string/property_details_description_text" />
+                    android:paddingBottom="@dimen/default_padding">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/property_details_description_title"
+                        style="@style/cardTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/property_details_description_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/property_details_description_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/small_margin"
+                        android:layout_marginHorizontal="@dimen/default_margin"
+                        android:gravity="start"
+                        android:lineBreakStyle="strict"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/property_details_description_title"
+                        tools:text="@string/property_details_description_text" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
