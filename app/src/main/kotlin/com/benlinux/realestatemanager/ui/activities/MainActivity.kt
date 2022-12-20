@@ -13,6 +13,7 @@ package com.benlinux.realestatemanager.ui.activities
  import androidx.appcompat.app.AppCompatActivity
  import androidx.appcompat.widget.Toolbar
  import androidx.core.view.GravityCompat
+ import androidx.core.view.isVisible
  import androidx.drawerlayout.widget.DrawerLayout
  import androidx.navigation.NavController
  import androidx.navigation.fragment.NavHostFragment
@@ -64,10 +65,9 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
         setUpDrawerNavigation()
         setUpBottomNavigation()
         configureDrawerLayoutToggle()
-        setAddButton()
         setUserDataInDrawer()
         setUserOptionsInDrawer()
-
+        setAddButton()
     }
 
     private fun isUserConnected(): Boolean {
@@ -116,7 +116,8 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
             }
             // Update menu options in drawer according to user status
             setUserOptionsInDrawer()
-
+            // Set add button visibility according to user status
+            addPropertyButton.isVisible = isUserRealtor()
         }
         if (!isUserConnected()) {
             userName.text = getString(R.string.info_no_username_found)
@@ -263,16 +264,13 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
                 Log.d("LOGOUT :", "SUCCESS" )
                 setUserDataInDrawer()
                 setUserOptionsInDrawer()
+                hideAddButton()
             }
             .addOnFailureListener {
                 // On failure, show error toast
                 Toast.makeText(this, getString(R.string.disconnection_failed), Toast.LENGTH_SHORT).show()
                 Log.d("LOGOUT :", "FAILURE" )
             }
-    }
-
-    fun showAddButton() {
-        addPropertyButton.visibility = View.VISIBLE
     }
 
     fun hideAddButton() {

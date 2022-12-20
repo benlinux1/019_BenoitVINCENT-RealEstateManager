@@ -46,7 +46,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="@dimen/default_margin"
             app:srcCompat="@drawable/ic_add_property_24"
-            android:contentDescription="@string/add_property" />
+            android:contentDescription="@string/add_property"
+            android:visibility="gone"/>
 
         <!-- Bottom Navigation Bar -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
