@@ -3,8 +3,11 @@ package com.benlinux.realestatemanager.ui.activities
  import android.annotation.SuppressLint
  import android.content.Intent
  import android.os.Bundle
+ import android.util.Log
  import android.view.MenuItem
  import android.view.View
+ import android.widget.ImageView
+ import android.widget.TextView
  import android.widget.Toast
  import androidx.appcompat.app.ActionBarDrawerToggle
  import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +25,8 @@ package com.benlinux.realestatemanager.ui.activities
  import com.benlinux.realestatemanager.data.userManager.UserManager
  import com.benlinux.realestatemanager.ui.fragments.MapFragment
  import com.benlinux.realestatemanager.utils.isInternetAvailable
+ import com.bumptech.glide.Glide
+ import com.bumptech.glide.request.RequestOptions
  import com.google.android.gms.maps.model.LatLng
  import com.google.android.material.bottomnavigation.BottomNavigationView
  import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -29,7 +34,7 @@ package com.benlinux.realestatemanager.ui.activities
  import java.util.*
 
 
-class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var bottomNavView: BottomNavigationView
     private lateinit var drawerLayout: DrawerLayout
@@ -42,6 +47,11 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
 
     var realtorLocation: LatLng? = null
 
+    private lateinit var userName: TextView
+    private lateinit var userEmail: TextView
+    private lateinit var userAvatar: ImageView
+
+    private var userIsRealtor = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +65,8 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         setUpBottomNavigation()
         configureDrawerLayoutToggle()
         setAddButton()
+        setUserDataInDrawer()
+        setUserOptionsInDrawer()
 
     }
 
@@ -62,15 +74,83 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         return UserManager.isCurrentUserLogged()
     }
 
+    private fun isUserRealtor(): Boolean {
+        return userIsRealtor
+    }
+
     private fun setUserDataInDrawer() {
+        val headerContainer = drawerNavView.getHeaderView(0)
+        userName = headerContainer.findViewById(R.id.user_name)
+        userEmail = headerContainer.findViewById(R.id.user_email)
+        userAvatar = headerContainer.findViewById(R.id.user_avatar)
+
+        UserManager.getUserData()?.addOnSuccessListener { user ->
+            if (user != null) {
+                // Set user name
+                userName.text = buildString {
+                    append(user.firstName)
+                    append(" ")
+                    append(user.lastName)
+                }
+                Log.d("USER NAME",
+                    buildString { append(user.firstName)
+                    append(" ")
+                    append(user.lastName) })
+
+                // Set user email
+                userEmail.text = user.email
+                // Set avatar
+                if (user.avatarUrl.isEmpty()) {
+                    Glide.with(this)
+                        .load(R.mipmap.no_photo)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(userAvatar)
+                } else {
+                    Glide.with(this)
+                        .load(user.avatarUrl)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(userAvatar)
+                }
+                userIsRealtor = user.isRealtor
+
+            }
+            // Update menu options in drawer according to user status
+            setUserOptionsInDrawer()
+
+        }
+        if (!isUserConnected()) {
+            userName.text = getString(R.string.info_no_username_found)
+            userEmail.text = getString(R.string.please_login)
+
+            Glide.with(this)
+                .load(R.mipmap.no_photo)
+                .apply(RequestOptions.circleCropTransform())
+                .into(userAvatar)
+        }
+        Log.d("DRAWER :", "user data updated" )
+    }
+
+    private fun setUserOptionsInDrawer(){
+        val loginItem: MenuItem = drawerNavView.menu.findItem(R.id.drawer_navigation_login)
+        loginItem.isVisible = !isUserConnected()
+
+        val myPropertiesItem = drawerNavView.menu.findItem(R.id.drawer_navigation_my_properties)
+        myPropertiesItem.isVisible = (isUserConnected() && isUserRealtor())
+
+        val myFavoritesItem = drawerNavView.menu.findItem(R.id.drawer_navigation_my_favorites)
+        myFavoritesItem.isVisible = (isUserConnected() && !isUserRealtor())
+
+        val settingsItem = drawerNavView.menu.findItem(R.id.drawer_navigation_settings)
+        settingsItem.isVisible = isUserConnected()
+
+        val logoutItem = drawerNavView.menu.findItem(R.id.drawer_navigation_logout)
+        logoutItem.isVisible = isUserConnected()
+
+        Log.d("DRAWER :", "menu options updated" )
 
     }
 
-    private fun setOptionsInDrawer(){
-
-    }
-
-    // Set fragments views (map, add property)
+    // Set fragments views (map)
     private fun setFragments() {
         mapFragment = MapFragment()
     }
@@ -147,6 +227,14 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
                 val loginActivityIntent = Intent(this, LoginActivity::class.java)
                 startActivity(loginActivityIntent)
             }
+            R.id.drawer_navigation_my_favorites -> {
+                val favoritesActivityIntent = Intent(this, MyPropertiesActivity::class.java)
+                startActivity(favoritesActivityIntent)
+            }
+            R.id.drawer_navigation_my_properties -> {
+                val myPropertiesActivityIntent = Intent(this, MyPropertiesActivity::class.java)
+                startActivity(myPropertiesActivityIntent)
+            }
             R.id.drawer_navigation_settings -> {
                 val settingsActivityIntent = Intent(this, SettingsActivity::class.java)
                 startActivity(settingsActivityIntent)
@@ -172,10 +260,14 @@ class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelected
         UserManager.signOut(this)
             .addOnSuccessListener {
                 Toast.makeText(this, getString(R.string.disconnection_succeed), Toast.LENGTH_SHORT).show()
+                Log.d("LOGOUT :", "SUCCESS" )
+                setUserDataInDrawer()
+                setUserOptionsInDrawer()
             }
             .addOnFailureListener {
                 // On failure, show error toast
                 Toast.makeText(this, getString(R.string.disconnection_failed), Toast.LENGTH_SHORT).show()
+                Log.d("LOGOUT :", "FAILURE" )
             }
     }
 

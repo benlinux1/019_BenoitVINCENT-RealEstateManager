@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/default_large_padding"
+    android:gravity="center"
+    android:layout_gravity="center"
+    tools:context=".ui.activities.SignupActivity">
+
+    <TextView
+        android:id="@+id/realtor_dialog_title"
+        style="@style/fieldTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/default_subtitle_size"
+        android:gravity="center"
+        android:text="@string/get_realtor_access"/>
+
+    <ImageView
+        android:layout_height="80dp"
+        android:layout_width="80dp"
+        android:id="@+id/realtor_access_logo"
+        android:layout_marginTop="@dimen/default_margin"
+        app:layout_constraintTop_toBottomOf="@id/realtor_dialog_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@drawable/logo"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/logo"
+        />
+
+    <TextView
+        android:id="@+id/enter_realtor_password_title"
+        style="@style/fieldTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        app:layout_constraintTop_toBottomOf="@id/realtor_access_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/default_subtitle_size"
+        android:gravity="center"
+        android:text="@string/add_realtor_password"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/realtor_password_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/enter_realtor_password_title"
+        app:layout_constraintStart_toStartOf="@+id/enter_realtor_password_title"
+        app:layout_constraintEnd_toEndOf="@+id/enter_realtor_password_title"
+        android:hint="@string/add_realtor_password_text" >
+
+        <EditText
+            android:id="@+id/realtor_password_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/add_realtor_password_text"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:inputType="textPassword"
+            android:imeOptions="actionNext"
+            android:autofillHints=""/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin"
+        app:layout_constraintTop_toBottomOf="@id/realtor_password_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/realtor_permission_negative_button"
+            android:layout_width="@dimen/dialog_button_width"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel_button"
+            style="?android:attr/buttonBarButtonStyle">
+        </Button>
+
+        <Button
+            android:id="@+id/realtor_permission_positive_button"
+            android:layout_width="@dimen/dialog_button_width"
+            android:layout_height="wrap_content"
+            android:text="@string/validate_realtor_button"
+            android:layout_marginStart="12dp"
+            style="?android:attr/buttonBarButtonStyle">
+        </Button>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

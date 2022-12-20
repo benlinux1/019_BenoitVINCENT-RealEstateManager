@@ -3,7 +3,7 @@ package com.benlinux.realestatemanager.data.userManager
 import android.content.Context
 import android.net.Uri
 import com.benlinux.realestatemanager.data.userRepository.UserRepository
-import com.benlinux.realestatemanager.ui.models.Realtor
+import com.benlinux.realestatemanager.ui.models.User
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.QuerySnapshot
@@ -29,23 +29,23 @@ class UserManager {
             return UserRepository.deleteUser(context)
         }
 
-        fun createUser(): Task<QuerySnapshot>? {
-            return UserRepository.createUser()
+        fun createUser(user: User): Task<QuerySnapshot>? {
+            return UserRepository.createUser(user)
         }
 
-        fun getAllUsersData(): Task<List<Realtor?>?> {
+        fun getAllUsersData(): Task<List<User?>?> {
             return Objects.requireNonNull(UserRepository.getAllUsersData()).continueWith { task ->
                 task.result.toObjects(
-                    Realtor::class.java
+                    User::class.java
                 )
             }
         }
 
-        fun getUserData(): Task<Realtor?> {
+        fun getUserData(): Task<User?>? {
             // Get the user from Firestore and cast it to a User model Object
-            return Objects.requireNonNull(UserRepository.getUserData())!!.continueWith { task ->
+            return UserRepository.getUserData()?.continueWith { task ->
                 task.result?.toObject(
-                    Realtor::class.java
+                    User::class.java
                 )
             }
         }
@@ -60,6 +60,10 @@ class UserManager {
                     UserRepository.updateUserAvatar(uri.toString())
                 }
             }
+        }
+
+        fun updateIsRealtor(isRealtor: Boolean?) {
+            UserRepository.updateIsRealtor(isRealtor)
         }
 
         fun deleteUserFromFirestore(context: Context?): Task<Void?>? {

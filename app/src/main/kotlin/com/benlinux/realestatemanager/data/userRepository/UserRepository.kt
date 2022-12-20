@@ -3,7 +3,7 @@ package com.benlinux.realestatemanager.data.userRepository
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import com.benlinux.realestatemanager.ui.models.Realtor
+import com.benlinux.realestatemanager.ui.models.User
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +21,9 @@ class UserRepository {
         private const val USERNAME_FIELD = "name"
         private const val EMAIL_FIELD = "email"
         private const val AVATAR_FIELD = "avatar"
+        private const val REALTOR_FIELD = "realtor"
+        private const val FAVORITES_FIELD = "favorites"
+        private const val PROPERTIES_FIELD = "realtorProperties"
 
         fun getCurrentUser(): FirebaseUser? {
             return FirebaseAuth.getInstance().currentUser
@@ -46,21 +49,27 @@ class UserRepository {
         }
 
         // Create User in Firestore
-        fun createUser(): Task<QuerySnapshot>? {
+        fun createUser(userData: User): Task<QuerySnapshot>? {
             val user = getCurrentUser()
             return if (user != null) {
                 val urlPicture = if (user.photoUrl != null) user.photoUrl.toString() else ""
-                val username = user.displayName
                 val uid = user.uid
-                val email = user.email
 
-                val userToCreate = Realtor(uid, email!!, username!!, username, urlPicture)
+                val userToCreate = User(
+                    uid,
+                    userData.email,
+                    userData.firstName,
+                    userData.lastName,
+                    urlPicture,
+                    userData.favorites,
+                    userData.isRealtor,
+                    userData.realtorProperties)
 
                 // Check if user exists in database
                 getAllUsersData().addOnSuccessListener { querySnapshot: QuerySnapshot ->
                     // Get all users
-                    val users: List<Realtor> =
-                        querySnapshot.toObjects(Realtor::class.java)
+                    val users: List<User> =
+                        querySnapshot.toObjects(User::class.java)
                     var userExists = false
                     // Check if user id exists in database
                     for (i in users.indices) {
@@ -115,6 +124,14 @@ class UserRepository {
             val uid = getCurrentUserUID()
             if (uid != null) {
                 getUsersCollection().document(uid).update(AVATAR_FIELD, avatarUrl)
+            }
+        }
+
+        // Update User isNotified in FireStore
+        fun updateIsRealtor(isRealtor: Boolean?) {
+            val uid = getCurrentUserUID()
+            if (uid != null) {
+                getUsersCollection().document(uid).update(REALTOR_FIELD, isRealtor)
             }
         }
 

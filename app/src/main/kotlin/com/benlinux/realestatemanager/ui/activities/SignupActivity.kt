@@ -3,15 +3,16 @@ package com.benlinux.realestatemanager.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SwitchCompat
 import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.data.userManager.UserManager
+import com.benlinux.realestatemanager.ui.models.User
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 
 
 class SignupActivity : AppCompatActivity(){
@@ -20,13 +21,11 @@ class SignupActivity : AppCompatActivity(){
     private lateinit var firstName:EditText
     private lateinit var lastName:EditText
     private lateinit var password:EditText
-    private lateinit var repeatPassword:EditText
+    private lateinit var switchToRealtor: SwitchCompat
     private lateinit var signUpButton: Button
     private lateinit var signInLink: TextView
 
     var mFirebaseAuth: FirebaseAuth? = null
-    private lateinit var firebaseDatabase: FirebaseDatabase
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,27 +36,26 @@ class SignupActivity : AppCompatActivity(){
         setFirebaseDatabase()
         setListenerOnSignUpButton()
         setListenerOnSignInLink()
-
+        setListenerOnRealtorSwitch()
     }
+
 
     private fun setViews() {
         emailId = findViewById(R.id.signup_email)
         firstName = findViewById(R.id.signup_firstName)
         lastName = findViewById(R.id.signup_lastName)
         password = findViewById(R.id.signup_password)
-        repeatPassword = findViewById(R.id.signup_repeat_password)
         signUpButton = findViewById(R.id.signup_button)
         signInLink = findViewById(R.id.signup_signIn_link)
+        switchToRealtor = findViewById(R.id.signup_realtor_switch)
     }
+
 
     private fun setFirebaseDatabase() {
         mFirebaseAuth = FirebaseAuth.getInstance()
     }
 
-    private fun checkIfPasswordsAreEquals(): Boolean {
-        return (password.text.toString() === repeatPassword.text.toString())
-    }
-
+    // Sign Up actions
     private fun setListenerOnSignUpButton() {
         signUpButton.setOnClickListener {
             // Define user data
@@ -65,7 +63,8 @@ class SignupActivity : AppCompatActivity(){
             val userFirstName: String = firstName.text.toString()
             val userLastName: String = lastName.text.toString()
             val userPassword: String = password.text.toString()
-            var passwordAreEquals = checkIfPasswordsAreEquals()
+
+            val userIsRealtor = switchToRealtor.isChecked
 
             // Check errors
             if (email.isEmpty()) {
@@ -80,8 +79,7 @@ class SignupActivity : AppCompatActivity(){
             } else if (userPassword.isEmpty()) {
                 password.error = "Please provide password"
                 password.requestFocus()
-            } else if (!passwordAreEquals) {
-                repeatPassword.error = "Passwords are not the equals"
+
             // if no errors
             } else {
                 if (!(email.isEmpty() && userPassword.isEmpty())) {
@@ -94,8 +92,20 @@ class SignupActivity : AppCompatActivity(){
                                 Log.d("Error SignUp", task.exception.toString())
                                 // if task is successful
                             } else {
-                                // register user in database
-                                UserManager.createUser()?.addOnSuccessListener {
+                                // Create user object
+                                val userToCreate = User(
+                                    task.result.user!!.uid, // id
+                                    email,
+                                    userFirstName,
+                                    userLastName,
+                                    task.result.user!!.photoUrl.toString(), // avatar
+                                    mutableListOf(), // empty favorites list
+                                    userIsRealtor, // realtor status
+                                    mutableListOf() // empty realtor properties list
+                                )
+
+                                // Register user in database
+                                UserManager.createUser(userToCreate)?.addOnSuccessListener {
                                     // If user created in database, go to main activity
                                     Toast.makeText(this, "Authentication successful", Toast.LENGTH_LONG).show()
                                     val mainActivityIntent = Intent(this, MainActivity::class.java)
@@ -111,6 +121,7 @@ class SignupActivity : AppCompatActivity(){
         }
     }
 
+    // When user click already gets an account, go to Login Activity
     private fun setListenerOnSignInLink() {
         signInLink.setOnClickListener {
             val loginIntent = Intent(this, LoginActivity::class.java)
@@ -118,4 +129,63 @@ class SignupActivity : AppCompatActivity(){
             finish()
         }
     }
+
+    // Switch to realtor account creation
+    private fun setListenerOnRealtorSwitch() {
+        switchToRealtor.setOnCheckedChangeListener { _: CompoundButton?, checked: Boolean ->
+            if (checked) {
+                showRealtorDialog()
+            }
+        }
+    }
+
+    // When user tries to create realtor account, show permission dialog
+    private fun showRealtorDialog() {
+        // Builder & custom view
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
+        val customView = layoutInflater.inflate(R.layout.custom_dialog_realtor_permission,null)
+        builder.setView(customView)
+        builder.setCancelable(true)
+        val dialogWindow = builder.create()
+
+        // Dialog Logo
+        val imageView: ImageView = customView.findViewById(R.id.realtor_access_logo)
+        // Custom view for password input
+        val password: EditText = customView.findViewById(R.id.realtor_password_input)
+        password.requestFocus()
+        // Negative button
+        val negativeButton: Button = customView.findViewById(R.id.realtor_permission_negative_button)
+        // Positive button
+        val positiveButton: Button = customView.findViewById(R.id.realtor_permission_positive_button)
+
+        // Logo
+        Glide.with(this)
+            .load(R.drawable.logo)
+            .apply(RequestOptions.centerInsideTransform())
+            .into(imageView)
+
+        // Positive button & actions
+        positiveButton.setOnClickListener {
+            if (password.text.toString() == ("realtor123!")) {
+                switchToRealtor.isChecked = true
+                dialogWindow.dismiss()
+            } else {
+                Log.d("INPUT PASSWORD", password.text.toString())
+                switchToRealtor.isChecked = false
+                password.error = resources.getString(R.string.wrong_password)
+            }
+        }
+
+        // Negative button & actions
+        negativeButton.setOnClickListener {
+            switchToRealtor.isChecked = false
+            dialogWindow.cancel() }
+
+        // Display dialog
+        dialogWindow.show()
+    }
+
+
+
+
 }

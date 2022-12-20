@@ -24,7 +24,7 @@ data class Property (
     var creationDate: String = "29/11/2022",
     var soldDate: String = "",
     @TypeConverters(Converters::class)
-    var realtor: Realtor = Realtor("0", "", "", "", ""),
+    var user: User = User("0", "", "", "", ""),
     var numberOfRooms: Int = 0,
     var numberOfBathrooms: Int = 0,
     var numberOfBedrooms: Int = 0

@@ -3,7 +3,6 @@ package com.benlinux.realestatemanager.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.benlinux.realestatemanager.ui.models.Property
-import com.benlinux.realestatemanager.ui.models.Realtor
 
 
 /**

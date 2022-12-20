@@ -20,10 +20,13 @@
 
     // NAVIGATION DRAWER
     <string name="drawer_title_login">CONNEXION</string>
-    <string name="drawer_title_settings">PRÉFÉRENCES</string>
+    <string name="drawer_title_my_properties">MES BIENS</string>
+    <string name="drawer_title_my_favorites">MES FAVORIS</string>
+    <string name="drawer_title_settings">PARAMÈTRES</string>
     <string name="drawer_title_logout">DÉCONNEXION</string>
     <string name="info_no_email_found">Adresse e-mail non trouvée</string>
     <string name="info_no_username_found">Nom d\'utilisateur non trouvé</string>
+    <string name="please_login">Veuillez vous connecter</string>
 
     // AUTHENTICATION
     <string name="error_not_connected">Vous devez être authentifié(e)</string>
@@ -71,12 +74,12 @@
     <string name="add_type_house">Maison</string>
     <string name="add_type_duplex">Duplex</string>
     <string name="add_type_penthouse">Villa</string>
-    <string name="add_property_name">Titre</string>
+    <string name="add_property_name">Titre*</string>
     <string name="choose_property_type">Sélectionnez un type de bien</string>
-    <string name="add_property_area">Secteur</string>
+    <string name="add_property_area">Secteur*</string>
     <string name="add_status_1">Disponible</string>
     <string name="add_status_2">Vendu</string>
-    <string name="add_price_text">Prix</string>
+    <string name="add_price_text">Prix*</string>
     <string name="add_surface_text">Superficie</string>
     <string name="add_property_description_text">Anchored by a vast marble gallery with sweeping staircase, th entertaining floor includes a baronial living room facing Park Avenue, handsome library with oringinal paneling, and tremendous dining room; all of which enjoy fireplaces. The state-of-the-art Saint Charles designed kitchen includes a sunny breakfast room and staff quarters. Upstairs, the expansive master suite overlooks Park Avenue and includes two marble baths, two dressing rooms, and two offices. Additionally, the are three large bedrooms with en-suite baths and a media room.</string>
     <string name="property_picture_content_description">Photo du bien</string>
@@ -106,11 +109,27 @@
     <string name="validate_button">AJOUTER</string>
     <string name="add_picture_dialog_title">APERCU DE VOTRE IMAGE</string>
     <string name="add_property_address_title">Adresse du bien</string>
-    <string name="add_property_street_number">Numéro de rue</string>
-    <string name="add_property_street_name">Nom de rue / voie</string>
+    <string name="add_property_street_number">Numéro de rue*</string>
+    <string name="add_property_street_name">Nom de rue / voie*</string>
     <string name="add_address_complement">Complément d\'adresse</string>
-    <string name="add_postal_code">Code postal</string>
-    <string name="add_property_city">Ville</string>
+    <string name="add_postal_code">Code postal*</string>
+    <string name="add_property_city">Ville*</string>
     <string name="add_property_country">Pays</string>
+
+    // INFO WINDOW MAP
+    <string name="see_details_button">Fiche détaillée</string>
+
+    // MY PROPERTIES ACTIVITY
+    <string name="user_favorites_toolbar_title">Mes favoris</string>
+    <string name="realtor_properties_toolbar_title">Mes biens imobiliers</string>
+
+    // SIGNUP ACTIVITY
+    <string name="signup_realtor_question">Etes-vous un agent immobilier ?</string>
+    <string name="get_realtor_access">Accès restreint</string>
+    <string name="add_realtor_password">Saisissez le code de votre agence</string>
+    <string name="add_realtor_password_text">Mot de passe agence*</string>
+    <string name="validate_realtor_button">CONFIRMER</string>
+    <string name="wrong_password">Le code agence est incorrect</string>
+
 
 </resources>

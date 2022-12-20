@@ -3,7 +3,7 @@ package com.benlinux.realestatemanager.utils.converters
 import androidx.room.TypeConverter
 import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.PropertyAddress
-import com.benlinux.realestatemanager.ui.models.Realtor
+import com.benlinux.realestatemanager.ui.models.User
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -25,14 +25,14 @@ class Converters {
 
     // For Realtors
     @TypeConverter
-    fun realtorToString(realtor: Realtor): String {
-        return Gson().toJson(realtor)
+    fun realtorToString(user: User): String {
+        return Gson().toJson(user)
     }
 
     @TypeConverter
-    fun stringToRealtor(data: String): Realtor {
-        val realtorType = object : TypeToken<Realtor>() {}.type
-        return Gson().fromJson(data, realtorType)
+    fun stringToRealtor(data: String): User {
+        val userType = object : TypeToken<User>() {}.type
+        return Gson().fromJson(data, userType)
     }
 
     // For Addresses
@@ -45,6 +45,18 @@ class Converters {
     fun stringToAddress(data: String): PropertyAddress {
         val addressType = object : TypeToken<PropertyAddress>() {}.type
         return Gson().fromJson(data, addressType)
+    }
+
+    // For Pictures
+    @TypeConverter
+    fun fromStringList(list : MutableList<String>?): String {
+        return Gson().toJson(list)
+    }
+
+    @TypeConverter
+    fun toStringList(data : String) : MutableList<String>? {
+        val stringType = object : TypeToken<List<String>>() {}.type
+        return Gson().fromJson(data, stringType)
     }
 
 }

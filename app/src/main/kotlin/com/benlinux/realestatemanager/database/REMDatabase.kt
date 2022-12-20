@@ -10,12 +10,12 @@ import com.benlinux.realestatemanager.dao.PropertyDao
 import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.ui.models.PropertyAddress
-import com.benlinux.realestatemanager.ui.models.Realtor
+import com.benlinux.realestatemanager.ui.models.User
 import com.benlinux.realestatemanager.utils.converters.Converters
 import com.benlinux.realestatemanager.utils.subscribeOnBackground
 
 
-@Database(entities = [Property::class, Realtor::class], version = 1, exportSchema = false)
+@Database(entities = [Property::class, User::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class REMDatabase : RoomDatabase() {
 
@@ -57,7 +57,7 @@ abstract class REMDatabase : RoomDatabase() {
                         "Lounge")),
                     PropertyAddress("12", "rue de la Paix", "", "75000", "Paris","France"),
                     true, "28/11/2022", "",
-                    Realtor("1", "ben@test.com", "Ben", "Linux",""), 0,0,0  )
+                    User("1", "ben@test.com", "Ben", "Linux",""), 0,0,0  )
                 )
                 propertyDao.insertProperty(Property(2, "Duplex", "Fabulous duplex", "London", 2200000,
                     300, "Fabulous Duplex in London with tremendous options...", mutableListOf(Picture(
@@ -65,7 +65,7 @@ abstract class REMDatabase : RoomDatabase() {
                         "Exterior")),
                     PropertyAddress("10", "Downing Street", "", "SW1", "London","United Kingdom"),
                     true, "28/11/2022", "",
-                    Realtor("1", "ben@test.com", "Ben", "Linux",""),0,0,0)
+                    User("1", "ben@test.com", "Ben", "Linux",""),0,0,0)
                 )
                 propertyDao.insertProperty(Property(3, "Penthouse", "Exceptional penthouse", "Manhattan", 5200000,
                     300, "Exceptional penthouse in Manhattan with tremendous options...", mutableListOf(Picture(
@@ -73,7 +73,7 @@ abstract class REMDatabase : RoomDatabase() {
                         "Lounge")),
                     PropertyAddress("66", "Perry Street", "", "NY 10014", "New York", "United States"),
                     true, "28/11/2022", "",
-                    Realtor("2", "franck@test.com", "Franck", "Black",""),0,0,0 )
+                    User("2", "franck@test.com", "Franck", "Black",""),0,0,0 )
                 )
                 propertyDao.insertProperty(Property(4, "Penthouse", "Unbelievable penthouse", "GooglePlex", 4300000,
                     300, "Unbelievable penthouse near GooglePlex with tremendous options...",
@@ -82,7 +82,7 @@ abstract class REMDatabase : RoomDatabase() {
                         "Exterior")),
                     PropertyAddress("1024", "Alta avenue", "", "94043", "Mountain View","United States"),
                     true, "13/12/2022", "",
-                    Realtor("1", "ben@test.com", "Ben", "Linux",""), 0,0,0  )
+                    User("1", "ben@test.com", "Ben", "Linux",""), 0,0,0  )
                 )
             }
         }

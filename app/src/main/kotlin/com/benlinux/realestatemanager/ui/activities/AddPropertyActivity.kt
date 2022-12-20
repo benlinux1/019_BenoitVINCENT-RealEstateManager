@@ -26,7 +26,7 @@ import com.benlinux.realestatemanager.ui.adapters.PictureAdapter
 import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.ui.models.PropertyAddress
-import com.benlinux.realestatemanager.ui.models.Realtor
+import com.benlinux.realestatemanager.ui.models.User
 import com.benlinux.realestatemanager.utils.*
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.bumptech.glide.Glide
@@ -217,7 +217,7 @@ open class AddPropertyActivity: AppCompatActivity() {
         property.creationDate = getTodayDate()
         property.pictures = picturesList
         // TODO : get current realtor
-        property.realtor = Realtor("0", "", "", "", "")
+        property.user = User("0", "", "", "", "")
         property.pictures = picturesList
         property.address = getPropertyAddress()
     }
