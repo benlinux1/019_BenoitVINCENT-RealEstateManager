@@ -135,6 +135,26 @@ class UserRepository {
             }
         }
 
+        // Add restaurant to favorites in FireStore
+        fun addPropertyToFavorites(propertyId: String?) {
+            val uid = getCurrentUserUID()
+            if (uid != null) {
+                getUsersCollection().document(uid)
+                    .update(FAVORITES_FIELD, FieldValue.arrayUnion(propertyId))
+            }
+        }
+
+        // Remove restaurant from favorites in FireStore
+        fun removePropertyFromFavorites(propertyId: String?) {
+            val uid = getCurrentUserUID()
+            if (uid != null) {
+                getUsersCollection().document(uid)
+                    .update(FAVORITES_FIELD, FieldValue.arrayRemove(propertyId))
+            }
+        }
+
+
+
 
         // Upload image from device to firebase storage
         fun uploadImage(imageUri: Uri?, pictures: String): UploadTask {

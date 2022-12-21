@@ -20,46 +20,11 @@ import java.util.*
  * @return LatLng the latitude & the longitude of the property in LatLng type
  * @author BenLinux1
  */
-fun getLatLngFromAddress(address: String, context: Context): LatLng? {
 
-    var location: LatLng? = null
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        val coder = Geocoder(context)
-        coder.getFromLocationName(
-            address,
-            1,
-            object : Geocoder.GeocodeListener {
-                override fun onGeocode(addresses: MutableList<Address>) {
-                    addresses.forEach {
-                        //do your work android 13
-                        Log.d("Latitude", "onGeocode: ${it.latitude}")
-                        Log.d("Longitude", "onGeocode: ${it.longitude}")
-                        location = LatLng(it.latitude, it.longitude)
-                    }
 
-                }
+fun getLatLngFromPropertyFormattedAddress(address: PropertyAddress, context: Context): LatLng {
 
-                override fun onError(errorMessage: String?) {
-                    super.onError(errorMessage)
-                    Log.d("GEO ERROR TIRAMISU", "onError: $errorMessage")
-                    Toast.makeText(
-                        context,
-                        "City not found",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
-
-    } else {
-        // less than Android 13, call function below
-        location = getLocationFromAddress(address, context)
-    }
-    return location
-}
-
-fun getLatLngFromPropertyFormattedAddress(address: PropertyAddress, context: Context): LatLng? {
-
-    var location: LatLng? = null
+    // Convert property address to string
     val addressString: String = buildString {
         append(address.streetNumber)
         append(" ")
@@ -69,46 +34,17 @@ fun getLatLngFromPropertyFormattedAddress(address: PropertyAddress, context: Con
         append(" ")
         append(address.city)
     }
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        val coder = Geocoder(context)
-        coder.getFromLocationName(
-            addressString,
-            1,
-            object : Geocoder.GeocodeListener {
-                override fun onGeocode(addresses: MutableList<Address>) {
-                    addresses.forEach {
-                        //do your work android 13
-                        Log.d("Latitude", "onGeocode: ${it.latitude}")
-                        Log.d("Longitude", "onGeocode: ${it.longitude}")
-                        location = LatLng(it.latitude, it.longitude)
-                    }
 
-                }
-
-                override fun onError(errorMessage: String?) {
-                    super.onError(errorMessage)
-                    Log.d("GEO ERROR TIRAMISU", "onError: $errorMessage")
-                    Toast.makeText(
-                        context,
-                        "City not found",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
-
-    } else {
-        // less than Android 13, call function below
-        location = getLocationFromAddress(addressString, context)
-    }
-    return location
+    // call geocoder to convert string & return lat lng
+    return getLocationFromAddress(addressString, context)
 
 }
 
 // Retrieve Latitude & Longitude from Address (Android < 13)
 @Suppress("DEPRECATION")
-private fun getLocationFromAddress(strAddress: String, context: Context): LatLng? {
+private fun getLocationFromAddress(strAddress: String, context: Context): LatLng {
     val coder = Geocoder(context)
-    var latLng: LatLng? = null
+    var latLng = LatLng(0.0,0.0)
     try {
         val address: MutableList<Address>? = coder.getFromLocationName(strAddress, 1)
 

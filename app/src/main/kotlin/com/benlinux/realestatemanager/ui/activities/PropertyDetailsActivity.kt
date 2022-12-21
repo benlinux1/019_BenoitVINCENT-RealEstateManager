@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
+import com.benlinux.realestatemanager.data.userManager.UserManager
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.adapters.PictureAdapter
 import com.benlinux.realestatemanager.ui.models.Picture
@@ -20,10 +21,14 @@ import com.benlinux.realestatemanager.utils.getLatLngFromPropertyFormattedAddres
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.google.android.gms.maps.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class PropertyDetailsActivity: AppCompatActivity() {
@@ -49,6 +54,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private lateinit var picturesRecyclerView: RecyclerView
     private lateinit var picturesList: MutableList<Picture?>
     private lateinit var pictureAdapter: PictureAdapter
+    private lateinit var updateButton: FloatingActionButton
 
     // The viewModel that contains data
     private lateinit var propertyViewModel: PropertyViewModel
@@ -60,6 +66,10 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private lateinit var mGoogleMap: GoogleMap
     private lateinit var mapView: MapView
 
+    // For data
+    private var userIsRealtor = false
+    private var propertyIsInFavorites = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +80,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
         setMap()
         setViewModel()
         retrievePropertyId()
-        retrieveAndSetPropertyData()
+        checkIfUserIsRealtor()
 
     }
 
@@ -81,10 +91,13 @@ class PropertyDetailsActivity: AppCompatActivity() {
             // Initialise the MapView
             onCreate(null)
             // Set the map ready callback to receive the GoogleMap object
-            getMapAsync{
+            getMapAsync{ map ->
                 MapsInitializer.initialize(applicationContext)
-                mGoogleMap = it
-                it.uiSettings.isMapToolbarEnabled = false
+                mGoogleMap = map
+                map.uiSettings.isMapToolbarEnabled = false
+
+                // When map is ready, set all property's data
+                retrieveAndSetPropertyData()
             }
         }
     }
@@ -134,6 +147,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
         complement = findViewById(R.id.property_details_location_complement)
         postalCodeAndCity = findViewById(R.id.property_details_location_postal_code_and_city)
         country = findViewById(R.id.property_details_location_country)
+        updateButton = findViewById(R.id.property_details_update_button)
     }
 
     // Configuring ViewModel from ViewModelFactory
@@ -152,7 +166,10 @@ class PropertyDetailsActivity: AppCompatActivity() {
             setPropertyData()
             retrievePropertyPictures()
             configurePhotoGallery()
-            setMarkersForProperty(mGoogleMap)
+
+            // Get property lat-lng & set marker on map
+            val latLng: LatLng = getLatLngFromPropertyFormattedAddress(property!!.address, this)
+            setMarkersForProperty(mGoogleMap, latLng)
         }
     }
 
@@ -255,34 +272,83 @@ class PropertyDetailsActivity: AppCompatActivity() {
         }
     }
 
-    // Set custom marker for displayed property on map
-    private fun setMarkersForProperty(googleMap: GoogleMap) {
+    // Set custom marker for displayed property on map, according to its latlng
+    private fun setMarkersForProperty(googleMap: GoogleMap, latLng: LatLng) {
 
         mGoogleMap = googleMap
 
         // Define custom marker icon
         val propertyMarker = R.drawable.marker_property
 
-        // Customize marker position & icon
-        if (property != null) {
-            val latLng: LatLng? = getLatLngFromPropertyFormattedAddress(property!!.address, this)
+        // Then, define marker options (property's position & icon)
+        val markerOptions = MarkerOptions()
+            .position(latLng)
+            .icon(BitmapDescriptorFactory.fromResource(propertyMarker))
 
-            // Then, define marker options (property's position & icon)
-            val markerOptions = MarkerOptions()
-                .position(latLng!!)
-                .icon(BitmapDescriptorFactory.fromResource(propertyMarker))
+        // Set marker
+        googleMap.addMarker(markerOptions)
 
-            // Set marker
-            googleMap.addMarker(markerOptions)
-
-            // Center & zoom camera on property location
-            googleMap.moveCamera(
-                CameraUpdateFactory.newLatLngZoom(
-                    latLng, 15f
-                )
+        // Center & zoom camera on property location
+        googleMap.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                latLng, 15f
             )
+        )
+    }
+
+    private fun checkIfUserIsRealtor() {
+        UserManager.getUserData()?.addOnSuccessListener { user ->
+            if (user != null) {
+                userIsRealtor = user.isRealtor
+                setFloatingButton()
+                setListenerOnFloatingButton()
+            }
         }
     }
+
+    private fun setFloatingButton() {
+        if (!userIsRealtor) {
+            updateButton.setImageResource(R.drawable.ic_details_like_empty)
+        } else {
+            updateButton.setImageResource(R.drawable.ic_details_edit_24)
+        }
+        UserManager.getUserData()?.addOnSuccessListener { user ->
+            if (user != null) {
+                for (favorite in user.favorites) {
+                    if (favorite == propertyId) {
+                        updateButton.setImageResource(R.drawable.ic_details_like_full)
+                        propertyIsInFavorites = true
+                    }
+                }
+            }
+        }
+    }
+
+    // Set floating button actions
+    private fun setListenerOnFloatingButton() {
+        updateButton.setOnClickListener {
+            // If realtor, go to update property
+            if (userIsRealtor) {
+                val updatePropertyIntent = Intent(this, UpdatePropertyActivity::class.java)
+                startActivity(updatePropertyIntent)
+                finish()
+            // if simple user, add property to favorites
+            } else {
+                if (!propertyIsInFavorites) {
+                    UserManager.addPropertyToFavorites(propertyId)
+                    propertyIsInFavorites = true
+                    updateButton.setImageResource(R.drawable.ic_details_like_full)
+                } else {
+                    UserManager.removePropertyFromFavorites(propertyId)
+                    propertyIsInFavorites = false
+                    updateButton.setImageResource(R.drawable.ic_details_like_empty)
+                }
+            }
+        }
+    }
+
+
+
 
     // Lifecycles
     override fun onResume() {

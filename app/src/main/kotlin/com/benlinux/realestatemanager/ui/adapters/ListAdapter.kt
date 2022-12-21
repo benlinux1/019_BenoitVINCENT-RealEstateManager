@@ -84,6 +84,7 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
          */
         val id: TextView
 
+
         /**
          * The TextView displaying the title of the property
          */
@@ -98,7 +99,6 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
          * The TextView displaying the price of the property
          */
         private val price: TextView
-
 
 
         /**
@@ -148,10 +148,7 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
                 append("$ ")
                 append(formattedPrice)
             }
+
         }
     }
-
-
-
-
 }
