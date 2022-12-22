@@ -1,5 +1,7 @@
 package com.benlinux.realestatemanager.ui.activities
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -16,9 +18,7 @@ import com.benlinux.realestatemanager.data.userManager.UserManager
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.adapters.ListAdapter
 import com.benlinux.realestatemanager.ui.models.Property
-import com.benlinux.realestatemanager.ui.models.User
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
-import com.google.android.gms.tasks.Task
 import com.google.android.material.divider.MaterialDividerItemDecoration
 
 
@@ -39,24 +39,23 @@ class MyPropertiesActivity: AppCompatActivity() {
         setContentView(R.layout.activity_favorites)
 
         redirectUserIfNotLogged()
-        checkIfUserIsRealtor()?.addOnCompleteListener {
-            setToolbar()
-            setViews()
-            configureViewModel()
-            if (userIsRealtor) {
-                retrieveRealtorPropertiesData()
-            } else {
-                retrieveFavoritesData()
-            }
-            configureRecyclerView()
-            showMessageIfNoPropertiesInList()
+        checkIfUserIsRealtor()
+        setToolbar()
+        setViews()
+        configureRecyclerView()
+        configureViewModel()
+        if (userIsRealtor) {
+            retrieveRealtorPropertiesData()
+        } else {
+            retrieveFavoritesData()
         }
+
     }
 
-    private fun checkIfUserIsRealtor(): Task<User?>? {
-        return UserManager.getUserData()?.addOnSuccessListener { user ->
-           userIsRealtor = user?.isRealtor!!
-        }
+    private fun checkIfUserIsRealtor() {
+        val sharedPreferences = this.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
+        userIsRealtor = sharedPreferences.getBoolean("realtor", true)
+        Log.d("REALTOR STATUS", userIsRealtor.toString())
     }
 
 
@@ -107,6 +106,7 @@ class MyPropertiesActivity: AppCompatActivity() {
         propertyRecyclerView.layoutManager = LinearLayoutManager(this)
         val divider = MaterialDividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         propertyRecyclerView.addItemDecoration(divider)
+        propertyRecyclerView.adapter = propertyAdapter
     }
 
     // Configuring ViewModel from ViewModelFactory
@@ -115,8 +115,10 @@ class MyPropertiesActivity: AppCompatActivity() {
         propertyViewModel = ViewModelProvider(this,
             ViewModelFactory.getInstance(this)!!
         )[PropertyViewModel::class.java]
+
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun retrieveFavoritesData() {
         UserManager.getUserData()?.addOnSuccessListener { user ->
             val favorites = user?.favorites
@@ -124,17 +126,23 @@ class MyPropertiesActivity: AppCompatActivity() {
             if (favorites != null) {
                 if (favorites.isEmpty()) {
                     Log.d("FAVORITES", "List of favorites is empty")
+                    showMessageIfNoPropertiesInList()
                 } else {
                     for (favorite in favorites) {
-                        val property: Property? =
-                            propertyViewModel.getPropertyById(favorite.toInt()).value
-                        propertiesList.add(property)
+                        propertyViewModel.getPropertyById(favorite.toInt()).observe(this) {
+                            val property = it
+                            Log.d("FAVORITE", property.toString())
+                            propertiesList.add(property)
+                            propertyAdapter.notifyDataSetChanged()
+
+                        }
                     }
                 }
             }
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun retrieveRealtorPropertiesData() {
         UserManager.getUserData()?.addOnSuccessListener { user ->
             val realtorProperties = user?.realtorProperties
@@ -142,10 +150,15 @@ class MyPropertiesActivity: AppCompatActivity() {
             if (realtorProperties != null) {
                 if (realtorProperties.isEmpty()) {
                     Log.d("REALTOR PROPERTIES", "List of realtor properties is empty")
+                    showMessageIfNoPropertiesInList()
                 } else {
                     for (realtorProperty in realtorProperties) {
-                        val property: Property? = propertyViewModel.getPropertyById(realtorProperty.toInt()).value
-                        propertiesList.add(property)
+                        propertyViewModel.getPropertyById(realtorProperty.toInt()).observe(this) {
+                            val property = it
+                            Log.d("REALTOR PROPERTY", it.toString())
+                            propertiesList.add(property)
+                            propertyAdapter.notifyDataSetChanged()
+                        }
                     }
                 }
             }

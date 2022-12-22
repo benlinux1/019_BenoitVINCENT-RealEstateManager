@@ -135,7 +135,7 @@ class UserRepository {
             }
         }
 
-        // Add restaurant to favorites in FireStore
+        // Add property to favorites in FireStore
         fun addPropertyToFavorites(propertyId: String?) {
             val uid = getCurrentUserUID()
             if (uid != null) {
@@ -144,7 +144,7 @@ class UserRepository {
             }
         }
 
-        // Remove restaurant from favorites in FireStore
+        // Remove property from favorites in FireStore
         fun removePropertyFromFavorites(propertyId: String?) {
             val uid = getCurrentUserUID()
             if (uid != null) {
@@ -153,7 +153,14 @@ class UserRepository {
             }
         }
 
-
+        // Add property to realtor's creations in FireStore
+        fun addPropertyToRealtorProperties(propertyId: String?) {
+            val uid = getCurrentUserUID()
+            if (uid != null) {
+                getUsersCollection().document(uid)
+                    .update(PROPERTIES_FIELD, FieldValue.arrayUnion(propertyId))
+            }
+        }
 
 
         // Upload image from device to firebase storage

@@ -83,21 +83,6 @@ class ListFragment: Fragment() {
         val divider = MaterialDividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
         mRecyclerView.addItemDecoration(divider)
 
-        /** ADD / DELETE PROPERTY EXAMPLE IN THE LIST (Functional)
-        val propertyExample = Property(
-            id = 4, name ="Ma super villa", type ="flat", price = 1200000, area ="Quartier de dingue",
-            realtor = Realtor(1, "***", "Ben", "Linux", ""), isAvailable = true )
-
-        // Add property to viewModel list
-        propertyViewModel.createProperty(propertyExample)
-
-        // DELETE PROPERTY EXAMPLE FROM ROOM DATABASE
-        propertyViewModel.deletePropertyById(4)
-        */
-
-
-
-
     }
 
     // Set textViews according to properties list size

@@ -46,6 +46,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="@dimen/default_margin"
             app:srcCompat="@drawable/ic_add_property_24"
+            app:backgroundTint="@color/colorAccent"
+            app:tint="@color/colorWhite"
             android:contentDescription="@string/add_property"
             android:visibility="gone"/>
 

@@ -52,8 +52,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/property_details_main_picture"
                 android:contentDescription="@string/property_details_update_button"
-                app:backgroundTint="@color/colorWhite"
-                android:tint="@color/colorPrimary" />
+                app:backgroundTint="@android:color/white"
+                app:tint="@color/colorAccent"
+                app:borderWidth="0dp"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/property_details_information_section"

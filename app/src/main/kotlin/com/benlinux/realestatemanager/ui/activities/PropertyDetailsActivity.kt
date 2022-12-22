@@ -1,5 +1,6 @@
 package com.benlinux.realestatemanager.ui.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -81,6 +82,8 @@ class PropertyDetailsActivity: AppCompatActivity() {
         setViewModel()
         retrievePropertyId()
         checkIfUserIsRealtor()
+        setFloatingButton()
+        setListenerOnFloatingButton()
 
     }
 
@@ -194,83 +197,110 @@ class PropertyDetailsActivity: AppCompatActivity() {
     // Set property data in all text views
     private fun setPropertyData() {
         if (this.property != null) {
-            title.text = property!!.name
-            area.text = property!!.area
 
-            // Formatted surface
-            surface.text = buildString {
-                append(property!!.surface)
-                append(" m²")
-            }
+            title.text = property!!.name // title
+            area.text = property!!.area // area
 
-            // Formatted price
-            val formattedPrice = String.format("%,d", property!!.price)
-            price.text = buildString {
-                append("$ ")
-                append(formattedPrice)
-            }
+            setSurface(property!!)
+            setPrice(property!!)
+            setRooms(property!!)
+            setBedrooms(property!!)
+            setBathrooms(property!!)
 
-            // Display or Hide number of rooms / bathrooms / bedrooms according to data
-            if (property!!.numberOfRooms > 0) {
-                numberOfRooms.text = property!!.numberOfRooms.toString()
-                titleRooms.visibility = View.VISIBLE
-            } else {
-                numberOfRooms.visibility = View.GONE
-                titleRooms.visibility = View.GONE
-            }
+            description.text = property!!.description // Description
 
-            // Bedrooms
-            if (property!!.numberOfBedrooms > 0) {
-                numberOfBedrooms.text = property!!.numberOfBedrooms.toString()
-                titleBedrooms.visibility = View.VISIBLE
-            } else {
-                numberOfBedrooms.visibility = View.GONE
-                titleBedrooms.visibility = View.GONE
-            }
+            setMainPicture(property!!)
+            setFullAddress(property!!)
 
-            // Bathrooms
-            if (property!!.numberOfBathrooms > 0) {
-                numberOfBathrooms.text = property!!.numberOfBathrooms.toString()
-                titleBathrooms.visibility = View.VISIBLE
-            } else {
-                numberOfBathrooms.visibility = View.GONE
-                titleBathrooms.visibility = View.GONE
-            }
-
-            // Description
-            description.text = property!!.description
-
-            // Main picture
-            if (property!!.pictures.isNotEmpty())
-                Glide.with(this)
-                    .load(property!!.pictures[0]?.url)
-                    .apply(RequestOptions.centerCropTransform())
-                    .into(mainPicture)
-
-            // Address
-            // Street number & street name
-            streetNumberAndStreetName.text = buildString {
-                append(property!!.address.streetNumber)
-                append(" ")
-                append(property!!.address.streetName)
-            }
-            // Complement
-            if (property!!.address.complement.isNotEmpty()) {
-                    complement.text = property!!.address.complement
-                    complement.visibility = View.VISIBLE
-            } else { complement.visibility = View.GONE }
-
-            // Postal code & city
-            postalCodeAndCity.text = buildString {
-                append(property!!.address.postalCode)
-                append(" ")
-                append(property!!.address.city)
-            }
-
-            // Country
-            country.text = property!!.address.country.uppercase()
+            Log.d("ACTUAL PROPERTY", property.toString())
         }
     }
+
+
+    private fun setSurface(property: Property) {
+        // Formatted surface
+        surface.text = buildString {
+            append(property.surface)
+            append(" m²")
+        }
+    }
+
+    private fun setPrice(property: Property) {
+        // Formatted price
+        val formattedPrice = String.format("%,d", property.price)
+        price.text = buildString {
+            append("$ ")
+            append(formattedPrice)
+        }
+    }
+
+    // Display or Hide number of rooms / bathrooms / bedrooms according to data
+    private fun setRooms(property: Property) {
+        if (property.numberOfRooms > 0) {
+            numberOfRooms.text = property.numberOfRooms.toString()
+            titleRooms.visibility = View.VISIBLE
+        } else {
+            numberOfRooms.visibility = View.GONE
+            titleRooms.visibility = View.GONE
+        }
+    }
+
+    // Display or Hide number of bedrooms according to data
+    private fun setBedrooms(property: Property) {
+        if (property.numberOfBedrooms > 0) {
+            numberOfBedrooms.text = property.numberOfBedrooms.toString()
+            titleBedrooms.visibility = View.VISIBLE
+        } else {
+            numberOfBedrooms.visibility = View.GONE
+            titleBedrooms.visibility = View.GONE
+        }
+    }
+
+    // Display or Hide number of bathrooms according to data
+    private fun setBathrooms(property: Property) {
+        if (property.numberOfBathrooms > 0) {
+            numberOfBathrooms.text = property.numberOfBathrooms.toString()
+            titleBathrooms.visibility = View.VISIBLE
+        } else {
+            numberOfBathrooms.visibility = View.GONE
+            titleBathrooms.visibility = View.GONE
+        }
+    }
+
+    // Main picture
+    private fun setMainPicture(property: Property) {
+        if (property.pictures.isNotEmpty())
+            Glide.with(this)
+                .load(property.pictures[0]?.url)
+                .apply(RequestOptions.centerCropTransform())
+                .into(mainPicture)
+    }
+
+    // Display Property full address data
+    private fun setFullAddress(property: Property) {
+        // Street number & street name
+        streetNumberAndStreetName.text = buildString {
+            append(property.address.streetNumber)
+            append(" ")
+            append(property.address.streetName)
+        }
+        // Complement
+        if (property.address.complement.isNotEmpty()) {
+            complement.text = property.address.complement
+            complement.visibility = View.VISIBLE
+        } else { complement.visibility = View.GONE }
+
+        // Postal code & city
+        postalCodeAndCity.text = buildString {
+            append(property.address.postalCode)
+            append(" ")
+            append(property.address.city)
+        }
+
+        // Country
+        country.text = property.address.country.uppercase()
+    }
+
 
     // Set custom marker for displayed property on map, according to its latlng
     private fun setMarkersForProperty(googleMap: GoogleMap, latLng: LatLng) {
@@ -297,34 +327,35 @@ class PropertyDetailsActivity: AppCompatActivity() {
     }
 
     private fun checkIfUserIsRealtor() {
-        UserManager.getUserData()?.addOnSuccessListener { user ->
-            if (user != null) {
-                userIsRealtor = user.isRealtor
-                setFloatingButton()
-                setListenerOnFloatingButton()
-            }
-        }
+        val sharedPreferences = this.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
+        userIsRealtor = sharedPreferences.getBoolean("realtor", true)
+        Log.d("REALTOR STATUS", userIsRealtor.toString())
     }
 
+    // Change floating button according to user status (4 possibilities)
     private fun setFloatingButton() {
-        if (!userIsRealtor) {
-            updateButton.setImageResource(R.drawable.ic_details_like_empty)
+        if (userIsRealtor) {
+            updateButton.setImageResource(R.drawable.ic_details_edit_24) // Edition button if realtor
         } else {
-            updateButton.setImageResource(R.drawable.ic_details_edit_24)
-        }
-        UserManager.getUserData()?.addOnSuccessListener { user ->
-            if (user != null) {
-                for (favorite in user.favorites) {
-                    if (favorite == propertyId) {
-                        updateButton.setImageResource(R.drawable.ic_details_like_full)
-                        propertyIsInFavorites = true
+            if (UserManager.isCurrentUserLogged()) {
+                updateButton.setImageResource(R.drawable.ic_details_like_empty) // Empty favorite if user
+                UserManager.getUserData()?.addOnSuccessListener { user ->
+                    if (user != null) {
+                        for (favorite in user.favorites) {
+                            if (favorite == propertyId) { // favorite full if property is in user's favorites
+                                updateButton.setImageResource(R.drawable.ic_details_like_full)
+                                propertyIsInFavorites = true
+                            }
+                        }
                     }
                 }
+            } else {
+                updateButton.visibility = View.GONE // no favorite feature if user not logged
             }
         }
     }
 
-    // Set floating button actions
+    // Set floating button actions on click
     private fun setListenerOnFloatingButton() {
         updateButton.setOnClickListener {
             // If realtor, go to update property
@@ -346,8 +377,6 @@ class PropertyDetailsActivity: AppCompatActivity() {
             }
         }
     }
-
-
 
 
     // Lifecycles

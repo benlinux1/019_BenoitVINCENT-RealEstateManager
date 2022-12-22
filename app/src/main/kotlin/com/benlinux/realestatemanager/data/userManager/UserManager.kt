@@ -74,6 +74,10 @@ class UserManager {
             UserRepository.removePropertyFromFavorites(propertyId)
         }
 
+        fun addPropertyToRealtorProperties(propertyId: String?) {
+            UserRepository.addPropertyToRealtorProperties(propertyId)
+        }
+
         fun deleteUserFromFirestore(context: Context?): Task<Void?>? {
             // Delete the user account from the Auth
             return UserRepository.deleteUserFromFirestore(context)

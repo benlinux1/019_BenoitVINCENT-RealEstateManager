@@ -1,7 +1,9 @@
 package com.benlinux.realestatemanager.ui.activities
 
  import android.annotation.SuppressLint
+ import android.content.Context
  import android.content.Intent
+ import android.content.SharedPreferences
  import android.os.Bundle
  import android.util.Log
  import android.view.MenuItem
@@ -54,11 +56,15 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     private var userIsRealtor = false
 
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var preferencesEditor: SharedPreferences.Editor
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setSharedPreferences()
         setFragments()
         configureToolBar()
         checkInternetConnection()
@@ -70,104 +76,14 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
         setAddButton()
     }
 
-    private fun isUserConnected(): Boolean {
-        return UserManager.isCurrentUserLogged()
-    }
-
-    private fun isUserRealtor(): Boolean {
-        return userIsRealtor
-    }
-
-    private fun setUserDataInDrawer() {
-        val headerContainer = drawerNavView.getHeaderView(0)
-        userName = headerContainer.findViewById(R.id.user_name)
-        userEmail = headerContainer.findViewById(R.id.user_email)
-        userAvatar = headerContainer.findViewById(R.id.user_avatar)
-
-        UserManager.getUserData()?.addOnSuccessListener { user ->
-            if (user != null) {
-                // Set user name
-                userName.text = buildString {
-                    append(user.firstName)
-                    append(" ")
-                    append(user.lastName)
-                }
-                Log.d("USER NAME",
-                    buildString { append(user.firstName)
-                    append(" ")
-                    append(user.lastName) })
-
-                // Set user email
-                userEmail.text = user.email
-                // Set avatar
-                if (user.avatarUrl.isEmpty()) {
-                    Glide.with(this)
-                        .load(R.mipmap.no_photo)
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(userAvatar)
-                } else {
-                    Glide.with(this)
-                        .load(user.avatarUrl)
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(userAvatar)
-                }
-                userIsRealtor = user.isRealtor
-
-            }
-            // Update menu options in drawer according to user status
-            setUserOptionsInDrawer()
-            // Set add button visibility according to user status
-            addPropertyButton.isVisible = isUserRealtor()
-        }
-        if (!isUserConnected()) {
-            userName.text = getString(R.string.info_no_username_found)
-            userEmail.text = getString(R.string.please_login)
-
-            Glide.with(this)
-                .load(R.mipmap.no_photo)
-                .apply(RequestOptions.circleCropTransform())
-                .into(userAvatar)
-        }
-        Log.d("DRAWER :", "user data updated" )
-    }
-
-    private fun setUserOptionsInDrawer(){
-        val loginItem: MenuItem = drawerNavView.menu.findItem(R.id.drawer_navigation_login)
-        loginItem.isVisible = !isUserConnected()
-
-        val myPropertiesItem = drawerNavView.menu.findItem(R.id.drawer_navigation_my_properties)
-        myPropertiesItem.isVisible = (isUserConnected() && isUserRealtor())
-
-        val myFavoritesItem = drawerNavView.menu.findItem(R.id.drawer_navigation_my_favorites)
-        myFavoritesItem.isVisible = (isUserConnected() && !isUserRealtor())
-
-        val settingsItem = drawerNavView.menu.findItem(R.id.drawer_navigation_settings)
-        settingsItem.isVisible = isUserConnected()
-
-        val logoutItem = drawerNavView.menu.findItem(R.id.drawer_navigation_logout)
-        logoutItem.isVisible = isUserConnected()
-
-        Log.d("DRAWER :", "menu options updated" )
-
+    private fun setSharedPreferences() {
+        sharedPreferences = this.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
+        preferencesEditor = sharedPreferences.edit()
     }
 
     // Set fragments views (map)
     private fun setFragments() {
         mapFragment = MapFragment()
-    }
-
-    // Set Add Property Floating action Button
-    private fun setAddButton() {
-        addPropertyButton = findViewById(R.id.add_property_button)
-        addPropertyButton.setOnClickListener {
-            val addPropertyActivityIntent = Intent(this, AddPropertyActivity::class.java)
-            startActivity(addPropertyActivityIntent)
-            finish()
-        }
-    }
-
-    private fun checkInternetConnection() {
-        isInternetAvailable(applicationContext)
     }
 
     // Setup custom Toolbar
@@ -177,6 +93,9 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
         supportActionBar?.elevation  = 16f
     }
 
+    private fun checkInternetConnection() {
+        isInternetAvailable(applicationContext)
+    }
 
     // Configure Drawer Navigation
     private fun setUpDrawerNavigation() {
@@ -255,6 +174,129 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
         return navigateUp(navController, appBarConfiguration)
     }
 
+    private fun setUserDataInDrawer() {
+        val headerContainer = drawerNavView.getHeaderView(0)
+        userName = headerContainer.findViewById(R.id.user_name)
+        userEmail = headerContainer.findViewById(R.id.user_email)
+        userAvatar = headerContainer.findViewById(R.id.user_avatar)
+
+        UserManager.getUserData()?.addOnSuccessListener { user ->
+            if (user != null) {
+                // Set user name
+                userName.text = buildString {
+                    append(user.firstName)
+                    append(" ")
+                    append(user.lastName)
+                }
+                Log.d("USER NAME", "${user.firstName} ${user.lastName}")
+
+                // Set user email
+                userEmail.text = user.email
+                // Set avatar
+                if (user.avatarUrl.isEmpty()) {
+                    Glide.with(this)
+                        .load(R.mipmap.no_photo)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(userAvatar)
+                } else {
+                    Glide.with(this)
+                        .load(user.avatarUrl)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(userAvatar)
+                }
+                // Set realtor or user status
+                userIsRealtor = user.isRealtor
+
+                // Save user status in shared preferences
+                saveUserStatusInSharedPreferences(user.isRealtor)
+
+                // Check / save user first connexion in shared preferences with id
+                checkAndSaveUserConnexionInSharedPreferences(user.id, user.firstName, user.lastName)
+
+            }
+            // Update menu options in drawer according to user status
+            setUserOptionsInDrawer()
+            // Set add button visibility according to user status
+            addPropertyButton.isVisible = isUserRealtor()
+        }
+        if (!isUserConnected()) {
+            userName.text = getString(R.string.info_no_username_found)
+            userEmail.text = getString(R.string.please_login)
+
+            Glide.with(this)
+                .load(R.mipmap.no_photo)
+                .apply(RequestOptions.circleCropTransform())
+                .into(userAvatar)
+        }
+        Log.d("DRAWER :", "user data updated" )
+    }
+
+    private fun isUserConnected(): Boolean {
+        return UserManager.isCurrentUserLogged()
+    }
+
+    private fun isUserRealtor(): Boolean {
+        return userIsRealtor
+    }
+
+    // Save user / realtor status in shared preferences
+    private fun saveUserStatusInSharedPreferences(status: Boolean) {
+        with(preferencesEditor) {
+            putBoolean("realtor", status)
+            commit()
+        }
+    }
+
+    // Check if it's user first connexion and save data in shared preferences
+    private fun checkAndSaveUserConnexionInSharedPreferences(id: String, firstName: String, lastName: String) {
+
+        val firstConnexion = sharedPreferences.getString(id, null )
+
+        // if user connexion was already saved in shared preferences, log
+        if (firstConnexion == "connected") {
+            Log.d("FIRST CONNEXION : ", ("$firstName $lastName is an old user"))
+        // if user has never been connected yet, save id in shared preferences
+        } else {
+            with(preferencesEditor) {
+                Log.d("FIRST CONNEXION : ", ("$firstName $lastName ID saved in shared preferences"))
+                putString(id, "connected")
+                commit()
+            }
+        }
+    }
+
+    // Set navigation options in drawer according to user status
+    private fun setUserOptionsInDrawer(){
+        val loginItem: MenuItem = drawerNavView.menu.findItem(R.id.drawer_navigation_login)
+        loginItem.isVisible = !isUserConnected()
+
+        val myPropertiesItem = drawerNavView.menu.findItem(R.id.drawer_navigation_my_properties)
+        myPropertiesItem.isVisible = (isUserConnected() && isUserRealtor())
+
+        val myFavoritesItem = drawerNavView.menu.findItem(R.id.drawer_navigation_my_favorites)
+        myFavoritesItem.isVisible = (isUserConnected() && !isUserRealtor())
+
+        val settingsItem = drawerNavView.menu.findItem(R.id.drawer_navigation_settings)
+        settingsItem.isVisible = isUserConnected()
+
+        val logoutItem = drawerNavView.menu.findItem(R.id.drawer_navigation_logout)
+        logoutItem.isVisible = isUserConnected()
+
+        Log.d("DRAWER :", "menu options updated" )
+
+    }
+
+
+    // Set Add Property Floating action Button
+    private fun setAddButton() {
+        addPropertyButton = findViewById(R.id.add_property_button)
+        addPropertyButton.setOnClickListener {
+            val addPropertyActivityIntent = Intent(this, AddPropertyActivity::class.java)
+            startActivity(addPropertyActivityIntent)
+            finish()
+        }
+    }
+
 
     // Logout from firebase
     private fun logout() {
@@ -273,6 +315,7 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
             }
     }
 
+    // Hide floating action button
     fun hideAddButton() {
         addPropertyButton.visibility = View.GONE
     }

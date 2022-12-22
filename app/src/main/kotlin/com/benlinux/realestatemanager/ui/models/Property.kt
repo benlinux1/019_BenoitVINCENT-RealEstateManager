@@ -7,7 +7,7 @@ import com.benlinux.realestatemanager.utils.converters.Converters
 @Entity(tableName = "property_table")
 @SuppressWarnings(RoomWarnings.PRIMARY_KEY_FROM_EMBEDDED_IS_DROPPED)
 data class Property (
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "property_id")
     var id: Int = 0,
     var type: String = "",
@@ -24,7 +24,7 @@ data class Property (
     var creationDate: String = "29/11/2022",
     var soldDate: String = "",
     @TypeConverters(Converters::class)
-    var user: User = User("0", "", "", "", ""),
+    var realtor: User = User("0", "", "", "", ""),
     var numberOfRooms: Int = 0,
     var numberOfBathrooms: Int = 0,
     var numberOfBedrooms: Int = 0

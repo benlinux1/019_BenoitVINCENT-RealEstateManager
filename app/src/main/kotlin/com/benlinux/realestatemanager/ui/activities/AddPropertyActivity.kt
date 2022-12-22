@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
+import com.benlinux.realestatemanager.data.userManager.UserManager
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.activities.AddPropertyActivity.Enum.Companion.PERMS
 import com.benlinux.realestatemanager.ui.activities.AddPropertyActivity.Enum.Companion.RC_IMAGE_PERMS
@@ -96,6 +97,8 @@ open class AddPropertyActivity: AppCompatActivity() {
     // Picture URL
     private var uriImageSelected: Uri? = null
 
+    private lateinit var realtor: User
+
     // Constants
     annotation class Enum {
         companion object {
@@ -110,6 +113,8 @@ open class AddPropertyActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_proprerty)
 
+
+
         setToolbar()
         setTypeRadioButtons()
         configureViewModel()
@@ -120,6 +125,18 @@ open class AddPropertyActivity: AppCompatActivity() {
         setListenerOnCreateButton()
         setAddPictureButtonListener()
         configureRecyclerView()
+        getCurrentRealtor()
+    }
+
+    private fun getCurrentRealtor() {
+        UserManager.getUserData()?.addOnSuccessListener { user ->
+            if (user != null) {
+                realtor = User(
+                    user.id, user.email, user.firstName, user.lastName,
+                    user.avatarUrl, user.favorites, user.isRealtor, user.realtorProperties
+                )
+            }
+        }
     }
 
     // Toolbar configuration
@@ -164,6 +181,8 @@ open class AddPropertyActivity: AppCompatActivity() {
                 createProperty()
                 propertyViewModel.saveProperty(property)
                 Log.d("PROPERTY CREATED", property.toString())
+                UserManager.addPropertyToRealtorProperties(property.id.toString())
+                Log.d("REALTOR UPDATE ADD", property.id.toString())
                 val mainActivityIntent = Intent(this, MainActivity::class.java)
                 startActivity(mainActivityIntent)
                 finish()
@@ -216,10 +235,10 @@ open class AddPropertyActivity: AppCompatActivity() {
         property.isAvailable = isPropertyAvailable()
         property.creationDate = getTodayDate()
         property.pictures = picturesList
-        // TODO : get current realtor
-        property.user = User("0", "", "", "", "")
+        property.realtor = realtor
         property.pictures = picturesList
         property.address = getPropertyAddress()
+        property.id = System.currentTimeMillis().toInt()
     }
 
     // Fields validation
