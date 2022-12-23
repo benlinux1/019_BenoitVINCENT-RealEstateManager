@@ -38,7 +38,7 @@ import pub.devrel.easypermissions.EasyPermissions
 import java.util.*
 
 
-open class AddPropertyActivity: AppCompatActivity() {
+class AddPropertyActivity: AppCompatActivity() {
 
     // Property type radio buttons
     private lateinit var typeRadioGroup1: RadioGroup
@@ -113,8 +113,6 @@ open class AddPropertyActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_proprerty)
 
-
-
         setToolbar()
         setTypeRadioButtons()
         configureViewModel()
@@ -140,7 +138,7 @@ open class AddPropertyActivity: AppCompatActivity() {
     }
 
     // Toolbar configuration
-    fun setToolbar() {
+    private fun setToolbar() {
         val mToolbar = findViewById<Toolbar>(R.id.main_toolbar)
         setSupportActionBar(mToolbar)
         mToolbar.title = resources.getString(R.string.add_property_activity_title)
@@ -393,7 +391,7 @@ open class AddPropertyActivity: AppCompatActivity() {
 
     // When photo access is granted
     @AfterPermissionGranted(RC_IMAGE_PERMS)
-    private fun updateAvatarPicture() {
+    fun updateAvatarPicture() {
         // Ask permission
         if (!EasyPermissions.hasPermissions(this, PERMS)) {
             EasyPermissions.requestPermissions(

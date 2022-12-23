@@ -40,7 +40,7 @@ fun getLatLngFromPropertyFormattedAddress(address: PropertyAddress, context: Con
 
 }
 
-// Retrieve Latitude & Longitude from Address (Android < 13)
+// Retrieve Latitude & Longitude from Address under String format
 @Suppress("DEPRECATION")
 private fun getLocationFromAddress(strAddress: String, context: Context): LatLng {
     val coder = Geocoder(context)

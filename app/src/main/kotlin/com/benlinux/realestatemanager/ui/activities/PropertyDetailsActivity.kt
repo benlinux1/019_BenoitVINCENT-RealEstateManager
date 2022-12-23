@@ -170,7 +170,6 @@ class PropertyDetailsActivity: AppCompatActivity() {
             retrievePropertyPictures()
             configurePhotoGallery()
 
-            // Get property lat-lng & set marker on map
             val latLng: LatLng = getLatLngFromPropertyFormattedAddress(property!!.address, this)
             setMarkersForProperty(mGoogleMap, latLng)
         }
@@ -303,7 +302,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
 
     // Set custom marker for displayed property on map, according to its latlng
-    private fun setMarkersForProperty(googleMap: GoogleMap, latLng: LatLng) {
+    private fun setMarkersForProperty(googleMap: GoogleMap, latLng: LatLng?) {
 
         mGoogleMap = googleMap
 
@@ -312,7 +311,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
         // Then, define marker options (property's position & icon)
         val markerOptions = MarkerOptions()
-            .position(latLng)
+            .position(latLng!!)
             .icon(BitmapDescriptorFactory.fromResource(propertyMarker))
 
         // Set marker
@@ -361,6 +360,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
             // If realtor, go to update property
             if (userIsRealtor) {
                 val updatePropertyIntent = Intent(this, UpdatePropertyActivity::class.java)
+                updatePropertyIntent.putExtra("PROPERTY_ID", propertyId)
                 startActivity(updatePropertyIntent)
                 finish()
             // if simple user, add property to favorites

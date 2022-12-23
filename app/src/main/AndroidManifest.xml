@@ -37,6 +37,9 @@
             android:name=".ui.activities.AddPropertyActivity"
             android:exported="true" />
         <activity
+            android:name=".ui.activities.UpdatePropertyActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.activities.MyPropertiesActivity"
             android:exported="true" />
 

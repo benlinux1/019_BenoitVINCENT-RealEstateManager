@@ -1,11 +1,9 @@
 package com.benlinux.realestatemanager.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.benlinux.realestatemanager.repository.PropertyRepository
 import com.benlinux.realestatemanager.ui.models.Property
-import com.benlinux.realestatemanager.ui.models.PropertyAddress
 import com.google.android.gms.maps.model.LatLng
 import java.util.concurrent.Executor
 

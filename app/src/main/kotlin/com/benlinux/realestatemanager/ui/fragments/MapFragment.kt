@@ -451,14 +451,14 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         for (property: Property? in properties) {
             val title = property?.name
             val address = property!!.address
-            val latLng: LatLng? = getLatLngFromPropertyFormattedAddress(address, requireContext())
+            val latLng: LatLng = getLatLngFromPropertyFormattedAddress(address, requireContext())
             val price = property.price.toString()
             val propertyId = property.id
 
             // Then, define marker options (property's title, address, position, icon)
             val markerOptions = MarkerOptions()
                 .title(title)
-                .position(latLng!!)
+                .position(latLng)
                 .snippet(price)
                 .icon(BitmapDescriptorFactory.fromResource(propertyMarker))
 
