@@ -59,7 +59,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
-                    tools:text="id1"
+                    tools:text="property_id"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/item_property_realtor_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    tools:text="realtorId"
                     android:visibility="gone"/>
 
                 <TextView

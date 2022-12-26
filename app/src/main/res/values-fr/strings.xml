@@ -116,6 +116,9 @@
     <string name="add_property_city">Ville*</string>
     <string name="add_property_country">Pays</string>
 
+    <string name="update_button_text">Mettre à jour</string>
+
+
     // INFO WINDOW MAP
     <string name="see_details_button">Fiche détaillée</string>
 

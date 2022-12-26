@@ -49,6 +49,8 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
                 PropertyDetailsActivity::class.java
             )
             propertyDetailsActivityIntent.putExtra("PROPERTY_ID", holder.id.text)
+            propertyDetailsActivityIntent.putExtra("PROPERTY_CREATOR_ID", holder.realtorId.text)
+
             propertyItem.context.startActivity(propertyDetailsActivityIntent)
         }
     }
@@ -84,6 +86,11 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
          */
         val id: TextView
 
+        /**
+         * The TextView displaying the id of the property's creator (invisible)
+         */
+        val realtorId: TextView
+
 
         /**
          * The TextView displaying the title of the property
@@ -107,6 +114,7 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
         init {
             picture = itemView.findViewById(R.id.item_property_picture)
             id = itemView.findViewById(R.id.item_property_id)
+            realtorId = itemView.findViewById(R.id.item_property_realtor_id)
             title = itemView.findViewById(R.id.item_property_title)
             area = itemView.findViewById(R.id.item_property_area)
             price = itemView.findViewById(R.id.item_property_price)
@@ -122,8 +130,11 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
             // Set title
             title.text = property.name
 
-            // Set place_id (from Places API)
+            // Set property id
             id.text = property.id.toString()
+
+            // Set property's creator id
+            realtorId.text = property.realtor.id
 
             // Set property picture
 

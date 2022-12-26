@@ -234,7 +234,6 @@ class AddPropertyActivity: AppCompatActivity() {
         property.creationDate = getTodayDate()
         property.pictures = picturesList
         property.realtor = realtor
-        property.pictures = picturesList
         property.address = getPropertyAddress()
         property.id = System.currentTimeMillis().toInt()
     }
@@ -494,7 +493,7 @@ class AddPropertyActivity: AppCompatActivity() {
         picturesRecyclerView.adapter = pictureAdapter
     }
 
-    // TODO : set address location with geocoder
+    // Create property Address
     private fun getPropertyAddress(): PropertyAddress {
         return PropertyAddress(
                 streetNumber.text.toString(),

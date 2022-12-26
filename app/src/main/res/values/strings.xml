@@ -127,6 +127,9 @@
     <string name="add_property_city">City*</string>
     <string name="add_property_country">Country</string>
 
+    // UPDATE PROPERTY ACTIVITY
+    <string name="update_button_text">Update property</string>
+
     // INFO WINDOW MAP
     <string name="see_details_button">See details</string>
 

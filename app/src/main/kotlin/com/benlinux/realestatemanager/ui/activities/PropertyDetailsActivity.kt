@@ -52,10 +52,12 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private lateinit var complement: TextView
     private lateinit var postalCodeAndCity: TextView
     private lateinit var country: TextView
+    private lateinit var updateButton: FloatingActionButton
+
+    // The recycler view and the list + adapter for pictures gallery
     private lateinit var picturesRecyclerView: RecyclerView
     private lateinit var picturesList: MutableList<Picture?>
     private lateinit var pictureAdapter: PictureAdapter
-    private lateinit var updateButton: FloatingActionButton
 
     // The viewModel that contains data
     private lateinit var propertyViewModel: PropertyViewModel
@@ -67,9 +69,10 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private lateinit var mGoogleMap: GoogleMap
     private lateinit var mapView: MapView
 
-    // For data
+    // For preferences data
     private var userIsRealtor = false
     private var propertyIsInFavorites = false
+    private var creatorId: String? = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,6 +84,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
         setMap()
         setViewModel()
         retrievePropertyId()
+        retrieveCreatorId()
         checkIfUserIsRealtor()
         setFloatingButton()
         setListenerOnFloatingButton()
@@ -109,6 +113,12 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private fun retrievePropertyId() {
         propertyId = intent.extras?.getString("PROPERTY_ID")
         Log.d("ID", propertyId.toString())
+    }
+
+    // Retrieve property id
+    private fun retrieveCreatorId() {
+        creatorId = intent.extras?.getString("PROPERTY_CREATOR_ID")
+        creatorId?.let { Log.d("CREATOR_ID", it) }
     }
 
     // Toolbar configuration
@@ -172,6 +182,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
             val latLng: LatLng = getLatLngFromPropertyFormattedAddress(property!!.address, this)
             setMarkersForProperty(mGoogleMap, latLng)
+
         }
     }
 
@@ -293,7 +304,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
         postalCodeAndCity.text = buildString {
             append(property.address.postalCode)
             append(" ")
-            append(property.address.city)
+            append(property.address.city.uppercase())
         }
 
         // Country
@@ -331,10 +342,14 @@ class PropertyDetailsActivity: AppCompatActivity() {
         Log.d("REALTOR STATUS", userIsRealtor.toString())
     }
 
-    // Change floating button according to user status (4 possibilities)
+    // Change floating button according to user status (5 possibilities)
     private fun setFloatingButton() {
         if (userIsRealtor) {
-            updateButton.setImageResource(R.drawable.ic_details_edit_24) // Edition button if realtor
+            if ( creatorId == UserManager.getCurrentUser()?.uid ) {
+                updateButton.setImageResource(R.drawable.ic_details_edit_24) // Edition button if realtor & creator
+            } else {
+                updateButton.visibility = View.GONE // invisible button if realtor is not creator
+            }
         } else {
             if (UserManager.isCurrentUserLogged()) {
                 updateButton.setImageResource(R.drawable.ic_details_like_empty) // Empty favorite if user
@@ -349,7 +364,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
                     }
                 }
             } else {
-                updateButton.visibility = View.GONE // no favorite feature if user not logged
+                updateButton.visibility = View.GONE // invisible button if user not logged
             }
         }
     }
