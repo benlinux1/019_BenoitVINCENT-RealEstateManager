@@ -133,6 +133,7 @@
     <string name="add_realtor_password_text">Mot de passe agence*</string>
     <string name="validate_realtor_button">CONFIRMER</string>
     <string name="wrong_password">Le code agence est incorrect</string>
+    <string name="zoom_close_content_description">close_picture</string>
 
 
 </resources>

@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -19,6 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
+import com.benlinux.realestatemanager.data.propertyManager.PropertyManager
 import com.benlinux.realestatemanager.data.userManager.UserManager
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.activities.AddPropertyActivity.Enum.Companion.PERMS
@@ -124,6 +126,8 @@ class AddPropertyActivity: AppCompatActivity() {
         setAddPictureButtonListener()
         configureRecyclerView()
         getCurrentRealtor()
+
+
     }
 
     private fun getCurrentRealtor() {
@@ -232,10 +236,11 @@ class AddPropertyActivity: AppCompatActivity() {
         property.description = description.text.toString()
         property.isAvailable = isPropertyAvailable()
         property.creationDate = getTodayDate()
-        property.pictures = picturesList
         property.realtor = realtor
         property.address = getPropertyAddress()
         property.id = System.currentTimeMillis().toInt()
+        property.pictures = picturesList
+
     }
 
     // Fields validation
@@ -255,7 +260,7 @@ class AddPropertyActivity: AppCompatActivity() {
     // Add picture action
     private fun setAddPictureButtonListener() {
         addPictureButton.setOnClickListener {
-            updateAvatarPicture()
+            updatePropertyPicture()
         }
     }
 
@@ -390,16 +395,18 @@ class AddPropertyActivity: AppCompatActivity() {
 
     // When photo access is granted
     @AfterPermissionGranted(RC_IMAGE_PERMS)
-    fun updateAvatarPicture() {
-        // Ask permission
-        if (!EasyPermissions.hasPermissions(this, PERMS)) {
-            EasyPermissions.requestPermissions(
-                this,
-                getString(R.string.allow_photo_access),
-                RC_IMAGE_PERMS,
-                PERMS
-            )
-            return
+    fun updatePropertyPicture() {
+        // Ask permission (used for API 32 and less)
+        if (Build.VERSION.SDK_INT <= 32) {
+            if (!EasyPermissions.hasPermissions(this, PERMS)) {
+                EasyPermissions.requestPermissions(
+                    this,
+                    getString(R.string.allow_photo_access),
+                    RC_IMAGE_PERMS,
+                    PERMS
+                )
+                return
+            }
         }
         // When permission granted, allow picking action
         Toast.makeText(this, getString(R.string.picture_enabled), Toast.LENGTH_SHORT).show()
@@ -431,7 +438,7 @@ class AddPropertyActivity: AppCompatActivity() {
     }
 
     // When picture is selected from device, create dialog window
-    private fun showAddPictureDialog(mContext: Context, imagePreview: Uri) {
+    private fun showAddPictureDialog(mContext: Context, imageUri: Uri) {
         // Builder & custom view
         val builder = AlertDialog.Builder(mContext, R.style.CustomAlertDialog)
         val customView = layoutInflater.inflate(R.layout.custom_dialog_add_picture,null)
@@ -451,21 +458,27 @@ class AddPropertyActivity: AppCompatActivity() {
 
         // Picture preview
         Glide.with(this)
-            .load(imagePreview)
+            .load(imageUri)
             .apply(RequestOptions.centerInsideTransform())
             .into(imageView)
 
         // Positive button & actions
         positiveButton.setOnClickListener {
             // Picture Data Creation
-            val picture = Picture(imagePreview.toString(), roomName.text.toString())
-            // Add picture
-            addPicture(picture)
-            // Remove dialog window
-            dialogWindow.dismiss()
-            // Clear title focus to stay on pictures recyclerview
-            title.clearFocus()
-            roomSpinner.requestFocus()
+            PropertyManager.uploadImageToFirestore(imageUri).addOnSuccessListener {
+                // get download url
+                it.metadata!!.reference!!.downloadUrl.addOnSuccessListener { uri ->
+                    // create picture with download url
+                    val picture = Picture(uri.toString(), roomName.text.toString())
+                    // Add picture to pictures list
+                    addPicture(picture)
+                    // Remove dialog window
+                    dialogWindow.dismiss()
+                    // Clear input focus to stay on pictures recyclerview
+                    clearAllFocuses()
+                    roomSpinner.requestFocus()
+                }
+            }
         }
 
         // Negative button & actions
@@ -475,6 +488,21 @@ class AddPropertyActivity: AppCompatActivity() {
 
         // Display dialog
         dialogWindow.show()
+    }
+
+    // Clear inputs focus
+    private fun clearAllFocuses() {
+        title.clearFocus()
+        area.clearFocus()
+        price.clearFocus()
+        surface.clearFocus()
+        description.clearFocus()
+        streetNumber.clearFocus()
+        streetName.clearFocus()
+        addressComplement.clearFocus()
+        postalCode.clearFocus()
+        city.clearFocus()
+        country.clearFocus()
     }
 
     // Add picture to pictures list

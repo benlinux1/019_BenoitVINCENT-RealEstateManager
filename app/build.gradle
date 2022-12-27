@@ -44,6 +44,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
+    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
@@ -63,7 +64,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:24.4.1'
 
     // FIREBASE STORAGE
-    implementation 'com.firebaseui:firebase-ui-storage:7.1.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
 
     // GLIDE
     kapt 'com.github.bumptech.glide:compiler:4.13.0'
@@ -107,5 +109,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+
+    // Image Slider
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
+
 
 }

@@ -30,16 +30,20 @@
             app:layout_constraintTop_toBottomOf="@id/main_toolbar"
             android:background="@color/colorIndigo">
 
-
-
-            <ImageView
-                android:id="@+id/property_details_main_picture"
+            <com.denzcoskun.imageslider.ImageSlider
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/property_details_picture_height"
-                android:importantForAccessibility="no"
-                android:scaleType="centerCrop"
+                android:id="@+id/imageSlider"
+                app:iss_auto_cycle="true"
+                app:iss_delay="0"
+                app:iss_placeholder="@color/colorIndigo"
+                app:iss_error_image="@color/colorIndigo"
+                app:iss_corner_radius="5"
+                app:iss_selected_dot="@drawable/default_selected_dot"
+                app:iss_unselected_dot="@drawable/default_unselected_dot"
                 app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-                tools:src="@drawable/ic_details_photo_camera_24" />
+                app:iss_period="1000" />
+
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/property_details_update_button"
@@ -50,7 +54,7 @@
                 android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="@+id/property_details_main_picture"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/property_details_main_picture"
+                app:layout_constraintTop_toBottomOf="@+id/imageSlider"
                 android:contentDescription="@string/property_details_update_button"
                 app:backgroundTint="@android:color/white"
                 app:tint="@color/colorAccent"
@@ -63,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
                 app:cardCornerRadius="4dp"
-                app:layout_constraintTop_toBottomOf="@id/property_details_main_picture">
+                app:layout_constraintTop_toBottomOf="@id/imageSlider">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -230,6 +234,7 @@
                         <ImageView
                             android:id="@+id/property_details_location_icon"
                             style="@style/cardTitle"
+                            android:importantForAccessibility="no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_details_location_24"

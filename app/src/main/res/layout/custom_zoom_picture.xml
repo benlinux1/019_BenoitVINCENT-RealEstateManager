@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:padding="@dimen/default_padding"
+    android:layout_marginHorizontal="@dimen/very_large_margin"
+    tools:context=".ui.activities.AddPropertyActivity">
+
+    <ImageView
+        android:layout_height="220dp"
+        android:layout_width="match_parent"
+        android:id="@+id/zoom_room_picture"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginHorizontal="@dimen/small_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/property_picture_content_description"
+        />
+
+    <ImageView
+        android:layout_height="48dp"
+        android:layout_width="48dp"
+        android:id="@+id/zoom_close_picture"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:layout_marginEnd="@dimen/very_small_margin"
+        app:layout_constraintTop_toTopOf="@+id/zoom_room_picture"
+        app:layout_constraintEnd_toEndOf="@+id/zoom_room_picture"
+        android:src="@drawable/ic_baseline_close_24"
+        app:tint="@color/colorPrimary"
+        android:contentDescription="@string/zoom_close_content_description"
+        />
+
+    <TextView
+        android:id="@+id/zoom_room_name"
+        style="@style/fieldTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        app:layout_constraintTop_toBottomOf="@id/zoom_room_picture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/default_title_size"
+        android:gravity="center"
+        android:text="@string/add_room_name_text"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

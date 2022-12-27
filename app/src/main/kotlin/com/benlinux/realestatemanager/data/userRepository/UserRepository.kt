@@ -170,6 +170,7 @@ class UserRepository {
             return mImageRef.putFile(imageUri!!)
         }
 
+
         // Delete the User from Firestore
         // if result ok, delete from firebase & logout
         fun deleteUserFromFirestore(context: Context?): Task<Void?> {

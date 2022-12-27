@@ -2,16 +2,19 @@ package com.benlinux.realestatemanager.ui.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.ui.models.Picture
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+
 
 @SuppressLint("NotifyDataSetChanged")
 class PictureAdapter(pictures: MutableList<Picture?>, context: Context) : RecyclerView.Adapter<PictureAdapter.ViewHolder>() {
@@ -43,7 +46,40 @@ class PictureAdapter(pictures: MutableList<Picture?>, context: Context) : Recycl
         // Launch Picture Details according to its Id
         holder.itemView.setOnClickListener {
             // TODO : extend picture view ?
+            zoomOnPicture(it.context, it, holder.imageView.drawable, holder.title.text.toString())
         }
+
+    }
+
+    private fun zoomOnPicture(context: Context?, view: View, picture: Drawable, roomName: String) {
+        // Builder & custom view
+        val builder = AlertDialog.Builder(context!!, R.style.CustomAlertDialog)
+        val customView: View = LayoutInflater.from(view.rootView.context).inflate(R.layout.custom_zoom_picture, null)
+        builder.setView(customView)
+        builder.setCancelable(true)
+        val dialogWindow = builder.create()
+
+        // Custom view picture
+        val imageView: ImageView = customView.findViewById(R.id.zoom_room_picture)
+        // Custom view room name
+        val room: TextView = customView.findViewById(R.id.zoom_room_name)
+        // Custom view picture
+        val closeButton: ImageView = customView.findViewById(R.id.zoom_close_picture)
+
+        // Picture preview
+        Glide.with(context)
+            .load(picture)
+            .apply(RequestOptions.centerInsideTransform())
+            .into(imageView)
+
+        room.text = roomName
+
+        closeButton.setOnClickListener {
+            dialogWindow.dismiss()
+        }
+
+        // Display dialog
+        dialogWindow.show()
     }
 
     fun updatePictures(pictures: MutableList<Picture?>) {
@@ -70,13 +106,13 @@ class PictureAdapter(pictures: MutableList<Picture?>, context: Context) : Recycl
         /**
          * The square picture
          */
-        private val imageView: ImageView
+        val imageView: ImageView
 
 
         /**
          * The TextView displaying the title of the picture
          */
-        private val title: TextView
+        val title: TextView
 
 
         /**

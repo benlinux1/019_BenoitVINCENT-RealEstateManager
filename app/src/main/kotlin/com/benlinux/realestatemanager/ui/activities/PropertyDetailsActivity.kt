@@ -2,11 +2,11 @@ package com.benlinux.realestatemanager.ui.activities
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -20,8 +20,9 @@ import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.utils.getLatLngFromPropertyFormattedAddress
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -35,7 +36,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class PropertyDetailsActivity: AppCompatActivity() {
 
     // Views
-    private lateinit var mainPicture: ImageView
     private var propertyId: String? = null
     private lateinit var title: TextView
     private lateinit var area: TextView
@@ -73,6 +73,9 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private var userIsRealtor = false
     private var propertyIsInFavorites = false
     private var creatorId: String? = ""
+
+    // Slider Image
+    private lateinit var imageSlider: ImageSlider
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -144,7 +147,6 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
     // Set all text views
     private fun setViews() {
-        mainPicture = findViewById(R.id.property_details_main_picture)
         title = findViewById(R.id.property_details_information_title)
         area = findViewById(R.id.property_details_information_area)
         surface = findViewById(R.id.property_details_surface_text)
@@ -219,7 +221,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
             description.text = property!!.description // Description
 
-            setMainPicture(property!!)
+            setPropertyPictures(property!!)
             setFullAddress(property!!)
 
             Log.d("ACTUAL PROPERTY", property.toString())
@@ -278,13 +280,22 @@ class PropertyDetailsActivity: AppCompatActivity() {
     }
 
     // Main picture
-    private fun setMainPicture(property: Property) {
-        if (property.pictures.isNotEmpty())
-            Glide.with(this)
-                .load(property.pictures[0]?.url)
-                .apply(RequestOptions.centerCropTransform())
-                .into(mainPicture)
+    private fun setPropertyPictures(property: Property) {
+
+        imageSlider = findViewById(R.id.imageSlider)
+        val imageList = ArrayList<SlideModel>()
+        if (property.pictures.isNotEmpty()) {
+            for (picture in property.pictures) {
+                val uri = Uri.parse(picture?.url)
+                imageList.add(SlideModel(uri.toString(), picture?.room, ScaleTypes.CENTER_CROP))
+            }
+        } else {
+            imageList.add(SlideModel(R.mipmap.no_photo_bis, ScaleTypes.CENTER_CROP))
+        }
+        imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
     }
+
+
 
     // Display Property full address data
     private fun setFullAddress(property: Property) {

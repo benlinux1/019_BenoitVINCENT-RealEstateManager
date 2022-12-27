@@ -144,7 +144,7 @@
     <string name="add_realtor_password_text">Agency password*</string>
     <string name="validate_realtor_button">CONFIRM</string>
     <string name="wrong_password">Agency password is not correct</string>
-
+    <string name="zoom_close_content_description">close_picture</string>
 
 
 </resources>

@@ -1,18 +1,27 @@
 package com.benlinux.realestatemanager.ui.activities
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
+import com.benlinux.realestatemanager.data.propertyManager.PropertyManager
 import com.benlinux.realestatemanager.data.userManager.UserManager
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.adapters.PictureAdapter
@@ -22,7 +31,11 @@ import com.benlinux.realestatemanager.ui.models.PropertyAddress
 import com.benlinux.realestatemanager.ui.models.User
 import com.benlinux.realestatemanager.utils.*
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputLayout
+import pub.devrel.easypermissions.AfterPermissionGranted
+import pub.devrel.easypermissions.EasyPermissions
 
 class UpdatePropertyActivity: AppCompatActivity() {
 
@@ -67,6 +80,10 @@ class UpdatePropertyActivity: AppCompatActivity() {
     private lateinit var picturesRecyclerView: RecyclerView
     private lateinit var picturesList: MutableList<Picture?>
     private lateinit var pictureAdapter: PictureAdapter
+    private lateinit var addPictureButton: ImageView
+
+    // Picture URL
+    private var uriImageSelected: Uri? = null
 
     // Spinners
     private lateinit var roomSpinner: Spinner
@@ -78,6 +95,16 @@ class UpdatePropertyActivity: AppCompatActivity() {
 
     // Realtor Data
     private lateinit var realtor: User
+
+
+    // Constants
+    annotation class Enum {
+        companion object {
+            // Permissions for picture picking
+            const val PERMS = Manifest.permission.READ_EXTERNAL_STORAGE
+            const val RC_IMAGE_PERMS = 100
+        }
+    }
 
 
 
@@ -93,16 +120,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
         setPicturesGallery()
         getCurrentRealtor()
         setListenerOnUpdateButton()
-
-
-
-
-
-
-
-
-
-
+        setAddPictureButtonListener()
     }
 
     private fun getCurrentRealtor() {
@@ -183,6 +201,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
         countryLayout = findViewById(R.id.add_country_layout)
         country = findViewById(R.id.add_country_input)
         saveButton = findViewById(R.id.create)
+        addPictureButton = findViewById(R.id.add_pictures_button)
     }
 
 
@@ -416,6 +435,141 @@ class UpdatePropertyActivity: AppCompatActivity() {
             city.text.toString(),
             country.text.toString()
         )
+    }
+
+    // Add picture action
+    private fun setAddPictureButtonListener() {
+        addPictureButton.setOnClickListener {
+            updateAvatarPicture()
+        }
+    }
+
+    // Easy permission result for photo access
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    // When photo access is granted
+    @AfterPermissionGranted(Enum.RC_IMAGE_PERMS)
+    fun updateAvatarPicture() {
+        // Ask permission (used for API 32 and less)
+        if (Build.VERSION.SDK_INT <= 32) {
+            if (!EasyPermissions.hasPermissions(this, Enum.PERMS)) {
+                EasyPermissions.requestPermissions(
+                    this,
+                    getString(R.string.allow_photo_access),
+                    Enum.RC_IMAGE_PERMS,
+                    Enum.PERMS
+                )
+                return
+            }
+        }
+        // When permission granted, allow picking action
+        Toast.makeText(this, getString(R.string.picture_enabled), Toast.LENGTH_SHORT).show()
+        val pickPhotoIntent =
+            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        actionPick.launch(pickPhotoIntent)
+    }
+
+    // Create callback when user pick a photo on his device
+    private val actionPick = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result -> onPickPhotoResult(result) }
+
+    // Handle result of photo picking activity
+    private fun onPickPhotoResult(result: ActivityResult) {
+        if (result.resultCode == RESULT_OK) { //SUCCESS
+            assert(result.data != null)
+            this.uriImageSelected = result.data!!.data
+
+            // Show dialog window for picture information
+            result.data!!.data?.let {
+                showAddPictureDialog(this, it
+                )
+            }
+
+        } else {
+            Toast.makeText(this, getString(R.string.no_image_chosen), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // When picture is selected from device, create dialog window
+    private fun showAddPictureDialog(mContext: Context, imageUri: Uri) {
+        // Builder & custom view
+        val builder = AlertDialog.Builder(mContext, R.style.CustomAlertDialog)
+        val customView = layoutInflater.inflate(R.layout.custom_dialog_add_picture,null)
+        builder.setView(customView)
+        builder.setCancelable(true)
+        val dialogWindow = builder.create()
+
+        // Custom view picture
+        val imageView: ImageView = customView.findViewById(R.id.property_new_picture_preview)
+        // Custom view room name
+        val roomName: EditText = customView.findViewById(R.id.add_room_name_input)
+        roomName.requestFocus()
+        // Negative button
+        val negativeButton: Button = customView.findViewById(R.id.picture_dialog_negative_button)
+        // Positive button
+        val positiveButton: Button = customView.findViewById(R.id.picture_dialog_positive_button)
+
+        // Picture preview
+        Glide.with(this)
+            .load(imageUri)
+            .apply(RequestOptions.centerInsideTransform())
+            .into(imageView)
+
+        // Positive button & actions
+        positiveButton.setOnClickListener {
+            // Picture Data Creation
+            PropertyManager.uploadImageToFirestore(imageUri).addOnSuccessListener {
+                // get download url
+                it.metadata!!.reference!!.downloadUrl.addOnSuccessListener { uri ->
+                    // create picture with download url
+                    val picture = Picture(uri.toString(), roomName.text.toString())
+                    // Add picture to pictures list
+                    addPicture(picture)
+                    // Remove dialog window
+                    dialogWindow.dismiss()
+                    // Clear input focus to stay on pictures recyclerview
+                    clearAllFocuses()
+                    roomSpinner.requestFocus()
+                }
+            }
+        }
+
+        // Negative button & actions
+        negativeButton.setOnClickListener {
+            // Picture Data Creation
+            dialogWindow.cancel() }
+
+        // Display dialog
+        dialogWindow.show()
+    }
+
+    // Add picture to pictures list
+    private fun addPicture(picture: Picture) {
+        picturesList.add(picture)
+        pictureAdapter.updatePictures(picturesList)
+    }
+
+    // Clear inputs focus
+    private fun clearAllFocuses() {
+        title.clearFocus()
+        area.clearFocus()
+        price.clearFocus()
+        surface.clearFocus()
+        description.clearFocus()
+        streetNumber.clearFocus()
+        streetName.clearFocus()
+        addressComplement.clearFocus()
+        postalCode.clearFocus()
+        city.clearFocus()
+        country.clearFocus()
     }
 
 }

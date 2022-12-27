@@ -55,7 +55,7 @@ class UserManager {
         }
 
         fun updateUserAvatarUrl(avatarUrl: Uri?) {
-            UserRepository.uploadImage(avatarUrl, "avatar")?.addOnSuccessListener { taskSnapshot ->
+            UserRepository.uploadImage(avatarUrl, "avatar").addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
                     UserRepository.updateUserAvatar(uri.toString())
                 }
