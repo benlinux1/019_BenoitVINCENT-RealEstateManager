@@ -202,7 +202,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private fun configurePhotoGallery() {
         // Define layout & adapter
         picturesRecyclerView = findViewById(R.id.details_pictures_list)
-        pictureAdapter = PictureAdapter(picturesList, this )
+        pictureAdapter = PictureAdapter(picturesList, this, userIsRealtor )
         picturesRecyclerView.adapter = pictureAdapter
     }
 

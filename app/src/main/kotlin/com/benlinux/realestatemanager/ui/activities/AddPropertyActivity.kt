@@ -517,7 +517,7 @@ class AddPropertyActivity: AppCompatActivity() {
     private fun configureRecyclerView() {
         // Define layout & adapter
         picturesRecyclerView = findViewById(R.id.add_pictures_list)
-        pictureAdapter = PictureAdapter(picturesList, this )
+        pictureAdapter = PictureAdapter(picturesList, this, true )
         picturesRecyclerView.adapter = pictureAdapter
     }
 

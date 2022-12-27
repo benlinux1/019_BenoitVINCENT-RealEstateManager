@@ -114,11 +114,12 @@ class UpdatePropertyActivity: AppCompatActivity() {
 
         retrievePropertyId()
         setToolbar()
+        getCurrentRealtor()
         setTypeRadioButtons()
         setViewModel()
         setViews()
         setPicturesGallery()
-        getCurrentRealtor()
+
         setListenerOnUpdateButton()
         setAddPictureButtonListener()
     }
@@ -139,7 +140,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
         // Define layout & adapter
         picturesList = mutableListOf()
         picturesRecyclerView = findViewById(R.id.add_pictures_list)
-        pictureAdapter = PictureAdapter(picturesList, this )
+        pictureAdapter = PictureAdapter(picturesList, this, true)
         picturesRecyclerView.adapter = pictureAdapter
     }
 
