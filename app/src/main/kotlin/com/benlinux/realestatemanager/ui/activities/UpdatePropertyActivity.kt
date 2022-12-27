@@ -96,6 +96,10 @@ class UpdatePropertyActivity: AppCompatActivity() {
     // Realtor Data
     private lateinit var realtor: User
 
+    private lateinit var availableButton: RadioButton
+    private lateinit var soldButton: RadioButton
+
+
 
     // Constants
     annotation class Enum {
@@ -203,6 +207,8 @@ class UpdatePropertyActivity: AppCompatActivity() {
         country = findViewById(R.id.add_country_input)
         saveButton = findViewById(R.id.create)
         addPictureButton = findViewById(R.id.add_pictures_button)
+        availableButton = findViewById(R.id.add_status_radioButton1)
+        soldButton = findViewById(R.id.add_status_radioButton2)
     }
 
 
@@ -223,8 +229,16 @@ class UpdatePropertyActivity: AppCompatActivity() {
         setRoomsSpinners(property.numberOfRooms)
         setBedroomsSpinners(property.numberOfBedrooms)
         setBathroomsSpinners(property.numberOfBathrooms)
+        setAvailability(property.isAvailable)
     }
 
+    private fun setAvailability(isAvailable: Boolean) {
+        if (isAvailable) {
+            availableButton.isChecked = true
+        } else {
+            soldButton.isChecked = true
+        }
+    }
 
 
     // Configuring ViewModel from ViewModelFactory

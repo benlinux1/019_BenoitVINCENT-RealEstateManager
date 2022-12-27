@@ -155,9 +155,11 @@ class MyPropertiesActivity: AppCompatActivity() {
                     for (realtorProperty in realtorProperties) {
                         propertyViewModel.getPropertyById(realtorProperty.toInt()).observe(this) {
                             val property = it
-                            Log.d("REALTOR PROPERTY", it.toString())
+                            if (it != null) {
+                                Log.d("REALTOR PROPERTY", it.toString())
                             propertiesList.add(property)
                             propertyAdapter.notifyDataSetChanged()
+                            }
                         }
                     }
                 }

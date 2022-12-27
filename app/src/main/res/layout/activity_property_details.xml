@@ -31,18 +31,18 @@
             android:background="@color/colorIndigo">
 
             <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/imageSlider"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/property_details_picture_height"
-                android:id="@+id/imageSlider"
                 app:iss_auto_cycle="true"
-                app:iss_delay="0"
-                app:iss_placeholder="@color/colorIndigo"
-                app:iss_error_image="@color/colorIndigo"
                 app:iss_corner_radius="5"
+                app:iss_delay="0"
+                app:iss_error_image="@color/colorIndigo"
+                app:iss_period="1000"
+                app:iss_placeholder="@color/colorIndigo"
                 app:iss_selected_dot="@drawable/default_selected_dot"
                 app:iss_unselected_dot="@drawable/default_unselected_dot"
-                app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-                app:iss_period="1000" />
+                app:layout_constraintTop_toBottomOf="@id/main_toolbar" />
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -67,7 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
                 app:cardCornerRadius="4dp"
-                app:layout_constraintTop_toBottomOf="@id/imageSlider">
+                app:layout_constraintTop_toBottomOf="@id/imageSlider"
+                tools:layout_editor_absoluteX="16dp">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,8 +94,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimaryDark"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/property_details_information_title"
                         tools:text="@string/details_information_subtitle" />
 
@@ -102,12 +103,12 @@
                         android:id="@+id/property_details_separator"
                         android:layout_width="@dimen/property_details_separator_width"
                         android:layout_height="1dp"
-                        android:foregroundGravity="center"
+                        android:layout_marginVertical="@dimen/default_margin"
                         android:background="@color/colorPrimary"
-                        app:layout_constraintStart_toStartOf="parent"
+                        android:foregroundGravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/property_details_information_area"
-                        android:layout_marginVertical="@dimen/default_margin" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_information_area" />
 
                     <TextView
                         android:id="@+id/property_details_surface_title"
@@ -115,19 +116,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/default_margin"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/property_details_separator"
                         android:text="@string/details_surface_title"
-                        app:drawableStartCompat="@drawable/ic_details_surface_24" />
+                        app:drawableStartCompat="@drawable/ic_details_surface_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_separator" />
 
                     <TextView
                         android:id="@+id/property_details_surface_text"
                         style="@style/cardText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/property_details_surface_title"
                         app:layout_constraintStart_toEndOf="@id/property_details_surface_title"
                         app:layout_constraintTop_toTopOf="@+id/property_details_surface_title"
-                        app:layout_constraintBottom_toBottomOf="@+id/property_details_surface_title"
                         tools:text="@string/details_surface_text" />
 
                     <TextView
@@ -135,19 +136,19 @@
                         style="@style/cardTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/property_details_surface_text"
                         android:text="@string/details_rooms_title"
-                        app:drawableStartCompat="@drawable/ic_details_rooms_24" />
+                        app:drawableStartCompat="@drawable/ic_details_rooms_24"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_surface_text" />
 
                     <TextView
                         android:id="@+id/property_details_rooms_text"
                         style="@style/cardText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/property_details_rooms_title"
                         app:layout_constraintStart_toEndOf="@id/property_details_rooms_title"
                         app:layout_constraintTop_toTopOf="@+id/property_details_rooms_title"
-                        app:layout_constraintBottom_toBottomOf="@+id/property_details_rooms_title"
                         tools:text="@string/details_rooms_text" />
 
                     <TextView
@@ -156,18 +157,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/details_bathrooms_title"
+                        app:drawableStartCompat="@drawable/ic_details_bathrooms_24"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/property_details_rooms_text"
-                        app:drawableStartCompat="@drawable/ic_details_bathrooms_24" />
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_rooms_text" />
 
                     <TextView
                         android:id="@+id/property_details_bathrooms_text"
                         style="@style/cardText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/property_details_bathrooms_title"
                         app:layout_constraintStart_toEndOf="@id/property_details_bathrooms_title"
                         app:layout_constraintTop_toTopOf="@+id/property_details_bathrooms_title"
-                        app:layout_constraintBottom_toBottomOf="@+id/property_details_bathrooms_title"
                         tools:text="@string/details_bathrooms_text" />
 
                     <TextView
@@ -175,20 +176,20 @@
                         style="@style/cardTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/property_details_bathrooms_text"
                         android:text="@string/details_bedrooms_title"
                         app:drawableStartCompat="@drawable/ic_details_bedrooms_24"
-                        app:drawableTint="@color/colorPrimary" />
+                        app:drawableTint="@color/colorPrimary"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_bathrooms_text" />
 
                     <TextView
                         android:id="@+id/property_details_bedrooms_text"
                         style="@style/cardText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/property_details_bedrooms_title"
                         app:layout_constraintStart_toEndOf="@id/property_details_bedrooms_title"
                         app:layout_constraintTop_toTopOf="@+id/property_details_bedrooms_title"
-                        app:layout_constraintBottom_toBottomOf="@+id/property_details_bedrooms_title"
                         tools:text="@string/details_bedrooms_text" />
 
                     <TextView
@@ -196,19 +197,19 @@
                         style="@style/cardTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/property_details_bedrooms_text"
                         android:text="@string/details_price_title"
-                        app:drawableStartCompat="@drawable/ic_details_price_24" />
+                        app:drawableStartCompat="@drawable/ic_details_price_24"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/property_details_bedrooms_text" />
 
                     <TextView
                         android:id="@+id/property_details_price_text"
                         style="@style/cardText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/property_details_price_title"
                         app:layout_constraintStart_toEndOf="@id/property_details_price_title"
                         app:layout_constraintTop_toTopOf="@+id/property_details_price_title"
-                        app:layout_constraintBottom_toBottomOf="@+id/property_details_price_title"
                         tools:text="@string/details_price_text" />
 
                     <!-- LOCATION CONTAINER -->
@@ -234,9 +235,9 @@
                         <ImageView
                             android:id="@+id/property_details_location_icon"
                             style="@style/cardTitle"
-                            android:importantForAccessibility="no"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:importantForAccessibility="no"
                             android:src="@drawable/ic_details_location_24"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/property_details_price_text" />
@@ -271,17 +272,17 @@
                                 android:id="@+id/property_details_location_complement"
                                 style="@style/location"
                                 android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
                                 android:lineBreakStyle="normal"
                                 android:maxLines="2"
-                                android:layout_height="wrap_content"
                                 tools:text="@string/details_location_complement_text" />
 
                             <TextView
                                 android:id="@+id/property_details_location_postal_code_and_city"
                                 style="@style/location"
-                                android:maxLines="2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:maxLines="2"
                                 tools:text="@string/details_postal_code_text" />
 
 
@@ -307,10 +308,10 @@
                             <!-- Card view container -->
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/property_details_map_section"
-                                android:layout_marginStart="@dimen/small_margin"
-                                android:layout_marginEnd="@dimen/default_margin"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/small_margin"
+                                android:layout_marginEnd="@dimen/default_margin"
                                 app:cardCornerRadius="8dp">
 
                                 <!-- Map View -->
@@ -326,7 +327,33 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/background_sold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/backgroundTransparent"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/high_title_size"
+                        app:layout_constraintTop_toTopOf="@id/background_sold"
+                        app:layout_constraintBottom_toBottomOf="@id/background_sold"
+                        app:layout_constraintStart_toStartOf="@id/background_sold"
+                        app:layout_constraintEnd_toEndOf="@id/background_sold"
+                        android:rotation="-35"
+                        android:textColor="@color/colorAccent"
+                        android:text="@string/sold"/>
+
+                </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 

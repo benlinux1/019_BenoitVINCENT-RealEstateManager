@@ -3,10 +3,12 @@ package com.benlinux.realestatemanager.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
+import androidx.appcompat.widget.Toolbar
 import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.data.userManager.UserManager
 import com.benlinux.realestatemanager.ui.models.User
@@ -32,6 +34,7 @@ class SignupActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
+        setToolbar()
         setViews()
         setFirebaseDatabase()
         setListenerOnSignUpButton()
@@ -39,6 +42,25 @@ class SignupActivity : AppCompatActivity(){
         setListenerOnRealtorSwitch()
     }
 
+    // Toolbar configuration
+    private fun setToolbar() {
+        val mToolbar = findViewById<Toolbar>(R.id.main_toolbar)
+        setSupportActionBar(mToolbar)
+        supportActionBar!!.title = resources.getString(R.string.signup_title_toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
+
+
+    // Close settings activity and turn back to main activity if back button is clicked
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            val mainActivityIntent = Intent(this, MainActivity::class.java)
+            startActivity(mainActivityIntent)
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun setViews() {
         emailId = findViewById(R.id.signup_email)

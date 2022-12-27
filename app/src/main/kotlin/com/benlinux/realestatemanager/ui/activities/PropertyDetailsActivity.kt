@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -53,6 +54,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private lateinit var postalCodeAndCity: TextView
     private lateinit var country: TextView
     private lateinit var updateButton: FloatingActionButton
+    private lateinit var soldBackground: LinearLayout
 
     // The recycler view and the list + adapter for pictures gallery
     private lateinit var picturesRecyclerView: RecyclerView
@@ -184,7 +186,17 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
             val latLng: LatLng = getLatLngFromPropertyFormattedAddress(property!!.address, this)
             setMarkersForProperty(mGoogleMap, latLng)
+            setSoldView(property!!.isAvailable)
 
+        }
+    }
+
+    private fun setSoldView(availableProperty: Boolean) {
+        soldBackground = findViewById(R.id.background_sold)
+        if (availableProperty) {
+            soldBackground.visibility = View.GONE
+        } else {
+            soldBackground.visibility = View.VISIBLE
         }
     }
 

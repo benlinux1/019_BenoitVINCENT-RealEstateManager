@@ -7,12 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.LoginActivity">
 
+    <!-- Toolbar -->
+    <include
+        layout="@layout/toolbar_main"
+        android:id="@+id/main_toolbar"
+        style="@style/DrawerArrowStyle"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.20" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_input"
@@ -42,45 +48,63 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/guideline_logo" />
 
-    <EditText
-        android:id="@+id/login_email"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/login_email_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/default_margin"
-        android:paddingHorizontal="@dimen/default_margin"
-        android:drawablePadding="@dimen/drawable_padding_medium"
-        android:drawableTint="@color/colorPrimary"
-        android:background="@drawable/rounded_corner"
-        android:drawableStart="@drawable/ic_baseline_email_24"
-        android:paddingVertical="@dimen/small_padding"
-        android:ems="15"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:textSize="@dimen/higher_plus_text_size"
-        android:imeOptions="actionNext"
+        android:maxWidth="400dp"
+        android:layout_marginHorizontal="@dimen/default_large_margin"
+        android:textAppearance="@style/fieldTitle"
+        app:boxStrokeColor="@color/colorPrimary"
+        android:layout_marginBottom="@dimen/small_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_input" />
+        app:layout_constraintBottom_toBottomOf="@id/guideline_input" >
 
-    <EditText
-        android:id="@+id/login_password"
-        android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/drawable_padding_medium"
+            android:drawableTint="@color/colorPrimary"
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/higher_plus_text_size"
+            android:imeOptions="actionNext" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/login_password_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin"
-        android:paddingHorizontal="@dimen/default_medium_padding"
-        android:drawablePadding="@dimen/drawable_padding_medium"
-        android:drawableTint="@color/colorPrimary"
-        android:background="@drawable/rounded_corner"
-        android:drawableStart="@drawable/ic_baseline_password_24"
-        android:paddingVertical="@dimen/small_padding"
-        android:ems="15"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textSize="@dimen/higher_plus_text_size"
-        android:imeOptions="actionNext"
+        android:maxWidth="400dp"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginHorizontal="@dimen/default_large_margin"
+        android:textAppearance="@style/fieldTitle"
+        app:boxStrokeColor="@color/colorPrimary"
+        android:layout_marginBottom="@dimen/default_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_input" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline_input" >
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:drawablePadding="@dimen/drawable_padding_medium"
+            android:drawableTint="@color/colorPrimary"
+            android:drawableStart="@drawable/ic_baseline_password_24"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textSize="@dimen/higher_plus_text_size"
+            android:imeOptions="actionNext" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/login_button"
@@ -97,7 +121,7 @@
         app:layout_constraintBottom_toBottomOf="@id/guideline_link"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_password" />
+        app:layout_constraintTop_toBottomOf="@+id/login_password_layout" />
 
     <TextView
         android:id="@+id/login_signup_link"

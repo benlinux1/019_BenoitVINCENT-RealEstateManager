@@ -1,6 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.activities.SettingsActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Toolbar -->
+    <include
+        layout="@layout/toolbar_main"
+        android:id="@+id/main_toolbar"
+        style="@style/DrawerArrowStyle"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/restaurant_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/activity_setting_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/settings_user_avatar"
+                android:layout_width="@dimen/user_avatar_size"
+                android:layout_height="@dimen/user_avatar_size"
+                android:layout_margin="@dimen/default_large_margin"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:srcCompat="@tools:sample/avatars"
+                android:contentDescription="@string/user_avatar_description" />
+
+            <ImageView
+                android:id="@+id/settings_user_avatar_update"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_add_photo_24"
+                app:layout_constraintBottom_toBottomOf="@id/settings_user_avatar"
+                app:layout_constraintEnd_toEndOf="@id/settings_user_avatar"
+                android:contentDescription="@string/user_avatar_update"
+                app:tint="@color/colorPrimary" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/settings_user_fist_name_input"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxWidth="400dp"
+                android:layout_marginHorizontal="@dimen/default_large_margin"
+                android:layout_marginTop="@dimen/default_large_margin"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@+id/settings_user_avatar"
+                android:hint="@string/settings_user_firstName_title">
+
+                <EditText
+                    android:id="@+id/settings_user_first_name_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/settings_user_name"
+                    android:text="@string/settings_user_firstName_title"
+                    app:boxStrokeColor="@color/mtrl_textinput_default_box_stroke_color"
+                    android:inputType="text"
+                    android:imeOptions="actionDone"
+                    android:autofillHints="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/settings_user_last_name_input"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxWidth="400dp"
+                android:layout_marginHorizontal="@dimen/default_large_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@+id/settings_user_fist_name_input"
+                android:hint="@string/settings_user_lastName_title">
+
+                <EditText
+                    android:id="@+id/settings_user_last_name_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/settings_user_name"
+                    android:text="@string/settings_user_name"
+                    android:inputType="text"
+                    android:imeOptions="actionDone"
+                    android:autofillHints="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/settings_user_email_input"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxWidth="400dp"
+                android:layout_marginHorizontal="@dimen/default_large_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@id/settings_user_last_name_input"
+                android:hint="@string/settings_user_email_title" >
+
+                <EditText
+                    android:id="@+id/settings_user_email_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_user_email"
+                    android:hint="@string/settings_user_email"
+                    android:inputType="textEmailAddress"
+                    android:autofillHints="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/settings_realtor_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/higher_plus_text_size"
+                app:layout_constraintTop_toBottomOf="@+id/settings_user_email_input"
+                app:layout_constraintStart_toStartOf="@+id/settings_user_email_input"
+                app:layout_constraintEnd_toEndOf="@+id/settings_user_email_input"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <TextView
+                    android:id="@+id/settings_realtor_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/signup_realtor_question"
+                    android:textSize="@dimen/high_text_size"/>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/settings_realtor_switch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/settings_update_button"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="270dp"
+                android:layout_marginBottom="@dimen/default_large_margin"
+                android:backgroundTint="@color/colorOrange"
+                android:textSize="@dimen/high_text_size"
+                android:textColor="@color/colorWhite"
+                app:iconTint="@color/colorWhite"
+                app:icon="@drawable/ic_save_profile"
+                android:text="@string/settings_update_button_text"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/settings_realtor_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/default_medium_margin"
+                android:layout_marginHorizontal="@dimen/small_margin" />
+
+            <Button
+                android:id="@+id/settings_delete_button"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="270dp"
+                android:layout_marginBottom="@dimen/default_large_margin"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:text="@string/delete_button_text"
+                android:textSize="@dimen/high_text_size"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                app:iconTint="@color/colorWhite"
+                app:icon="@drawable/ic_baseline_delete_24"
+                android:layout_marginTop="@dimen/small_margin"
+                app:layout_constraintTop_toBottomOf="@+id/settings_update_button"
+                app:layout_constraintStart_toStartOf="@id/settings_update_button"
+                app:layout_constraintEnd_toEndOf="@id/settings_update_button" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

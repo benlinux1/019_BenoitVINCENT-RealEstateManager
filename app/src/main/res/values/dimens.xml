@@ -70,7 +70,7 @@
     <dimen name="dialog_button_width">140dp</dimen>
 
     <!-- Login Activity -->
-    <dimen name="logo_dimens">120dp</dimen>
+    <dimen name="logo_dimens">100dp</dimen>
 
     <!-- Drawer Header -->
     <dimen name="drawer_header_height">180dp</dimen>

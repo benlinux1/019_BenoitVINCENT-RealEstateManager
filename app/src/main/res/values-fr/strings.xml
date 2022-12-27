@@ -127,6 +127,7 @@
     <string name="realtor_properties_toolbar_title">Mes biens imobiliers</string>
 
     // SIGNUP ACTIVITY
+    <string name="signup_title_toolbar">Création d\'un compte</string>
     <string name="signup_realtor_question">Etes-vous un agent immobilier ?</string>
     <string name="get_realtor_access">Accès restreint</string>
     <string name="add_realtor_password">Saisissez le code de votre agence</string>
@@ -134,6 +135,25 @@
     <string name="validate_realtor_button">CONFIRMER</string>
     <string name="wrong_password">Le code agence est incorrect</string>
     <string name="zoom_close_content_description">close_picture</string>
+    <string name="sold">Vendu…</string>
+
+    // SETTINGS ACTIVITY
+    <string name="settings_title_toolbar">Compte utilisateur</string>
+    <string name="popup_message_choice_yes">OUI</string>
+    <string name="popup_message_choice_no">NON</string>
+    <string name="popup_message_confirmation_delete_account">Voulez-vous réellement supprimer votre compte ?</string>
+    <string name="delete_account_succeed">Compte supprimé avec succès !</string>
+    <string name="delete_account_failed">Erreur pendant la suppression… Veuillez réessayer</string>
+    <string name="settings_update_button_text">Mettre à jour</string>
+    <string name="delete_button_text">Supprimer le compte</string>
+    <dimen name="settings_progressbar_size">80dip</dimen>
+    <string name="settings_user_firstName_title">Prénom</string>
+    <string name="settings_user_lastName_title">Nom</string>
+    <string name="settings_user_email_title">Email</string>
+    <string name="account_update_success">Compte modifié avec succès !</string>
+    <string name="user_avatar_description">photo d\'un utilisateur</string>
+    <string name="user_avatar_update">mise à jour de la photo d\'un utilisateur</string>
+    <string name="login_title_toolbar">Connexion</string>
 
 
 </resources>

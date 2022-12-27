@@ -145,6 +145,28 @@
     <string name="validate_realtor_button">CONFIRM</string>
     <string name="wrong_password">Agency password is not correct</string>
     <string name="zoom_close_content_description">close_picture</string>
+    <string name="sold">Already sold…</string>
+
+    // SETTINGS ACTIVITY
+    <string name="settings_title_toolbar">Settings</string>
+    <string name="popup_message_choice_yes">YES</string>
+    <string name="popup_message_choice_no">NO</string>
+    <string name="popup_message_confirmation_delete_account">Do you really want to delete your account ?</string>
+    <string name="delete_account_succeed">Account deleted with success !</string>
+    <string name="delete_account_failed">Error during deletion… Try again</string>
+    <string name="settings_update_button_text">Save changes</string>
+    <string name="delete_button_text">Delete account</string>
+    <dimen name="settings_progressbar_size">80dip</dimen>
+    <string name="settings_user_firstName_title">First name</string>
+    <string name="settings_user_lastName_title">Last name</string>
+    <string name="settings_user_name" translatable="false">John Doe</string>
+    <string name="settings_user_email_title">Email</string>
+    <string name="settings_user_email" translatable="false">johndoe@test.com</string>
+    <string name="account_update_success">Account update successful !</string>
+    <string name="user_avatar_description">user picture</string>
+    <string name="user_avatar_update">update user picture</string>
+    <string name="signup_title_toolbar">Account creation</string>
+    <string name="login_title_toolbar">Connexion</string>
 
 
 </resources>
