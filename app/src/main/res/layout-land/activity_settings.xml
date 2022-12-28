@@ -21,8 +21,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/activity_setting_layout"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/screen_width"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:paddingBottom="@dimen/default_large_padding">
 
             <ImageView
@@ -51,13 +52,13 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxWidth="400dp"
                 android:layout_marginHorizontal="@dimen/default_large_margin"
                 android:layout_marginTop="@dimen/default_large_margin"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@+id/settings_user_avatar"
-                android:hint="@string/settings_user_firstName_title"
-                app:endIconMode="clear_text">
+                android:hint="@string/settings_user_firstName_title">
 
                 <EditText
                     android:id="@+id/settings_user_first_name_field"
@@ -76,12 +77,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxWidth="400dp"
                 android:layout_marginHorizontal="@dimen/default_large_margin"
                 android:layout_marginTop="@dimen/small_margin"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@+id/settings_user_fist_name_input"
-                android:hint="@string/settings_user_lastName_title"
-                app:endIconMode="clear_text" >
+                android:hint="@string/settings_user_lastName_title">
 
                 <EditText
                     android:id="@+id/settings_user_last_name_field"
@@ -92,7 +93,6 @@
                     android:inputType="text"
                     android:imeOptions="actionDone"
                     android:autofillHints="" />
-
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -100,12 +100,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxWidth="400dp"
                 android:layout_marginHorizontal="@dimen/default_large_margin"
                 android:layout_marginTop="@dimen/small_margin"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@id/settings_user_last_name_input"
-                android:hint="@string/settings_user_email_title"
-                app:endIconMode="clear_text">
+                android:hint="@string/settings_user_email_title" >
 
                 <EditText
                     android:id="@+id/settings_user_email_field"

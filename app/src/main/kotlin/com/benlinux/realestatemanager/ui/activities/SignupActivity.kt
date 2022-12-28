@@ -90,16 +90,16 @@ class SignupActivity : AppCompatActivity(){
 
             // Check errors
             if (email.isEmpty()) {
-                emailId.error = "Please provide email id"
+                emailId.error = getString(R.string.please_provide_email)
                 emailId.requestFocus()
             } else if (userFirstName.isEmpty()) {
-                firstName.error = "Please provide your first name"
+                firstName.error = getString(R.string.please_provide_firstname)
                 firstName.requestFocus()
             } else if (userLastName.isEmpty()) {
-                lastName.error = "Please provide your last name"
+                lastName.error = getString(R.string.please_provide_lastname)
                 lastName.requestFocus()
             } else if (userPassword.isEmpty()) {
-                password.error = "Please provide password"
+                password.error = getString(R.string.please_provide_password)
                 password.requestFocus()
 
             // if no errors
@@ -110,7 +110,7 @@ class SignupActivity : AppCompatActivity(){
                         .addOnCompleteListener(this) { task ->
                             // if task is not successful
                             if (!task.isSuccessful) {
-                                Toast.makeText(this, "An error occurred", Toast.LENGTH_LONG).show()
+                                Toast.makeText(this, getString(R.string.error_unknown_error), Toast.LENGTH_LONG).show()
                                 Log.d("Error SignUp", task.exception.toString())
                                 // if task is successful
                             } else {
@@ -129,7 +129,7 @@ class SignupActivity : AppCompatActivity(){
                                 // Register user in database
                                 UserManager.createUser(userToCreate)?.addOnSuccessListener {
                                     // If user created in database, go to main activity
-                                    Toast.makeText(this, "Authentication successful", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(this, getString(R.string.connection_succeed), Toast.LENGTH_LONG).show()
                                     val mainActivityIntent = Intent(this, MainActivity::class.java)
                                     startActivity(mainActivityIntent)
                                     finish()
@@ -137,7 +137,7 @@ class SignupActivity : AppCompatActivity(){
                             }
                         }
                 } else {
-                    Toast.makeText(this, "An error occurred", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.error_unknown_error), Toast.LENGTH_LONG).show()
                 }
             }
         }

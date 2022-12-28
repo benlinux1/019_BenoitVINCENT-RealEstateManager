@@ -72,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
             if (mFirebaseUser != null) {
                 navigateToHomeActivity()
             } else {
-                Toast.makeText(this, "Please login", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.please_login), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -84,29 +84,29 @@ class LoginActivity : AppCompatActivity() {
             val pwd: String = password.text.toString()
 
             if (email.isEmpty()) {
-                emailId.error = "Please provide email"
+                emailId.error = getString(R.string.please_provide_email)
                 emailId.requestFocus()
             } else if (pwd.isEmpty()) {
-                password.error = "Please provide password"
+                password.error = getString(R.string.please_provide_password)
                 password.requestFocus()
             } else if (email.isEmpty() && pwd.isEmpty()) {
-                Toast.makeText(this, "Fields are empty", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.fields_empty), Toast.LENGTH_LONG).show()
             } else {
                 if (!(email.isEmpty() && pwd.isEmpty())) {
                     firebaseAuth!!.signInWithEmailAndPassword(email, pwd)
                         .addOnCompleteListener(this) { task ->
                             if (!task.isSuccessful) {
                                 Toast.makeText(
-                                    this, "Login Error ,Please Login In",
+                                    this, getString(R.string.error_unknown_error),
                                     Toast.LENGTH_LONG
                                 ).show()
                             } else {
-                                Toast.makeText(applicationContext, "Login successful", Toast.LENGTH_LONG).show()
+                                Toast.makeText(applicationContext, getString(R.string.connection_succeed), Toast.LENGTH_LONG).show()
                                 navigateToHomeActivity()
                             }
                         }
                 } else {
-                    Toast.makeText(this, "Error Occurred !", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.error_unknown_error), Toast.LENGTH_LONG).show()
                 }
             }
         }

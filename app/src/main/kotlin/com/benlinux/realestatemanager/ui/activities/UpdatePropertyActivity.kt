@@ -160,7 +160,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
     private fun setToolbar() {
         val mToolbar = findViewById<Toolbar>(R.id.main_toolbar)
         setSupportActionBar(mToolbar)
-        mToolbar.title = resources.getString(R.string.add_property_activity_title)
+        supportActionBar!!.title = resources.getString(R.string.update_property_activity_title)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 

@@ -7,6 +7,7 @@
     android:id="@+id/property_details_main_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorIndigo"
     tools:context=".ui.activities.PropertyDetailsActivity">
 
     <!-- Toolbar -->
@@ -25,10 +26,11 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="500dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/main_toolbar"
-            android:background="@color/colorIndigo">
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/main_toolbar">
 
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/imageSlider"
@@ -52,9 +54,9 @@
                 android:layout_marginEnd="@dimen/default_margin"
                 android:clickable="true"
                 android:focusable="true"
-                app:layout_constraintBottom_toTopOf="@+id/property_details_information_section"
+                app:layout_constraintBottom_toBottomOf="@+id/property_details_main_picture"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/property_details_information_section"
+                app:layout_constraintTop_toBottomOf="@+id/imageSlider"
                 android:contentDescription="@string/property_details_update_button"
                 app:backgroundTint="@android:color/white"
                 app:tint="@color/colorAccent"
@@ -255,11 +257,11 @@
 
                             <TextView
                                 android:id="@+id/property_details_location_title"
+                                style="@style/cardLocationTitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/details_location_title"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="@dimen/high_text_size"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -394,7 +396,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="@dimen/default_medium_padding"
+                        android:paddingHorizontal="@dimen/default_padding"
                         android:paddingBottom="@dimen/default_padding"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:layout_marginTop="@dimen/small_margin"

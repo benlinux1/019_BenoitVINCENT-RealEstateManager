@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -40,17 +41,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
-        android:layout_marginTop="@dimen/small_margin"
-        android:layout_marginBottom="80dp"
         android:overScrollMode="never">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_my_properties"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/screen_width"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="@dimen/recycler_view_margin_horizontal"
             android:paddingTop="@dimen/default_padding"
-            android:paddingBottom="72dp"
+            android:paddingBottom="60dp"
             tools:listitem="@layout/item_property_list"
             app:layoutManager="LinearLayoutManager"/>
 

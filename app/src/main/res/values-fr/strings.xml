@@ -38,6 +38,7 @@
     <string name="disconnection_failed">Erreur pendant la déconnexion, réessayez svp</string>
 
     // PROPERTY DETAILS
+    <string name="details_activity_title">Fiche détaillée</string>
     <string name="property_details_update_button">Bouton pour mettre à jour le bien immobilier</string>
     <string name="property_details_information_title">Duplex</string>
     <string name="details_information_subtitle">Manhattan</string>
@@ -80,7 +81,7 @@
     <string name="add_status_1">Disponible</string>
     <string name="add_status_2">Vendu</string>
     <string name="add_price_text">Prix*</string>
-    <string name="add_surface_text">Superficie</string>
+    <string name="add_surface_text">Superficie (m²)</string>
     <string name="add_property_description_text">Anchored by a vast marble gallery with sweeping staircase, th entertaining floor includes a baronial living room facing Park Avenue, handsome library with oringinal paneling, and tremendous dining room; all of which enjoy fireplaces. The state-of-the-art Saint Charles designed kitchen includes a sunny breakfast room and staff quarters. Upstairs, the expansive master suite overlooks Park Avenue and includes two marble baths, two dressing rooms, and two offices. Additionally, the are three large bedrooms with en-suite baths and a media room.</string>
     <string name="property_picture_content_description">Photo du bien</string>
     <string name="add_pictures_title">Galerie Photo</string>
@@ -116,6 +117,9 @@
     <string name="add_property_city">Ville*</string>
     <string name="add_property_country">Pays</string>
 
+
+    // UPDATE PROPERTY FRAGMENT
+    <string name="update_property_activity_title">Modification du bien</string>
     <string name="update_button_text">Mettre à jour</string>
 
 
@@ -154,6 +158,13 @@
     <string name="user_avatar_description">photo d\'un utilisateur</string>
     <string name="user_avatar_update">mise à jour de la photo d\'un utilisateur</string>
     <string name="login_title_toolbar">Connexion</string>
+
+
+    <string name="please_provide_email">Veuillez saisir votre adresse email</string>
+    <string name="please_provide_password">Veuillez saisir votre mot de passe</string>
+    <string name="fields_empty">Les champs sont vides</string>
+    <string name="please_provide_firstname">Veuillez saisir votre prénom</string>
+    <string name="please_provide_lastname">Veuillez saisir votre nom</string>
 
 
 </resources>

@@ -28,13 +28,14 @@
     <!-- Text sizes -->
     <dimen name="high_title_size">30sp</dimen>
     <dimen name="default_title_size">20sp</dimen>
+    <dimen name="default_subtitle_size">18sp</dimen>
 
-    <dimen name="high_text_size">16sp</dimen>
-    <dimen name="higher_plus_text_size">15sp</dimen>
-    <dimen name="higher_text_size">14sp</dimen>
-    <dimen name="default_text_size">13sp</dimen>
-    <dimen name="smaller_text_size">12sp</dimen>
-    <dimen name="default_text_size_mini">8sp</dimen>
+    <dimen name="high_text_size">18sp</dimen>
+    <dimen name="higher_plus_text_size">17sp</dimen>
+    <dimen name="higher_text_size">16sp</dimen>
+    <dimen name="default_text_size">15sp</dimen>
+    <dimen name="smaller_text_size">14sp</dimen>
+    <dimen name="default_text_size_mini">10sp</dimen>
 
     <!-- Cards -->
     <dimen name="default_elevation_size">8dp</dimen>
@@ -44,7 +45,7 @@
     <dimen name="profile_button_width">180dp</dimen>
 
     <!-- Recycler view -->
-    <dimen name="list_restaurant_picture">72dp</dimen>
+    <dimen name="list_property_picture">72dp</dimen>
     <dimen name="recycler_view_margin_top">4dp</dimen>
     <dimen name="recycler_view_margin_bottom">0dp</dimen>
     <dimen name="recycler_view_margin_horizontal">8dp</dimen>
@@ -70,6 +71,7 @@
     <!-- Item Picture -->
     <dimen name="item_picture_size">80dp</dimen>
     <dimen name="item_picture_description_height">20dp</dimen>
+
 
 
 </resources>

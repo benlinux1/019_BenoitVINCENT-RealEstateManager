@@ -48,7 +48,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/add_name_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/land_input_width"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/default_medium_margin"
                         android:hint="@string/add_property_name">
@@ -71,7 +71,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/add_area_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/land_input_width"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/small_margin"
                         android:hint="@string/add_property_area">
@@ -166,7 +166,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/add_price_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/land_input_width"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/small_margin"
                         android:hint="@string/add_price_text">
@@ -189,7 +189,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/add_surface_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/land_input_width"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/small_margin"
                         android:hint="@string/add_surface_text">
@@ -211,7 +211,7 @@
                     <!-- PROPERTY DESCRIPTION -->
                     <LinearLayout
                         android:id="@+id/add_description_section"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/land_input_width"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         app:layout_constraintStart_toStartOf="parent"
@@ -281,7 +281,7 @@
                     <!-- PROPERTY PICTURES -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/add_pictures_section"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/land_input_width"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:layout_marginTop="@dimen/default_medium_margin">
@@ -488,7 +488,7 @@
                     <!-- ADDRESS SECTION -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/add_pictures_section"
-                        android:layout_width="match_parent"
+                        android:layout_width="@dimen/land_input_width"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
