@@ -56,13 +56,22 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <!-- PROPERTY DETAILS SUB SECTIONS TITLES-->
+    <style name="cardSubCategories" >
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:textSize">@dimen/higher_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
 
     <!-- PROPERTY DETAILS CARD TEXTS-->
     <style name="cardText">
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginStart">4dp</item>
         <item name="android:textSize">@dimen/default_text_size</item>
-        <item name="android:paddingTop">2dp</item>
     </style>
 
     <!-- PROPERTY DETAILS LOCATION TITLE-->
@@ -126,11 +135,6 @@
         <item name="boxStrokeColor">@color/colorPrimary</item>
         <item name="boxStrokeWidth">1dp</item>
     </style>
-
-
-
-
-
 
 
 

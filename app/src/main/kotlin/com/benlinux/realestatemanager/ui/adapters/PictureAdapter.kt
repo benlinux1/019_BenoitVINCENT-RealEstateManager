@@ -81,8 +81,8 @@ class PictureAdapter(pictures: MutableList<Picture?>, context: Context, userIsRe
 
         // Popup icon action
         if(realtorStatus) {
-            // If realtor is updating, set delete icon with delete feature
-            if (context.javaClass.simpleName == "UpdatePropertyActivity") {
+            // If realtor is updating or adding, set delete icon with delete feature
+            if (context.javaClass.simpleName == "UpdatePropertyActivity" || context.javaClass.simpleName == "AddPropertyActivity") {
                 windowIcon.setImageResource(R.drawable.ic_baseline_delete_24)
                 windowIcon.setColorFilter(ContextCompat.getColor(context, R.color.colorAccent))
                 windowIcon.setOnClickListener {

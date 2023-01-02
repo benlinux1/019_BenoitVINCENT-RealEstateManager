@@ -55,6 +55,11 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private lateinit var country: TextView
     private lateinit var updateButton: FloatingActionButton
     private lateinit var soldBackground: LinearLayout
+    private lateinit var propertyRealtor : TextView
+    private lateinit var dateOfPublication: TextView
+    private lateinit var dateOfSold: TextView
+    private lateinit var dateOfPublicationTitle: TextView
+    private lateinit var dateOfSoldTitle: TextView
 
     // The recycler view and the list + adapter for pictures gallery
     private lateinit var picturesRecyclerView: RecyclerView
@@ -165,6 +170,11 @@ class PropertyDetailsActivity: AppCompatActivity() {
         postalCodeAndCity = findViewById(R.id.property_details_location_postal_code_and_city)
         country = findViewById(R.id.property_details_location_country)
         updateButton = findViewById(R.id.property_details_update_button)
+        propertyRealtor = findViewById(R.id.property_details_realtor_text)
+        dateOfPublication = findViewById(R.id.property_details_publication_date_text)
+        dateOfSold = findViewById(R.id.property_details_sold_date_text)
+        dateOfPublicationTitle = findViewById(R.id.property_details_publication_date_title)
+        dateOfSoldTitle = findViewById(R.id.property_details_sold_date_title)
     }
 
     // Configuring ViewModel from ViewModelFactory
@@ -236,7 +246,30 @@ class PropertyDetailsActivity: AppCompatActivity() {
             setPropertyPictures(property!!)
             setFullAddress(property!!)
 
+            setPropertyRealtor(property!!) // property realtor
+            setPropertyDates(property!!) // publication / sold date
+
             Log.d("ACTUAL PROPERTY", property.toString())
+        }
+    }
+
+    private fun setPropertyDates(property: Property) {
+        if (property.isAvailable) {
+            dateOfPublication.text = property.creationDate
+            dateOfSold.visibility = View.GONE
+            dateOfSoldTitle.visibility = View.GONE
+        } else {
+            dateOfSold.text = property.soldDate
+            dateOfPublication.visibility = View.GONE
+            dateOfPublicationTitle.visibility = View.GONE
+        }
+    }
+
+    private fun setPropertyRealtor(property: Property) {
+        propertyRealtor.text = buildString {
+            append(property.realtor.firstName)
+            append(" ")
+            append(property.realtor.lastName)
         }
     }
 

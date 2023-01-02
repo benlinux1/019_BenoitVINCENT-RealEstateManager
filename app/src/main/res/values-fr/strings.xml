@@ -60,6 +60,12 @@
     <string name="details_location_state_text">FRANCE</string>
     <string name="property_details_description_title">Description</string>
     <string name="property_details_description_text">Description du bien</string>
+    <string name="property_details_other_title">Further information</string>
+    <string name="details_realtor_title">Property\'s realtor :&#160;</string>
+    <string name="details_realtor_text">Franck BLACK</string>
+    <string name="details_date_title">Date of publication : &#160;</string>
+    <string name="details_date_text">02/01/2023</string>
+    <string name="details_sold_date_title">Date of sold :&#160;</string>
 
 
     // PROPERTY LIST
@@ -116,6 +122,7 @@
     <string name="add_postal_code">Code postal*</string>
     <string name="add_property_city">Ville*</string>
     <string name="add_property_country">Pays</string>
+    <string name="sold_date_dialog_title">Veuillez indiquer la date de vente</string>
 
 
     // UPDATE PROPERTY FRAGMENT
@@ -165,6 +172,5 @@
     <string name="fields_empty">Les champs sont vides</string>
     <string name="please_provide_firstname">Veuillez saisir votre prénom</string>
     <string name="please_provide_lastname">Veuillez saisir votre nom</string>
-
 
 </resources>

@@ -1,6 +1,7 @@
 package com.benlinux.realestatemanager.ui.activities
 
 import android.Manifest
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -8,6 +9,8 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -84,7 +87,6 @@ class AddPropertyActivity: AppCompatActivity() {
     private lateinit var countryLayout: TextInputLayout
     private lateinit var country: EditText
 
-
     // The adapter which handles the list of pictures
     private lateinit var pictureAdapter: PictureAdapter
 
@@ -99,7 +101,15 @@ class AddPropertyActivity: AppCompatActivity() {
     // Picture URL
     private var uriImageSelected: Uri? = null
 
+    // Current realtor
     private lateinit var realtor: User
+
+    // Property status checkboxes
+    private lateinit var availableButton: RadioButton
+    private lateinit var soldButton: RadioButton
+
+    // Date of sold
+    private var dateOfSold: String? = null
 
     // Constants
     annotation class Enum {
@@ -126,8 +136,7 @@ class AddPropertyActivity: AppCompatActivity() {
         setAddPictureButtonListener()
         configureRecyclerView()
         getCurrentRealtor()
-
-
+        setListenerOnSoldChecked()
     }
 
     private fun getCurrentRealtor() {
@@ -149,9 +158,8 @@ class AddPropertyActivity: AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    /**
-     * Close add property activity and turn back to main activity if back button is clicked
-     */
+
+     // Close current activity and turn back to main activity if back button is clicked
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             val mainActivityIntent = Intent(this, MainActivity::class.java)
@@ -162,7 +170,7 @@ class AddPropertyActivity: AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    // Set radio buttons for property type
+    // Set radio buttons for property type (flat, penthouse, house, duplex)
     private fun setTypeRadioButtons() {
         typeRadioGroup1 = findViewById(R.id.add_type_radioGroup1)
         typeRadioGroup2 = findViewById(R.id.add_type_radioGroup2)
@@ -224,6 +232,8 @@ class AddPropertyActivity: AppCompatActivity() {
         city = findViewById(R.id.add_city_input)
         countryLayout = findViewById(R.id.add_country_layout)
         country = findViewById(R.id.add_country_input)
+        availableButton = findViewById(R.id.add_status_radioButton1)
+        soldButton = findViewById(R.id.add_status_radioButton2)
     }
 
     // Create property action that retrieves all data
@@ -236,11 +246,13 @@ class AddPropertyActivity: AppCompatActivity() {
         property.description = description.text.toString()
         property.isAvailable = isPropertyAvailable()
         property.creationDate = getTodayDate()
+        if (!property.isAvailable) {
+            property.soldDate = dateOfSold!!
+        }
         property.realtor = realtor
         property.address = getPropertyAddress()
         property.id = System.currentTimeMillis().toInt()
         property.pictures = picturesList
-
     }
 
     // Fields validation
@@ -266,7 +278,6 @@ class AddPropertyActivity: AppCompatActivity() {
 
     // Rooms number spinner
     private fun setRoomsSpinners() {
-
         roomSpinner = findViewById(R.id.add_number_rooms_count)
         val roomsItems = arrayListOf(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25, 26,27,28,29,30)
         val roomAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, roomsItems)
@@ -345,6 +356,7 @@ class AddPropertyActivity: AppCompatActivity() {
         }
     }
 
+    // Get property type according to checkbox clicked
     private fun getPropertyType(): String {
         val selectedRadioButtonIDinGroup1: Int = typeRadioGroup1.checkedRadioButtonId
         val selectedRadioButtonIDinGroup2: Int = typeRadioGroup2.checkedRadioButtonId
@@ -359,6 +371,7 @@ class AddPropertyActivity: AppCompatActivity() {
         }
     }
 
+    // Get price value
     private fun getPropertyPrice() {
         val priceValue = price.text.toString()
         try {
@@ -368,6 +381,7 @@ class AddPropertyActivity: AppCompatActivity() {
         }
     }
 
+    // Get surface value
     private fun getPropertySurface() {
         val surfaceValue = surface.text.toString()
         try {
@@ -511,9 +525,7 @@ class AddPropertyActivity: AppCompatActivity() {
         pictureAdapter.updatePictures(picturesList)
     }
 
-    /**
-     * Init the recyclerView that contains pictures list
-     */
+     // Init the recyclerView that contains pictures list
     private fun configureRecyclerView() {
         // Define layout & adapter
         picturesRecyclerView = findViewById(R.id.add_pictures_list)
@@ -531,5 +543,67 @@ class AddPropertyActivity: AppCompatActivity() {
                 city.text.toString(),
                 country.text.toString()
         )
+    }
+
+    // When user selects sold status, launch date picker
+    private fun setListenerOnSoldChecked() {
+        soldButton.setOnClickListener {
+            showDateDialog()
+        }
+    }
+
+    // Custom date picker dialog
+    @Suppress("DEPRECATION")
+    private fun showDateDialog() {
+        val currentDate = Calendar.getInstance(Locale.FRANCE)
+
+        // Date Picker dialog
+        val datePickerDialog = DatePickerDialog(
+            this, object : DatePickerDialog.OnDateSetListener {
+                private val date = Calendar.getInstance(Locale.FRANCE)
+
+                // When user select a date
+                override fun onDateSet(
+                    datePicker: DatePicker,
+                    year: Int,
+                    monthOfYear: Int,
+                    dayOfMonth: Int
+                ) {
+                    date[year, monthOfYear] = dayOfMonth
+
+                    // Define date of sold
+                    dateOfSold = convertDateToString(date.time)
+                }
+            }, currentDate[Calendar.YEAR], currentDate[Calendar.MONTH],
+            currentDate[Calendar.DATE]
+        )
+
+        // Disable dates after today in date picker
+        datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+
+        // Customize title view
+        val customTitle = TextView(applicationContext)
+        customTitle.setText(R.string.sold_date_dialog_title) // title text
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            customTitle.setTextColor(resources.getColor(R.color.colorWhite, resources.newTheme())) // text color
+            customTitle.setBackgroundColor(resources.getColor(R.color.colorAccent, resources.newTheme())) // background color
+        } else {
+            customTitle.setTextColor(resources.getColor(R.color.colorWhite)) // text color
+            customTitle.setBackgroundColor(resources.getColor(R.color.colorAccent)) // background color
+        }
+        customTitle.gravity = Gravity.CENTER // gravity
+        customTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 19f) // text size
+        customTitle.setPadding(8, 24, 8, 16) // padding
+        // Set custom title
+        datePickerDialog.setCustomTitle(customTitle)
+
+        // When user cancel or dismiss date dialog
+        datePickerDialog.setOnCancelListener {
+            soldButton.isChecked = false
+            availableButton.isChecked = true
+        }
+
+        // Show date dialog
+        datePickerDialog.show()
     }
 }

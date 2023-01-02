@@ -71,6 +71,12 @@
     <string name="property_details_description_text">Property description</string>
     <string name="details_price_title">Price :&#160;</string>
     <string name="details_price_text">$ 29 872 000</string>
+    <string name="property_details_other_title">Further information</string>
+    <string name="details_realtor_title">Property\'s realtor :&#160;</string>
+    <string name="details_realtor_text">Franck BLACK</string>
+    <string name="details_date_title">Date of publication :&#160;</string>
+    <string name="details_date_text">02/01/2023</string>
+    <string name="details_sold_date_title">Date of sold :&#160;</string>
 
 
     // PROPERTY LIST
@@ -128,6 +134,7 @@
     <string name="add_postal_code">Postal code*</string>
     <string name="add_property_city">City*</string>
     <string name="add_property_country">Country</string>
+    <string name="sold_date_dialog_title">Please select the date of sold</string>
 
     // UPDATE PROPERTY ACTIVITY
     <string name="update_property_activity_title">Property update</string>

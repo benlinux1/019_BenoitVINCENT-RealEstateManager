@@ -16,3 +16,9 @@ fun getTodayDate(): String {
     val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
     return dateFormat.format(Date())
 }
+
+@SuppressLint("SimpleDateFormat")
+fun convertDateToString(date: Date): String {
+    val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
+    return dateFormat.format(date)
+}
