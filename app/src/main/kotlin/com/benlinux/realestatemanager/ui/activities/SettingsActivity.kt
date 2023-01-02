@@ -3,19 +3,27 @@ package com.benlinux.realestatemanager.ui.activities
 import android.Manifest
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.util.Log
 import android.view.MenuItem
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
 import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.data.userManager.UserManager
+import com.benlinux.realestatemanager.ui.activities.SettingsActivity.Enum.Companion.PERMS
+import com.benlinux.realestatemanager.ui.activities.SettingsActivity.Enum.Companion.RC_IMAGE_PERMS
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import pub.devrel.easypermissions.AfterPermissionGranted
+import pub.devrel.easypermissions.EasyPermissions
 
 class SettingsActivity: AppCompatActivity() {
 
@@ -48,6 +56,10 @@ class SettingsActivity: AppCompatActivity() {
         setToolbar()
         setViews()
         updateUIWithUserData()
+        setListenerOnUpdateAvatarButton()
+        setListenerOnUpdateAccountButton()
+        setListenerOnDeleteAccountButton()
+
     }
 
     // Toolbar configuration
@@ -178,7 +190,76 @@ class SettingsActivity: AppCompatActivity() {
         }
     }
 
+    private fun setListenerOnUpdateAvatarButton() {
+        updateAvatarButton.setOnClickListener {
+            updateAvatarPicture()
+        }
+    }
 
 
+    private fun setListenerOnUpdateAccountButton() {
+        updateButton.setOnClickListener {
 
+        }
+    }
+
+
+    private fun setListenerOnDeleteAccountButton() {
+        deleteButton.setOnClickListener {
+
+        }
+    }
+
+    // Easy permission result for photo access
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+
+    // When photo access is granted
+    @AfterPermissionGranted(RC_IMAGE_PERMS)
+    private fun updateAvatarPicture() {
+        // Ask permission (used for API 32 and less)
+        if (Build.VERSION.SDK_INT <= 32) {
+            if (!EasyPermissions.hasPermissions(this, PERMS)) {
+                EasyPermissions.requestPermissions(
+                    this,
+                    getString(R.string.allow_photo_access),
+                    RC_IMAGE_PERMS,
+                    PERMS
+                )
+                return
+            }
+        }
+        // When permission granted, allow picking action
+        Toast.makeText(this, getString(R.string.picture_enabled), Toast.LENGTH_SHORT).show()
+        val pickPhotoIntent =
+            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        actionPick.launch(pickPhotoIntent)
+    }
+
+
+    // Create callback when user pick a photo on his device
+    private val actionPick = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result -> onPickPhotoResult(result) }
+
+    // Handle result of photo picking activity
+    private fun onPickPhotoResult(result: ActivityResult) {
+        if (result.resultCode == RESULT_OK) { //SUCCESS
+            assert(result.data != null)
+            uriImageSelected = result.data!!.data
+            Glide.with(this) //SHOWING PREVIEW OF IMAGE
+                .load(uriImageSelected)
+                .apply(RequestOptions.circleCropTransform())
+                .into(userAvatar)
+        } else {
+            Toast.makeText(this, getString(R.string.no_image_chosen), Toast.LENGTH_SHORT).show()
+        }
+    }
 }
