@@ -186,6 +186,12 @@
     <string name="login_link">Existing User ? Sign In</string>
     <string name="sign_in_button_text">SIGN IN</string>
     <string name="signup_button_text">SIGN UP</string>
+    <string name="add_media_selector_dialog_title">Please select a media source</string>
+    <string name="gallery_label">From gallery</string>
+    <string name="camera_label">Take a photo</string>
+    <string name="add_gallery_picture_content_description">Button to add picture from gallery</string>
+    <string name="add_camera_picture_content_description">Button to take a photo from camera</string>
+    <string name="allow_camera_access">Please allow pictures access</string>
 
 
 </resources>

@@ -45,7 +45,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/settings_user_avatar"
                 app:layout_constraintEnd_toEndOf="@id/settings_user_avatar"
                 android:contentDescription="@string/user_avatar_update"
-                app:tint="@color/colorPrimary" />
+                app:tint="@color/colorAccent" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/settings_user_fist_name_input"
