@@ -70,7 +70,7 @@
             android:drawablePadding="@dimen/drawable_padding_medium"
             android:drawableTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_baseline_email_24"
-            android:hint="Email"
+            android:hint="@string/settings_user_email_title"
             android:inputType="textEmailAddress"
             android:textSize="@dimen/higher_plus_text_size"
             android:imeOptions="actionNext" />
@@ -101,7 +101,7 @@
             android:drawablePadding="@dimen/drawable_padding_medium"
             android:drawableTint="@color/colorPrimary"
             android:drawableStart="@drawable/ic_baseline_password_24"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textSize="@dimen/higher_plus_text_size"
             android:imeOptions="actionNext" />
@@ -110,11 +110,12 @@
 
     <Button
         android:id="@+id/login_button"
-        style="@style/Widget.MaterialComponents.Button"
+        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="270dp"
         android:backgroundTint="@color/colorPrimary"
-        android:text="Sign In"
+        android:text="@string/sign_in_button_text"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/default_subtitle_size"
         app:cornerRadius="12dp"
@@ -129,8 +130,8 @@
         android:id="@+id/login_signup_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Not Registered ? Sign Up"
-        android:textSize="@dimen/default_subtitle_size"
+        android:text="@string/signup_link"
+        android:textSize="@dimen/higher_plus_text_size"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@id/guideline_link"
         app:layout_constraintEnd_toEndOf="parent"

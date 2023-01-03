@@ -51,7 +51,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/default_medium_margin"
-                        android:hint="@string/add_property_name">
+                        android:hint="@string/add_property_name"
+                        app:endIconMode="clear_text">
 
                         <EditText
                             android:id="@+id/add_name_input"
@@ -74,7 +75,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/small_margin"
-                        android:hint="@string/add_property_area">
+                        android:hint="@string/add_property_area"
+                        app:endIconMode="clear_text">
 
                         <EditText
                             android:id="@+id/add_area_input"
@@ -169,7 +171,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/small_margin"
-                        android:hint="@string/add_price_text">
+                        android:hint="@string/add_price_text"
+                        app:endIconMode="clear_text">
 
                         <EditText
                             android:id="@+id/add_price_input"
@@ -192,7 +195,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/small_margin"
-                        android:hint="@string/add_surface_text">
+                        android:hint="@string/add_surface_text"
+                        app:endIconMode="clear_text">
 
                         <EditText
                             android:id="@+id/add_surface_input"
@@ -224,7 +228,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toTopOf="parent"
-                            android:hint="@string/add_property_description">
+                            android:hint="@string/add_property_description"
+                            app:endIconMode="clear_text">
 
                             <EditText
                                 android:id="@+id/add_description_text"
@@ -512,7 +517,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_address_layout_title"
-                            android:hint="@string/add_property_street_number">
+                            android:hint="@string/add_property_street_number"
+                            app:endIconMode="clear_text">
 
                             <EditText
                                 android:id="@+id/add_street_number_input"
@@ -536,7 +542,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_street_number_layout"
-                            android:hint="@string/add_property_street_name">
+                            android:hint="@string/add_property_street_name"
+                            app:endIconMode="clear_text">
 
                             <EditText
                                 android:id="@+id/add_street_name_input"
@@ -558,7 +565,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_street_name_layout"
-                            android:hint="@string/add_address_complement">
+                            android:hint="@string/add_address_complement"
+                            app:endIconMode="clear_text">
 
                             <EditText
                                 android:id="@+id/add_address_complement_input"
@@ -580,7 +588,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_address_complement_layout"
-                            android:hint="@string/add_postal_code">
+                            android:hint="@string/add_postal_code"
+                            app:endIconMode="clear_text">
 
                             <EditText
                                 android:id="@+id/add_postal_code_input"
@@ -603,7 +612,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_postal_code_layout"
-                            android:hint="@string/add_property_city">
+                            android:hint="@string/add_property_city"
+                            app:endIconMode="clear_text">
 
                             <EditText
                                 android:id="@+id/add_city_input"
@@ -625,7 +635,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_city_layout"
-                            android:hint="@string/add_property_country">
+                            android:hint="@string/add_property_country"
+                            app:endIconMode="clear_text">
 
                             <EditText
                                 android:id="@+id/add_country_input"

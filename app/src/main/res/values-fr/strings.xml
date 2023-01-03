@@ -139,7 +139,7 @@
 
     // SIGNUP ACTIVITY
     <string name="signup_title_toolbar">Création d\'un compte</string>
-    <string name="signup_realtor_question">Etes-vous un agent immobilier ?</string>
+    <string name="signup_realtor_question">Etes-vous agent immobilier ?</string>
     <string name="get_realtor_access">Accès restreint</string>
     <string name="add_realtor_password">Saisissez le code de votre agence</string>
     <string name="add_realtor_password_text">Mot de passe agence*</string>
@@ -172,5 +172,11 @@
     <string name="fields_empty">Les champs sont vides</string>
     <string name="please_provide_firstname">Veuillez saisir votre prénom</string>
     <string name="please_provide_lastname">Veuillez saisir votre nom</string>
+    <string name="signup_link">Pas encore enregistré(e) ? Inscrivez-vous</string>
+    <string name="password">Mot de passe</string>
+    <string name="login_link">Vous avez un compte ? Connectez-vous</string>
+    <string name="sign_in_button_text">SE CONNECTER</string>
+    <string name="signup_button_text">S\'INSCRIRE</string>
+
 
 </resources>

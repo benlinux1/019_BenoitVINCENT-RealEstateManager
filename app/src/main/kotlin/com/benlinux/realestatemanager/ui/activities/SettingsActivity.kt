@@ -59,7 +59,6 @@ class SettingsActivity: AppCompatActivity() {
         setListenerOnUpdateAvatarButton()
         setListenerOnUpdateAccountButton()
         setListenerOnDeleteAccountButton()
-
     }
 
     // Toolbar configuration
@@ -157,6 +156,7 @@ class SettingsActivity: AppCompatActivity() {
         }
     }
 
+    // Retrieve all user data and set it into input fields
     private fun getUserData() {
         fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
         UserManager.getUserData()?.addOnSuccessListener { user ->
@@ -175,6 +175,7 @@ class SettingsActivity: AppCompatActivity() {
         }?.addOnFailureListener { error -> Log.d("USER DATA EXCEPTION", error.toString()) }
     }
 
+    // Set user avatar or coming soon picture into image view according to situation
     private fun setProfilePicture(profilePictureUrl: String?) {
         if (profilePictureUrl != null) {
             Glide.with(this)
@@ -190,23 +191,74 @@ class SettingsActivity: AppCompatActivity() {
         }
     }
 
+    // When user click on update avatar button
     private fun setListenerOnUpdateAvatarButton() {
         updateAvatarButton.setOnClickListener {
             updateAvatarPicture()
         }
     }
 
-
+    // When user click on update account button, update all data
     private fun setListenerOnUpdateAccountButton() {
         updateButton.setOnClickListener {
+            // update avatar url
+            if (uriImageSelected != null) {
+                UserManager.updateUserAvatarUrl(uriImageSelected)
+                Log.d("Firebase update", "User avatar updated")
+            }
 
+            val email = userEmail.text.toString()
+            val firstName: String = userFirstName.text.toString()
+            val lastName: String = userLastName.text.toString()
+
+            // Check errors
+            if (email.isEmpty()) {
+                userEmail.error = getString(R.string.please_provide_email)
+                userEmail.requestFocus()
+            } else if (firstName.isEmpty()) {
+                userFirstName.error = getString(R.string.please_provide_firstname)
+                userFirstName.requestFocus()
+            } else if (lastName.isEmpty()) {
+                userLastName.error = getString(R.string.please_provide_lastname)
+                userLastName.requestFocus()
+            // if no errors
+            } else {
+                // first name
+                UserManager.updateUserFirstName(firstName)
+                // last name
+                UserManager.updateUserLastName(lastName)
+                // realtor status
+                UserManager.updateIsRealtor(switchRealtor.isChecked)
+                // Update email in Firebase
+                val user = UserManager.getCurrentUser()
+                user!!.updateEmail(email).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("Firebase update", "User email address updated")
+                        // If successful, Update email in Firestore
+                        UserManager.updateUserEmailInFirestore(email)
+                    }
+                }
+                Toast.makeText(this, getString(R.string.account_update_success), Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
     }
 
-
+    // When user click on delete account button
     private fun setListenerOnDeleteAccountButton() {
         deleteButton.setOnClickListener {
-
+            // Delete user from firestore
+            UserManager.deleteUserFromFirestore().addOnSuccessListener {
+                Log.d("Firestore delete", "User account deleted from Firestore")
+                // On success delete user from firebase
+                UserManager.deleteUser(this).addOnSuccessListener {
+                    Log.d("Firebase delete", "User account deleted from Firebase")
+                    Toast.makeText(this, getString(R.string.delete_account_succeed), Toast.LENGTH_SHORT).show()
+                    navigateToHomeActivity()
+                }
+            }.addOnFailureListener {
+                Toast.makeText(this, getString(R.string.delete_account_failed), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -261,5 +313,12 @@ class SettingsActivity: AppCompatActivity() {
         } else {
             Toast.makeText(this, getString(R.string.no_image_chosen), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    // Go to main activity
+    private fun navigateToHomeActivity() {
+        val mainActivityIntent = Intent(applicationContext, MainActivity::class.java)
+        startActivity(mainActivityIntent)
+        finish()
     }
 }

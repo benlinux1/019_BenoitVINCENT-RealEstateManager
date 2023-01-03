@@ -50,8 +50,18 @@ class UserManager {
             }
         }
 
-        fun updateUsername(username: String?) {
-            UserRepository.updateUsername(username)
+
+        fun updateUserEmailInFirestore(email: String?) {
+            UserRepository.updateUserEmailInFirestore(email)
+        }
+
+
+        fun updateUserFirstName(firstname: String?) {
+            UserRepository.updateUserFirstname(firstname)
+        }
+
+        fun updateUserLastName(lastname: String?) {
+            UserRepository.updateUserLastname(lastname)
         }
 
         fun updateUserAvatarUrl(avatarUrl: Uri?) {
@@ -78,9 +88,9 @@ class UserManager {
             UserRepository.addPropertyToRealtorProperties(propertyId)
         }
 
-        fun deleteUserFromFirestore(context: Context?): Task<Void?>? {
+        fun deleteUserFromFirestore(): Task<Void?> {
             // Delete the user account from the Auth
-            return UserRepository.deleteUserFromFirestore(context)
+            return UserRepository.deleteUserFromFirestore()
         }
 
     }

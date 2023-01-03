@@ -181,6 +181,11 @@
     <string name="fields_empty">Fields are empty</string>
     <string name="please_provide_firstname">Please provide first name</string>
     <string name="please_provide_lastname">Please provide last name</string>
+    <string name="signup_link">Not registered yet ? Sign up here</string>
+    <string name="password">Password</string>
+    <string name="login_link">Existing User ? Sign In</string>
+    <string name="sign_in_button_text">SIGN IN</string>
+    <string name="signup_button_text">SIGN UP</string>
 
 
 </resources>

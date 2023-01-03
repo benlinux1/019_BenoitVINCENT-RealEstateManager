@@ -18,9 +18,10 @@ class UserRepository {
     companion object {
         // FIRESTORE DATA
         private const val COLLECTION_NAME = "users"
-        private const val USERNAME_FIELD = "name"
+        private const val FIRSTNAME_FIELD = "firstName"
+        private const val LASTNAME_FIELD = "lastName"
         private const val EMAIL_FIELD = "email"
-        private const val AVATAR_FIELD = "avatar"
+        private const val AVATAR_FIELD = "avatarUrl"
         private const val REALTOR_FIELD = "realtor"
         private const val FAVORITES_FIELD = "favorites"
         private const val PROPERTIES_FIELD = "realtorProperties"
@@ -110,11 +111,28 @@ class UserRepository {
         }
 
 
-        // Update Username in FireStore
-        fun updateUsername(username: String?) {
+        // Update User Email in FireStore
+        fun updateUserEmailInFirestore(email: String?) {
             val uid = getCurrentUserUID()
             if (uid != null) {
-                getUsersCollection().document(uid).update(USERNAME_FIELD, username)
+                getUsersCollection().document(uid).update(EMAIL_FIELD, email)
+            }
+        }
+
+
+        // Update User FirstName in FireStore
+        fun updateUserFirstname(firstName: String?) {
+            val uid = getCurrentUserUID()
+            if (uid != null) {
+                getUsersCollection().document(uid).update(FIRSTNAME_FIELD, firstName)
+            }
+        }
+
+        // Update User LastName in FireStore
+        fun updateUserLastname(lastName: String?) {
+            val uid = getCurrentUserUID()
+            if (uid != null) {
+                getUsersCollection().document(uid).update(LASTNAME_FIELD, lastName)
             }
         }
 
@@ -127,7 +145,7 @@ class UserRepository {
             }
         }
 
-        // Update User isNotified in FireStore
+        // Update Realtor status in FireStore
         fun updateIsRealtor(isRealtor: Boolean?) {
             val uid = getCurrentUserUID()
             if (uid != null) {
@@ -164,16 +182,16 @@ class UserRepository {
 
 
         // Upload image from device to firebase storage
-        fun uploadImage(imageUri: Uri?, pictures: String): UploadTask {
+        fun uploadImage(imageUri: Uri?, picturesFolder: String): UploadTask {
             val uuid = UUID.randomUUID().toString() // GENERATE UNIQUE STRING
-            val mImageRef = FirebaseStorage.getInstance().getReference("$pictures/$uuid")
+            val mImageRef = FirebaseStorage.getInstance().getReference("$picturesFolder/$uuid")
             return mImageRef.putFile(imageUri!!)
         }
 
 
         // Delete the User from Firestore
         // if result ok, delete from firebase & logout
-        fun deleteUserFromFirestore(context: Context?): Task<Void?> {
+        fun deleteUserFromFirestore(): Task<Void?> {
             val uid = getCurrentUserUID()!!
             return getUsersCollection().document(uid).delete()
         }
