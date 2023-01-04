@@ -3,9 +3,7 @@ package com.benlinux.realestatemanager.utils
 import android.content.Context
 import android.location.Address
 import android.location.Geocoder
-import android.os.Build
 import android.util.Log
-import android.widget.Toast
 import com.benlinux.realestatemanager.ui.models.PropertyAddress
 import com.google.android.gms.maps.model.LatLng
 import java.io.IOException
@@ -79,45 +77,7 @@ private fun getLocationFromAddress(strAddress: String, context: Context): LatLng
  */
 fun getAddressFromLocation(location: LatLng, context: Context): PropertyAddress? {
 
-    var address: PropertyAddress? = null
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        val coder = Geocoder(context)
-        coder.getFromLocation(
-                location.latitude,
-                location.longitude,
-                1,
-                object : Geocoder.GeocodeListener {
-                    override fun onGeocode(addresses: MutableList<Address>) {
-                        addresses.forEach {
-                            // Build address model in android 13+
-                            Log.d("Street Number", "onGeocode: ${it.subThoroughfare}")
-                            Log.d("Street Name", "onGeocode: ${it.thoroughfare}")
-                            Log.d("Postal Code", "onGeocode: ${it.postalCode}")
-                            Log.d("City", "onGeocode: ${it.locality}")
-                            Log.d("Country", "onGeocode: ${it.countryName}")
-
-                            address = PropertyAddress(it.subThoroughfare, it.thoroughfare, "",
-                                it.postalCode, it.locality, it.countryName)
-                        }
-                    }
-
-                    override fun onError(errorMessage: String?) {
-                        super.onError(errorMessage)
-                        Log.d("GEO ERROR TIRAMISU", "onError: $errorMessage")
-                        Toast.makeText(
-                            context,
-                            "Address not found",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                })
-
-    } else {
-        // less than Android 13, call function below
-        address = getFormattedAddressFromLatLng(location, context)
-    }
-    return address
+    return getFormattedAddressFromLatLng(location, context)
 }
 
 

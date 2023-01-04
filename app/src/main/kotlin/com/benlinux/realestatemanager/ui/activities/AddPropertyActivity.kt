@@ -1,7 +1,7 @@
 package com.benlinux.realestatemanager.ui.activities
 
-import android.Manifest
 import android.app.DatePickerDialog
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -26,14 +26,16 @@ import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.data.propertyManager.PropertyManager
 import com.benlinux.realestatemanager.data.userManager.UserManager
 import com.benlinux.realestatemanager.injections.ViewModelFactory
-import com.benlinux.realestatemanager.ui.activities.AddPropertyActivity.Enum.Companion.PERMS
-import com.benlinux.realestatemanager.ui.activities.AddPropertyActivity.Enum.Companion.RC_IMAGE_PERMS
 import com.benlinux.realestatemanager.ui.adapters.PictureAdapter
 import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.ui.models.PropertyAddress
 import com.benlinux.realestatemanager.ui.models.User
 import com.benlinux.realestatemanager.utils.*
+import com.benlinux.realestatemanager.utils.Constants.Companion.CAMERA_ACCESS_PERMISSION
+import com.benlinux.realestatemanager.utils.Constants.Companion.IMAGE_CAPTURE_CODE
+import com.benlinux.realestatemanager.utils.Constants.Companion.PHOTO_ACCESS_PERMISSION
+import com.benlinux.realestatemanager.utils.Constants.Companion.RC_IMAGE_PERMS
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -110,15 +112,6 @@ class AddPropertyActivity: AppCompatActivity() {
 
     // Date of sold
     private var dateOfSold: String? = null
-
-    // Constants
-    annotation class Enum {
-        companion object {
-            // Permissions for picture picking
-            const val PERMS = Manifest.permission.READ_EXTERNAL_STORAGE
-            const val RC_IMAGE_PERMS = 100
-        }
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -269,13 +262,6 @@ class AddPropertyActivity: AppCompatActivity() {
                 && validateField(country.text.toString(), countryLayout))
     }
 
-    // Add picture action
-    private fun setAddPictureButtonListener() {
-        addPictureButton.setOnClickListener {
-            updatePropertyPicture()
-        }
-    }
-
     // Rooms number spinner
     private fun setRoomsSpinners() {
         roomSpinner = findViewById(R.id.add_number_rooms_count)
@@ -397,6 +383,44 @@ class AddPropertyActivity: AppCompatActivity() {
         return available.isChecked
     }
 
+    // Add picture action, show selector between gallery or camera
+    private fun setAddPictureButtonListener() {
+        addPictureButton.setOnClickListener {
+            showMediaSelectorDialog()
+        }
+    }
+
+
+    // Show dialog to choose between Gallery or Take Photo actions
+    private fun showMediaSelectorDialog() {
+        // Builder & custom view
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
+        val customView = layoutInflater.inflate(R.layout.custom_dialog_media_selector,null)
+        builder.setView(customView)
+        builder.setCancelable(true)
+        val dialogWindow = builder.create()
+
+        // Gallery button
+        val galleryButton: ImageView = customView.findViewById(R.id.gallery_button)
+        // Camera Button
+        val cameraButton: ImageView = customView.findViewById(R.id.camera_button)
+
+        // Gallery button & actions
+        galleryButton.setOnClickListener {
+            updatePropertyPicture()
+            dialogWindow.dismiss()
+        }
+
+        // Camera button & actions
+        cameraButton.setOnClickListener {
+            takePhoto()
+            dialogWindow.dismiss()
+        }
+
+        // Display dialog
+        dialogWindow.show()
+    }
+
     // Easy permission result for photo access
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -412,12 +436,12 @@ class AddPropertyActivity: AppCompatActivity() {
     fun updatePropertyPicture() {
         // Ask permission (used for API 32 and less)
         if (Build.VERSION.SDK_INT <= 32) {
-            if (!EasyPermissions.hasPermissions(this, PERMS)) {
+            if (!EasyPermissions.hasPermissions(this, PHOTO_ACCESS_PERMISSION)) {
                 EasyPermissions.requestPermissions(
                     this,
                     getString(R.string.allow_photo_access),
                     RC_IMAGE_PERMS,
-                    PERMS
+                    PHOTO_ACCESS_PERMISSION
                 )
                 return
             }
@@ -445,7 +469,49 @@ class AddPropertyActivity: AppCompatActivity() {
                 showAddPictureDialog(this, it
                 )
             }
+        } else {
+            Toast.makeText(this, getString(R.string.no_image_chosen), Toast.LENGTH_SHORT).show()
+        }
+    }
 
+    // Permission request for Camera and actions
+    @AfterPermissionGranted(IMAGE_CAPTURE_CODE)
+    private fun takePhoto() {
+        // Permission request for camera
+        if (!EasyPermissions.hasPermissions(this, CAMERA_ACCESS_PERMISSION)) {
+            EasyPermissions.requestPermissions(
+                this,
+                getString(R.string.allow_camera_access),
+                IMAGE_CAPTURE_CODE,
+                CAMERA_ACCESS_PERMISSION
+            )
+            return
+
+        }
+        // When permission granted, allow camera action
+        // Content values to get uri with content resolver builder options to write captured image to MediaStore
+        val values = ContentValues()
+        values.put(MediaStore.Images.Media.TITLE, "Token picture")
+        uriImageSelected = this.contentResolver?.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        // Create camera intent
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        // Add uri to extras
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriImageSelected)
+        actionCamera.launch(cameraIntent) // Launch intent
+    }
+
+
+    // Create callback when user take a photo on his device
+    private val actionCamera = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result -> onTakePhotoResult(result) }
+
+
+    // Handle result of photo capture with device's camera
+    private fun onTakePhotoResult(result: ActivityResult) {
+        if (result.resultCode == RESULT_OK) { //SUCCESS
+            // Show dialog window for picture information
+            showAddPictureDialog(this, uriImageSelected!!)
         } else {
             Toast.makeText(this, getString(R.string.no_image_chosen), Toast.LENGTH_SHORT).show()
         }
@@ -525,12 +591,48 @@ class AddPropertyActivity: AppCompatActivity() {
         pictureAdapter.updatePictures(picturesList)
     }
 
-     // Init the recyclerView that contains pictures list
+
+    // Init the recyclerView that contains pictures list
     private fun configureRecyclerView() {
         // Define layout & adapter
         picturesRecyclerView = findViewById(R.id.add_pictures_list)
         pictureAdapter = PictureAdapter(picturesList, this, true )
         picturesRecyclerView.adapter = pictureAdapter
+        setEasyScrollFeature()
+    }
+
+    // Show arrows on list sides to indicate scroll possibility
+    private fun setEasyScrollFeature() {
+        val arrowRight: ImageView = findViewById(R.id.list_arrow_right)
+        val arrowLeft: ImageView = findViewById(R.id.list_arrow_left)
+
+        // Go to end of pictures list
+        arrowRight.setOnClickListener {
+            picturesRecyclerView.smoothScrollToPosition(picturesList.size)
+        }
+        // Go to start of pictures list
+        arrowLeft.setOnClickListener {
+            picturesRecyclerView.smoothScrollToPosition(0)
+        }
+
+        // After scroll, handle arrows visibility
+        picturesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                Log.d("scroll", "scrolling")
+                if (!recyclerView.canScrollHorizontally(1)) {
+                    arrowRight.visibility = View.GONE
+                } else {
+                    arrowRight.visibility = View.VISIBLE
+                }
+                if (!recyclerView.canScrollHorizontally(-1)) {
+                    arrowLeft.visibility = View.GONE
+                } else {
+                    arrowLeft.visibility = View.VISIBLE
+                }
+            }
+        })
     }
 
     // Create property Address

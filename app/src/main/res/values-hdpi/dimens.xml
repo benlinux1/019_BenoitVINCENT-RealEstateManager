@@ -69,8 +69,7 @@
     <dimen name="drawer_header_avatar_size">48dp</dimen>
 
     <!-- Item Picture -->
-    <dimen name="item_picture_size">80dp</dimen>
-    <dimen name="item_picture_description_height">20dp</dimen>
+    <dimen name="item_picture_size">100dp</dimen>
 
 
 

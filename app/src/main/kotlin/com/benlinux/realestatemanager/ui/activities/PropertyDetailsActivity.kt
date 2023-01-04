@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -98,7 +99,6 @@ class PropertyDetailsActivity: AppCompatActivity() {
         checkIfUserIsRealtor()
         setFloatingButton()
         setListenerOnFloatingButton()
-
     }
 
     // Initialize map view and google map
@@ -139,9 +139,8 @@ class PropertyDetailsActivity: AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    /**
-     * Close add property activity and turn back to main activity if back button is clicked
-     */
+
+    // Close current activity and turn back to main activity if back button is clicked
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             val mainActivityIntent = Intent(this, MainActivity::class.java)
@@ -197,10 +196,10 @@ class PropertyDetailsActivity: AppCompatActivity() {
             val latLng: LatLng = getLatLngFromPropertyFormattedAddress(property!!.address, this)
             setMarkersForProperty(mGoogleMap, latLng)
             setSoldView(property!!.isAvailable)
-
         }
     }
 
+    // Indicate if property is sold according to its availability status
     private fun setSoldView(availableProperty: Boolean) {
         soldBackground = findViewById(R.id.background_sold)
         if (availableProperty) {
@@ -226,6 +225,41 @@ class PropertyDetailsActivity: AppCompatActivity() {
         picturesRecyclerView = findViewById(R.id.details_pictures_list)
         pictureAdapter = PictureAdapter(picturesList, this, userIsRealtor )
         picturesRecyclerView.adapter = pictureAdapter
+        setEasyScrollFeature()
+    }
+
+    // Show arrows on list sides to indicate scroll possibility
+    private fun setEasyScrollFeature() {
+        val arrowRight: ImageView = findViewById(R.id.list_arrow_right)
+        val arrowLeft: ImageView = findViewById(R.id.list_arrow_left)
+
+        // Go to end of pictures list
+        arrowRight.setOnClickListener {
+            picturesRecyclerView.smoothScrollToPosition(picturesList.size)
+        }
+        // Go to start of pictures list
+        arrowLeft.setOnClickListener {
+            picturesRecyclerView.smoothScrollToPosition(0)
+        }
+
+        // After scroll, handle arrows visibility
+        picturesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                Log.d("scroll", "scrolling")
+                if (!recyclerView.canScrollHorizontally(1)) {
+                    arrowRight.visibility = View.GONE
+                } else {
+                    arrowRight.visibility = View.VISIBLE
+                }
+                if (!recyclerView.canScrollHorizontally(-1)) {
+                    arrowLeft.visibility = View.GONE
+                } else {
+                    arrowLeft.visibility = View.VISIBLE
+                }
+            }
+        })
     }
 
     // Set property data in all text views
@@ -324,7 +358,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
         }
     }
 
-    // Main picture
+    // Image Slider for property pictures
     private fun setPropertyPictures(property: Property) {
 
         imageSlider = findViewById(R.id.imageSlider)
@@ -339,7 +373,6 @@ class PropertyDetailsActivity: AppCompatActivity() {
         }
         imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
     }
-
 
 
     // Display Property full address data

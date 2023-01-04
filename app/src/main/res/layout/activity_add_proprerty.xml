@@ -287,7 +287,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/add_pictures_section"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="@dimen/default_medium_margin">
 
@@ -309,11 +309,10 @@
                             android:layout_marginTop="@dimen/small_margin"
                             android:layout_marginStart="@dimen/small_plus_margin"
                             android:src="@drawable/ic_add_photo_24"
-                            android:drawableTint="@color/colorPrimary"
                             app:layout_constraintStart_toStartOf="@id/add_pictures_title"
                             app:layout_constraintTop_toBottomOf="@id/add_pictures_title"
                             android:contentDescription="@string/add_new_picture"
-                            app:tint="@color/colorPrimary" />
+                            app:tint="@color/colorAccent" />
 
                         <TextView
                             android:id="@+id/empty_error_text"
@@ -333,13 +332,36 @@
                             android:id="@+id/add_pictures_list"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
                             android:orientation="horizontal"
+                            android:scrollbars="horizontal"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/add_pictures_button"
                             tools:itemCount="5"
                             tools:listitem="@layout/item_property_picture" />
+
+                        <ImageView
+                            android:id="@+id/list_arrow_right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_arrow_right"
+                            android:tint="@color/colorAccent"
+                            app:layout_constraintTop_toTopOf="@id/add_pictures_list"
+                            app:layout_constraintBottom_toBottomOf="@id/add_pictures_list"
+                            app:layout_constraintEnd_toEndOf="@id/add_pictures_list"
+                            android:visibility="gone"/>
+
+                        <ImageView
+                            android:id="@+id/list_arrow_left"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_arrow_left"
+                            android:tint="@color/colorAccent"
+                            app:layout_constraintTop_toTopOf="@id/add_pictures_list"
+                            app:layout_constraintBottom_toBottomOf="@id/add_pictures_list"
+                            app:layout_constraintStart_toStartOf="@id/add_pictures_list"
+                            android:visibility="gone"/>
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,8 @@
 package com.benlinux.realestatemanager.ui.activities
 
-import android.Manifest
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -34,6 +34,8 @@ import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.ui.models.PropertyAddress
 import com.benlinux.realestatemanager.ui.models.User
 import com.benlinux.realestatemanager.utils.*
+import com.benlinux.realestatemanager.utils.Constants.Companion.PHOTO_ACCESS_PERMISSION
+import com.benlinux.realestatemanager.utils.Constants.Companion.RC_IMAGE_PERMS
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -106,18 +108,6 @@ class UpdatePropertyActivity: AppCompatActivity() {
     private var dateOfSold: String? = null
 
 
-
-    // Constants
-    annotation class Enum {
-        companion object {
-            // Permissions for picture picking
-            const val PERMS = Manifest.permission.READ_EXTERNAL_STORAGE
-            const val RC_IMAGE_PERMS = 100
-        }
-    }
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_proprerty)
@@ -129,7 +119,6 @@ class UpdatePropertyActivity: AppCompatActivity() {
         setViewModel()
         setViews()
         setPicturesGallery()
-
         setListenerOnUpdateButton()
         setAddPictureButtonListener()
         setListenerOnSoldChecked()
@@ -153,13 +142,69 @@ class UpdatePropertyActivity: AppCompatActivity() {
         picturesRecyclerView = findViewById(R.id.add_pictures_list)
         pictureAdapter = PictureAdapter(picturesList, this, true)
         picturesRecyclerView.adapter = pictureAdapter
+        setEasyScrollFeature()
     }
+
+    // Show arrows on list sides to indicate scroll possibility
+    private fun setEasyScrollFeature() {
+        val arrowRight: ImageView = findViewById(R.id.list_arrow_right)
+        val arrowLeft: ImageView = findViewById(R.id.list_arrow_left)
+
+        // Go to end of pictures list
+        arrowRight.setOnClickListener {
+            picturesRecyclerView.smoothScrollToPosition(picturesList.size)
+        }
+        // Go to start of pictures list
+        arrowLeft.setOnClickListener {
+            picturesRecyclerView.smoothScrollToPosition(0)
+        }
+
+        // After scroll, handle arrows visibility
+        picturesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                Log.d("scroll", "scrolling")
+                if (!recyclerView.canScrollHorizontally(1)) {
+                    arrowRight.visibility = View.GONE
+                } else {
+                    arrowRight.visibility = View.VISIBLE
+                }
+                if (!recyclerView.canScrollHorizontally(-1)) {
+                    arrowLeft.visibility = View.GONE
+                } else {
+                    arrowLeft.visibility = View.VISIBLE
+                }
+            }
+        })
+    }
+
 
     // Retrieve property's pictures and add each of them in pictures list
     private fun retrievePropertyPictures(property: Property) {
         for (picture: Picture? in property.pictures) {
             picturesList.add(picture)
             pictureAdapter.notifyItemInserted(picturesList.lastIndex)
+        }
+        if (picturesList.size > 3) {
+            setEasyScroll()
+        }
+    }
+
+    // Show arrows on list sides to indicate scroll possibility
+    private fun setEasyScroll() {
+        val arrowRight: ImageView = findViewById(R.id.list_arrow_right)
+        val arrowLeft: ImageView = findViewById(R.id.list_arrow_left)
+        arrowRight.visibility = View.VISIBLE
+        arrowRight.setOnClickListener {
+            picturesRecyclerView.smoothScrollToPosition(picturesList.size)
+            arrowRight.visibility = View.GONE
+            arrowLeft.visibility = View.VISIBLE
+        }
+        arrowLeft.setOnClickListener {
+            picturesRecyclerView.smoothScrollToPosition(0)
+            arrowRight.visibility = View.VISIBLE
+            arrowLeft.visibility = View.GONE
         }
     }
 
@@ -355,6 +400,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
         if (item.itemId == android.R.id.home) {
             val propertyDetailsActivityIntent = Intent(this, PropertyDetailsActivity::class.java)
             propertyDetailsActivityIntent.putExtra("PROPERTY_ID", propertyId)
+            propertyDetailsActivityIntent.putExtra("PROPERTY_CREATOR_ID", property.realtor.id)
             startActivity(propertyDetailsActivityIntent)
             finish()
             return true
@@ -466,8 +512,38 @@ class UpdatePropertyActivity: AppCompatActivity() {
     // Add picture action
     private fun setAddPictureButtonListener() {
         addPictureButton.setOnClickListener {
-            updateAvatarPicture()
+           showMediaSelectorDialog()
         }
+    }
+
+    // Show dialog to choose between Gallery or Take Photo actions
+    private fun showMediaSelectorDialog() {
+        // Builder & custom view
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
+        val customView = layoutInflater.inflate(R.layout.custom_dialog_media_selector,null)
+        builder.setView(customView)
+        builder.setCancelable(true)
+        val dialogWindow = builder.create()
+
+        // Gallery button
+        val galleryButton: ImageView = customView.findViewById(R.id.gallery_button)
+        // Camera Button
+        val cameraButton: ImageView = customView.findViewById(R.id.camera_button)
+
+        // Gallery button & actions
+        galleryButton.setOnClickListener {
+            updatePropertyPicture()
+            dialogWindow.dismiss()
+        }
+
+        // Camera button & actions
+        cameraButton.setOnClickListener {
+            takePhoto()
+            dialogWindow.dismiss()
+        }
+
+        // Display dialog
+        dialogWindow.show()
     }
 
     // Easy permission result for photo access
@@ -481,16 +557,16 @@ class UpdatePropertyActivity: AppCompatActivity() {
     }
 
     // When photo access is granted
-    @AfterPermissionGranted(Enum.RC_IMAGE_PERMS)
-    fun updateAvatarPicture() {
+    @AfterPermissionGranted(RC_IMAGE_PERMS)
+    fun updatePropertyPicture() {
         // Ask permission (used for API 32 and less)
         if (Build.VERSION.SDK_INT <= 32) {
-            if (!EasyPermissions.hasPermissions(this, Enum.PERMS)) {
+            if (!EasyPermissions.hasPermissions(this, PHOTO_ACCESS_PERMISSION)) {
                 EasyPermissions.requestPermissions(
                     this,
                     getString(R.string.allow_photo_access),
-                    Enum.RC_IMAGE_PERMS,
-                    Enum.PERMS
+                    RC_IMAGE_PERMS,
+                    PHOTO_ACCESS_PERMISSION
                 )
                 return
             }
@@ -519,6 +595,48 @@ class UpdatePropertyActivity: AppCompatActivity() {
                 )
             }
 
+        } else {
+            Toast.makeText(this, getString(R.string.no_image_chosen), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Permission request for Camera and actions
+    @AfterPermissionGranted(Constants.IMAGE_CAPTURE_CODE)
+    private fun takePhoto() {
+        // Permission request for camera
+        if (!EasyPermissions.hasPermissions(this, Constants.CAMERA_ACCESS_PERMISSION)) {
+            EasyPermissions.requestPermissions(
+                this,
+                getString(R.string.allow_camera_access),
+                Constants.IMAGE_CAPTURE_CODE,
+                Constants.CAMERA_ACCESS_PERMISSION
+            )
+            return
+
+        }
+        // When permission granted, allow camera action
+        // Content values to get uri with content resolver builder options to write captured image to MediaStore
+        val values = ContentValues()
+        values.put(MediaStore.Images.Media.TITLE, "Token picture")
+        uriImageSelected = this.contentResolver?.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+        // Create camera intent
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        // Add uri to extras
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriImageSelected)
+        actionCamera.launch(cameraIntent) // Launch intent
+    }
+
+    // Create callback when user take a photo on his device
+    private val actionCamera = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result -> onTakePhotoResult(result) }
+
+
+    // Handle result of photo capture with device's camera
+    private fun onTakePhotoResult(result: ActivityResult) {
+        if (result.resultCode == RESULT_OK) { //SUCCESS
+            // Show dialog window for picture information
+            showAddPictureDialog(this, uriImageSelected!!)
         } else {
             Toast.makeText(this, getString(R.string.no_image_chosen), Toast.LENGTH_SHORT).show()
         }

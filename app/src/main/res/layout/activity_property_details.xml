@@ -366,24 +366,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
                 app:cardCornerRadius="4dp"
-                android:paddingVertical="@dimen/default_padding"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/property_details_information_section"
                 app:layout_constraintBottom_toTopOf="@+id/details_description_section">
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/details_pictures_title"
                         style="@style/cardTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/small_margin"
                         android:text="@string/add_pictures_title"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -394,15 +392,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="@dimen/default_medium_padding"
-                        android:paddingBottom="@dimen/default_padding"
+                        android:scrollbarStyle="outsideOverlay"
+                        android:scrollbars="horizontal"
+                        android:paddingVertical="@dimen/very_small_margin"
+                        android:layout_marginBottom="@dimen/very_small_margin"
+                        android:paddingHorizontal="@dimen/small_plus_margin"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        android:layout_marginTop="@dimen/small_margin"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/details_pictures_title"
                         app:layout_constraintTop_toBottomOf="@id/details_pictures_title"
                         tools:itemCount="5"
                         tools:listitem="@layout/item_property_picture" />
 
+                    <ImageView
+                        android:id="@+id/list_arrow_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_right"
+                        android:tint="@color/colorAccent"
+                        app:layout_constraintTop_toTopOf="@id/details_pictures_list"
+                        app:layout_constraintBottom_toBottomOf="@id/details_pictures_list"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:visibility="gone"/>
+
+                    <ImageView
+                        android:id="@+id/list_arrow_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_left"
+                        android:tint="@color/colorAccent"
+                        app:layout_constraintTop_toTopOf="@id/details_pictures_list"
+                        app:layout_constraintBottom_toBottomOf="@id/details_pictures_list"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:visibility="gone"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

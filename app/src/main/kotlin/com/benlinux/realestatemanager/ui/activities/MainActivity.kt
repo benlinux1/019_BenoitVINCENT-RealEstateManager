@@ -48,7 +48,7 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     private lateinit var addPropertyButton: FloatingActionButton
 
-    var realtorLocation: LatLng? = null
+    var userLocation: LatLng? = null
 
     private lateinit var userName: TextView
     private lateinit var userEmail: TextView

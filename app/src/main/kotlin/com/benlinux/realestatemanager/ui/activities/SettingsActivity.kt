@@ -1,6 +1,5 @@
 package com.benlinux.realestatemanager.ui.activities
 
-import android.Manifest
 import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
@@ -19,38 +18,28 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
 import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.data.userManager.UserManager
-import com.benlinux.realestatemanager.ui.activities.SettingsActivity.Enum.Companion.CAMERA_PERMISSION
-import com.benlinux.realestatemanager.ui.activities.SettingsActivity.Enum.Companion.IMAGE_CAPTURE_CODE
-import com.benlinux.realestatemanager.ui.activities.SettingsActivity.Enum.Companion.PHOTO_ACCESS_PERMISSION
-import com.benlinux.realestatemanager.ui.activities.SettingsActivity.Enum.Companion.RC_IMAGE_PERMS
+import com.benlinux.realestatemanager.utils.Constants.Companion.CAMERA_ACCESS_PERMISSION
+import com.benlinux.realestatemanager.utils.Constants.Companion.IMAGE_CAPTURE_CODE
+import com.benlinux.realestatemanager.utils.Constants.Companion.PHOTO_ACCESS_PERMISSION
+import com.benlinux.realestatemanager.utils.Constants.Companion.RC_IMAGE_PERMS
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
+
 class SettingsActivity: AppCompatActivity() {
 
     private lateinit var userAvatar: ImageView
-
+    private lateinit var updateAvatarButton: ImageView
     private lateinit var userFirstName: EditText
     private lateinit var userLastName: EditText
     private lateinit var userEmail: TextView
     private lateinit var deleteButton: Button
     private lateinit var updateButton: Button
     private lateinit var switchRealtor: SwitchCompat
-    private lateinit var updateAvatarButton: ImageView
 
-    // Constants
-    annotation class Enum {
-        companion object {
-            // Permissions for picture picking
-            const val PHOTO_ACCESS_PERMISSION = Manifest.permission.READ_EXTERNAL_STORAGE
-            const val CAMERA_PERMISSION = Manifest.permission.CAMERA
-            const val RC_IMAGE_PERMS = 100
-            const val IMAGE_CAPTURE_CODE = 1001
-        }
-    }
-
+    // For picture remote data
     private var uriImageSelected: Uri? = null
 
 
@@ -66,6 +55,7 @@ class SettingsActivity: AppCompatActivity() {
         setListenerOnDeleteAccountButton()
     }
 
+
     // Toolbar configuration
     private fun setToolbar() {
         val mToolbar = findViewById<Toolbar>(R.id.main_toolbar)
@@ -73,6 +63,7 @@ class SettingsActivity: AppCompatActivity() {
         supportActionBar!!.title = resources.getString(R.string.settings_title_toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
+
 
     // Define all views
     private fun setViews() {
@@ -98,7 +89,8 @@ class SettingsActivity: AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    // Switch to realtor account creation
+
+    // Switch to realtor status
     private fun setListenerOnRealtorSwitch() {
         switchRealtor.setOnCheckedChangeListener { _: CompoundButton?, checked: Boolean ->
             if (checked) {
@@ -107,7 +99,8 @@ class SettingsActivity: AppCompatActivity() {
         }
     }
 
-    // When user tries to create realtor account, show permission dialog
+
+    // When user tries to access to realtor status, show permission dialog
     private fun showRealtorDialog() {
         // Builder & custom view
         val builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
@@ -153,6 +146,7 @@ class SettingsActivity: AppCompatActivity() {
         dialogWindow.show()
     }
 
+
     // Set User data in fields
     private fun updateUIWithUserData() {
         // If user is logged
@@ -160,6 +154,7 @@ class SettingsActivity: AppCompatActivity() {
             getUserData()
         }
     }
+
 
     // Retrieve all user data and set it into input fields
     private fun getUserData() {
@@ -180,6 +175,7 @@ class SettingsActivity: AppCompatActivity() {
         }?.addOnFailureListener { error -> Log.d("USER DATA EXCEPTION", error.toString()) }
     }
 
+
     // Set user avatar or coming soon picture into image view according to situation
     private fun setProfilePicture(profilePictureUrl: String?) {
         if (profilePictureUrl != null) {
@@ -196,12 +192,6 @@ class SettingsActivity: AppCompatActivity() {
         }
     }
 
-    // When user click on update avatar button
-    private fun setListenerOnUpdateAvatarButton() {
-        updateAvatarButton.setOnClickListener {
-            showMediaSelectorDialog()
-        }
-    }
 
     // When user click on update account button, update all data
     private fun setListenerOnUpdateAccountButton() {
@@ -212,6 +202,7 @@ class SettingsActivity: AppCompatActivity() {
                 Log.d("Firebase update", "User avatar updated")
             }
 
+            // Input values
             val email = userEmail.text.toString()
             val firstName: String = userFirstName.text.toString()
             val lastName: String = userLastName.text.toString()
@@ -249,6 +240,7 @@ class SettingsActivity: AppCompatActivity() {
         }
     }
 
+
     // When user click on delete account button
     private fun setListenerOnDeleteAccountButton() {
         deleteButton.setOnClickListener {
@@ -267,7 +259,47 @@ class SettingsActivity: AppCompatActivity() {
         }
     }
 
-    // Easy permission result for photo access
+
+    // When click on update avatar button, prompt user to select a media source
+    private fun setListenerOnUpdateAvatarButton() {
+        updateAvatarButton.setOnClickListener {
+            showMediaSelectorDialog()
+        }
+    }
+
+
+    // Show dialog to choose between Gallery or Take Photo actions
+    private fun showMediaSelectorDialog() {
+        // Builder & custom view
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
+        val customView = layoutInflater.inflate(R.layout.custom_dialog_media_selector,null)
+        builder.setView(customView)
+        builder.setCancelable(true)
+        val dialogWindow = builder.create()
+
+        // Gallery button
+        val galleryButton: ImageView = customView.findViewById(R.id.gallery_button)
+        // Camera Button
+        val cameraButton: ImageView = customView.findViewById(R.id.camera_button)
+
+        // Gallery button & actions
+        galleryButton.setOnClickListener {
+            updateAvatarPictureFromGallery()
+            dialogWindow.dismiss()
+        }
+
+        // Camera button & actions
+        cameraButton.setOnClickListener {
+            takePhoto()
+            dialogWindow.dismiss()
+        }
+
+        // Display dialog
+        dialogWindow.show()
+    }
+
+
+    // Easy permission result for photo / camera access
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String?>,
@@ -306,6 +338,7 @@ class SettingsActivity: AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result -> onPickPhotoResult(result) }
 
+
     // Handle result of photo picking activity
     private fun onPickPhotoResult(result: ActivityResult) {
         if (result.resultCode == RESULT_OK) { //SUCCESS
@@ -320,52 +353,17 @@ class SettingsActivity: AppCompatActivity() {
         }
     }
 
-    // Go to main activity
-    private fun navigateToHomeActivity() {
-        val mainActivityIntent = Intent(applicationContext, MainActivity::class.java)
-        startActivity(mainActivityIntent)
-        finish()
-    }
 
-    // Show dialog to choose between Gallery or Take Photo actions
-    private fun showMediaSelectorDialog() {
-        // Builder & custom view
-        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
-        val customView = layoutInflater.inflate(R.layout.custom_dialog_media_selector,null)
-        builder.setView(customView)
-        builder.setCancelable(true)
-        val dialogWindow = builder.create()
-
-        // Gallery button
-        val galleryButton: ImageView = customView.findViewById(R.id.gallery_button)
-        // Camera Button
-        val cameraButton: ImageView = customView.findViewById(R.id.camera_button)
-
-        // Gallery button & actions
-        galleryButton.setOnClickListener {
-            updateAvatarPictureFromGallery()
-            dialogWindow.dismiss()
-        }
-
-        // Camera button & actions
-        cameraButton.setOnClickListener {
-            takePhoto()
-            dialogWindow.dismiss()
-        }
-
-        // Display dialog
-        dialogWindow.show()
-    }
-
-    // When photo access is granted
+    // Permission request for Camera and actions
     @AfterPermissionGranted(IMAGE_CAPTURE_CODE)
     private fun takePhoto() {
-        if (!EasyPermissions.hasPermissions(this, CAMERA_PERMISSION)) {
+        // Permission request for camera
+        if (!EasyPermissions.hasPermissions(this, CAMERA_ACCESS_PERMISSION)) {
             EasyPermissions.requestPermissions(
                 this,
                 getString(R.string.allow_camera_access),
                 IMAGE_CAPTURE_CODE,
-                CAMERA_PERMISSION
+                CAMERA_ACCESS_PERMISSION
             )
             return
 
@@ -382,10 +380,12 @@ class SettingsActivity: AppCompatActivity() {
         actionCamera.launch(cameraIntent) // Launch intent
     }
 
+
     // Create callback when user take a photo on his device
     private val actionCamera = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result -> onTakePhotoResult(result) }
+
 
     // Handle result of photo capture with device's camera
     private fun onTakePhotoResult(result: ActivityResult) {
@@ -397,5 +397,12 @@ class SettingsActivity: AppCompatActivity() {
         } else {
             Toast.makeText(this, getString(R.string.no_image_chosen), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    // Go to main activity
+    private fun navigateToHomeActivity() {
+        val mainActivityIntent = Intent(applicationContext, MainActivity::class.java)
+        startActivity(mainActivityIntent)
+        finish()
     }
 }

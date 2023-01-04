@@ -75,7 +75,6 @@
 
     <!-- Item Picture -->
     <dimen name="item_picture_size">120dp</dimen>
-    <dimen name="item_picture_description_height">30dp</dimen>
 
     <dimen name="land_input_width">400dp</dimen>
 

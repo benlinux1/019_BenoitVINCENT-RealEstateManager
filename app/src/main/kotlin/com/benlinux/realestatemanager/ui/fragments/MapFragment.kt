@@ -66,7 +66,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         (activity as MainActivity).hideAddButton()
 
         // Check if user has been located
-        userLocation = getRealtorLocation()
+        userLocation = getUserLocationFromMain()
 
         return inflater.inflate(R.layout.fragment_map_view, container, false)
     }
@@ -82,8 +82,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
         // Set async google map
         mapFragment.getMapAsync(this)
-
-
     }
 
     // Configuring ViewModel from ViewModelFactory
@@ -98,7 +96,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         propertyViewModel.currentLocation?.observe(viewLifecycleOwner) { location ->
             userLocation = location
         }
-
     }
 
     // Retrieve properties and set markers on google map for each
@@ -121,9 +118,8 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         if (locationPermissionIsGranted) {
             // Set marker & move camera if user has been located yet
             if (this.getUserLocation() != null) {
-                setMarkerForUserLocation(mGoogleMap, userLocation!!, "actual" )
-                moveCamera(mGoogleMap, userLocation!!)
-                // else get user location
+                setMarkerForUserLocation(googleMap, userLocation!!, "actual" )
+            // else get user location
             } else {
                 getCurrentLocation()
             }
@@ -145,7 +141,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
         // Set properties with markers
         setProperties()
-
     }
 
     private fun getUserLocation(): LatLng? {
@@ -164,6 +159,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
                 isPermissionGranted = if (isGranted) { // If permission is granted
                     Log.d("LOG_TAG", "permission granted by the user")
+                    getCurrentLocation()
                     true
 
                 } else { // If permission is not granted
@@ -173,12 +169,9 @@ class MapFragment: Fragment(), OnMapReadyCallback {
             }
 
         // If location permission is not granted yet
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED)
+        if (ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Prompt user for location permission if not granted yet
-        {
             requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         // Else, location has been granted
         } else {
@@ -196,8 +189,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
             .getSystemService(Context.LOCATION_SERVICE) as LocationManager
         // Check condition
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-                LocationManager.NETWORK_PROVIDER
-            )
+                LocationManager.NETWORK_PROVIDER)
         ) {
             try {
                 // When Location is enabled, get last location
@@ -211,7 +203,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
                             // Save actual location to userLocation variable
                             userLocation = LatLng(location.latitude, location.longitude)
-                            setRealtorLocation(LatLng(location.latitude, location.longitude))
+                            setUserLocation(LatLng(location.latitude, location.longitude))
 
 
                             // Set marker for user position
@@ -223,6 +215,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
                             // Move Camera
                             moveCamera(mGoogleMap, userLocation!!)
+                            animateCamera(mGoogleMap, userLocation!!, 10f)
 
 
                         } else {
@@ -245,7 +238,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                                     if (lastLocation != null) {
                                         userLocation =
                                             LatLng(lastLocation.latitude, lastLocation.longitude)
-                                        setRealtorLocation(
+                                        setUserLocation(
                                             LatLng(
                                                 lastLocation.latitude,
                                                 lastLocation.longitude
@@ -265,8 +258,8 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
                                     // Move Camera on user location
                                     moveCamera(mGoogleMap, userLocation!!)
+                                    animateCamera(mGoogleMap, userLocation!!, 10f)
 
-                                    // Set markers for properties
                                 }
                             }
                             // Request location updates
@@ -290,15 +283,14 @@ class MapFragment: Fragment(), OnMapReadyCallback {
     }
 
     // Set realtor location in main activity variable
-    private fun setRealtorLocation(latLng: LatLng) {
-        (activity as MainActivity).realtorLocation = latLng
+    private fun setUserLocation(latLng: LatLng) {
+        (activity as MainActivity).userLocation = latLng
     }
 
     // Retrieve realtor location from main activity
-    private fun getRealtorLocation(): LatLng? {
-        return (activity as MainActivity).realtorLocation
+    private fun getUserLocationFromMain(): LatLng? {
+        return (activity as MainActivity).userLocation
     }
-
 
     // Add marker for user location
     private fun setMarkerForUserLocation(googleMap: GoogleMap, userLocation: LatLng, locationType: String) {
@@ -467,23 +459,12 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         }
     }
 
-    /**
-    // Convert drawable resource to bitmap (can be used for map marker in .icon())
-    private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor? {
-        return ContextCompat.getDrawable(context, vectorResId)?.run {
-            setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-            val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
-            draw(Canvas(bitmap))
-            BitmapDescriptorFactory.fromBitmap(bitmap)
+    override fun onResume() {
+        super.onResume()
+        // Get current location if not set yet
+        if (locationPermissionIsGranted && userLocation == null) {
+            getCurrentLocation()
         }
     }
-    */
-
-
-
-
-
-
-
 
 }
