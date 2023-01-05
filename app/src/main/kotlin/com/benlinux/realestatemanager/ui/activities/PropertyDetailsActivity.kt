@@ -384,7 +384,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
             append(property.address.streetName)
         }
         // Complement
-        if (property.address.complement.isNotEmpty()) {
+        if (property.address.complement!!.isNotEmpty()) {
             complement.text = property.address.complement
             complement.visibility = View.VISIBLE
         } else { complement.visibility = View.GONE }
@@ -393,11 +393,11 @@ class PropertyDetailsActivity: AppCompatActivity() {
         postalCodeAndCity.text = buildString {
             append(property.address.postalCode)
             append(" ")
-            append(property.address.city.uppercase())
+            append(property.address.city!!.uppercase())
         }
 
         // Country
-        country.text = property.address.country.uppercase()
+        country.text = property.address.country!!.uppercase()
     }
 
 

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
+import com.benlinux.realestatemanager.data.propertyManager.PropertyManager
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.adapters.ListAdapter
 import com.benlinux.realestatemanager.ui.models.Property
@@ -63,11 +64,43 @@ class ListFragment: Fragment() {
         // Set observer on properties list
         propertyViewModel.currentProperties?.observe(viewLifecycleOwner) { listOfProperties ->
             mProperties = listOfProperties
+            // Synchronize local and remote databases
+            // TODO: Connectivity Manager that allow this sync
+            syncFirestoreWithRoomDatabases(mProperties)
 
             // Define and configure adapter (MUST BE CALLED HERE FOR DATA REFRESH)
             adapter = ListAdapter(mProperties, requireContext())
             mRecyclerView.adapter = adapter
             setTextViews()
+        }
+    }
+
+    // Synchronize properties data with local Room database & remote Firestore Database
+    private fun syncFirestoreWithRoomDatabases(localProperties: MutableList<Property?>) {
+        // Call remote firestore properties data
+        PropertyManager.getAllPropertiesData().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val list = task.result
+                // Check if local properties are on Firebase
+                for (localProperty in localProperties) {
+                    // If local properties are not on Firebase, save each
+                    if (!list!!.contains(localProperty)) {
+                        if (localProperty != null) {
+                            PropertyManager.createProperty(localProperty)
+                        }
+                    }
+                }
+
+                // Check if remote properties are on local database
+                for (firebaseProperty in list!!) {
+                    // If remote properties are not on Room Database, save each
+                    if (!localProperties.contains(firebaseProperty)) {
+                        if (firebaseProperty != null) {
+                            propertyViewModel.saveProperty(firebaseProperty)
+                        }
+                    }
+                }
+            }
         }
     }
 

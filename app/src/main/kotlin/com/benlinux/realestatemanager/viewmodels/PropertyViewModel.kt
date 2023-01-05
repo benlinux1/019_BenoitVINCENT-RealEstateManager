@@ -14,7 +14,6 @@ class PropertyViewModel(propertyDataSource: PropertyRepository, executor: Execut
     var currentPropertyId: Int? = null
     var currentLocation: LiveData<LatLng>? = null
 
-
     // REPOSITORIES
     private val propertyDataSource: PropertyRepository
     private val executor: Executor
@@ -25,6 +24,7 @@ class PropertyViewModel(propertyDataSource: PropertyRepository, executor: Execut
         this.executor = executor
         getPropertiesList()
     }
+
 
     // GET PROPERTIES LIST
     private fun getPropertiesList(): LiveData<MutableList<Property?>> {

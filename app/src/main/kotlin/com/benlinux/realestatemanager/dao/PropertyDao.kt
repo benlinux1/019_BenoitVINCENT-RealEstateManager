@@ -9,10 +9,11 @@ import com.benlinux.realestatemanager.ui.models.Property
  * Sets DAO Pattern Interface to group access to persistent data
  */
 @Dao
+
 interface PropertyDao {
 
     // Insert Property in the table
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertProperty(property: Property)
 
     // Update Property in the table
