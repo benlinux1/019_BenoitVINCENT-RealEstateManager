@@ -13,7 +13,7 @@ import java.util.*
  */
 @SuppressLint("SimpleDateFormat")
 fun getTodayDate(): String {
-    val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
+    val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
     return dateFormat.format(Date())
 }
 
@@ -22,3 +22,10 @@ fun convertDateToString(date: Date): String {
     val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
     return dateFormat.format(date)
 }
+
+@SuppressLint("SimpleDateFormat")
+fun convertStringToDate(string: String): Date? {
+    val formatter = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+    return formatter.parse(string)
+}
+

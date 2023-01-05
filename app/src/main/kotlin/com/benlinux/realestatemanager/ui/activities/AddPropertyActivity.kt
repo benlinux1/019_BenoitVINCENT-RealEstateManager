@@ -104,7 +104,7 @@ class AddPropertyActivity: AppCompatActivity() {
     private var uriImageSelected: Uri? = null
 
     // Current realtor
-    private lateinit var realtor: User
+    private var realtor: User? = null
 
     // Property status checkboxes
     private lateinit var availableButton: RadioButton
@@ -181,11 +181,17 @@ class AddPropertyActivity: AppCompatActivity() {
     private fun setListenerOnCreateButton() {
         saveButton.setOnClickListener {
             if (checkPropertyFields()) {
+                // Create property object with data in fields
                 createProperty()
+                // save property in local Room database
                 propertyViewModel.saveProperty(property)
                 Log.d("PROPERTY CREATED", property.toString())
-                UserManager.addPropertyToRealtorProperties(property.id.toString())
+                // Update realtor properties list
+                if (isInternetAvailable(this)) {
+                    UserManager.addPropertyToRealtorProperties(property.id.toString())
+                }
                 Log.d("REALTOR UPDATE ADD", property.id.toString())
+                // Go to Main Activity
                 val mainActivityIntent = Intent(this, MainActivity::class.java)
                 startActivity(mainActivityIntent)
                 finish()
@@ -242,7 +248,7 @@ class AddPropertyActivity: AppCompatActivity() {
         if (!property.isAvailable) {
             property.soldDate = dateOfSold!!
         }
-        property.realtor = realtor
+        property.realtor = realtor!!
         property.address = getPropertyAddress()
         property.id = System.currentTimeMillis().toInt()
         property.pictures = picturesList

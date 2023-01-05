@@ -23,6 +23,7 @@ data class Property (
     var isAvailable: Boolean = true,
     var creationDate: String = "29/11/2022",
     var soldDate: String = "",
+    var updateDate: String = "",
     @TypeConverters(Converters::class)
     var realtor: User = User("0", "", "", "", ""),
     var numberOfRooms: Int = 0,

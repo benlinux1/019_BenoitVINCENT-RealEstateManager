@@ -100,7 +100,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
     private lateinit var saveButton: Button
 
     // Realtor Data
-    private lateinit var realtor: User
+    private var realtor: User? = null
 
     private lateinit var availableButton: RadioButton
     private lateinit var soldButton: RadioButton
@@ -413,11 +413,16 @@ class UpdatePropertyActivity: AppCompatActivity() {
         saveButton.text = resources.getString(R.string.update_button_text)
         saveButton.setOnClickListener {
             if (checkPropertyFields()) {
+                // create property with new data
                 updateProperty()
+                // update Room repository with this property data
                 propertyViewModel.updateProperty(property)
-                // TODO: If connected to Internet before remote update
-                PropertyManager.updateProperty(property)
+                // If connected to Internet, update Firestore remote database too
+                if (isInternetAvailable(this)) {
+                    PropertyManager.updateProperty(property)
+                }
                 Log.d("PROPERTY UPDATED", property.toString())
+                // Go to Main Activity
                 val mainActivityIntent = Intent(this, MainActivity::class.java)
                 startActivity(mainActivityIntent)
                 finish()
@@ -454,9 +459,9 @@ class UpdatePropertyActivity: AppCompatActivity() {
             property.soldDate = dateOfSold!!
         }
         property.pictures = picturesList
-        property.realtor = realtor
         property.address = getPropertyAddress()
         property.id = propertyId!!.toInt()
+        property.updateDate = getTodayDate()
     }
 
     // Get property type according to checkbox clicked
