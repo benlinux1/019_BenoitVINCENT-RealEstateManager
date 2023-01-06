@@ -202,6 +202,7 @@
     <string name="filter_creation_date_title">Date of publication</string>
     <string name="filter_button_text">Validate filters</string>
     <string name="filter_update_date_title">Date of last update</string>
+    <string name="filter_sold_date_title">Date of sold</string>
 
 
 </resources>

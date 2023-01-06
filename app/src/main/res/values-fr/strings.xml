@@ -193,8 +193,9 @@
     <string name="filter_bathrooms_title">Nombre de salles de bain</string>
     <string name="filter_main_text">FILTRES PERSONNALISÉS</string>
     <string name="filter_creation_date_title">Date de publication</string>
-    <string name="filter_button_text">Validate filters</string>
-    <string name="filter_update_date_title">Date of last update</string>
+    <string name="filter_button_text">Valider les filtres</string>
+    <string name="filter_update_date_title">Date de dernière modification</string>
+    <string name="filter_sold_date_title">Date de vente</string>
 
 
 </resources>
