@@ -203,6 +203,8 @@
     <string name="filter_button_text">Validate filters</string>
     <string name="filter_update_date_title">Date of last update</string>
     <string name="filter_sold_date_title">Date of sold</string>
+    <string name="filter_status_title">Availability status</string>
+    <string name="filter_property_type">Property type</string>
 
 
 </resources>
