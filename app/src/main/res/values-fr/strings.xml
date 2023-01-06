@@ -196,8 +196,9 @@
     <string name="filter_button_text">Valider les filtres</string>
     <string name="filter_update_date_title">Date de dernière modification</string>
     <string name="filter_sold_date_title">Date de vente</string>
-    <string name="filter_status_title">Availability status</string>
-    <string name="filter_property_type">Property type</string>
+    <string name="filter_status_title">Statut actuel</string>
+    <string name="filter_property_type">Type de bien</string>
+    <string name="list_filter_properties_button_text">Filtrer</string>
 
 
 </resources>

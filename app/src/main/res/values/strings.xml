@@ -205,6 +205,7 @@
     <string name="filter_sold_date_title">Date of sold</string>
     <string name="filter_status_title">Availability status</string>
     <string name="filter_property_type">Property type</string>
+    <string name="list_filter_properties_button_text">Filter properties</string>
 
 
 </resources>

@@ -12,12 +12,29 @@
         style="@style/fieldTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/default_padding"
+        android:layout_marginTop="@dimen/default_padding"
         android:text="@string/list_properties_title"
         android:gravity="center"
         android:textSize="@dimen/default_subtitle_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/list_filter_button"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:backgroundTint="@color/colorAccent"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/default_subtitle_size"
+        app:cornerRadius="20dp"
+        android:layout_marginBottom="@dimen/very_small_margin"
+        android:layout_marginTop="@dimen/very_small_margin"
+        app:layout_constraintTop_toBottomOf="@id/list_properties_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/list_filter_properties_button_text" />
 
     <TextView
         android:id="@+id/no_property_label"
@@ -36,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
-        app:layout_constraintTop_toBottomOf="@id/list_properties_title">
+        app:layout_constraintTop_toBottomOf="@id/list_filter_button">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_properties"
