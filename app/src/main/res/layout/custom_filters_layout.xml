@@ -3,12 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    app:backgroundTint="@color/fui_transparent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:backgroundTint="@color/colorIndigo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -26,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.30" />
+                app:layout_constraintGuide_percent="0.35" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_v50"
@@ -40,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.70" />
+                app:layout_constraintGuide_percent="0.65" />
 
             <!-- FILTERS MAIN TITLE -->
             <TextView
@@ -80,7 +82,7 @@
 
 
                 <LinearLayout
-                    android:id="@+id/add_type_radioGroup1"
+                    android:id="@+id/filter_type_radioGroup1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_margin"
@@ -90,44 +92,48 @@
 
 
                     <CheckBox
-                        android:id="@+id/add_type_radiobutton_1"
+                        android:id="@+id/filter_type_radiobutton_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:buttonTint="@drawable/check_box_tint"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:text="@string/add_type_flat" />
 
                     <CheckBox
-                        android:id="@+id/add_type_radiobutton_2"
+                        android:id="@+id/filter_type_radiobutton_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:buttonTint="@drawable/check_box_tint"
                         android:text="@string/add_type_house"
-                        app:layout_constraintTop_toBottomOf="@id/add_type_radiobutton_1"
+                        app:layout_constraintTop_toBottomOf="@id/filter_type_radiobutton_1"
                         app:layout_constraintStart_toEndOf="@id/add_type_radiobutton_1" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/add_type_radioGroup2"
+                    android:id="@+id/filter_type_radioGroup2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginTop="@dimen/small_margin"
                     android:layout_marginStart="@dimen/default_medium_margin"
-                    android:layout_toRightOf="@id/add_type_radioGroup1">
+                    android:layout_toRightOf="@id/filter_type_radioGroup1">
 
                     <CheckBox
-                        android:id="@+id/add_type_radiobutton_3"
+                        android:id="@+id/filter_type_radiobutton_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:buttonTint="@drawable/check_box_tint"
                         android:text="@string/add_type_duplex"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
                     <CheckBox
-                        android:id="@+id/add_type_radiobutton_4"
+                        android:id="@+id/filter_type_radiobutton_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:buttonTint="@drawable/check_box_tint"
                         android:text="@string/add_type_penthouse"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -154,7 +160,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_surface_min_layout"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_margin"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -180,7 +186,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_surface_max_layout"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintTop_toTopOf="@id/filter_surface_min_layout"
@@ -221,7 +227,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_price_min_layout"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/small_margin"
@@ -247,7 +253,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_price_max_layout"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintTop_toTopOf="@id/filter_price_min_layout"
@@ -288,7 +294,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_rooms_min_layout"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/small_margin"
@@ -314,7 +320,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_rooms_max_layout"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintTop_toTopOf="@id/filter_rooms_min_layout"
@@ -354,7 +360,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_bedrooms_min_layout"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/small_margin"
@@ -380,7 +386,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_bedrooms_max_layout"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintTop_toTopOf="@id/filter_bedrooms_min_layout"
@@ -420,7 +426,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_bathrooms_min_layout"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/small_margin"
@@ -446,7 +452,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_bathrooms_max_layout"
                 android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintTop_toTopOf="@id/filter_bathrooms_min_layout"
@@ -493,14 +499,14 @@
                 app:layout_constraintTop_toBottomOf="@id/filter_status_title">
 
                 <RadioButton
-                    android:id="@+id/add_status_radioButton1"
+                    android:id="@+id/filter_status_radioButton1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="@string/add_status_1" />
 
                 <RadioButton
-                    android:id="@+id/add_status_radioButton2"
+                    android:id="@+id/filter_status_radioButton2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/default_medium_margin"
@@ -527,8 +533,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_creation_date_min_layout"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/small_margin"
@@ -555,8 +561,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_creation_date_max_layout"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintTop_toTopOf="@id/filter_creation_date_min_layout"
@@ -598,8 +604,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_update_date_min_layout"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/small_margin"
@@ -626,8 +632,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_update_date_max_layout"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintTop_toTopOf="@id/filter_update_date_min_layout"
@@ -669,8 +675,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_sold_date_min_layout"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/small_margin"
@@ -697,8 +703,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_sold_date_max_layout"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintTop_toTopOf="@id/filter_sold_date_min_layout"

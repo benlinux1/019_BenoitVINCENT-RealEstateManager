@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.fragments.ListFragment">
 
     <TextView
@@ -23,11 +23,11 @@
         android:id="@+id/list_filter_button"
         style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:gravity="center"
         app:backgroundTint="@color/colorAccent"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/default_subtitle_size"
+        android:textSize="@dimen/default_text_size"
         app:cornerRadius="20dp"
         android:layout_marginBottom="@dimen/very_small_margin"
         android:layout_marginTop="@dimen/very_small_margin"
@@ -52,15 +52,15 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never"
+        android:overScrollMode="always"
         app:layout_constraintTop_toBottomOf="@id/list_filter_button">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_properties"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="40dp"
             app:layoutManager="LinearLayoutManager"
+            android:paddingBottom="76dp"
             tools:listitem="@layout/item_property_list" />
 
     </androidx.core.widget.NestedScrollView>

@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/recycler_view_margin_horizontal"
             android:paddingTop="@dimen/default_padding"
-            android:paddingBottom="72dp"
+            android:paddingBottom="76dp"
             tools:listitem="@layout/item_property_list"
             app:layoutManager="LinearLayoutManager"/>
 
