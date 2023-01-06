@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent" >
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="@dimen/screen_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="@dimen/default_margin"
+            android:paddingBottom="@dimen/very_large_margin"
+            tools:context=".ui.activities.MainActivity">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_v25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.30" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_v50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_v75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.70" />
+
+            <!-- FILTERS MAIN TITLE -->
+            <TextView
+                android:id="@+id/filter_main_title"
+                style="@style/cardMainTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/filter_main_text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- SURFACE TITLE -->
+            <TextView
+                android:id="@+id/filter_surface_title"
+                android:textSize="@dimen/default_subtitle_size"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/add_surface_text"
+                app:layout_constraintTop_toBottomOf="@id/filter_main_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/default_medium_margin" />
+
+            <!-- SURFACE MIN -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_surface_min_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@id/filter_surface_title"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v25"
+                app:layout_constraintStart_toStartOf="@id/guideline_v25"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_surface_min"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_min"
+                    android:autofillHints=""
+                    android:inputType="textShortMessage"
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- SURFACE MAX -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_surface_max_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="@id/filter_surface_min_layout"
+                app:layout_constraintBottom_toBottomOf="@id/filter_surface_min_layout"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v75"
+                app:layout_constraintStart_toStartOf="@id/guideline_v75"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_surface_max"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_max"
+                    android:inputType="textShortMessage"
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size"
+                    android:autofillHints="" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- PRICE TITLE -->
+            <TextView
+                android:id="@+id/filter_price_title"
+                android:textSize="@dimen/default_subtitle_size"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/filter_price_title"
+                app:layout_constraintTop_toBottomOf="@id/filter_surface_min_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/default_medium_margin" />
+
+            <!-- PRICE MIN -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_price_min_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginTop="@dimen/small_margin"
+                app:layout_constraintTop_toBottomOf="@id/filter_price_title"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v25"
+                app:layout_constraintStart_toStartOf="@id/guideline_v25"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_price_min"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_min"
+                    android:inputType="textShortMessage"
+                    android:gravity="center"
+                    android:autofillHints=""
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- PRICE MAX -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_price_max_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="@id/filter_price_min_layout"
+                app:layout_constraintBottom_toBottomOf="@id/filter_price_min_layout"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v75"
+                app:layout_constraintStart_toStartOf="@id/guideline_v75"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_price_max"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_max"
+                    android:inputType="textShortMessage"
+                    android:autofillHints=""
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- NUMBER OF ROOMS TITLE -->
+            <TextView
+                android:id="@+id/filter_rooms_title"
+                android:textSize="@dimen/default_subtitle_size"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/filter_rooms_title"
+                app:layout_constraintTop_toBottomOf="@id/filter_price_min_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/default_medium_margin" />
+
+            <!-- NUMBER OF ROOMS MIN -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_rooms_min_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginTop="@dimen/small_margin"
+                app:layout_constraintTop_toBottomOf="@id/filter_rooms_title"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v25"
+                app:layout_constraintStart_toStartOf="@id/guideline_v25"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_rooms_min"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_min"
+                    android:inputType="textShortMessage"
+                    android:autofillHints=""
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- NUMBER OF ROOMS MAX -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_rooms_max_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="@id/filter_rooms_min_layout"
+                app:layout_constraintBottom_toBottomOf="@id/filter_rooms_min_layout"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v75"
+                app:layout_constraintStart_toStartOf="@id/guideline_v75"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_rooms_max"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_max"
+                    android:inputType="textShortMessage"
+                    android:autofillHints=""
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- NUMBER OF BEDROOMS TITLE -->
+            <TextView
+                android:id="@+id/filter_bedrooms_title"
+                android:textSize="@dimen/default_subtitle_size"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/filter_bedrooms_title"
+                app:layout_constraintTop_toBottomOf="@id/filter_rooms_min_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/default_medium_margin" />
+
+            <!-- NUMBER OF BEDROOMS MIN -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_bedrooms_min_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginTop="@dimen/small_margin"
+                app:layout_constraintTop_toBottomOf="@id/filter_bedrooms_title"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v25"
+                app:layout_constraintStart_toStartOf="@id/guideline_v25"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_bedrooms_min"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_min"
+                    android:inputType="textShortMessage"
+                    android:autofillHints=""
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- NUMBER OF BEDROOMS MAX -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_bedrooms_max_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="@id/filter_bedrooms_min_layout"
+                app:layout_constraintBottom_toBottomOf="@id/filter_bedrooms_min_layout"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v75"
+                app:layout_constraintStart_toStartOf="@id/guideline_v75"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_bedrooms_max"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_max"
+                    android:inputType="textShortMessage"
+                    android:autofillHints=""
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- NUMBER OF BATHROOMS TITLE -->
+            <TextView
+                android:id="@+id/filter_bathrooms_title"
+                android:textSize="@dimen/default_subtitle_size"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/filter_bathrooms_title"
+                app:layout_constraintTop_toBottomOf="@id/filter_bedrooms_min_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/default_medium_margin" />
+
+            <!-- NUMBER OF BATHROOMS MIN -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_bathrooms_min_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginTop="@dimen/small_margin"
+                app:layout_constraintTop_toBottomOf="@id/filter_bathrooms_title"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v25"
+                app:layout_constraintStart_toStartOf="@id/guideline_v25"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_bathrooms_min"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_min"
+                    android:inputType="textShortMessage"
+                    android:autofillHints=""
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- NUMBER OF BATHROOMS MAX -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_bathrooms_max_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="@id/filter_bathrooms_min_layout"
+                app:layout_constraintBottom_toBottomOf="@id/filter_bathrooms_min_layout"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v75"
+                app:layout_constraintStart_toStartOf="@id/guideline_v75"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_bathrooms_max"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_max"
+                    android:inputType="textShortMessage"
+                    android:autofillHints=""
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- DATE OF CREATION TITLE -->
+            <TextView
+                android:id="@+id/filter_creation_date_title"
+                android:textSize="@dimen/default_subtitle_size"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/filter_creation_date_title"
+                app:layout_constraintTop_toBottomOf="@id/filter_bathrooms_min_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/default_medium_margin" />
+
+            <!-- DATE OF CREATION MIN -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_creation_date_min_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginTop="@dimen/small_margin"
+                app:layout_constraintTop_toBottomOf="@id/filter_creation_date_title"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v25"
+                app:layout_constraintStart_toStartOf="@id/guideline_v25"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_creation_date_min"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_min"
+                    android:inputType="date"
+                    android:autofillHints=""
+                    android:drawableStart="@drawable/ic_calendar_24"
+                    app:drawableTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- DATE OF CREATION MAX -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_creation_date_max_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="@id/filter_creation_date_min_layout"
+                app:layout_constraintBottom_toBottomOf="@id/filter_creation_date_min_layout"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v75"
+                app:layout_constraintStart_toStartOf="@id/guideline_v75"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_creation_date_max"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_max"
+                    android:inputType="date"
+                    android:autofillHints=""
+                    android:drawableStart="@drawable/ic_calendar_24"
+                    app:drawableTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- DATE OF UPDATE TITLE -->
+            <TextView
+                android:id="@+id/filter_update_date_title"
+                android:textSize="@dimen/default_subtitle_size"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/filter_update_date_title"
+                app:layout_constraintTop_toBottomOf="@id/filter_creation_date_min_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/default_medium_margin" />
+
+            <!-- DATE OF UPDATE MIN -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_update_date_min_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginTop="@dimen/small_margin"
+                app:layout_constraintTop_toBottomOf="@id/filter_update_date_title"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v25"
+                app:layout_constraintStart_toStartOf="@id/guideline_v25"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_update_date_min"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_min"
+                    android:inputType="date"
+                    android:autofillHints=""
+                    android:drawableStart="@drawable/ic_calendar_24"
+                    app:drawableTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- DATE OF UPDATE MAX -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_update_date_max_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="@id/filter_update_date_min_layout"
+                app:layout_constraintBottom_toBottomOf="@id/filter_update_date_min_layout"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v75"
+                app:layout_constraintStart_toStartOf="@id/guideline_v75"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_update_date_max"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_max"
+                    android:inputType="date"
+                    android:autofillHints=""
+                    android:drawableStart="@drawable/ic_calendar_24"
+                    app:drawableTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- DATE OF SOLD TITLE -->
+            <TextView
+                android:id="@+id/filter_sold_date_title"
+                android:textSize="@dimen/default_subtitle_size"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/filter_update_date_title"
+                app:layout_constraintTop_toBottomOf="@id/filter_update_date_min_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/default_medium_margin" />
+
+            <!-- DATE OF SOLD MIN -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_sold_date_min_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                android:layout_marginTop="@dimen/small_margin"
+                app:layout_constraintTop_toBottomOf="@id/filter_sold_date_title"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v25"
+                app:layout_constraintStart_toStartOf="@id/guideline_v25"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_sold_date_min"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_min"
+                    android:inputType="date"
+                    android:autofillHints=""
+                    android:drawableStart="@drawable/ic_calendar_24"
+                    app:drawableTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- DATE OF SOLD MAX -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/filter_sold_date_max_layout"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:textAppearance="@style/fieldTitle"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:layout_constraintTop_toTopOf="@id/filter_sold_date_min_layout"
+                app:layout_constraintBottom_toBottomOf="@id/filter_sold_date_min_layout"
+                app:layout_constraintEnd_toEndOf="@id/guideline_v75"
+                app:layout_constraintStart_toStartOf="@id/guideline_v75"
+                app:endIconMode="clear_text">
+
+                <EditText
+                    android:id="@+id/filter_sold_date_max"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/filter_max"
+                    android:inputType="date"
+                    android:autofillHints=""
+                    android:drawableStart="@drawable/ic_calendar_24"
+                    app:drawableTint="@color/colorPrimary"
+                    android:gravity="center"
+                    android:textSize="@dimen/higher_plus_text_size" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button android:id="@+id/filters_validate_button"
+        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="270dp"
+        app:backgroundTint="@color/colorPrimary"
+        android:text="@string/filter_button_text"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/default_subtitle_size"
+        app:cornerRadius="12dp"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="24dp"
+        android:layout_marginBottom="@dimen/default_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

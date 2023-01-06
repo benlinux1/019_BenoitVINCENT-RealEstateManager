@@ -191,7 +191,17 @@
     <string name="camera_label">Take a photo</string>
     <string name="add_gallery_picture_content_description">Button to add picture from gallery</string>
     <string name="add_camera_picture_content_description">Button to take a photo from camera</string>
-    <string name="allow_camera_access">Please allow pictures access</string>
+    <string name="allow_camera_access">Please allow camera access</string>
+    <string name="filter_min">Min</string>
+    <string name="filter_max">Max</string>
+    <string name="filter_price_title">Price ($)</string>
+    <string name="filter_rooms_title">Number of rooms</string>
+    <string name="filter_bedrooms_title">Number of bedrooms</string>
+    <string name="filter_bathrooms_title">Number of bathrooms</string>
+    <string name="filter_main_text">CUSTOM FILTERS</string>
+    <string name="filter_creation_date_title">Date of publication</string>
+    <string name="filter_button_text">Validate filters</string>
+    <string name="filter_update_date_title">Date of last update</string>
 
 
 </resources>

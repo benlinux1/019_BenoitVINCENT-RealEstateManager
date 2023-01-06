@@ -275,6 +275,7 @@ class AddPropertyActivity: AppCompatActivity() {
         val roomAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, roomsItems)
         roomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         roomSpinner.adapter = roomAdapter
+        // Listener on selected item to update view
         roomSpinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -304,6 +305,7 @@ class AddPropertyActivity: AppCompatActivity() {
         )
         bedroomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         bedroomSpinner.adapter = bedroomAdapter
+        // Listener on selected item to update view
         bedroomSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -330,6 +332,7 @@ class AddPropertyActivity: AppCompatActivity() {
         val bathroomAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, bathroomsItems)
         bathroomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         bathroomSpinner.adapter = bathroomAdapter
+        // Listener on selected item to update view
         bathroomSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -395,7 +398,6 @@ class AddPropertyActivity: AppCompatActivity() {
             showMediaSelectorDialog()
         }
     }
-
 
     // Show dialog to choose between Gallery or Take Photo actions
     private fun showMediaSelectorDialog() {
@@ -596,7 +598,6 @@ class AddPropertyActivity: AppCompatActivity() {
         picturesList.add(picture)
         pictureAdapter.updatePictures(picturesList)
     }
-
 
     // Init the recyclerView that contains pictures list
     private fun configureRecyclerView() {

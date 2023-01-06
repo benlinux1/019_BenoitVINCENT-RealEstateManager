@@ -102,9 +102,9 @@ class UpdatePropertyActivity: AppCompatActivity() {
     // Realtor Data
     private var realtor: User? = null
 
+    // Property availability status
     private lateinit var availableButton: RadioButton
     private lateinit var soldButton: RadioButton
-
     private var dateOfSold: String? = null
 
 
@@ -158,7 +158,6 @@ class UpdatePropertyActivity: AppCompatActivity() {
         arrowLeft.setOnClickListener {
             picturesRecyclerView.smoothScrollToPosition(0)
         }
-
         // After scroll, handle arrows visibility
         picturesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
@@ -179,32 +178,11 @@ class UpdatePropertyActivity: AppCompatActivity() {
         })
     }
 
-
     // Retrieve property's pictures and add each of them in pictures list
     private fun retrievePropertyPictures(property: Property) {
         for (picture: Picture? in property.pictures) {
             picturesList.add(picture)
             pictureAdapter.notifyItemInserted(picturesList.lastIndex)
-        }
-        if (picturesList.size > 3) {
-            setEasyScroll()
-        }
-    }
-
-    // Show arrows on list sides to indicate scroll possibility
-    private fun setEasyScroll() {
-        val arrowRight: ImageView = findViewById(R.id.list_arrow_right)
-        val arrowLeft: ImageView = findViewById(R.id.list_arrow_left)
-        arrowRight.visibility = View.VISIBLE
-        arrowRight.setOnClickListener {
-            picturesRecyclerView.smoothScrollToPosition(picturesList.size)
-            arrowRight.visibility = View.GONE
-            arrowLeft.visibility = View.VISIBLE
-        }
-        arrowLeft.setOnClickListener {
-            picturesRecyclerView.smoothScrollToPosition(0)
-            arrowRight.visibility = View.VISIBLE
-            arrowLeft.visibility = View.GONE
         }
     }
 
@@ -263,7 +241,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
         soldButton = findViewById(R.id.add_status_radioButton2)
     }
 
-
+    // Set property data in all views
     private fun setData(property: Property) {
         fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
         fun Int.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this.toString())
@@ -284,6 +262,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
         setAvailability(property.isAvailable)
     }
 
+    // Set availability status radio button
     private fun setAvailability(isAvailable: Boolean) {
         if (isAvailable) {
             availableButton.isChecked = true
@@ -291,7 +270,6 @@ class UpdatePropertyActivity: AppCompatActivity() {
             soldButton.isChecked = true
         }
     }
-
 
     // Configuring ViewModel from ViewModelFactory
     private fun setViewModel() {
@@ -318,6 +296,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
         roomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         roomSpinner.adapter = roomAdapter
         roomSpinner.setSelection(numberOfRooms)
+        // Listener on selected item to update view
         roomSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -348,6 +327,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
         bedroomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         bedroomSpinner.adapter = bedroomAdapter
         bedroomSpinner.setSelection(numberOfBedrooms)
+        // Listener on selected item to update view
         bedroomSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -375,6 +355,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
         bathroomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         bathroomSpinner.adapter = bathroomAdapter
         bathroomSpinner.setSelection(numberOfBathrooms)
+        // Listener on selected item to update view
         bathroomSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -393,9 +374,8 @@ class UpdatePropertyActivity: AppCompatActivity() {
         }
     }
 
-    /**
-     * Close add property activity and turn back to main activity if back button is clicked
-     */
+
+    // Close current activity and turn back to property details if back button is clicked
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             val propertyDetailsActivityIntent = Intent(this, PropertyDetailsActivity::class.java)
@@ -412,6 +392,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
     private fun setListenerOnUpdateButton() {
         saveButton.text = resources.getString(R.string.update_button_text)
         saveButton.setOnClickListener {
+            // Fields validation
             if (checkPropertyFields()) {
                 // create property with new data
                 updateProperty()

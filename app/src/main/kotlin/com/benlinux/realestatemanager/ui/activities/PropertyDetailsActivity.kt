@@ -2,7 +2,6 @@ package com.benlinux.realestatemanager.ui.activities
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -365,8 +364,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
         val imageList = ArrayList<SlideModel>()
         if (property.pictures.isNotEmpty()) {
             for (picture in property.pictures) {
-                val uri = Uri.parse(picture?.url)
-                imageList.add(SlideModel(uri.toString(), picture?.room, ScaleTypes.CENTER_CROP))
+                imageList.add(SlideModel(picture?.url, picture?.room, ScaleTypes.CENTER_CROP))
             }
         } else {
             imageList.add(SlideModel(R.mipmap.no_photo_bis, ScaleTypes.CENTER_CROP))
