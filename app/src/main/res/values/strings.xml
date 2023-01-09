@@ -192,6 +192,8 @@
     <string name="add_gallery_picture_content_description">Button to add picture from gallery</string>
     <string name="add_camera_picture_content_description">Button to take a photo from camera</string>
     <string name="allow_camera_access">Please allow camera access</string>
+
+
     <string name="filter_min">Min</string>
     <string name="filter_max">Max</string>
     <string name="filter_price_title">Price ($)</string>
@@ -205,7 +207,8 @@
     <string name="filter_sold_date_title">Date of sold</string>
     <string name="filter_status_title">Availability status</string>
     <string name="filter_property_type">Property type</string>
-    <string name="list_filter_properties_button_text">Filter properties</string>
+    <string name="list_filter_properties_button_text">Add filters</string>
+    <string name="list_clear_filters_properties_button_text">Clear filters</string>
 
 
 </resources>

@@ -19,22 +19,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/list_filter_button"
-        style="@style/Widget.Material3.Button.ElevatedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
+    <LinearLayout
+        android:id="@+id/list_filter_buttons_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="center"
-        app:backgroundTint="@color/colorAccent"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/default_text_size"
-        app:cornerRadius="20dp"
         android:layout_marginBottom="@dimen/very_small_margin"
         android:layout_marginTop="@dimen/very_small_margin"
         app:layout_constraintTop_toBottomOf="@id/list_properties_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/list_filter_properties_button_text" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/list_filter_button"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            app:backgroundTint="@color/colorAccent"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/default_text_size"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_add_property_24"
+            app:iconTint="@color/colorWhite"
+            android:text="@string/list_filter_properties_button_text" />
+
+        <Button
+            android:id="@+id/list_clear_filters_button"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/default_margin"
+            app:backgroundTint="@color/colorAccent"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/default_text_size"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_baseline_close_24"
+            app:iconTint="@color/colorWhite"
+            android:visibility="gone"
+            android:text="@string/list_clear_filters_properties_button_text" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/no_property_label"
@@ -53,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="always"
-        app:layout_constraintTop_toBottomOf="@id/list_filter_button">
+        app:layout_constraintTop_toBottomOf="@id/list_filter_buttons_container">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_properties"

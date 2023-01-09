@@ -1,6 +1,11 @@
 package com.benlinux.realestatemanager.ui.fragments
 
+import android.app.DatePickerDialog
+import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,10 +21,13 @@ import com.benlinux.realestatemanager.data.userManager.UserManager
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.adapters.ListAdapter
 import com.benlinux.realestatemanager.ui.models.Property
+import com.benlinux.realestatemanager.utils.convertDateToString
 import com.benlinux.realestatemanager.utils.convertStringToDate
+import com.benlinux.realestatemanager.utils.convertStringToShortDate
 import com.benlinux.realestatemanager.utils.isInternetAvailable
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
 
@@ -34,6 +42,9 @@ class ListFragment: Fragment() {
     // List of all current properties in the application
     private var mProperties: MutableList<Property?> = mutableListOf()
 
+    // List of filtered properties
+    private var filteredProperties: MutableList<Property?> = mutableListOf()
+
     // The adapter which handles the list of properties
     private lateinit var adapter: ListAdapter
 
@@ -47,6 +58,9 @@ class ListFragment: Fragment() {
     // Filter button
     private lateinit var filterButton: Button
 
+    // Clear Filters button
+    private lateinit var clearFiltersButton: Button
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -54,6 +68,7 @@ class ListFragment: Fragment() {
         configureViewModel()
         configureRecyclerView()
         setFilterButton()
+        setClearFiltersButton()
 
         return fragmentView
     }
@@ -197,10 +212,20 @@ class ListFragment: Fragment() {
         }
     }
 
+    // Set filter button and actions
     private fun setFilterButton() {
         filterButton = fragmentView.findViewById(R.id.list_filter_button)
         filterButton.setOnClickListener {
             launchFilterDialog()
+        }
+    }
+
+    // Set reset filters button and actions
+    private fun setClearFiltersButton() {
+        clearFiltersButton = fragmentView.findViewById(R.id.list_clear_filters_button)
+        clearFiltersButton.setOnClickListener {
+            adapter.updateProperties(mProperties)
+            clearFiltersButton.visibility = View.GONE
         }
     }
 
@@ -221,39 +246,294 @@ class ListFragment: Fragment() {
         val houseType: CheckBox = customView.findViewById(R.id.filter_type_radiobutton_2)
         val duplexType: CheckBox = customView.findViewById(R.id.filter_type_radiobutton_3)
         val penthouseType: CheckBox = customView.findViewById(R.id.filter_type_radiobutton_4)
-        val surfaceMin: EditText = customView.findViewById(R.id.filter_surface_min)
-        val surfaceMax: EditText = customView.findViewById(R.id.filter_surface_max)
-        val priceMin: EditText = customView.findViewById(R.id.filter_price_min)
-        val priceMax: EditText = customView.findViewById(R.id.filter_price_max)
-        val roomsMin: EditText = customView.findViewById(R.id.filter_rooms_min)
-        val roomsMax: EditText = customView.findViewById(R.id.filter_rooms_max)
-        val bedroomsMin: EditText = customView.findViewById(R.id.filter_bedrooms_min)
-        val bedroomsMax: EditText = customView.findViewById(R.id.filter_bedrooms_max)
-        val bathroomsMin: EditText = customView.findViewById(R.id.filter_bathrooms_min)
-        val bathroomsMax: EditText = customView.findViewById(R.id.filter_bathrooms_max)
+        val surfaceMinInput: EditText = customView.findViewById(R.id.filter_surface_min)
+        val surfaceMaxInput: EditText = customView.findViewById(R.id.filter_surface_max)
+        val priceMinInput: EditText = customView.findViewById(R.id.filter_price_min)
+        val priceMaxInput: EditText = customView.findViewById(R.id.filter_price_max)
+        val roomsMinInput: EditText = customView.findViewById(R.id.filter_rooms_min)
+        val roomsMaxInput: EditText = customView.findViewById(R.id.filter_rooms_max)
+        val bedroomsMinInput: EditText = customView.findViewById(R.id.filter_bedrooms_min)
+        val bedroomsMaxInput: EditText = customView.findViewById(R.id.filter_bedrooms_max)
+        val bathroomsMinInput: EditText = customView.findViewById(R.id.filter_bathrooms_min)
+        val bathroomsMaxInput: EditText = customView.findViewById(R.id.filter_bathrooms_max)
         val availableButton: RadioButton = customView.findViewById(R.id.filter_status_radioButton1)
-        val soldButton: RadioButton = customView.findViewById(R.id.filter_status_radioButton2)
-        val creationDateTitle: TextView = customView.findViewById(R.id.filter_creation_date_title)
-        val creationDateMin: EditText = customView.findViewById(R.id.filter_creation_date_min)
-        val creationDateMax: EditText = customView.findViewById(R.id.filter_creation_date_max)
+        val creationDateTitleInput: TextView = customView.findViewById(R.id.filter_creation_date_title)
+        val creationDateMinLayout: TextInputLayout = customView.findViewById(R.id.filter_creation_date_min_layout)
+        val creationDateMaxLayout: TextInputLayout = customView.findViewById(R.id.filter_creation_date_max_layout)
+        val creationDateMinInput: EditText = customView.findViewById(R.id.filter_creation_date_min)
+        val creationDateMaxInput: EditText = customView.findViewById(R.id.filter_creation_date_max)
         val updateDateTitle: TextView = customView.findViewById(R.id.filter_update_date_title)
-        val updateDateMin: EditText = customView.findViewById(R.id.filter_update_date_min)
-        val updateDateMax: EditText = customView.findViewById(R.id.filter_update_date_max)
+        val updateDateMinLayout: TextInputLayout = customView.findViewById(R.id.filter_update_date_min_layout)
+        val updateDateMaxLayout: TextInputLayout = customView.findViewById(R.id.filter_update_date_max_layout)
+        val updateDateMinInput: EditText = customView.findViewById(R.id.filter_update_date_min)
+        val updateDateMaxInput: EditText = customView.findViewById(R.id.filter_update_date_max)
         val soldDateTitle: TextView = customView.findViewById(R.id.filter_sold_date_title)
-        val soldDateMin: EditText = customView.findViewById(R.id.filter_sold_date_min)
-        val soldDateMax: EditText = customView.findViewById(R.id.filter_sold_date_max)
+        val soldDateMinLayout: TextInputLayout = customView.findViewById(R.id.filter_sold_date_min_layout)
+        val soldDateMaxLayout: TextInputLayout = customView.findViewById(R.id.filter_sold_date_max_layout)
+        val soldDateMinInput: EditText = customView.findViewById(R.id.filter_sold_date_min)
+        val soldDateMaxInput: EditText = customView.findViewById(R.id.filter_sold_date_max)
 
         // Set custom background design with radius and insets
         dialogWindow.window?.setBackgroundDrawableResource(R.drawable.background_filter_dialog)
 
+        // Status
+        val isAvailable = availableButton.isChecked
+
+        // Set dates types according to property's required status
+        val statusGroup: RadioGroup = customView.findViewById(R.id.filter_status_radioGroup)
+        statusGroup.setOnCheckedChangeListener { _, _ ->
+            if (availableButton.isChecked) {
+                creationDateTitleInput.visibility = View.VISIBLE
+                creationDateMinLayout.visibility = View.VISIBLE
+                creationDateMaxLayout.visibility = View.VISIBLE
+                updateDateTitle.visibility = View.VISIBLE
+                updateDateMinLayout.visibility = View.VISIBLE
+                updateDateMaxLayout.visibility = View.VISIBLE
+                soldDateTitle.visibility = View.GONE
+                soldDateMinLayout.visibility = View.GONE
+                soldDateMaxLayout.visibility = View.GONE
+            } else {
+                creationDateTitleInput.visibility = View.GONE
+                creationDateMinLayout.visibility = View.GONE
+                creationDateMaxLayout.visibility = View.GONE
+                updateDateTitle.visibility = View.GONE
+                updateDateMinLayout.visibility = View.GONE
+                updateDateMaxLayout.visibility = View.GONE
+                soldDateTitle.visibility = View.VISIBLE
+                soldDateMinLayout.visibility = View.VISIBLE
+                soldDateMaxLayout.visibility = View.VISIBLE
+            }
+        }
+
+        // Set listeners when user click on date field
+        setListenerOnDateField(creationDateMinInput)
+        setListenerOnDateField(creationDateMaxInput)
+        setListenerOnDateField(updateDateMinInput)
+        setListenerOnDateField(updateDateMaxInput)
+        setListenerOnDateField(soldDateMinInput)
+        setListenerOnDateField(soldDateMinInput)
+
         // validate filters button & actions
         validateFiltersButton.setOnClickListener {
-            // TODO : launch search
+
+            // Set empty filtered list
+            filteredProperties = mutableListOf()
+
+            // Surface
+            var surfaceMin = 0
+            if (surfaceMinInput.text.isNotEmpty()) { surfaceMin = surfaceMinInput.text.toString().toInt() }
+            var surfaceMax = 999999999
+            if (surfaceMaxInput.text.isNotEmpty()) { surfaceMax = surfaceMaxInput.text.toString().toInt() }
+            // Price
+            var priceMin = 0
+            if (priceMinInput.text.isNotEmpty()) { priceMin = priceMinInput.text.toString().toInt() }
+            var priceMax = 999999999
+            if (priceMaxInput.text.isNotEmpty()) { priceMax = priceMaxInput.text.toString().toInt() }
+            // Number of rooms
+            var roomMin = 0
+            if (roomsMinInput.text.isNotEmpty()) { roomMin = roomsMinInput.text.toString().toInt() }
+            var roomMax = 999999999
+            if (roomsMaxInput.text.isNotEmpty()) { roomMax = roomsMaxInput.text.toString().toInt() }
+            // Number of bedrooms
+            var bedroomMin = 0
+            if (bedroomsMinInput.text.isNotEmpty()) { bedroomMin = bedroomsMinInput.text.toString().toInt() }
+            var bedroomMax = 999999999
+            if (bedroomsMaxInput.text.isNotEmpty()) { bedroomMax = bedroomsMaxInput.text.toString().toInt() }
+            // Number of bathrooms
+            var bathroomMin = 0
+            if (bathroomsMinInput.text.isNotEmpty()) { bathroomMin = bathroomsMinInput.text.toString().toInt() }
+            var bathroomMax = 999999999
+            if (bathroomsMaxInput.text.isNotEmpty()) { bathroomMax = roomsMaxInput.text.toString().toInt() }
+
+            // All dates
+            var dateOfPublicationMin: Date? = null
+            var dateOfPublicationMax: Date? = null
+            var dateOfUpdateMin: Date? = null
+            var dateOfUpdateMax: Date? = null
+            var dateOfSoldMin: Date? = null
+            var dateOfSoldMax: Date? = null
+
+
+            // Status & dates
+            if (isAvailable) {
+                if (creationDateMinInput.text.isNotEmpty()) { dateOfPublicationMin = convertStringToDate(creationDateMinInput.text.toString()) }
+                if (creationDateMaxInput.text.isNotEmpty()) { dateOfPublicationMax = convertStringToDate(creationDateMaxInput.text.toString()) }
+                if (updateDateMinInput.text.isNotEmpty()) { dateOfUpdateMin = convertStringToDate(updateDateMinInput.text.toString()) }
+                if (updateDateMaxInput.text.isNotEmpty()) { dateOfUpdateMax = convertStringToDate(updateDateMaxInput.text.toString()) }
+            } else {
+                if (soldDateMinInput.text.isNotEmpty()) { dateOfSoldMin = convertStringToDate(soldDateMinInput.text.toString()) }
+                if (soldDateMaxInput.text.isNotEmpty()) { dateOfSoldMax = convertStringToDate(soldDateMaxInput.text.toString()) }
+            }
+
+            // Types
+            val types = arrayListOf<String>()
+            if (flatType.isChecked) { types.add("Flat") }
+            if (houseType.isChecked) { types.add("House") }
+            if (duplexType.isChecked) { types.add("Duplex") }
+            if (penthouseType.isChecked) { types.add("Penthouse") }
+
+            // Filter results
+            filterResults(
+                types,
+                surfaceMin,
+                surfaceMax,
+                priceMin,
+                priceMax,
+                roomMin,
+                roomMax,
+                bedroomMin,
+                bedroomMax,
+                bathroomMin,
+                bathroomMax,
+                dateOfPublicationMin,
+                dateOfPublicationMax,
+                dateOfUpdateMin,
+                dateOfUpdateMax,
+                dateOfSoldMin,
+                dateOfSoldMax
+            )
             dialogWindow.dismiss()
         }
 
         // Display dialog
         dialogWindow.show()
 
+    }
+
+    private fun setListenerOnDateField(dateField: EditText) {
+        dateField.setOnFocusChangeListener { view, _ ->
+            if (view.isFocused) {
+                showDateDialog(dateField)
+            }
+        }
+    }
+
+    private fun filterResults(
+        types: ArrayList<String>,
+        surfaceMin: Int?,
+        surfaceMax: Int?,
+        priceMin: Int?,
+        priceMax: Int?,
+        numberOfRoomsMin: Int?,
+        numberOfRoomsMax: Int?,
+        numberOfBedroomsMin: Int?,
+        numberOfBedroomsMax: Int?,
+        numberOfBathroomsMin: Int?,
+        numberOfBathroomsMax: Int?,
+        creationDateMin: Date?,
+        creationDateMax: Date?,
+        updateDateMin: Date?,
+        updateDateMax: Date?,
+        soldDateMin: Date?,
+        soldDateMax: Date?
+    ) {
+        for (property in mProperties) {
+            val creationDate = if (property?.creationDate?.isNotEmpty() == true) {
+                convertStringToShortDate(property.creationDate)
+            } else { null }
+
+            val updateDate = if (property?.updateDate?.isNotEmpty() == true) {
+                 convertStringToShortDate(property.updateDate)
+            } else { null }
+
+            val soldDate = if (property?.soldDate?.isNotEmpty() == true) {
+                convertStringToShortDate(property.soldDate)
+            } else { null }
+
+            // Check dates
+            var creationMin = true
+            if (creationDateMin != null && creationDate != null) { creationMin = checkMinDate(creationDateMin, creationDate) }
+            var creationMax = true
+            if (creationDateMax != null && creationDate != null) { creationMax = checkMaxDate(creationDateMax, creationDate) }
+            var updateMin = true
+            if (updateDateMin != null && updateDate != null) { updateMin = checkMinDate(updateDateMin, updateDate) }
+            var updateMax = true
+            if (updateDateMax != null && updateDate != null) { updateMax = checkMaxDate(updateDateMax, updateDate) }
+            var soldMin = true
+            if (soldDateMin != null && soldDate != null) { soldMin = checkMinDate(soldDateMin, soldDate) }
+            var soldMax = true
+            if (soldDateMax != null && soldDate != null) { soldMax = checkMaxDate(soldDateMax, soldDate) }
+
+            // Check all filters
+            if (property?.surface!! in surfaceMin!!..surfaceMax!!
+                && property.price in priceMin!!..priceMax!!
+                && property.numberOfRooms in numberOfRoomsMin!!..numberOfRoomsMax!!
+                && property.numberOfBedrooms in numberOfBedroomsMin!!..numberOfBedroomsMax!!
+                && property.numberOfBathrooms in numberOfBathroomsMin!!..numberOfBathroomsMax!!
+                && types.contains(property.type)
+                && creationMin
+                && creationMax
+                && updateMin
+                && updateMax
+                && soldMin
+                && soldMax
+            ){
+                // if filters concord, add property to list
+                filteredProperties.add(property)
+
+            }
+        }
+        // update list
+        adapter.updateProperties(filteredProperties)
+        clearFiltersButton.visibility = View.VISIBLE
+    }
+
+    private fun checkMinDate(request: Date?, final: Date?): Boolean {
+        return request!!.before(final)
+    }
+
+    private fun checkMaxDate(request: Date?, final: Date?): Boolean {
+        return request!!.after(final)
+    }
+
+    // Custom date picker dialog
+    @Suppress("DEPRECATION")
+    private fun showDateDialog(destination: EditText) {
+        val currentDate = Calendar.getInstance(Locale.FRANCE)
+        fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
+
+        // Date Picker dialog
+        val datePickerDialog = DatePickerDialog(
+            requireContext(), object : DatePickerDialog.OnDateSetListener {
+                private val date = Calendar.getInstance(Locale.FRANCE)
+
+                // When user select a date
+                override fun onDateSet(
+                    datePicker: DatePicker,
+                    year: Int,
+                    monthOfYear: Int,
+                    dayOfMonth: Int
+                ) {
+                    date[year, monthOfYear] = dayOfMonth
+
+                    // Set date into destination input field
+                    destination.text = convertDateToString(date.time).toEditable()
+                    destination.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                }
+            }, currentDate[Calendar.YEAR], currentDate[Calendar.MONTH],
+            currentDate[Calendar.DATE]
+        )
+
+        // Disable dates after today in date picker
+        datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+
+        // Customize title view
+        val customTitle = TextView(requireContext())
+        customTitle.setText(R.string.sold_date_dialog_title) // title text
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            customTitle.setTextColor(resources.getColor(R.color.colorWhite, resources.newTheme())) // text color
+            customTitle.setBackgroundColor(resources.getColor(R.color.colorAccent, resources.newTheme())) // background color
+        } else {
+            customTitle.setTextColor(resources.getColor(R.color.colorWhite)) // text color
+            customTitle.setBackgroundColor(resources.getColor(R.color.colorAccent)) // background color
+        }
+        customTitle.gravity = Gravity.CENTER // gravity
+        customTitle.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 19f) // text size
+        customTitle.setPadding(8, 24, 8, 16) // padding
+        // Set custom title
+        datePickerDialog.setCustomTitle(customTitle)
+
+        // Show date dialog
+        datePickerDialog.show()
     }
 }

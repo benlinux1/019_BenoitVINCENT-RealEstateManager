@@ -60,12 +60,12 @@
     <string name="details_location_state_text">FRANCE</string>
     <string name="property_details_description_title">Description</string>
     <string name="property_details_description_text">Description du bien</string>
-    <string name="property_details_other_title">Further information</string>
-    <string name="details_realtor_title">Property\'s realtor :&#160;</string>
+    <string name="property_details_other_title">Informations complémentaires</string>
+    <string name="details_realtor_title">Agent en charge :&#160;</string>
     <string name="details_realtor_text">Franck BLACK</string>
-    <string name="details_date_title">Date of publication : &#160;</string>
+    <string name="details_date_title">Date de publication : &#160;</string>
     <string name="details_date_text">02/01/2023</string>
-    <string name="details_sold_date_title">Date of sold :&#160;</string>
+    <string name="details_sold_date_title">Date de vente :&#160;</string>
 
 
     // PROPERTY LIST
@@ -185,6 +185,8 @@
     <string name="add_gallery_picture_content_description">Bouton pour ajpouter une image depuis la galerie</string>
     <string name="add_camera_picture_content_description">Bouton pour prendre une photo</string>
     <string name="allow_camera_access">Veuillez autoriser l\'accès à la camera de votre appareil</string>
+
+    // FILTERS
     <string name="filter_min">Min</string>
     <string name="filter_max">Max</string>
     <string name="filter_price_title">Prix ($)</string>
@@ -198,7 +200,8 @@
     <string name="filter_sold_date_title">Date de vente</string>
     <string name="filter_status_title">Statut actuel</string>
     <string name="filter_property_type">Type de bien</string>
-    <string name="list_filter_properties_button_text">Filtrer</string>
+    <string name="list_filter_properties_button_text">Filtres</string>
+    <string name="list_clear_filters_properties_button_text">Supprimer les filtres</string>
 
 
 </resources>

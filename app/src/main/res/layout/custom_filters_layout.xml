@@ -65,7 +65,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
-
                 android:gravity="center"
                 app:layout_constraintTop_toBottomOf="@id/filter_main_title"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -159,7 +158,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_surface_min_layout"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_margin"
                 android:textAppearance="@style/fieldTitle"
@@ -177,7 +176,7 @@
                     android:autofillHints=""
                     android:inputType="textShortMessage"
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/higher_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -185,7 +184,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_surface_max_layout"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -202,7 +201,7 @@
                     android:hint="@string/filter_max"
                     android:inputType="textShortMessage"
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size"
+                    android:textSize="@dimen/higher_text_size"
                     android:autofillHints="" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -226,7 +225,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_price_min_layout"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -244,7 +243,7 @@
                     android:inputType="textShortMessage"
                     android:gravity="center"
                     android:autofillHints=""
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/higher_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -252,7 +251,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_price_max_layout"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -270,7 +269,7 @@
                     android:inputType="textShortMessage"
                     android:autofillHints=""
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/higher_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -293,7 +292,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_rooms_min_layout"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -311,7 +310,7 @@
                     android:inputType="textShortMessage"
                     android:autofillHints=""
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/higher_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -319,7 +318,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_rooms_max_layout"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -337,7 +336,7 @@
                     android:inputType="textShortMessage"
                     android:autofillHints=""
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/higher_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -359,7 +358,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_bedrooms_min_layout"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -385,7 +384,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_bedrooms_max_layout"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -403,7 +402,7 @@
                     android:inputType="textShortMessage"
                     android:autofillHints=""
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/higher_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -425,7 +424,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_bathrooms_min_layout"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -443,7 +442,7 @@
                     android:inputType="textShortMessage"
                     android:autofillHints=""
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/higher_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -451,7 +450,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_bathrooms_max_layout"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -469,7 +468,7 @@
                     android:inputType="textShortMessage"
                     android:autofillHints=""
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/higher_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -533,7 +532,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_creation_date_min_layout"
-                android:layout_width="120dp"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -553,7 +552,7 @@
                     android:drawableStart="@drawable/ic_calendar_24"
                     app:drawableTint="@color/colorPrimary"
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/smaller_plus_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -561,7 +560,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_creation_date_max_layout"
-                android:layout_width="120dp"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -581,7 +580,7 @@
                     android:drawableStart="@drawable/ic_calendar_24"
                     app:drawableTint="@color/colorPrimary"
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/smaller_plus_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -604,7 +603,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_update_date_min_layout"
-                android:layout_width="120dp"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -624,7 +623,7 @@
                     android:drawableStart="@drawable/ic_calendar_24"
                     app:drawableTint="@color/colorPrimary"
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/smaller_plus_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -632,7 +631,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_update_date_max_layout"
-                android:layout_width="120dp"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -652,7 +651,7 @@
                     android:drawableStart="@drawable/ic_calendar_24"
                     app:drawableTint="@color/colorPrimary"
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/smaller_plus_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -669,13 +668,14 @@
                 app:layout_constraintTop_toBottomOf="@id/filter_update_date_min_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="@dimen/default_medium_margin" />
+                android:layout_marginTop="@dimen/default_medium_margin"
+                android:visibility="gone" />
 
             <!-- DATE OF SOLD MIN -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_sold_date_min_layout"
-                android:layout_width="120dp"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -683,7 +683,8 @@
                 app:layout_constraintTop_toBottomOf="@id/filter_sold_date_title"
                 app:layout_constraintEnd_toEndOf="@id/guideline_v25"
                 app:layout_constraintStart_toStartOf="@id/guideline_v25"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                android:visibility="gone" >
 
                 <EditText
                     android:id="@+id/filter_sold_date_min"
@@ -695,7 +696,7 @@
                     android:drawableStart="@drawable/ic_calendar_24"
                     app:drawableTint="@color/colorPrimary"
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/smaller_plus_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -703,7 +704,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/filter_sold_date_max_layout"
-                android:layout_width="120dp"
+                android:layout_width="135dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/fieldTitle"
                 app:boxStrokeColor="@color/colorPrimary"
@@ -711,7 +712,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/filter_sold_date_min_layout"
                 app:layout_constraintEnd_toEndOf="@id/guideline_v75"
                 app:layout_constraintStart_toStartOf="@id/guideline_v75"
-                app:endIconMode="clear_text">
+                app:endIconMode="clear_text"
+                android:visibility="gone" >
 
                 <EditText
                     android:id="@+id/filter_sold_date_max"
@@ -723,7 +725,7 @@
                     android:drawableStart="@drawable/ic_calendar_24"
                     app:drawableTint="@color/colorPrimary"
                     android:gravity="center"
-                    android:textSize="@dimen/higher_plus_text_size" />
+                    android:textSize="@dimen/smaller_plus_text_size" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -29,3 +29,9 @@ fun convertStringToDate(string: String): Date? {
     return formatter.parse(string)
 }
 
+@SuppressLint("SimpleDateFormat")
+fun convertStringToShortDate(string: String): Date? {
+    val formatter = SimpleDateFormat("dd/MM/yyyy")
+    return formatter.parse(string)
+}
+
