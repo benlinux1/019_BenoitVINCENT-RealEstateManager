@@ -30,18 +30,24 @@
             app:layout_constraintTop_toBottomOf="@id/main_toolbar"
             android:background="@color/colorIndigo">
 
-            <com.denzcoskun.imageslider.ImageSlider
+            <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/imageSlider"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/property_details_picture_height"
-                app:iss_auto_cycle="true"
-                app:iss_corner_radius="5"
-                app:iss_delay="0"
-                app:iss_error_image="@color/colorIndigo"
-                app:iss_period="1000"
-                app:iss_placeholder="@color/colorIndigo"
-                app:iss_selected_dot="@drawable/default_selected_dot"
-                app:iss_unselected_dot="@drawable/default_unselected_dot"
+                android:layout_centerInParent="true"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorEnabled="true"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="16dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="@color/colorWhite"
+                app:sliderIndicatorUnselectedColor="@color/colorGrey"
+                app:sliderScrollTimeInSec="2"
+                app:sliderStartAutoCycle="true"
                 app:layout_constraintTop_toBottomOf="@id/main_toolbar" />
 
 

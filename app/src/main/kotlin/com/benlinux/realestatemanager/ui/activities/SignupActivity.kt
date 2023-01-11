@@ -27,7 +27,7 @@ class SignupActivity : AppCompatActivity(){
     private lateinit var signUpButton: Button
     private lateinit var signInLink: TextView
 
-    var mFirebaseAuth: FirebaseAuth? = null
+    private var mFirebaseAuth: FirebaseAuth? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

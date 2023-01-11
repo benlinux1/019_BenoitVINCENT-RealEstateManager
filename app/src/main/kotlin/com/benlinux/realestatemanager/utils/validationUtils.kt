@@ -3,7 +3,6 @@ package com.benlinux.realestatemanager.utils
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.benlinux.realestatemanager.R
 import com.google.android.material.textfield.TextInputLayout
 
 /**

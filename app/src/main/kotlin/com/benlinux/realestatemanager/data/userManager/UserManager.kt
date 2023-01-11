@@ -7,7 +7,6 @@ import com.benlinux.realestatemanager.ui.models.User
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.QuerySnapshot
-import java.util.*
 
 class UserManager {
 
@@ -33,13 +32,6 @@ class UserManager {
             return UserRepository.createUser(user)
         }
 
-        fun getAllUsersData(): Task<List<User?>?> {
-            return Objects.requireNonNull(UserRepository.getAllUsersData()).continueWith { task ->
-                task.result.toObjects(
-                    User::class.java
-                )
-            }
-        }
 
         fun getUserData(): Task<User?>? {
             // Get the user from Firestore and cast it to a User model Object
@@ -50,11 +42,9 @@ class UserManager {
             }
         }
 
-
         fun updateUserEmailInFirestore(email: String?) {
             UserRepository.updateUserEmailInFirestore(email)
         }
-
 
         fun updateUserFirstName(firstname: String?) {
             UserRepository.updateUserFirstname(firstname)

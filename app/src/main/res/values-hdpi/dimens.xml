@@ -59,7 +59,7 @@
     <dimen name="design_bottom_navigation_height" tools:override="true">60dp</dimen>
 
     <!-- Property Details -->
-    <dimen name="property_details_picture_height" >220dp</dimen>
+    <dimen name="property_details_picture_height" >260dp</dimen>
     <dimen name="spinner_width">70dp</dimen>
 
     <!-- Login Activity -->

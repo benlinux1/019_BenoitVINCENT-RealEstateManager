@@ -20,16 +20,16 @@ class PropertyRepository {
         private const val PICTURES_FOLDER = "pictures"
 
         // Get the Collection Reference in Firestore Database
-        fun getPropertiesCollection(): CollectionReference {
+        private fun getPropertiesCollection(): CollectionReference {
             return FirebaseFirestore.getInstance().collection(COLLECTION_NAME)
         }
 
-        // Get all users from Firestore
+        // Get all properties from Firestore
         fun getAllPropertiesData(): Task<QuerySnapshot> {
             return getPropertiesCollection().get()
         }
 
-        // Create User in Firestore
+        // Create property in Firestore
         fun createProperty(property: Property): Task<QuerySnapshot> {
             // Check if this property exists in database
             return getAllPropertiesData()
@@ -65,7 +65,7 @@ class PropertyRepository {
             return picturesRef.putFile(imageUri!!)
         }
 
-
+        // Update a given property in Firestore
         fun updateProperty(property: Property): Task<Void> {
             return getPropertiesCollection().document(property.id.toString()).set(property)
         }

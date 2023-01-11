@@ -42,7 +42,7 @@ class PictureAdapter(pictures: MutableList<Picture?>, context: Context, userIsRe
 
     // Position for click listener
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // bind property according to position in the list
+        // bind picture according to position in the list
         mPictures[position]?.let { holder.bind(it) }
 
         // TODO : Call metrics for tab or smartphone to define onClick action

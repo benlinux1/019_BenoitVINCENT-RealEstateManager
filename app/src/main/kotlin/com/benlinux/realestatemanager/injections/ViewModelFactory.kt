@@ -13,6 +13,7 @@ import java.util.concurrent.Executors
  * ViewModelFactory created to declare ViewModel in MainActivity
  * Used to instantiate correctly PropertyViewModel class
  */
+
 class ViewModelFactory constructor(context: Context) : ViewModelProvider.Factory {
     private val propertyDataSource: PropertyRepository
     private val executor: Executor
@@ -23,6 +24,7 @@ class ViewModelFactory constructor(context: Context) : ViewModelProvider.Factory
         executor = Executors.newSingleThreadExecutor()
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PropertyViewModel::class.java)) {
             return PropertyViewModel(propertyDataSource, executor) as T
@@ -43,6 +45,4 @@ class ViewModelFactory constructor(context: Context) : ViewModelProvider.Factory
             return factory
         }
     }
-
-    
 }

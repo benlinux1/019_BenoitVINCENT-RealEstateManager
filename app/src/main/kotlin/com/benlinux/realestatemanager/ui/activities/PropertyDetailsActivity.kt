@@ -19,13 +19,11 @@ import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.data.userManager.UserManager
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.adapters.PictureAdapter
+import com.benlinux.realestatemanager.ui.adapters.SliderAdapter
 import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.utils.getLatLngFromPropertyFormattedAddress
 import com.benlinux.realestatemanager.viewmodels.PropertyViewModel
-import com.denzcoskun.imageslider.ImageSlider
-import com.denzcoskun.imageslider.constants.ScaleTypes
-import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -34,6 +32,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
+import com.smarteist.autoimageslider.SliderAnimations
+import com.smarteist.autoimageslider.SliderView
 import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -94,7 +95,8 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private var creatorId: String? = ""
 
     // Slider Image
-    private lateinit var imageSlider: ImageSlider
+    private lateinit var imageSlider: SliderView
+    private lateinit var sliderAdapter: SliderAdapter
 
     // POINTS OF INTEREST
     private lateinit var pointsOfInterestTitle: TextView
@@ -468,15 +470,20 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private fun setPropertyPictures(property: Property) {
 
         imageSlider = findViewById(R.id.imageSlider)
-        val imageList = ArrayList<SlideModel>()
+        val imageList: MutableList<Picture?> = mutableListOf()
         if (property.pictures.isNotEmpty()) {
             for (picture in property.pictures) {
-                imageList.add(SlideModel(picture?.url, picture?.room, ScaleTypes.CENTER_CROP))
+                imageList.add(picture)
             }
         } else {
-            imageList.add(SlideModel(R.mipmap.no_photo_bis, ScaleTypes.CENTER_CROP))
+            imageList.add(Picture("http://www.dunstableroadrunners.org/wp-content/uploads/2019/04/image-coming-soon.jpg", "No internet connexion"))
         }
-        imageSlider.setImageList(imageList, ScaleTypes.CENTER_CROP)
+        sliderAdapter = SliderAdapter(imageList, this)
+        imageSlider.setSliderAdapter(sliderAdapter)
+        imageSlider.autoCycleDirection = SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH
+        imageSlider.setIndicatorAnimation(IndicatorAnimationType.SWAP)
+        imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
+        imageSlider.startAutoCycle()
     }
 
 

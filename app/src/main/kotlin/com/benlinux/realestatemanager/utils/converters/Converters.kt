@@ -47,7 +47,7 @@ class Converters {
         return Gson().fromJson(data, addressType)
     }
 
-    // For Pictures
+    // For user favorites
     @TypeConverter
     fun fromStringList(list : MutableList<String>?): String {
         return Gson().toJson(list)

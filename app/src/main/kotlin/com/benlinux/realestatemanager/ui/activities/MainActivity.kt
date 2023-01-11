@@ -56,8 +56,8 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     private var userIsRealtor = false
 
-    lateinit var sharedPreferences: SharedPreferences
-    lateinit var preferencesEditor: SharedPreferences.Editor
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var preferencesEditor: SharedPreferences.Editor
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

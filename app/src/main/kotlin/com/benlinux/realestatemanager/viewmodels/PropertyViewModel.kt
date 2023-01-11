@@ -50,15 +50,4 @@ class PropertyViewModel(propertyDataSource: PropertyRepository, executor: Execut
     fun updateProperty(property: Property) {
         executor.execute { propertyDataSource.updateProperty(property) }
     }
-
-    // DELETE A GIVEN PROPERTY by id
-    fun deletePropertyById(propertyId: Int) {
-        executor.execute { propertyDataSource.deletePropertyById(propertyId) }
-    }
-
-    // DELETE A GIVEN PROPERTY
-    fun deletePropertyById(property: Property) {
-        executor.execute { propertyDataSource.deleteProperty(property) }
-    }
-
 }

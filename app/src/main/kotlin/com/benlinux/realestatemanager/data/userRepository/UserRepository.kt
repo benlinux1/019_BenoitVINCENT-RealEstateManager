@@ -106,7 +106,7 @@ class UserRepository {
 
 
         // Get all users from Firestore
-        fun getAllUsersData(): Task<QuerySnapshot> {
+        private fun getAllUsersData(): Task<QuerySnapshot> {
             return getUsersCollection().get()
         }
 
@@ -190,7 +190,6 @@ class UserRepository {
 
 
         // Delete the User from Firestore
-        // if result ok, delete from firebase & logout
         fun deleteUserFromFirestore(): Task<Void?> {
             val uid = getCurrentUserUID()!!
             return getUsersCollection().document(uid).delete()

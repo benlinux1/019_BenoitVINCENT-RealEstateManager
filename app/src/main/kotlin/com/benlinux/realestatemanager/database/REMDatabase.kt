@@ -14,7 +14,7 @@ import com.benlinux.realestatemanager.ui.models.User
 import com.benlinux.realestatemanager.utils.converters.Converters
 import com.benlinux.realestatemanager.utils.subscribeOnBackground
 
-
+// ROOM Database
 @Database(entities = [Property::class, User::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class REMDatabase : RoomDatabase() {
@@ -46,7 +46,7 @@ abstract class REMDatabase : RoomDatabase() {
             }
         }
 
-        // Create 3 property & 2 realtors in database
+        // Create 4 properties in room database
         private fun populateDatabase(db: REMDatabase) {
             val propertyDao = db.propertyDao()
             subscribeOnBackground {
