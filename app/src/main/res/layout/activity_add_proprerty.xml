@@ -52,6 +52,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/default_medium_margin"
                         android:hint="@string/add_property_name"
+                        app:helperTextEnabled="true"
+                        app:helperText="@string/required_field"
                         app:endIconMode="clear_text">
 
                         <EditText
@@ -76,6 +78,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/small_margin"
                         android:hint="@string/add_property_area"
+                        app:helperTextEnabled="true"
+                        app:helperText="@string/required_field"
                         app:endIconMode="clear_text">
 
                         <EditText
@@ -172,6 +176,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/small_margin"
                         android:hint="@string/add_price_text"
+                        app:helperTextEnabled="true"
+                        app:helperText="@string/required_field"
                         app:endIconMode="clear_text">
 
                         <EditText
@@ -540,6 +546,8 @@
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_address_layout_title"
                             android:hint="@string/add_property_street_number"
+                            app:helperTextEnabled="true"
+                            app:helperText="@string/required_field"
                             app:endIconMode="clear_text">
 
                             <EditText
@@ -565,6 +573,8 @@
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_street_number_layout"
                             android:hint="@string/add_property_street_name"
+                            app:helperTextEnabled="true"
+                            app:helperText="@string/required_field"
                             app:endIconMode="clear_text">
 
                             <EditText
@@ -611,6 +621,8 @@
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_address_complement_layout"
                             android:hint="@string/add_postal_code"
+                            app:helperTextEnabled="true"
+                            app:helperText="@string/required_field"
                             app:endIconMode="clear_text">
 
                             <EditText
@@ -635,6 +647,8 @@
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_postal_code_layout"
                             android:hint="@string/add_property_city"
+                            app:helperTextEnabled="true"
+                            app:helperText="@string/required_field"
                             app:endIconMode="clear_text">
 
                             <EditText
@@ -658,6 +672,8 @@
                             android:layout_marginTop="@dimen/small_margin"
                             app:layout_constraintTop_toBottomOf="@id/add_city_layout"
                             android:hint="@string/add_property_country"
+                            app:helperTextEnabled="true"
+                            app:helperText="@string/required_field"
                             app:endIconMode="clear_text">
 
                             <EditText

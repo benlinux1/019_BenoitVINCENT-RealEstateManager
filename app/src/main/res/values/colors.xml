@@ -7,8 +7,10 @@
     <color name="colorSecondary">#B3E5FC</color>
     <color name="colorIndigo">#E8EAF6</color>
     <color name="backgroundTransparent">#80000000</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorGrey">#9E9E9E</color>
     <color name="colorOrange">#FFA000</color>
+    <color name="colorIron">#676767</color>
 
     <color  name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/colorPrimary</color>
 

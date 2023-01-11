@@ -540,6 +540,7 @@ class AddPropertyActivity: AppCompatActivity() {
         // Custom view room name
         val roomName: EditText = customView.findViewById(R.id.add_room_name_input)
         roomName.requestFocus()
+        val roomNameLayout: TextInputLayout = customView.findViewById(R.id.add_name_layout)
         // Negative button
         val negativeButton: Button = customView.findViewById(R.id.picture_dialog_negative_button)
         // Positive button
@@ -554,19 +555,23 @@ class AddPropertyActivity: AppCompatActivity() {
         // Positive button & actions
         positiveButton.setOnClickListener {
             // Picture Data Creation
-            PropertyManager.uploadImageToFirestore(imageUri).addOnSuccessListener {
-                // get download url
-                it.metadata!!.reference!!.downloadUrl.addOnSuccessListener { uri ->
-                    // create picture with download url
-                    val picture = Picture(uri.toString(), roomName.text.toString())
-                    // Add picture to pictures list
-                    addPicture(picture)
-                    // Remove dialog window
-                    dialogWindow.dismiss()
-                    // Clear input focus to stay on pictures recyclerview
-                    clearAllFocuses()
-                    roomSpinner.requestFocus()
+            if (roomName.text.toString().length < 13) {
+                PropertyManager.uploadImageToFirestore(imageUri).addOnSuccessListener {
+                    // get download url
+                    it.metadata!!.reference!!.downloadUrl.addOnSuccessListener { uri ->
+                        // create picture with download url
+                        val picture = Picture(uri.toString(), roomName.text.toString())
+                        // Add picture to pictures list
+                        addPicture(picture)
+                        // Remove dialog window
+                        dialogWindow.dismiss()
+                        // Clear input focus to stay on pictures recyclerview
+                        clearAllFocuses()
+                        roomSpinner.requestFocus()
+                    }
                 }
+            } else {
+                roomNameLayout.error = getString(R.string.room_name_length_error)
             }
         }
 

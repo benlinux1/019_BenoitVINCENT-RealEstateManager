@@ -87,6 +87,10 @@
 
     // LOGIN ACTIVITY
     <string name="login_title">Voici la page de connexion</string>
+    <string name="login_firstName_title">Prénom *</string>
+    <string name="login_lastName_title">Nom *</string>
+    <string name="login_email_title">Email *</string>
+    <string name="login_password_title">Mot de passe *</string>
 
 
     // ADD PROPERTY FRAGMENT
@@ -94,12 +98,12 @@
     <string name="add_type_house">Maison</string>
     <string name="add_type_duplex">Duplex</string>
     <string name="add_type_penthouse">Villa</string>
-    <string name="add_property_name">Titre*</string>
+    <string name="add_property_name">Titre *</string>
     <string name="choose_property_type">Sélectionnez un type de bien</string>
-    <string name="add_property_area">Secteur*</string>
+    <string name="add_property_area">Secteur *</string>
     <string name="add_status_1">Disponible</string>
     <string name="add_status_2">Vendu</string>
-    <string name="add_price_text">Prix*</string>
+    <string name="add_price_text">Prix *</string>
     <string name="add_surface_text">Superficie (m²)</string>
     <string name="add_property_description_text">Anchored by a vast marble gallery with sweeping staircase, th entertaining floor includes a baronial living room facing Park Avenue, handsome library with oringinal paneling, and tremendous dining room; all of which enjoy fireplaces. The state-of-the-art Saint Charles designed kitchen includes a sunny breakfast room and staff quarters. Upstairs, the expansive master suite overlooks Park Avenue and includes two marble baths, two dressing rooms, and two offices. Additionally, the are three large bedrooms with en-suite baths and a media room.</string>
     <string name="property_picture_content_description">Photo du bien</string>
@@ -129,12 +133,12 @@
     <string name="validate_button">AJOUTER</string>
     <string name="add_picture_dialog_title">APERCU DE VOTRE IMAGE</string>
     <string name="add_property_address_title">Adresse du bien</string>
-    <string name="add_property_street_number">Numéro de rue*</string>
-    <string name="add_property_street_name">Nom de rue / voie*</string>
+    <string name="add_property_street_number">Numéro de rue *</string>
+    <string name="add_property_street_name">Nom de rue / voie *</string>
     <string name="add_address_complement">Complément d\'adresse</string>
-    <string name="add_postal_code">Code postal*</string>
-    <string name="add_property_city">Ville*</string>
-    <string name="add_property_country">Pays</string>
+    <string name="add_postal_code">Code postal *</string>
+    <string name="add_property_city">Ville *</string>
+    <string name="add_property_country">Pays *</string>
     <string name="sold_date_dialog_title">Veuillez indiquer la date de vente</string>
 
 
@@ -223,8 +227,8 @@
     <string name="add_type_house_trad">House</string>
     <string name="add_type_duplex_trad">Duplex</string>
     <string name="add_type_penthouse_trad">Penthouse</string>
-
-
+    <string name="room_name_length_error">Please fix room name length</string>
+    <string name="required_field">* Champ requis</string>
 
 
 </resources>

@@ -67,11 +67,22 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <!-- PROPERTY DETAILS PICTURE DESCRIPTION-->
+    <style name="pictureTitle" >
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">@dimen/default_medium_margin</item>
+        <item name="android:textSize">@dimen/higher_text_size</item>
+        <item name="android:background">@color/backgroundTransparent</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <!-- PROPERTY DETAILS CARD TEXTS-->
     <style name="cardText">
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginStart">4dp</item>
         <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/colorBlack</item>
     </style>
 
     <!-- PROPERTY DETAILS LOCATION TITLE-->
@@ -87,6 +98,7 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginTop">4dp</item>
         <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/colorBlack</item>
     </style>
 
     <!-- PROPERTY DETAILS CARD TEXTS-->
@@ -95,13 +107,20 @@
         <item name="android:textSize">@dimen/default_text_size</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
 
+    <!-- PROPERTY DETAILS POINTS OF INTEREST EXAMPLES-->
+    <style name="pointOfInterestExample">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:textSize">@dimen/smaller_text_size</item>
+        <item name="android:textColor">@color/colorIron</item>
     </style>
 
     <!-- BOTTOM NAVIGATION -->
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">14sp</item>
-
     </style>
 
     <!-- BOTTOM NAVIGATION WHEN ACTIVE -->

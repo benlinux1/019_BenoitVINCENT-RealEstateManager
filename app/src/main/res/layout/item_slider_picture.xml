@@ -21,14 +21,10 @@
 
     <TextView
         android:id="@+id/slider_picture_description"
+        style="@style/pictureTitle"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/backgroundTransparent"
-        android:gravity="center_vertical"
-        android:paddingStart="@dimen/default_medium_margin"
         android:text="@string/property_picture_description"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/higher_text_size"
         app:layout_constraintBottom_toBottomOf="@id/slider_picture_item"
         app:layout_constraintStart_toStartOf="@id/slider_picture_item"
         app:layout_constraintEnd_toEndOf="@id/slider_picture_item" />

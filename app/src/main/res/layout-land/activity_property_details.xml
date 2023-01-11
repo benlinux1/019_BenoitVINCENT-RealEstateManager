@@ -530,7 +530,7 @@
 
                     <TextView
                         android:id="@+id/property_details_primary_school_example"
-                        style="@style/cardText"
+                        style="@style/pointOfInterestExample"
                         android:text="@string/property_details_place_example"
                         android:ellipsize="end"
                         android:maxLines="2"
@@ -566,7 +566,7 @@
 
                     <TextView
                         android:id="@+id/property_details_secondary_school_example"
-                        style="@style/cardText"
+                        style="@style/pointOfInterestExample"
                         android:text="@string/property_details_place_example"
                         android:ellipsize="end"
                         android:maxLines="2"
@@ -602,7 +602,7 @@
 
                     <TextView
                         android:id="@+id/property_details_park_example"
-                        style="@style/cardText"
+                        style="@style/pointOfInterestExample"
                         android:text="@string/property_details_place_example"
                         android:ellipsize="end"
                         android:maxLines="2"
@@ -638,7 +638,7 @@
 
                     <TextView
                         android:id="@+id/property_details_supermarket_example"
-                        style="@style/cardText"
+                        style="@style/pointOfInterestExample"
                         android:text="@string/property_details_place_example"
                         android:ellipsize="end"
                         android:maxLines="2"
@@ -674,7 +674,7 @@
 
                     <TextView
                         android:id="@+id/property_details_restaurant_example"
-                        style="@style/cardText"
+                        style="@style/pointOfInterestExample"
                         android:text="@string/property_details_place_example"
                         android:ellipsize="end"
                         android:maxLines="2"
@@ -711,7 +711,7 @@
 
                     <TextView
                         android:id="@+id/property_details_bakery_example"
-                        style="@style/cardText"
+                        style="@style/pointOfInterestExample"
                         android:text="@string/property_details_place_example"
                         android:ellipsize="end"
                         android:maxLines="2"
@@ -747,7 +747,7 @@
 
                     <TextView
                         android:id="@+id/property_details_doctor_example"
-                        style="@style/cardText"
+                        style="@style/pointOfInterestExample"
                         android:text="@string/property_details_place_example"
                         android:ellipsize="end"
                         android:maxLines="2"
@@ -784,7 +784,7 @@
 
                     <TextView
                         android:id="@+id/property_details_pharmacy_example"
-                        style="@style/cardText"
+                        style="@style/pointOfInterestExample"
                         android:text="@string/property_details_place_example"
                         android:ellipsize="end"
                         android:maxLines="2"

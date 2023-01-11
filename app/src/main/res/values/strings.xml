@@ -100,18 +100,22 @@
     // LOGIN ACTIVITY
     <string name="login_title">Here is the login activity</string>
     <string name="login_title_toolbar">Connexion</string>
+    <string name="login_firstName_title">First name *</string>
+    <string name="login_lastName_title">Last name *</string>
+    <string name="login_email_title">Email *</string>
+    <string name="login_password_title">Password *</string>
 
     // ADD PROPERTY ACTIVITY
     <string name="add_type_flat">Flat</string>
     <string name="add_type_house">House</string>
     <string name="add_type_duplex">Duplex</string>
     <string name="add_type_penthouse">Penthouse</string>
-    <string name="add_property_name">Title*</string>
+    <string name="add_property_name">Title *</string>
     <string name="choose_property_type">Please select a property type</string>
-    <string name="add_property_area">Area*</string>
+    <string name="add_property_area">Area *</string>
     <string name="add_status_1">Available</string>
     <string name="add_status_2">Sold</string>
-    <string name="add_price_text">Price*</string>
+    <string name="add_price_text">Price *</string>
     <string name="add_surface_text">Surface (m²)</string>
     <string name="add_property_description_text">Anchored by a vast marble gallery with sweeping staircase, th entertaining floor includes a baronial living room facing Park Avenue, handsome library with oringinal paneling, and tremendous dining room; all of which enjoy fireplaces. The state-of-the-art Saint Charles designed kitchen includes a sunny breakfast room and staff quarters. Upstairs, the expansive master suite overlooks Park Avenue and includes two marble baths, two dressing rooms, and two offices. Additionally, the are three large bedrooms with en-suite baths and a media room.</string>
     <string name="property_picture_content_description">Picture of the property</string>
@@ -141,12 +145,12 @@
     <string name="validate_button">ADD PICTURE</string>
     <string name="add_picture_dialog_title">PICTURE PREVIEW</string>
     <string name="add_property_address_title">Property address</string>
-    <string name="add_property_street_number">Street number*</string>
-    <string name="add_property_street_name">Street name*</string>
+    <string name="add_property_street_number">Street number *</string>
+    <string name="add_property_street_name">Street name *</string>
     <string name="add_address_complement">Address complement</string>
-    <string name="add_postal_code">Postal code*</string>
-    <string name="add_property_city">City*</string>
-    <string name="add_property_country">Country</string>
+    <string name="add_postal_code">Postal code *</string>
+    <string name="add_property_city">City *</string>
+    <string name="add_property_country">Country *</string>
     <string name="sold_date_dialog_title">Please select the date of sold</string>
 
     // UPDATE PROPERTY ACTIVITY
@@ -231,6 +235,8 @@
     <string name="add_type_house_trad">Maison</string>
     <string name="add_type_duplex_trad">Duplex</string>
     <string name="add_type_penthouse_trad">Villa</string>
+    <string name="room_name_length_error">Please fix room name length</string>
+    <string name="required_field">* Required field</string>
 
 
 </resources>
