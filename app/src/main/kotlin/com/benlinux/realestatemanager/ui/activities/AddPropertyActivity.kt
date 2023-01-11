@@ -245,6 +245,7 @@ class AddPropertyActivity: AppCompatActivity() {
         property.description = description.text.toString()
         property.isAvailable = isPropertyAvailable()
         property.creationDate = getTodayDate()
+        property.updateDate = getTodayDate()
         if (!property.isAvailable) {
             property.soldDate = dateOfSold!!
         }

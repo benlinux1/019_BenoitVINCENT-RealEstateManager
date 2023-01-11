@@ -40,8 +40,9 @@
         android:id="@+id/list_scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:overScrollMode="never"
         app:layout_constraintTop_toBottomOf="@id/layout_toolbar"
-        android:overScrollMode="never">
+        tools:layout_editor_absoluteX="25dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_my_properties"
@@ -51,8 +52,8 @@
             android:layout_marginHorizontal="@dimen/recycler_view_margin_horizontal"
             android:paddingTop="@dimen/default_padding"
             android:paddingBottom="60dp"
-            tools:listitem="@layout/item_property_list"
-            app:layoutManager="LinearLayoutManager"/>
+            app:layoutManager="LinearLayoutManager"
+            tools:listitem="@layout/item_property_list" />
 
     </androidx.core.widget.NestedScrollView>
 

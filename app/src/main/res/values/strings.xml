@@ -77,6 +77,7 @@
     <string name="details_date_title">Date of publication :&#160;</string>
     <string name="details_date_text">02/01/2023</string>
     <string name="details_sold_date_title">Date of sold :&#160;</string>
+    <string name="details_update_date_title">Last update :&#160;</string>
 
 
     // PROPERTY LIST
@@ -194,6 +195,7 @@
     <string name="allow_camera_access">Please allow camera access</string>
 
 
+    // Filter dialog
     <string name="filter_min">Min</string>
     <string name="filter_max">Max</string>
     <string name="filter_price_title">Price ($)</string>
@@ -209,6 +211,19 @@
     <string name="filter_property_type">Property type</string>
     <string name="list_filter_properties_button_text">Add filters</string>
     <string name="list_clear_filters_properties_button_text">Clear filters</string>
+    <string name="creation_date_dialog_title">Please select a date of publication</string>
+    <string name="update_date_dialog_title">Select date of last update</string>
+    <string name="add_type_flat_trad">Appartement</string>
+    <string name="add_type_house_trad">Maison</string>
+    <string name="add_type_duplex_trad">Duplex</string>
+    <string name="add_type_penthouse_trad">Villa</string>
+    <string name="property_details_points_of_interest_title">Local services (in a 1,5km radius)</string>
+    <string name="property_details_primary_school_title">Primary school(s) :&#160;</string>
+    <string name="property_details_primary_school_counter">10</string>
+    <string name="property_details_secondary_school_title">Secondary school(s) :&#160;</string>
+    <string name="property_details_place_example">(Place 1, place 2, place 3, place 4, place 5, place 6, place 7)</string>
+    <string name="property_details_park_title">Parks :&#160;</string>
+    <string name="property_details_supermarket_title">Supermarkets :&#160;</string>
 
 
 </resources>

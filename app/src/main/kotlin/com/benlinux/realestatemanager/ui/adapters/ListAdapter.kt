@@ -41,7 +41,6 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
         // bind property according to position in the list
         mProperties[position]?.let { holder.bind(it) }
 
-        // TODO : Call metrics for tab or smartphone to define onClick action
         // Launch Property Details according to its Id
         holder.itemView.setOnClickListener { propertyItem ->
             val propertyDetailsActivityIntent = Intent(
@@ -50,7 +49,6 @@ class ListAdapter(properties: MutableList<Property?>, context: Context) : Recycl
             )
             propertyDetailsActivityIntent.putExtra("PROPERTY_ID", holder.id.text)
             propertyDetailsActivityIntent.putExtra("PROPERTY_CREATOR_ID", holder.realtorId.text)
-
             propertyItem.context.startActivity(propertyDetailsActivityIntent)
         }
     }

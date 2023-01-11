@@ -66,6 +66,7 @@
     <string name="details_date_title">Date de publication : &#160;</string>
     <string name="details_date_text">02/01/2023</string>
     <string name="details_sold_date_title">Date de vente :&#160;</string>
+    <string name="details_update_date_title">Dernières modifications :&#160;</string>
 
 
     // PROPERTY LIST
@@ -202,6 +203,19 @@
     <string name="filter_property_type">Type de bien</string>
     <string name="list_filter_properties_button_text">Filtres</string>
     <string name="list_clear_filters_properties_button_text">Supprimer les filtres</string>
+    <string name="creation_date_dialog_title">Veuillez choisir une date de publication</string>
+    <string name="update_date_dialog_title">Selectionnez la date de modification</string>
+    <string name="add_type_flat_trad">Flat</string>
+    <string name="add_type_house_trad">House</string>
+    <string name="add_type_duplex_trad">Duplex</string>
+    <string name="add_type_penthouse_trad">Penthouse</string>
+    <string name="property_details_points_of_interest_title">A proximité (rayon de 1,5km)</string>
+    <string name="property_details_primary_school_title">Ecole(s) primaire(s) :&#160;</string>
+    <string name="property_details_primary_school_counter">10</string>
+    <string name="property_details_secondary_school_title">Ecole(s) secondaire(s) :&#160;</string>
+    <string name="property_details_place_example">(Place 1, place 2, place 3, place 4, place 5, place 6, place 7)</string>
+    <string name="property_details_park_title">Parc(s) :&#160;</string>
+    <string name="property_details_supermarket_title">Supermarché(s) :&#160;</string>
 
 
 </resources>

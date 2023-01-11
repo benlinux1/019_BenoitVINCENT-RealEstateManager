@@ -3,6 +3,7 @@ package com.benlinux.realestatemanager.ui.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.benlinux.realestatemanager.BuildConfig
 import com.benlinux.realestatemanager.R
 import com.benlinux.realestatemanager.data.userManager.UserManager
 import com.benlinux.realestatemanager.injections.ViewModelFactory
@@ -32,6 +34,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import okhttp3.*
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.IOException
 
 
 class PropertyDetailsActivity: AppCompatActivity() {
@@ -57,14 +63,20 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private lateinit var soldBackground: LinearLayout
     private lateinit var propertyRealtor : TextView
     private lateinit var dateOfPublication: TextView
+    private lateinit var dateOfUpdate: TextView
     private lateinit var dateOfSold: TextView
     private lateinit var dateOfPublicationTitle: TextView
+    private lateinit var dateOfUpdateTitle: TextView
     private lateinit var dateOfSoldTitle: TextView
 
     // The recycler view and the list + adapter for pictures gallery
     private lateinit var picturesRecyclerView: RecyclerView
     private lateinit var picturesList: MutableList<Picture?>
     private lateinit var pictureAdapter: PictureAdapter
+
+    // The recyclerview arrows used for smooth scroll
+    private lateinit var arrowLeft: ImageView
+    private lateinit var arrowRight: ImageView
 
     // The viewModel that contains data
     private lateinit var propertyViewModel: PropertyViewModel
@@ -83,6 +95,34 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
     // Slider Image
     private lateinit var imageSlider: ImageSlider
+
+    // POINTS OF INTEREST
+    private lateinit var pointsOfInterestTitle: TextView
+
+    // Primary Schools
+    private lateinit var primarySchoolTitle: TextView
+    private lateinit var primarySchoolCounter: TextView
+    private lateinit var primarySchoolExamples: TextView
+    private var primarySchoolList: MutableList<String> = mutableListOf()
+
+
+    // Secondary schools
+    private lateinit var secondarySchoolTitle: TextView
+    private lateinit var secondarySchoolCounter: TextView
+    private lateinit var secondarySchoolExamples: TextView
+    private var secondarySchoolList: MutableList<String> = mutableListOf()
+
+    // Parks
+    private lateinit var parkTitle: TextView
+    private lateinit var parkCounter: TextView
+    private lateinit var parkExamples: TextView
+    private var parkList: MutableList<String> = mutableListOf()
+
+    // Supermarkets
+    private lateinit var supermarketTitle: TextView
+    private lateinit var supermarketCounter: TextView
+    private lateinit var supermarketExamples: TextView
+    private var supermarketList: MutableList<String> = mutableListOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,8 +182,6 @@ class PropertyDetailsActivity: AppCompatActivity() {
     // Close current activity and turn back to main activity if back button is clicked
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            val mainActivityIntent = Intent(this, MainActivity::class.java)
-            startActivity(mainActivityIntent)
             finish()
             return true
         }
@@ -173,6 +211,23 @@ class PropertyDetailsActivity: AppCompatActivity() {
         dateOfSold = findViewById(R.id.property_details_sold_date_text)
         dateOfPublicationTitle = findViewById(R.id.property_details_publication_date_title)
         dateOfSoldTitle = findViewById(R.id.property_details_sold_date_title)
+        dateOfUpdate = findViewById(R.id.property_details_update_date_text)
+        dateOfUpdateTitle = findViewById(R.id.property_details_update_date_title)
+        arrowRight = findViewById(R.id.list_arrow_right)
+        arrowLeft = findViewById(R.id.list_arrow_left)
+        pointsOfInterestTitle = findViewById(R.id.property_details_points_of_interest_title)
+        primarySchoolTitle = findViewById(R.id.property_details_primary_school_title)
+        primarySchoolCounter = findViewById(R.id.property_details_primary_school_counter)
+        primarySchoolExamples = findViewById(R.id.property_details_primary_school_example)
+        secondarySchoolTitle = findViewById(R.id.property_details_secondary_school_title)
+        secondarySchoolCounter = findViewById(R.id.property_details_secondary_school_counter)
+        secondarySchoolExamples = findViewById(R.id.property_details_secondary_school_example)
+        parkTitle = findViewById(R.id.property_details_park_title)
+        parkCounter = findViewById(R.id.property_details_park_counter)
+        parkExamples = findViewById(R.id.property_details_park_example)
+        supermarketTitle = findViewById(R.id.property_details_supermarket_title)
+        supermarketCounter = findViewById(R.id.property_details_supermarket_counter)
+        supermarketExamples = findViewById(R.id.property_details_supermarket_example)
     }
 
     // Configuring ViewModel from ViewModelFactory
@@ -195,6 +250,12 @@ class PropertyDetailsActivity: AppCompatActivity() {
             val latLng: LatLng = getLatLngFromPropertyFormattedAddress(property!!.address, this)
             setMarkersForProperty(mGoogleMap, latLng)
             setSoldView(property!!.isAvailable)
+
+            // Set points of interest data, by type
+            setNearbyDataByType(latLng, "primary_school", primarySchoolList, primarySchoolCounter, primarySchoolExamples, primarySchoolTitle )
+            setNearbyDataByType(latLng, "secondary_school", secondarySchoolList, secondarySchoolCounter, secondarySchoolExamples, secondarySchoolTitle)
+            setNearbyDataByType(latLng, "park", parkList, parkCounter, parkExamples, parkTitle)
+            setNearbyDataByType(latLng, "supermarket", supermarketList, supermarketCounter, supermarketExamples, supermarketTitle)
         }
     }
 
@@ -229,9 +290,6 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
     // Show arrows on list sides to indicate scroll possibility
     private fun setEasyScrollFeature() {
-        val arrowRight: ImageView = findViewById(R.id.list_arrow_right)
-        val arrowLeft: ImageView = findViewById(R.id.list_arrow_left)
-
         // Go to end of pictures list
         arrowRight.setOnClickListener {
             picturesRecyclerView.smoothScrollToPosition(picturesList.size)
@@ -286,15 +344,24 @@ class PropertyDetailsActivity: AppCompatActivity() {
         }
     }
 
+    // Set date of publication, update & sold according to situations
     private fun setPropertyDates(property: Property) {
         if (property.isAvailable) {
             dateOfPublication.text = property.creationDate
+            if (property.creationDate != property.updateDate.substring(0, 10)) {
+                dateOfUpdate.text = property.updateDate.substring(0, 10)
+            } else {
+                dateOfUpdate.visibility = View.GONE
+                dateOfUpdateTitle.visibility = View.GONE
+            }
             dateOfSold.visibility = View.GONE
             dateOfSoldTitle.visibility = View.GONE
         } else {
             dateOfSold.text = property.soldDate
             dateOfPublication.visibility = View.GONE
             dateOfPublicationTitle.visibility = View.GONE
+            dateOfUpdate.visibility = View.GONE
+            dateOfUpdateTitle.visibility = View.GONE
         }
     }
 
@@ -399,7 +466,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
     }
 
 
-    // Set custom marker for displayed property on map, according to its latlng
+    // Set custom marker for current property on map, according to its location
     private fun setMarkersForProperty(googleMap: GoogleMap, latLng: LatLng?) {
 
         mGoogleMap = googleMap
@@ -480,6 +547,73 @@ class PropertyDetailsActivity: AppCompatActivity() {
         }
     }
 
+    /** Search nearby place by type around current property (editable radius : 1.5km)
+     * @author BenLinux
+     * @param latLng the current property's location
+     * @param type the requested place type
+     * @param placeList the final list that contains all places names
+     * @param counterTextView the view that displays the number of places found
+     * @param destinationTextView the view that displays the list of places name
+     * @param destinationType the view that displays the type of places
+    */
+    private fun setNearbyDataByType(latLng: LatLng?, type: String, placeList: MutableList<String>, counterTextView: TextView, destinationTextView: TextView, destinationType: TextView) {
+        val apiKey: String = BuildConfig.MAPS_API_KEY
+
+        // Build Place API request with URL
+        val request = Request.Builder().url(
+            "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+                    + "?location=${latLng?.latitude},${latLng?.longitude}"
+                    + "&type=" + type
+                    + "&radius=1500"
+                    + "&key=" + apiKey)
+            .build()
+
+        // Set OKHTTP client
+        val client = OkHttpClient()
+        // Set OKHTTP callback to handle response
+        client.newCall(request).enqueue(object : Callback {
+            var mainHandler = Handler(applicationContext.mainLooper)
+            override fun onResponse(call: Call, response: Response) {
+                mainHandler.post {
+                    val body = response.body?.string() ?: return@post
+
+                    // Get results from NearBy API
+                    val jsonObject = JSONObject(body)
+                    val jsonArray: JSONArray = jsonObject.getJSONArray("results")
+                    var counter = 0
+
+                    // Loop to get place details from each result
+                    for (i in 0 until jsonArray.length()) {
+                        // Place result
+                        val item = jsonArray.getJSONObject(i)
+                        // Place name
+                        val name: String = item.getString("name")
+                        Log.d("${type.uppercase()} NAME", name)
+                        // Add place name in list
+                        placeList.add(name)
+                        // Increment places counter
+                        counter ++
+                    }
+                    if (counter == 0) {
+                        destinationType.visibility = View.GONE
+                        counterTextView.visibility = View.GONE
+                        destinationTextView.visibility = View.GONE
+                    } else {
+                        // Set counter in counter text view
+                        counterTextView.text = counter.toString()
+                        // Set places list in text view
+                        destinationTextView.text =
+                            placeList.toString().replace("[", "").replace("]", "")
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                println("API execute failed")
+            }
+        })
+    }
+
 
     // Lifecycles
     override fun onResume() {
@@ -502,3 +636,4 @@ class PropertyDetailsActivity: AppCompatActivity() {
         mapView.onLowMemory()
     }
 }
+

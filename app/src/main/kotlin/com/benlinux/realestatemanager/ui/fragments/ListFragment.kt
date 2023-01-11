@@ -65,17 +65,13 @@ class ListFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentView = inflater.inflate(R.layout.fragment_list_view, container, false)
-        configureViewModel()
+
         configureRecyclerView()
+        configureViewModel()
         setFilterButton()
         setClearFiltersButton()
 
         return fragmentView
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     // Configuring ViewModel from ViewModelFactory
@@ -96,8 +92,9 @@ class ListFragment: Fragment() {
             }
 
             // Define and configure adapter (MUST BE CALLED HERE FOR DATA REFRESH)
-            adapter = ListAdapter(mProperties, requireContext())
-            mRecyclerView.adapter = adapter
+            adapter.updateProperties(mProperties)
+
+            // Set data in right views
             setTextViews()
         }
     }
@@ -192,8 +189,12 @@ class ListFragment: Fragment() {
         mRecyclerView.layoutManager = LinearLayoutManager(context)
         val divider = MaterialDividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
         mRecyclerView.addItemDecoration(divider)
-
+        adapter = ListAdapter(mProperties, requireContext())
+        mRecyclerView.adapter = adapter
+        mRecyclerView.setHasFixedSize(true)
     }
+
+
 
     // Set textViews according to properties list size
     private fun setTextViews() {
@@ -230,7 +231,6 @@ class ListFragment: Fragment() {
     }
 
     private fun launchFilterDialog() {
-
         // Builder & custom view
         val builder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
         val customView = layoutInflater.inflate(R.layout.custom_filters_layout,null)
@@ -306,12 +306,12 @@ class ListFragment: Fragment() {
         }
 
         // Set listeners when user click on date field
-        setListenerOnDateField(creationDateMinInput)
-        setListenerOnDateField(creationDateMaxInput)
-        setListenerOnDateField(updateDateMinInput)
-        setListenerOnDateField(updateDateMaxInput)
-        setListenerOnDateField(soldDateMinInput)
-        setListenerOnDateField(soldDateMinInput)
+        setListenerOnDateField(creationDateMinInput, getString(R.string.creation_date_dialog_title))
+        setListenerOnDateField(creationDateMaxInput, getString(R.string.creation_date_dialog_title))
+        setListenerOnDateField(updateDateMinInput, getString(R.string.update_date_dialog_title))
+        setListenerOnDateField(updateDateMaxInput, getString(R.string.update_date_dialog_title))
+        setListenerOnDateField(soldDateMinInput, getString(R.string.sold_date_dialog_title))
+        setListenerOnDateField(soldDateMinInput, getString(R.string.sold_date_dialog_title))
 
         // validate filters button & actions
         validateFiltersButton.setOnClickListener {
@@ -356,21 +356,21 @@ class ListFragment: Fragment() {
 
             // Status & dates
             if (isAvailable) {
-                if (creationDateMinInput.text.isNotEmpty()) { dateOfPublicationMin = convertStringToDate(creationDateMinInput.text.toString()) }
-                if (creationDateMaxInput.text.isNotEmpty()) { dateOfPublicationMax = convertStringToDate(creationDateMaxInput.text.toString()) }
+                if (creationDateMinInput.text.isNotEmpty()) { dateOfPublicationMin = convertStringToShortDate(creationDateMinInput.text.toString()) }
+                if (creationDateMaxInput.text.isNotEmpty()) { dateOfPublicationMax = convertStringToShortDate(creationDateMaxInput.text.toString()) }
                 if (updateDateMinInput.text.isNotEmpty()) { dateOfUpdateMin = convertStringToDate(updateDateMinInput.text.toString()) }
                 if (updateDateMaxInput.text.isNotEmpty()) { dateOfUpdateMax = convertStringToDate(updateDateMaxInput.text.toString()) }
             } else {
-                if (soldDateMinInput.text.isNotEmpty()) { dateOfSoldMin = convertStringToDate(soldDateMinInput.text.toString()) }
-                if (soldDateMaxInput.text.isNotEmpty()) { dateOfSoldMax = convertStringToDate(soldDateMaxInput.text.toString()) }
+                if (soldDateMinInput.text.isNotEmpty()) { dateOfSoldMin = convertStringToShortDate(soldDateMinInput.text.toString()) }
+                if (soldDateMaxInput.text.isNotEmpty()) { dateOfSoldMax = convertStringToShortDate(soldDateMaxInput.text.toString()) }
             }
 
-            // Types
+            // Types (translation added)
             val types = arrayListOf<String>()
-            if (flatType.isChecked) { types.add("Flat") }
-            if (houseType.isChecked) { types.add("House") }
-            if (duplexType.isChecked) { types.add("Duplex") }
-            if (penthouseType.isChecked) { types.add("Penthouse") }
+            if (flatType.isChecked) { types.add(getString(R.string.add_type_flat)) && types.add(getString(R.string.add_type_flat_trad)) }
+            if (houseType.isChecked) { types.add(getString(R.string.add_type_house)) && types.add(getString(R.string.add_type_house_trad)) }
+            if (duplexType.isChecked) { types.add(getString(R.string.add_type_duplex)) && types.add(getString(R.string.add_type_duplex_trad)) }
+            if (penthouseType.isChecked) { types.add(getString(R.string.add_type_penthouse)) && types.add(getString(R.string.add_type_penthouse_trad)) }
 
             // Filter results
             filterResults(
@@ -394,20 +394,20 @@ class ListFragment: Fragment() {
             )
             dialogWindow.dismiss()
         }
-
         // Display dialog
         dialogWindow.show()
-
     }
 
-    private fun setListenerOnDateField(dateField: EditText) {
+    // When user clicks on date input, launch date dialog with custom title
+    private fun setListenerOnDateField(dateField: EditText, title: String) {
         dateField.setOnFocusChangeListener { view, _ ->
             if (view.isFocused) {
-                showDateDialog(dateField)
+                showDateDialog(dateField, title)
             }
         }
     }
 
+    // Filter displayed list according to input fields data
     private fun filterResults(
         types: ArrayList<String>,
         surfaceMin: Int?,
@@ -428,6 +428,8 @@ class ListFragment: Fragment() {
         soldDateMax: Date?
     ) {
         for (property in mProperties) {
+
+            // Date conversion
             val creationDate = if (property?.creationDate?.isNotEmpty() == true) {
                 convertStringToShortDate(property.creationDate)
             } else { null }
@@ -470,11 +472,11 @@ class ListFragment: Fragment() {
             ){
                 // if filters concord, add property to list
                 filteredProperties.add(property)
-
             }
         }
         // update list
         adapter.updateProperties(filteredProperties)
+        // Add clear filters button
         clearFiltersButton.visibility = View.VISIBLE
     }
 
@@ -488,7 +490,7 @@ class ListFragment: Fragment() {
 
     // Custom date picker dialog
     @Suppress("DEPRECATION")
-    private fun showDateDialog(destination: EditText) {
+    private fun showDateDialog(destination: EditText, title: String) {
         val currentDate = Calendar.getInstance(Locale.FRANCE)
         fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
 
@@ -519,7 +521,7 @@ class ListFragment: Fragment() {
 
         // Customize title view
         val customTitle = TextView(requireContext())
-        customTitle.setText(R.string.sold_date_dialog_title) // title text
+        customTitle.text = title // title text
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             customTitle.setTextColor(resources.getColor(R.color.colorWhite, resources.newTheme())) // text color
             customTitle.setBackgroundColor(resources.getColor(R.color.colorAccent, resources.newTheme())) // background color
