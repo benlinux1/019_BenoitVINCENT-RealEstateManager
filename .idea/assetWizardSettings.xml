@@ -318,7 +318,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/local_grocery_store/baseline_local_grocery_store_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/bakery_dining/baseline_bakery_dining_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -328,7 +328,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_grocery" />
+                            <entry key="outputName" value="ic_bakery" />
                             <entry key="sourceFile" value="C:\Users\ops14\Desktop\Nouveau dossier\Bed-01.svg" />
                           </map>
                         </option>

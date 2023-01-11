@@ -4,20 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".ui.fragments.ListFragment">
-
-    <TextView
-        android:id="@+id/list_properties_title"
-        style="@style/fieldTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_padding"
-        android:text="@string/list_properties_title"
-        android:gravity="center"
-        android:textSize="@dimen/default_subtitle_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/list_filter_buttons_container"
@@ -25,9 +13,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginBottom="@dimen/very_small_margin"
-        android:layout_marginTop="@dimen/very_small_margin"
-        app:layout_constraintTop_toBottomOf="@id/list_properties_title"
+        android:paddingVertical="@dimen/small_padding"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -71,7 +58,7 @@
         android:gravity="center"
         android:textSize="@dimen/default_subtitle_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/list_properties_title"
+        app:layout_constraintTop_toBottomOf="@id/list_filter_buttons_container"
         app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="gone" />
 
@@ -92,7 +79,7 @@
                 android:scrollbarStyle="outsideOverlay"
                 android:scrollbars="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:paddingBottom="76dp"
+                android:paddingBottom="48dp"
                 tools:listitem="@layout/item_property_list" />
 
     </androidx.core.widget.NestedScrollView>

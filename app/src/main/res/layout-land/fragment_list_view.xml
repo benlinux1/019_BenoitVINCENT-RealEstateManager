@@ -9,27 +9,14 @@
     android:paddingBottom="@dimen/default_padding"
     tools:context=".ui.fragments.ListFragment">
 
-    <TextView
-        android:id="@+id/list_properties_title"
-        style="@style/fieldTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/default_padding"
-        android:text="@string/list_properties_title"
-        android:gravity="center"
-        android:textSize="@dimen/default_subtitle_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/list_filter_buttons_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginBottom="@dimen/very_small_margin"
-        android:layout_marginTop="@dimen/very_small_margin"
-        app:layout_constraintTop_toBottomOf="@id/list_properties_title"
+        android:paddingVertical="@dimen/small_padding"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 

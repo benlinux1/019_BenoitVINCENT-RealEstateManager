@@ -53,7 +53,6 @@ class ListFragment: Fragment() {
 
     // TextViews
     private lateinit var mLabelNoProperty: TextView
-    private lateinit var mFragmentTitle: TextView
 
     // Filter button
     private lateinit var filterButton: Button
@@ -91,10 +90,10 @@ class ListFragment: Fragment() {
                 syncFirestoreWithRoomDatabases(mProperties)
             }
 
-            // Define and configure adapter (MUST BE CALLED HERE FOR DATA REFRESH)
+            // Update properties in recycler view adapter
             adapter.updateProperties(mProperties)
 
-            // Set data in right views
+            // Display / hide no property label according to situation
             setTextViews()
         }
     }
@@ -195,19 +194,15 @@ class ListFragment: Fragment() {
     }
 
 
-
     // Set textViews according to properties list size
     private fun setTextViews() {
         mLabelNoProperty = fragmentView.findViewById(R.id.no_property_label)
-        mFragmentTitle = fragmentView.findViewById(R.id.list_properties_title)
+
         if (mProperties.isEmpty()) {
             // Display "No property found"
             mLabelNoProperty.visibility = View.VISIBLE
-            // Hide list title
-            mFragmentTitle.visibility = View.GONE
+
         } else {
-            // Display list title
-            mFragmentTitle.visibility = View.VISIBLE
             // Hide "No property found"
             mLabelNoProperty.visibility = View.GONE
         }

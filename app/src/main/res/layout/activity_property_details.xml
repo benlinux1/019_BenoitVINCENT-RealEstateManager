@@ -638,6 +638,153 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/property_details_supermarket_title" />
+
+                    <!-- RESTAURANTS -->
+                    <TextView
+                        android:id="@+id/property_details_restaurant_title"
+                        style="@style/cardSubCategories"
+                        android:text="@string/property_details_restaurant_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/small_margin"
+                        android:drawableStart="@drawable/ic_restaurant"
+                        android:drawableTint="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/property_details_supermarket_example" />
+
+                    <TextView
+                        android:id="@+id/property_details_restaurant_counter"
+                        style="@style/cardText"
+                        android:text="@string/property_details_primary_school_counter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/property_details_restaurant_title"
+                        app:layout_constraintBottom_toBottomOf="@id/property_details_restaurant_title"
+                        app:layout_constraintTop_toTopOf="@id/property_details_restaurant_title" />
+
+                    <TextView
+                        android:id="@+id/property_details_restaurant_example"
+                        style="@style/cardText"
+                        android:text="@string/property_details_place_example"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/property_details_restaurant_title" />
+
+
+                    <!-- Bakery -->
+                    <TextView
+                        android:id="@+id/property_details_bakery_title"
+                        style="@style/cardSubCategories"
+                        android:text="@string/property_details_bakery_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/small_margin"
+                        android:drawableStart="@drawable/ic_bakery"
+                        android:drawableTint="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/property_details_restaurant_example" />
+
+                    <TextView
+                        android:id="@+id/property_details_bakery_counter"
+                        style="@style/cardText"
+                        android:text="@string/property_details_primary_school_counter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/property_details_bakery_title"
+                        app:layout_constraintBottom_toBottomOf="@id/property_details_bakery_title"
+                        app:layout_constraintTop_toTopOf="@id/property_details_bakery_title" />
+
+                    <TextView
+                        android:id="@+id/property_details_bakery_example"
+                        style="@style/cardText"
+                        android:text="@string/property_details_place_example"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/property_details_bakery_title" />
+
+                    <!-- Doctors -->
+                    <TextView
+                        android:id="@+id/property_details_doctor_title"
+                        style="@style/cardSubCategories"
+                        android:text="@string/property_details_doctor_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/small_margin"
+                        android:drawableStart="@drawable/ic_medical_services"
+                        android:drawableTint="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/property_details_bakery_example" />
+
+                    <TextView
+                        android:id="@+id/property_details_doctor_counter"
+                        style="@style/cardText"
+                        android:text="@string/property_details_primary_school_counter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/property_details_doctor_title"
+                        app:layout_constraintBottom_toBottomOf="@id/property_details_doctor_title"
+                        app:layout_constraintTop_toTopOf="@id/property_details_doctor_title" />
+
+                    <TextView
+                        android:id="@+id/property_details_doctor_example"
+                        style="@style/cardText"
+                        android:text="@string/property_details_place_example"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/property_details_doctor_title" />
+
+
+                    <!-- Pharmacies -->
+                    <TextView
+                        android:id="@+id/property_details_pharmacy_title"
+                        style="@style/cardSubCategories"
+                        android:text="@string/property_details_pharmacy_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/small_margin"
+                        android:drawableStart="@drawable/ic_pharmacy"
+                        android:drawableTint="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/property_details_doctor_example" />
+
+                    <TextView
+                        android:id="@+id/property_details_pharmacy_counter"
+                        style="@style/cardText"
+                        android:text="@string/property_details_primary_school_counter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@id/property_details_pharmacy_title"
+                        app:layout_constraintBottom_toBottomOf="@id/property_details_pharmacy_title"
+                        app:layout_constraintTop_toTopOf="@id/property_details_pharmacy_title" />
+
+                    <TextView
+                        android:id="@+id/property_details_pharmacy_example"
+                        style="@style/cardText"
+                        android:text="@string/property_details_place_example"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/property_details_pharmacy_title" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 

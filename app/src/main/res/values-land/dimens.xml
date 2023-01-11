@@ -20,7 +20,7 @@
     <dimen name="default_large_padding">24dp</dimen>
     <dimen name="default_medium_padding">20dp</dimen>
     <dimen name="default_padding">12dp</dimen>
-    <dimen name="small_padding">8dp</dimen>
+    <dimen name="small_padding">4dp</dimen>
 
     <dimen name="default_drawable_padding">12dp</dimen>
     <dimen name="drawable_padding_medium">16dp</dimen>

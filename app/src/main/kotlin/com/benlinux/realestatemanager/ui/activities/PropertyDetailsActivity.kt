@@ -124,6 +124,30 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private lateinit var supermarketExamples: TextView
     private var supermarketList: MutableList<String> = mutableListOf()
 
+    // Restaurants
+    private lateinit var restaurantTitle: TextView
+    private lateinit var restaurantCounter: TextView
+    private lateinit var restaurantExamples: TextView
+    private var restaurantList: MutableList<String> = mutableListOf()
+
+    // Bakeries
+    private lateinit var bakeryTitle: TextView
+    private lateinit var bakeryCounter: TextView
+    private lateinit var bakeryExamples: TextView
+    private var bakeryList: MutableList<String> = mutableListOf()
+
+    // Doctors
+    private lateinit var doctorTitle: TextView
+    private lateinit var doctorCounter: TextView
+    private lateinit var doctorExamples: TextView
+    private var doctorList: MutableList<String> = mutableListOf()
+
+    // Pharmacies
+    private lateinit var pharmacyTitle: TextView
+    private lateinit var pharmacyCounter: TextView
+    private lateinit var pharmacyExamples: TextView
+    private var pharmacyList: MutableList<String> = mutableListOf()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -228,6 +252,18 @@ class PropertyDetailsActivity: AppCompatActivity() {
         supermarketTitle = findViewById(R.id.property_details_supermarket_title)
         supermarketCounter = findViewById(R.id.property_details_supermarket_counter)
         supermarketExamples = findViewById(R.id.property_details_supermarket_example)
+        restaurantTitle = findViewById(R.id.property_details_restaurant_title)
+        restaurantCounter = findViewById(R.id.property_details_restaurant_counter)
+        restaurantExamples = findViewById(R.id.property_details_restaurant_example)
+        bakeryTitle = findViewById(R.id.property_details_bakery_title)
+        bakeryCounter = findViewById(R.id.property_details_bakery_counter)
+        bakeryExamples = findViewById(R.id.property_details_bakery_example)
+        doctorTitle = findViewById(R.id.property_details_doctor_title)
+        doctorCounter = findViewById(R.id.property_details_doctor_counter)
+        doctorExamples = findViewById(R.id.property_details_doctor_example)
+        pharmacyTitle = findViewById(R.id.property_details_pharmacy_title)
+        pharmacyCounter = findViewById(R.id.property_details_pharmacy_counter)
+        pharmacyExamples = findViewById(R.id.property_details_pharmacy_example)
     }
 
     // Configuring ViewModel from ViewModelFactory
@@ -256,6 +292,10 @@ class PropertyDetailsActivity: AppCompatActivity() {
             setNearbyDataByType(latLng, "secondary_school", secondarySchoolList, secondarySchoolCounter, secondarySchoolExamples, secondarySchoolTitle)
             setNearbyDataByType(latLng, "park", parkList, parkCounter, parkExamples, parkTitle)
             setNearbyDataByType(latLng, "supermarket", supermarketList, supermarketCounter, supermarketExamples, supermarketTitle)
+            setNearbyDataByType(latLng, "restaurant", restaurantList, restaurantCounter, restaurantExamples, restaurantTitle )
+            setNearbyDataByType(latLng, "bakery", bakeryList, bakeryCounter, bakeryExamples, bakeryTitle)
+            setNearbyDataByType(latLng, "doctor", doctorList, doctorCounter, doctorExamples, doctorTitle)
+            setNearbyDataByType(latLng, "pharmacy", pharmacyList, pharmacyCounter, pharmacyExamples, pharmacyTitle)
         }
     }
 
@@ -547,7 +587,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
         }
     }
 
-    /** Search nearby place by type around current property (editable radius : 1.5km)
+    /** Search nearby place by type around current property (editable radius : 1 km)
      * @author BenLinux
      * @param latLng the current property's location
      * @param type the requested place type
@@ -556,7 +596,8 @@ class PropertyDetailsActivity: AppCompatActivity() {
      * @param destinationTextView the view that displays the list of places name
      * @param destinationType the view that displays the type of places
     */
-    private fun setNearbyDataByType(latLng: LatLng?, type: String, placeList: MutableList<String>, counterTextView: TextView, destinationTextView: TextView, destinationType: TextView) {
+    private fun setNearbyDataByType(latLng: LatLng?, type: String, placeList: MutableList<String>,
+        counterTextView: TextView, destinationTextView: TextView, destinationType: TextView) {
         val apiKey: String = BuildConfig.MAPS_API_KEY
 
         // Build Place API request with URL
@@ -564,7 +605,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
             "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
                     + "?location=${latLng?.latitude},${latLng?.longitude}"
                     + "&type=" + type
-                    + "&radius=1500"
+                    + "&radius=1000"
                     + "&key=" + apiKey)
             .build()
 
@@ -600,10 +641,14 @@ class PropertyDetailsActivity: AppCompatActivity() {
                         destinationTextView.visibility = View.GONE
                     } else {
                         // Set counter in counter text view
-                        counterTextView.text = counter.toString()
+                        if (counter == 20) {   // If place API limit is hit (20), set "more than 20"
+                            counterTextView.text = getString(R.string.more_than_20_results)
+                        } else {
+                            counterTextView.text = counter.toString() // Set real counter
+                        }
                         // Set places list in text view
-                        destinationTextView.text =
-                            placeList.toString().replace("[", "").replace("]", "")
+                        destinationTextView.text = placeList.toString()
+                            .replace("[", "").replace("]", "")
                     }
                 }
             }

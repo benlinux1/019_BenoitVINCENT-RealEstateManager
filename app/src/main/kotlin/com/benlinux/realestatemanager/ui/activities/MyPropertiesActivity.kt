@@ -67,10 +67,18 @@ class MyPropertiesActivity: AppCompatActivity() {
         }
     }
 
+    // Show message if list is empty, according to user status (realtor / user)
     private fun showMessageIfNoPropertiesInList() {
         if (propertiesList.isEmpty()) {
+            // Display "No property found"
             noPropertyText.visibility = View.VISIBLE
+            if (userIsRealtor)  {
+                noPropertyText.text = getString(R.string.no_property_found_realtor)
+            } else {
+                noPropertyText.text = getString(R.string.no_property_found_user)
+            }
         } else {
+            // Hide "No property found"
             noPropertyText.visibility = View.GONE
         }
     }
@@ -134,7 +142,6 @@ class MyPropertiesActivity: AppCompatActivity() {
                             Log.d("FAVORITE", property.toString())
                             propertiesList.add(property)
                             propertyAdapter.notifyDataSetChanged()
-
                         }
                     }
                 }
@@ -157,8 +164,8 @@ class MyPropertiesActivity: AppCompatActivity() {
                             val property = it
                             if (it != null) {
                                 Log.d("REALTOR PROPERTY", it.toString())
-                            propertiesList.add(property)
-                            propertyAdapter.notifyDataSetChanged()
+                                propertiesList.add(property)
+                                propertyAdapter.notifyDataSetChanged()
                             }
                         }
                     }

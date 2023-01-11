@@ -67,6 +67,18 @@
     <string name="details_date_text">02/01/2023</string>
     <string name="details_sold_date_title">Date de vente :&#160;</string>
     <string name="details_update_date_title">Dernières modifications :&#160;</string>
+    <string name="property_details_points_of_interest_title">A proximité (rayon de 1 km)</string>
+    <string name="property_details_primary_school_title">Ecole(s) primaire(s) :&#160;</string>
+    <string name="property_details_primary_school_counter">10</string>
+    <string name="property_details_secondary_school_title">Ecole(s) secondaire(s) :&#160;</string>
+    <string name="property_details_place_example">(Place 1, place 2, place 3, place 4, place 5, place 6, place 7)</string>
+    <string name="property_details_park_title">Parc(s) :&#160;</string>
+    <string name="property_details_supermarket_title">Supermarché(s) :&#160;</string>
+    <string name="property_details_restaurant_title">Restaurant(s) :&#160;</string>
+    <string name="property_details_doctor_title">Médecin(s) :&#160;</string>
+    <string name="property_details_pharmacy_title">Pharmacie(s) :&#160;</string>
+    <string name="property_details_bakery_title">Boulangerie(s) :&#160;</string>
+    <string name="more_than_20_results">plus de 20</string>
 
 
     // PROPERTY LIST
@@ -137,6 +149,8 @@
     // MY PROPERTIES ACTIVITY
     <string name="user_favorites_toolbar_title">Mes favoris</string>
     <string name="realtor_properties_toolbar_title">Mes biens imobiliers</string>
+    <string name="no_property_found_realtor">Vous n\'avez posté aucun bien pour le moment</string>
+    <string name="no_property_found_user">Aucun bien ne figure dans vos favoris pour le moment</string>
 
     // SIGNUP ACTIVITY
     <string name="signup_title_toolbar">Création d\'un compte</string>
@@ -209,13 +223,8 @@
     <string name="add_type_house_trad">House</string>
     <string name="add_type_duplex_trad">Duplex</string>
     <string name="add_type_penthouse_trad">Penthouse</string>
-    <string name="property_details_points_of_interest_title">A proximité (rayon de 1,5km)</string>
-    <string name="property_details_primary_school_title">Ecole(s) primaire(s) :&#160;</string>
-    <string name="property_details_primary_school_counter">10</string>
-    <string name="property_details_secondary_school_title">Ecole(s) secondaire(s) :&#160;</string>
-    <string name="property_details_place_example">(Place 1, place 2, place 3, place 4, place 5, place 6, place 7)</string>
-    <string name="property_details_park_title">Parc(s) :&#160;</string>
-    <string name="property_details_supermarket_title">Supermarché(s) :&#160;</string>
+
+
 
 
 </resources>
