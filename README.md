@@ -15,21 +15,24 @@ Ce dépôt contient une application pour le P9 du parcours **DA ANDROID**, intit
 
 ## Fonctionnalités
 
-Cette applcation permet à un utilisateur :
+Cette applcation permet à un utilisateur de :
 
-- Créer votre compte utilisateur à partir de votre adresse e-mail
-- Afficher les biens immobiliers situés autour de vous sur une carte, ou sous forme de liste
-- Filtrer la liste des biens immobiliers selon vos critères (surface, prix, nombre de pièces, date de publication...)
+- Créer un compte utilisateur à partir d'une adresse e-mail
+- Afficher les biens immobiliers situés autour de lui sur une carte, ou sous forme de liste
+- Filtrer la liste des biens immobiliers selon ses critères (surface, prix, nombre de pièces, date de publication...)
 - Consulter la fiche détaillée d'un bien (adresse, surface, prix, nombre de pièces, services de proximité...)
-- Modifier votre compte (nom d'utilisateur, avatar, adresse e-mail...)
-- Supprimer votre compte utilisateur
-- Ajouter un ou plusieurs biens immobiliers dans votre liste de favoris
+- Modifier son compte (nom d'utilisateur, avatar, adresse e-mail...)
+- Supprimer son compte utilisateur
+- Ajouter un ou plusieurs biens immobiliers dans sa liste de favoris
+- Consulter sa liste de favoris
 
-Elle permet aussi aux agents immobiliers de :
+Elle permet aussi à un agent immobilier de :
 
+- Créer son compte agent immobilier
+- Modifier ou supprimer son compte agent
 - Créer un bien immobilier et le publier dans l'application
 - Modifier un bien immobilier créé par ses soins
-- Afficher la liste des biens immobiliers dont ils sont en charge
+- Afficher la liste des biens immobiliers dont il est en charge
 
 
 ## Tests
