@@ -1,6 +1,5 @@
 ![da-android-real-estate-manager](https://user-images.githubusercontent.com/78255467/211861909-49492dc9-09db-42f3-bde8-e7b3d0c7c7b9.svg)
-https://forthebadge.com/images/badges/built-for-android.svg
-
+[![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
 
 # VERSION FRANCAISE
 (English translation in the 2nd part of the documentation below)
@@ -105,7 +104,7 @@ Notre équipe : BenLinux & FranckBlack
 
 
 ![da-android-real-estate-manager](https://user-images.githubusercontent.com/78255467/211861909-49492dc9-09db-42f3-bde8-e7b3d0c7c7b9.svg)
-https://forthebadge.com/images/badges/built-for-android.svg
+[![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
 
 
 # ENGLISH VERSION
