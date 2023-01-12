@@ -1,5 +1,6 @@
 ![da-android-real-estate-manager](https://user-images.githubusercontent.com/78255467/211861909-49492dc9-09db-42f3-bde8-e7b3d0c7c7b9.svg)
-[![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
+![BADGE ANDROID](https://user-images.githubusercontent.com/78255467/212008134-8b9fc581-f078-458a-9caf-63180670a845.svg)
+
 
 # VERSION FRANCAISE
 (English translation in the 2nd part of the documentation below)
@@ -91,7 +92,7 @@ Ensuite, lancez l'application en cliquant sur le bouton triangulaire "Run", comm
 
 ## Contribuez au projet
 
-Go4lunch est un projet open source. Vous pouvez donc en utiliser le code source à votre guise pour développer vos propres fonctionnalités.
+Real Estate Manager est un projet open source. Vous pouvez donc en utiliser le code source à votre guise pour développer vos propres fonctionnalités.
 
 
 ## Auteurs
@@ -104,7 +105,7 @@ Notre équipe : BenLinux & FranckBlack
 
 
 ![da-android-real-estate-manager](https://user-images.githubusercontent.com/78255467/211861909-49492dc9-09db-42f3-bde8-e7b3d0c7c7b9.svg)
-[![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
+![BADGE ANDROID](https://user-images.githubusercontent.com/78255467/212008134-8b9fc581-f078-458a-9caf-63180670a845.svg)
 
 # ENGLISH VERSION
 (version française en 1ère partie de la documentation)
