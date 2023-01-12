@@ -1,5 +1,5 @@
 ![da-android-real-estate-manager](https://user-images.githubusercontent.com/78255467/211861909-49492dc9-09db-42f3-bde8-e7b3d0c7c7b9.svg)
-![BADGE ANDROID](https://user-images.githubusercontent.com/78255467/212008134-8b9fc581-f078-458a-9caf-63180670a845.svg)
+![ANDROID BADGE BEN LINUX1](https://user-images.githubusercontent.com/78255467/212008374-f33686b5-4c82-4ce4-abf4-d49ed364c5f3.png)
 
 
 # VERSION FRANCAISE
@@ -105,7 +105,7 @@ Notre équipe : BenLinux & FranckBlack
 
 
 ![da-android-real-estate-manager](https://user-images.githubusercontent.com/78255467/211861909-49492dc9-09db-42f3-bde8-e7b3d0c7c7b9.svg)
-![BADGE ANDROID](https://user-images.githubusercontent.com/78255467/212008134-8b9fc581-f078-458a-9caf-63180670a845.svg)
+![ANDROID BADGE BEN LINUX1](https://user-images.githubusercontent.com/78255467/212008374-f33686b5-4c82-4ce4-abf4-d49ed364c5f3.png)
 
 # ENGLISH VERSION
 (version française en 1ère partie de la documentation)
