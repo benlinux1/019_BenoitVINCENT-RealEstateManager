@@ -1,4 +1,5 @@
 ![da-android-real-estate-manager](https://user-images.githubusercontent.com/78255467/211861909-49492dc9-09db-42f3-bde8-e7b3d0c7c7b9.svg)
+![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 
 
 # VERSION FRANCAISE
