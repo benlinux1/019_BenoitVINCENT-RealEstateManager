@@ -52,7 +52,7 @@ Elle a également été testée dans des conditions réelles, sur un smartphone 
 
 ## Langues
 
-L'application est entièrement traduite en Anglais et en Français, selon la langue de l'appareil que vous utilisez.
+L'application est entièrement traduite en **Anglais** et en **Français**, selon la langue de l'appareil que vous utilisez.
 
 
 ## Bibliothèques / API
@@ -168,7 +168,7 @@ It was also tested in real conditions, on a physical phone Samsung Galaxy S20 an
 
 ## Languages
 
-Real Estate Manager is fully available in English and in French languages, automatically set according to your device's general language.
+Real Estate Manager is **fully available in English and in French languages**, automatically set according to your device's general language.
 
 
 ## Libraries / API
