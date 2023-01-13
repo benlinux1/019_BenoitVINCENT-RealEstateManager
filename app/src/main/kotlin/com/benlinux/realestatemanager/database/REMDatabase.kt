@@ -70,9 +70,17 @@ abstract class REMDatabase : RoomDatabase() {
                 propertyDao.insertProperty(Property(3, "Penthouse", "Exceptional penthouse", "Manhattan", 5200000,
                     300, "Exceptional penthouse in Manhattan with tremendous options...", mutableListOf(Picture(
                         "https://media.architecturaldigest.com/photos/5c0817ec1b58382d031ba321/2:1/w_4800,h_2400,c_limit/Eighty%20Seven%20Park%20Penthouse%20Family%20Room.jpg",
-                        "Lounge")),
+                        "Lounge"),
+                        Picture("https://pic.le-cdn.com/thumbs/520x390/480/1/properties/Property-62f9abc14ac9ab2b8bf16d26814daef9-125310425.jpg",
+                        "Exterior"),
+                        Picture("https://pictures.aqualivingvillas.com/vacation-rentals/golden-beach-house/large/goldenbeachhouse-3.jpg",
+                            "Pool"),
+                        Picture("https://www.designferia.com/sites/default/files/images/villa-contemporaine-arcchitecture-vue-mer.jpg",
+                            "Garden"),
+                        Picture("https://prestige.excellenceimmobilier.fr/public/img/big/13812059535bed507a7afbb8255167991200jpg5bed9576a362cjpg_5c93bc1784534.jpg",
+                            "Pool 2")),
                     PropertyAddress("66", "Perry Street", "", "NY 10014", "New York", "United States"),
-                    true, "28/11/2022", "", "",
+                    true, "28/11/2022", "", "12/01/2022 18:42:00",
                     User("2", "franck@test.com", "Franck", "Black",""),0,0,0 )
                 )
                 propertyDao.insertProperty(Property(4, "Penthouse", "Unbelievable penthouse", "GooglePlex", 4300000,

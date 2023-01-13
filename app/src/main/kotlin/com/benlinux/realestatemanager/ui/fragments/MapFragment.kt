@@ -216,6 +216,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                             // Move Camera
                             moveCamera(mGoogleMap, userLocation!!)
                             animateCamera(mGoogleMap, userLocation!!, 10f)
+                            updateLocationUI()
 
 
                         } else {
@@ -244,7 +245,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                                                 lastLocation.longitude
                                             )
                                         )
-
                                     }
 
                                     // Set marker for user position
@@ -259,6 +259,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                                     // Move Camera on user location
                                     moveCamera(mGoogleMap, userLocation!!)
                                     animateCamera(mGoogleMap, userLocation!!, 10f)
+                                    updateLocationUI()
 
                                 }
                             }
@@ -465,6 +466,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         if (locationPermissionIsGranted && userLocation == null) {
             getCurrentLocation()
         }
+
     }
 
 }

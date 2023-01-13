@@ -332,6 +332,10 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
     // Show arrows on list sides to indicate scroll possibility
     private fun setEasyScrollFeature() {
+
+        if (picturesRecyclerView.canScrollHorizontally(1)) {
+            arrowRight.visibility = View.VISIBLE
+        }
         // Go to end of pictures list
         arrowRight.setOnClickListener {
             picturesRecyclerView.smoothScrollToPosition(picturesList.size)

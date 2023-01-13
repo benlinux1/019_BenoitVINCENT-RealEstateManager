@@ -619,6 +619,10 @@ class AddPropertyActivity: AppCompatActivity() {
         val arrowRight: ImageView = findViewById(R.id.list_arrow_right)
         val arrowLeft: ImageView = findViewById(R.id.list_arrow_left)
 
+        if (picturesRecyclerView.canScrollHorizontally(1)) {
+            arrowRight.visibility = View.VISIBLE
+        }
+
         // Go to end of pictures list
         arrowRight.setOnClickListener {
             picturesRecyclerView.smoothScrollToPosition(picturesList.size)

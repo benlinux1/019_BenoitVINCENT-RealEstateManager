@@ -117,8 +117,8 @@ class UpdatePropertyActivity: AppCompatActivity() {
         getCurrentRealtor()
         setTypeRadioButtons()
         setViewModel()
-        setViews()
         setPicturesGallery()
+        setViews()
         setListenerOnUpdateButton()
         setAddPictureButtonListener()
         setListenerOnSoldChecked()
@@ -149,6 +149,8 @@ class UpdatePropertyActivity: AppCompatActivity() {
     private fun setEasyScrollFeature() {
         val arrowRight: ImageView = findViewById(R.id.list_arrow_right)
         val arrowLeft: ImageView = findViewById(R.id.list_arrow_left)
+
+        arrowRight.visibility = View.VISIBLE
 
         // Go to end of pictures list
         arrowRight.setOnClickListener {
@@ -183,6 +185,9 @@ class UpdatePropertyActivity: AppCompatActivity() {
         for (picture: Picture? in property.pictures) {
             picturesList.add(picture)
             pictureAdapter.notifyItemInserted(picturesList.lastIndex)
+        }
+        if (picturesRecyclerView.canScrollHorizontally(1)) {
+            setEasyScrollFeature()
         }
     }
 
