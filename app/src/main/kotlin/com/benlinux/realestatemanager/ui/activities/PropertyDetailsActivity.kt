@@ -333,6 +333,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
     // Show arrows on list sides to indicate scroll possibility
     private fun setEasyScrollFeature() {
 
+        // Set right arrow visibility
         if (picturesRecyclerView.canScrollHorizontally(1)) {
             arrowRight.visibility = View.VISIBLE
         }

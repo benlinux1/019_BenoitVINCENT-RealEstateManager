@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/default_large_margin">
 
+                <!-- Logo -->
                 <ImageView
                     android:id="@+id/signup_logo"
                     android:layout_width="@dimen/logo_dimens"
@@ -48,6 +49,7 @@
                     android:contentDescription="@string/logo"
                     android:src="@mipmap/ic_launcher"/>
 
+                <!-- Email -->
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:id="@+id/signup_email_layout"
@@ -77,7 +79,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-
+                <!-- FIRST NAME -->
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:id="@+id/signup_firstName_layout"
@@ -107,6 +109,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <!-- LAST NAME -->
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:id="@+id/signup_lastName_layout"
@@ -137,6 +140,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
+                <!-- PASSWORD -->
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:id="@+id/signup_password_layout"
@@ -168,6 +172,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <!-- REALTOR SWITCH -->
                 <LinearLayout
                     android:id="@+id/signup_realtor_layout"
                     android:layout_width="match_parent"
@@ -198,6 +203,7 @@
                         android:checked="false"/>
                 </LinearLayout>
 
+                <!-- SIGNUP BUTTON -->
                 <Button android:id="@+id/signup_button"
                     style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="wrap_content"

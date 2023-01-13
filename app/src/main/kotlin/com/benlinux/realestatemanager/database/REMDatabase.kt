@@ -42,7 +42,7 @@ abstract class REMDatabase : RoomDatabase() {
         private val roomCallback = object : Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
-                populateDatabase(instance!!)
+                populateDatabase(instance!!) // Add 4 properties
             }
         }
 

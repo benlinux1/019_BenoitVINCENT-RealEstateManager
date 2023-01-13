@@ -71,6 +71,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/filter_property_type"/>
 
+            <!-- CHECK BOXES -->
             <RelativeLayout
                 android:id="@+id/filter_type_radioGroup_layout"
                 android:layout_width="wrap_content"

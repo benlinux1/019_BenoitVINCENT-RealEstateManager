@@ -216,6 +216,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                             // Move Camera
                             moveCamera(mGoogleMap, userLocation!!)
                             animateCamera(mGoogleMap, userLocation!!, 10f)
+                            // Update map settings
                             updateLocationUI()
 
 
@@ -259,6 +260,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                                     // Move Camera on user location
                                     moveCamera(mGoogleMap, userLocation!!)
                                     animateCamera(mGoogleMap, userLocation!!, 10f)
+                                    // Update map settings
                                     updateLocationUI()
 
                                 }
