@@ -24,6 +24,7 @@ package com.benlinux.realestatemanager.ui.activities
  import androidx.navigation.ui.NavigationUI.setupWithNavController
  import androidx.navigation.ui.onNavDestinationSelected
  import androidx.navigation.ui.setupActionBarWithNavController
+ import androidx.window.layout.WindowMetricsCalculator
  import com.benlinux.realestatemanager.R
  import com.benlinux.realestatemanager.data.userManager.UserManager
  import com.benlinux.realestatemanager.ui.fragments.MapFragment
@@ -118,6 +119,18 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         // Setup Drawer Navigation with its items
         drawerNavView.setNavigationItemSelectedListener(this)
+
+        // Hide drawer logo under 1081px screen height
+        if (getScreenHeight() < 1081) {
+            findViewById<View>(R.id.activity_main_nav_view_logo).visibility = View.GONE
+        }
+    }
+
+    // Calculate screen height
+    private fun getScreenHeight(): Int {
+        val windowMetrics = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(this)
+        val currentBounds = windowMetrics.bounds
+        return currentBounds.height()
     }
 
 

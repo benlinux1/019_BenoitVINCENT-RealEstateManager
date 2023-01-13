@@ -113,4 +113,7 @@ dependencies {
     // SMARTEIST Image Slider
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
 
+    // Display metrics
+    implementation "androidx.window:window:1.1.0-alpha04"
+
 }
