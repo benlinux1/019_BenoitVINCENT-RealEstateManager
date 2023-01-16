@@ -25,6 +25,11 @@ class SliderAdapter(pictures: MutableList<Picture?>, context: Context) :
         localContext = context
     }
 
+    // Return slider item
+    fun getItem(i: Int): Picture? {
+        return picturesList[i]
+    }
+
     // Return pictures list size
     override fun getCount(): Int {
         return picturesList.size

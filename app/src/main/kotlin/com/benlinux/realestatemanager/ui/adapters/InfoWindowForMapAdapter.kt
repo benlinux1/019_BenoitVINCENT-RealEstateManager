@@ -14,8 +14,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import java.util.*
 
-class InfoWindowForMapAdapter(var context: Context) :
-    InfoWindowAdapter {
+class InfoWindowForMapAdapter(var context: Context) : InfoWindowAdapter {
+
     override fun getInfoContents(marker: Marker): View? {
         return null
     }
