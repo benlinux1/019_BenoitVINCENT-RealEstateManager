@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -134,7 +135,9 @@ class ListFragment: Fragment() {
                                     if (localPropertyDateOfUpdate!!.before(firebasePropertyDateOfUpdate) ) {
                                         propertyViewModel.updateProperty(firebaseProperty)
                                     } else {
-                                        PropertyManager.updateProperty(localProperty)
+                                        PropertyManager.updateProperty(localProperty).addOnCompleteListener {
+                                            Log.d("FIREBASE UPDATE", "Room property imported")
+                                        }
                                     }
                                 }
                             }
@@ -168,7 +171,9 @@ class ListFragment: Fragment() {
                                     if (localPropertyDateOfUpdate!!.before(firebasePropertyDateOfUpdate) ) {
                                         propertyViewModel.updateProperty(firebaseProperty)
                                     } else {
-                                        PropertyManager.updateProperty(localProperty)
+                                        PropertyManager.updateProperty(localProperty).addOnCompleteListener {
+                                            Log.d("FIREBASE UPDATE", "Room property imported")
+                                        }
                                     }
                                 }
                             }

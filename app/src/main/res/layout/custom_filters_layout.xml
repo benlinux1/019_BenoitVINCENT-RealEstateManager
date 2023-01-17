@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:backgroundTint="@color/fui_transparent"
+    app:backgroundTint="@color/transparent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.MainActivity" >
@@ -120,7 +120,7 @@
                     android:orientation="vertical"
                     android:layout_marginTop="@dimen/small_margin"
                     android:layout_marginStart="@dimen/default_medium_margin"
-                    android:layout_toRightOf="@id/filter_type_radioGroup1">
+                    android:layout_toEndOf="@id/filter_type_radioGroup1">
 
                     <CheckBox
                         android:id="@+id/filter_type_radiobutton_3"

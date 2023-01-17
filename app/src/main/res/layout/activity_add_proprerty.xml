@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -145,7 +146,7 @@
                             android:orientation="vertical"
                             android:layout_marginTop="@dimen/small_margin"
                             android:layout_marginStart="@dimen/default_medium_margin"
-                            android:layout_toRightOf="@id/add_type_radioGroup1">
+                            android:layout_toEndOf="@id/add_type_radioGroup1">
 
                             <RadioButton
                                 android:id="@+id/add_type_radiobutton_3"

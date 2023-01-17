@@ -80,8 +80,8 @@ abstract class REMDatabase : RoomDatabase() {
                         Picture("https://prestige.excellenceimmobilier.fr/public/img/big/13812059535bed507a7afbb8255167991200jpg5bed9576a362cjpg_5c93bc1784534.jpg",
                             "Pool 2")),
                     PropertyAddress("66", "Perry Street", "", "NY 10014", "New York", "United States"),
-                    true, "28/11/2022", "", "12/01/2022 18:42:00",
-                    User("2", "franck@test.com", "Franck", "Black",""),0,0,0 )
+                    true, "28/11/2022", "", "12/01/2023 18:43:00",
+                    User("2eLNnlU4v4VRfZJ8EarjPzOCNi02", "franck@test.com", "Franck", "Black",""),0,0,0 )
                 )
                 propertyDao.insertProperty(Property(4, "Penthouse", "Unbelievable penthouse", "GooglePlex", 4300000,
                     300, "Unbelievable penthouse near GooglePlex with tremendous options...",
