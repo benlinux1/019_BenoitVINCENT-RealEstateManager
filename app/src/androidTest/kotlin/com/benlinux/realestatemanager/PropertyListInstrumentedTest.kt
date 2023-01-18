@@ -27,7 +27,7 @@ import org.junit.runner.RunWith
 class PropertyListInstrumentedTest {
 
 
-    // Retrieve third property data
+    // Property taken for tests
     private val property = Property(3, "Penthouse", "Exceptional penthouse", "Manhattan", 5200000,
         300, "Exceptional penthouse in Manhattan with tremendous options...", mutableListOf(Picture(
             "https://media.architecturaldigest.com/photos/5c0817ec1b58382d031ba321/2:1/w_4800,h_2400,c_limit/Eighty%20Seven%20Park%20Penthouse%20Family%20Room.jpg",
@@ -67,7 +67,7 @@ class PropertyListInstrumentedTest {
                         click()
                     )
                 )
-            // Check if meeting details page is displayed
+            // Check if property details page is displayed
             onView(withId(R.id.property_details_main_layout)).check(matches(isDisplayed()))
         }
     }
@@ -92,7 +92,6 @@ class PropertyListInstrumentedTest {
             onView(withId(R.id.property_details_information_area)).check(matches(withText(property.area)))
             // Description
             onView(withId(R.id.property_details_description_text)).check(matches(withText(property.description)))
-
         }
     }
 
@@ -212,12 +211,12 @@ class PropertyListInstrumentedTest {
     }
 
 
-    /**
-     * When we add a property, the item is in the properties list
-     */
+
+
 
     @Test
-    fun addingNewPropertyActionShouldAddItem() {
+    // When we add a property, the item is in the main properties list
+    fun addingNewPropertyActionShouldAddItemInMainList() {
         launchActivity<MainActivity>().use {
             // LOGIN
             onView(withId(R.id.activity_main_drawer_layout))
@@ -285,11 +284,11 @@ class PropertyListInstrumentedTest {
             onView(withId(R.id.add_country_input)).perform(scrollTo(), click())
                 .perform(typeText("FRANCE"), closeSoftKeyboard())
 
-            // Click on the creation button to add this new meeting
+            // Click on the creation button to add this new property
             onView(withId(R.id.create))
                 .perform(scrollTo(), click())
 
-            // Then : check if item was added to the list ()
+            // Then : check if item was added to the list
             onView(withId(R.id.list_properties)).check(matches(hasDescendant(withText("NAME"))))
             onView(withId(R.id.list_properties)).check(matches(hasDescendant(withText("area"))))
 
@@ -354,7 +353,9 @@ class PropertyListInstrumentedTest {
             // Check if property data (here name, area and price) is displayed in the right fields
             onView(withId(R.id.add_name_input)).check(matches(withText("NAME")))
 
+            // Clear name and enter NEW NAME
             onView(withId(R.id.add_name_input)).perform(click()).perform(clearText(), typeText("NEW NAME"), closeSoftKeyboard())
+            // Update property
             onView(withId(R.id.create)).perform(scrollTo(), click())
 
             // LIST DISPLAY ----------
