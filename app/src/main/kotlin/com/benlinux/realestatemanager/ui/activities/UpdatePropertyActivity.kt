@@ -266,6 +266,10 @@ class UpdatePropertyActivity: AppCompatActivity() {
         setBedroomsSpinners(property.numberOfBedrooms)
         setBathroomsSpinners(property.numberOfBathrooms)
         setAvailability(property.isAvailable)
+        // Set date of sold if existing data (used if realtor updates data after property sold)
+        if (property.soldDate.isNotEmpty()) {
+            dateOfSold = property.soldDate
+        }
     }
 
     // Set availability status radio button
@@ -400,8 +404,8 @@ class UpdatePropertyActivity: AppCompatActivity() {
         saveButton.setOnClickListener {
             // Fields validation
             if (checkPropertyFields()) {
-                // create property with new data
-                updateProperty()
+                // collect property new data in fields
+                collectPropertyData()
                 // update Room repository with this property data
                 propertyViewModel.updateProperty(property)
                 // If connected to Internet, update Firestore remote database too
@@ -434,7 +438,7 @@ class UpdatePropertyActivity: AppCompatActivity() {
     }
 
     // Create property action that retrieves all data
-    private fun updateProperty() {
+    private fun collectPropertyData() {
         property.name = title.text.toString()
         property.area = area.text.toString()
         property.type = getPropertyType()

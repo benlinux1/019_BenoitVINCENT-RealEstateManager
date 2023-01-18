@@ -75,7 +75,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
 
         // Check location permissions
-        locationPermissionIsGranted = checkLocationPermissions()
+        checkLocationPermissions()
 
         // Define map fragment
         mapFragment = (childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?)!!
@@ -149,22 +149,17 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
 
     // Check for location permission
-    private fun checkLocationPermissions(): Boolean {
-
-        var isPermissionGranted = false
-
+    private fun checkLocationPermissions() {
         // Callback for location permission
         val requestPermission =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
 
-                isPermissionGranted = if (isGranted) { // If permission is granted
+                if (isGranted) { // If permission is granted
+                    locationPermissionIsGranted = true
                     Log.d("LOG_TAG", "permission granted by the user")
-                    getCurrentLocation()
-                    true
 
                 } else { // If permission is not granted
                     Log.d("LOG_TAG", "permission denied by the user")
-                    false
                 }
             }
 
@@ -175,10 +170,9 @@ class MapFragment: Fragment(), OnMapReadyCallback {
             requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         // Else, location has been granted
         } else {
-            isPermissionGranted = true
+            locationPermissionIsGranted = true
             Log.d("LOG_TAG", "permission granted by the user yet")
         }
-        return isPermissionGranted
     }
 
 
@@ -205,20 +199,15 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                             userLocation = LatLng(location.latitude, location.longitude)
                             setUserLocation(LatLng(location.latitude, location.longitude))
 
-
                             // Set marker for user position
                             setMarkerForUserLocation(
                                 mGoogleMap,
                                 LatLng(location.latitude, location.longitude),
                                 "actual"
                             )
-
                             // Move Camera
                             moveCamera(mGoogleMap, userLocation!!)
                             animateCamera(mGoogleMap, userLocation!!, 10f)
-                            // Update map settings
-                            updateLocationUI()
-
 
                         } else {
 
@@ -229,7 +218,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                                     .setMinUpdateIntervalMillis(5)
                                     .setMaxUpdateDelayMillis(1)
                                     .build()
-
 
                             // Initialize Location callback
                             val locationCallback: LocationCallback = object : LocationCallback() {
@@ -260,9 +248,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                                     // Move Camera on user location
                                     moveCamera(mGoogleMap, userLocation!!)
                                     animateCamera(mGoogleMap, userLocation!!, 10f)
-                                    // Update map settings
-                                    updateLocationUI()
-
                                 }
                             }
                             // Request location updates
@@ -357,7 +342,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
     private fun setUserPosition(latLng: LatLng) {
         userLocation = LatLng(latLng.latitude, latLng.longitude)
-
     }
 
     private fun setListenerOnMyLocationIcon(googleMap: GoogleMap) {
@@ -465,10 +449,17 @@ class MapFragment: Fragment(), OnMapReadyCallback {
     override fun onResume() {
         super.onResume()
         // Get current location if not set yet
-        if (locationPermissionIsGranted && userLocation == null) {
-            getCurrentLocation()
+        if (locationPermissionIsGranted) {
+            if (userLocation == null) {
+                getCurrentLocation()
+            // if user has already been located, animate camera on his position
+            } else {
+                setMarkerForUserLocation(mGoogleMap, userLocation!!, "last")
+                moveCamera(mGoogleMap, userLocation!!)
+                animateCamera(mGoogleMap, userLocation!!, 15f)
+            }
+            updateLocationUI()
         }
-
     }
 
 }

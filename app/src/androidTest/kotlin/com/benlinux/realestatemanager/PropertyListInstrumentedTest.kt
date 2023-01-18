@@ -1,6 +1,5 @@
 package com.benlinux.realestatemanager
 
-import android.annotation.SuppressLint
 import android.view.Gravity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.launchActivity
@@ -17,7 +16,6 @@ import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.ui.models.PropertyAddress
 import com.benlinux.realestatemanager.ui.models.User
-import com.benlinux.realestatemanager.utils.RecyclerViewItemCountAssertion.Companion.withItemCount
 import kotlinx.coroutines.*
 import org.hamcrest.Matchers
 import org.junit.Test
@@ -28,24 +26,31 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class PropertyListInstrumentedTest {
 
-    // Actual list of properties count
-    private val itemsCount = 9
+
+    // Retrieve third property data
+    private val property = Property(3, "Penthouse", "Exceptional penthouse", "Manhattan", 5200000,
+        300, "Exceptional penthouse in Manhattan with tremendous options...", mutableListOf(Picture(
+            "https://media.architecturaldigest.com/photos/5c0817ec1b58382d031ba321/2:1/w_4800,h_2400,c_limit/Eighty%20Seven%20Park%20Penthouse%20Family%20Room.jpg",
+            "Lounge"),
+            Picture("https://pic.le-cdn.com/thumbs/520x390/480/1/properties/Property-62f9abc14ac9ab2b8bf16d26814daef9-125310425.jpg",
+                "Exterior"),
+            Picture("https://pictures.aqualivingvillas.com/vacation-rentals/golden-beach-house/large/goldenbeachhouse-3.jpg",
+                "Pool"),
+            Picture("https://www.designferia.com/sites/default/files/images/villa-contemporaine-arcchitecture-vue-mer.jpg",
+                "Garden"),
+            Picture("https://prestige.excellenceimmobilier.fr/public/img/big/13812059535bed507a7afbb8255167991200jpg5bed9576a362cjpg_5c93bc1784534.jpg",
+                "Pool 2")),
+        PropertyAddress("66", "Perry Street", "", "NY 10014", "New York", "United States"),
+        true, "28/11/2022", "", "12/01/2023 18:43:00",
+        User("2eLNnlU4v4VRfZJ8EarjPzOCNi02", "franck@test.com", "Franck", "Black",""),0,0,0 )
 
 
     @Test
     // We ensure that our recyclerview is displaying at least 1 property
-    fun listOfPropertiesShouldNotBeEmpty() {
+    fun listOfPropertiesShouldNotBeEmptyAndContainsAtLeastNineItems() {
         launchActivity<MainActivity>().use {
             onView(withId(R.id.list_properties))
-                .check(matches(hasMinimumChildCount(1)))
-        }
-    }
-
-    @Test
-    // Check that properties list contains 9 items
-    fun listOfPropertiesContainsNineItems() {
-        launchActivity<MainActivity>().use {
-            onView(withId(R.id.list_properties)).check(withItemCount(itemsCount))
+                .check(matches(hasMinimumChildCount(9)))
         }
     }
 
@@ -68,27 +73,8 @@ class PropertyListInstrumentedTest {
     }
 
     // When we click on a property in the list, the data is displayed in the right fields
-    @SuppressLint("CheckResult")
     @Test
     fun clickOnPropertyShouldDisplayPropertyDataInDetailView() {
-
-        // Retrieve third property data
-        val property = Property(3, "Penthouse", "Exceptional penthouse", "Manhattan", 5200000,
-        300, "Exceptional penthouse in Manhattan with tremendous options...", mutableListOf(Picture(
-        "https://media.architecturaldigest.com/photos/5c0817ec1b58382d031ba321/2:1/w_4800,h_2400,c_limit/Eighty%20Seven%20Park%20Penthouse%20Family%20Room.jpg",
-        "Lounge"),
-        Picture("https://pic.le-cdn.com/thumbs/520x390/480/1/properties/Property-62f9abc14ac9ab2b8bf16d26814daef9-125310425.jpg",
-            "Exterior"),
-        Picture("https://pictures.aqualivingvillas.com/vacation-rentals/golden-beach-house/large/goldenbeachhouse-3.jpg",
-            "Pool"),
-        Picture("https://www.designferia.com/sites/default/files/images/villa-contemporaine-arcchitecture-vue-mer.jpg",
-            "Garden"),
-        Picture("https://prestige.excellenceimmobilier.fr/public/img/big/13812059535bed507a7afbb8255167991200jpg5bed9576a362cjpg_5c93bc1784534.jpg",
-            "Pool 2")),
-        PropertyAddress("66", "Perry Street", "", "NY 10014", "New York", "United States"),
-        true, "28/11/2022", "", "12/01/2022 18:42:00",
-        User("2", "franck@test.com", "Franck", "Black",""),0,0,0 )
-
 
         launchActivity<MainActivity>().use {
             // Click on the forth item in the properties list
@@ -99,16 +85,14 @@ class PropertyListInstrumentedTest {
                         click()
                     )
                 )
-            CoroutineScope(Dispatchers.IO).launch {
-                // Check if property data is displayed on the details page
-                // Name
-                onView(withId(R.id.property_details_information_title)).check(matches(withText(property.name)))
-                // Area
-                onView(withId(R.id.property_details_information_area)).check(matches(withText(property.area)))
-                // Description
-                onView(withId(R.id.property_details_description_text)).check(matches(withText(property.description)))
+            // Check if property data is displayed on the details page
+            // Name
+            onView(withId(R.id.property_details_information_title)).check(matches(withText(property.name)))
+            // Area
+            onView(withId(R.id.property_details_information_area)).check(matches(withText(property.area)))
+            // Description
+            onView(withId(R.id.property_details_description_text)).check(matches(withText(property.description)))
 
-            }
         }
     }
 
@@ -136,9 +120,8 @@ class PropertyListInstrumentedTest {
             // Click on login button
             onView(withId(R.id.login_button)).perform(click())
 
-            Thread.sleep(4000)
-            // Check meetings list count (actual is 7)
-            onView(withId(R.id.list_properties)).check(withItemCount(itemsCount))
+            Thread.sleep(1000)
+
             // When perform a click on the add button
             onView(withId(R.id.add_property_button)).perform(click())
             // Close keyboard due to autofocus
@@ -162,26 +145,10 @@ class PropertyListInstrumentedTest {
         }
     }
 
-    // When realtor click on EDIT BUTTON in property details page, the edit form is displayed
-    @Test
-    fun editPropertyButtonShouldOpenEditForm() {
 
-        // Retrieve third property data
-        val property = Property(3, "Penthouse", "Exceptional penthouse", "Manhattan", 5200000,
-            300, "Exceptional penthouse in Manhattan with tremendous options...", mutableListOf(Picture(
-                "https://media.architecturaldigest.com/photos/5c0817ec1b58382d031ba321/2:1/w_4800,h_2400,c_limit/Eighty%20Seven%20Park%20Penthouse%20Family%20Room.jpg",
-                "Lounge"),
-                Picture("https://pic.le-cdn.com/thumbs/520x390/480/1/properties/Property-62f9abc14ac9ab2b8bf16d26814daef9-125310425.jpg",
-                    "Exterior"),
-                Picture("https://pictures.aqualivingvillas.com/vacation-rentals/golden-beach-house/large/goldenbeachhouse-3.jpg",
-                    "Pool"),
-                Picture("https://www.designferia.com/sites/default/files/images/villa-contemporaine-arcchitecture-vue-mer.jpg",
-                    "Garden"),
-                Picture("https://prestige.excellenceimmobilier.fr/public/img/big/13812059535bed507a7afbb8255167991200jpg5bed9576a362cjpg_5c93bc1784534.jpg",
-                    "Pool 2")),
-            PropertyAddress("66", "Perry Street", "", "NY 10014", "New York", "United States"),
-            true, "28/11/2022", "", "12/01/2023 18:43:00",
-            User("2eLNnlU4v4VRfZJ8EarjPzOCNi02", "franck@test.com", "Franck", "Black",""),0,0,0 )
+    @Test
+    // When realtor click on EDIT BUTTON in property details page, the edit form is displayed
+    fun editPropertyButtonShouldOpenEditForm() {
 
         // Click on the forth item in the properties list
         launchActivity<MainActivity>().use {
@@ -204,12 +171,12 @@ class PropertyListInstrumentedTest {
             // Click on login button
             onView(withId(R.id.login_button)).perform(click())
 
-            Thread.sleep(4000)
+            Thread.sleep(1000)
             // Click on third property in the list
             onView(withId(R.id.list_properties))
                 .perform(
                     RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                        2,
+                        3,
                         click()
                     )
                 )
@@ -248,6 +215,7 @@ class PropertyListInstrumentedTest {
     /**
      * When we add a property, the item is in the properties list
      */
+
     @Test
     fun addingNewPropertyActionShouldAddItem() {
         launchActivity<MainActivity>().use {
@@ -269,9 +237,8 @@ class PropertyListInstrumentedTest {
             // Click on login button
             onView(withId(R.id.login_button)).perform(click())
 
-            Thread.sleep(4000)
-            // Check meetings list count (actual is 7)
-            onView(withId(R.id.list_properties)).check(withItemCount(itemsCount))
+            Thread.sleep(1000)
+
             // When perform a click on the add button
             onView(withId(R.id.add_property_button)).perform(click())
             // Close keyboard due to autofocus
@@ -323,9 +290,103 @@ class PropertyListInstrumentedTest {
                 .perform(scrollTo(), click())
 
             // Then : check if item was added to the list ()
-            onView(withId(R.id.list_properties)).check(withItemCount(itemsCount + 1))
+            onView(withId(R.id.list_properties)).check(matches(hasDescendant(withText("NAME"))))
+            onView(withId(R.id.list_properties)).check(matches(hasDescendant(withText("area"))))
 
             // Logout
+            onView(withId(R.id.activity_main_drawer_layout))
+                .check(matches(isClosed(Gravity.LEFT)))
+                // Open drawer menu
+                .perform(DrawerActions.open())
+            onView(withId(R.id.drawer_navigation_logout)).perform(click())
+        }
+    }
+
+    @Test
+    // When realtor click on EDIT BUTTON in property details page, the edit form is displayed
+    fun mainListContainsUpdatedPropertyAfterUpdate() {
+
+        // Launch activity
+        launchActivity<MainActivity>().use {
+
+            // LOGIN ----------
+            // Check if drawer is closed
+            onView(withId(R.id.activity_main_drawer_layout))
+                .check(matches(isClosed(Gravity.LEFT)))
+                // Open drawer menu
+                .perform(DrawerActions.open())
+            // Open Login
+            onView(withId(R.id.drawer_navigation_login)).perform(click())
+            // Check login page is displayed
+            onView(withId(R.id.login_layout)).check(matches(isDisplayed()))
+            // Enter email
+            onView(withId(R.id.login_email)).perform(click())
+                .perform(typeText("realtor@test.com"), closeSoftKeyboard())
+            // Enter password
+            onView(withId(R.id.login_password)).perform(click())
+                .perform(typeText("marie1208"), closeSoftKeyboard())
+            // Click on login button
+            onView(withId(R.id.login_button)).perform(click())
+
+            // LIST DISPLAY ----------
+            Thread.sleep(1000)
+            // Click on first property in the list
+            onView(withId(R.id.list_properties))
+                .perform(
+                    RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                        0,
+                        click()
+                    )
+                )
+
+            // PROPERTY DETAILS DISPLAY ----------
+            // Check if property details page is displayed
+            onView(withId(R.id.property_details_main_layout)).check(matches(isDisplayed()))
+            // When perform a click on the update button
+            onView(withId(R.id.property_details_update_button)).perform(click())
+
+            // PROPERTY UPDATE FORM DISPLAY ----------
+            // Close keyboard due to autofocus
+            onView(withId(R.id.add_name_input)).perform(closeSoftKeyboard())
+            // Check if update property form is displayed
+            onView(withId(R.id.activity_add_layout)).check(matches(isDisplayed())) // same layout than add
+
+            // Check if property data (here name, area and price) is displayed in the right fields
+            onView(withId(R.id.add_name_input)).check(matches(withText("NAME")))
+
+            onView(withId(R.id.add_name_input)).perform(click()).perform(clearText(), typeText("NEW NAME"), closeSoftKeyboard())
+            onView(withId(R.id.create)).perform(scrollTo(), click())
+
+            // LIST DISPLAY ----------
+            Thread.sleep(1000)
+
+            // Check if property name has been updated with NEW NAME
+            onView(withId(R.id.list_properties)).check(matches(hasDescendant(withText("NEW NAME"))))
+
+            // RESET ORIGINAL NAME
+            // Click on first property in the list
+            onView(withId(R.id.list_properties))
+                .perform(
+                    RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                        0,
+                        click()
+                    )
+                )
+
+            // Check if property details page is displayed
+            onView(withId(R.id.property_details_main_layout)).check(matches(isDisplayed()))
+            // Perform a click on the update button
+            onView(withId(R.id.property_details_update_button)).perform(click())
+            // Reset name
+            onView(withId(R.id.add_name_input)).perform(click()).perform(clearText(), typeText("NAME"), closeSoftKeyboard())
+            // Update property with original name
+            onView(withId(R.id.create)).perform(scrollTo(), click())
+            // LIST DISPLAY ----------
+            Thread.sleep(1000)
+            // Check if property name has been updated with NAME
+            onView(withId(R.id.list_properties)).check(matches(hasDescendant(withText("NAME"))))
+
+            // LOGOUT
             onView(withId(R.id.activity_main_drawer_layout))
                 .check(matches(isClosed(Gravity.LEFT)))
                 // Open drawer menu

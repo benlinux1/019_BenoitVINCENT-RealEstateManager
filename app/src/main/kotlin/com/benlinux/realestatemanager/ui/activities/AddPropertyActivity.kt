@@ -182,7 +182,7 @@ class AddPropertyActivity: AppCompatActivity() {
         saveButton.setOnClickListener {
             if (checkPropertyFields()) {
                 // Create property object with data in fields
-                createProperty()
+                collectPropertyData()
                 // save property in local Room database
                 propertyViewModel.saveProperty(property)
                 Log.d("PROPERTY CREATED", property.toString())
@@ -236,7 +236,7 @@ class AddPropertyActivity: AppCompatActivity() {
     }
 
     // Create property action that retrieves all data
-    private fun createProperty() {
+    private fun collectPropertyData() {
         property.name = title.text.toString()
         property.area = area.text.toString()
         property.type = getPropertyType()

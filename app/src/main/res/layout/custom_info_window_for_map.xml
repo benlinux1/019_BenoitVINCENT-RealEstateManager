@@ -7,7 +7,7 @@
     android:layoutDirection="locale"
     android:layout_marginHorizontal="@dimen/small_margin"
     android:paddingHorizontal="@dimen/default_padding"
-    android:paddingVertical="@dimen/small_padding"
+    android:paddingVertical="@dimen/default_padding"
     android:gravity="center"
     android:elevation="@dimen/small_margin"
     android:background="@drawable/background_info_window"
