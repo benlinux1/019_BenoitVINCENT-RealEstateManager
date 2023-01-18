@@ -385,10 +385,13 @@ class MapFragment: Fragment(), OnMapReadyCallback {
             val propertyDetailsIntent = Intent(context, PropertyDetailsActivity::class.java)
 
             // Retrieve property id in tag
-            val propertyId = marker.tag.toString()
+            val propertyId = marker.tag.toString().split("/")[0]
+            // Retrieve property realtor id in extra
+            val propertyRealtorId = marker.tag.toString().split("/")[1]
 
             // Send property id in order to get it in details activity
             propertyDetailsIntent.putExtra("PROPERTY_ID", propertyId)
+            propertyDetailsIntent.putExtra("PROPERTY_CREATOR_ID", propertyRealtorId)
             if (propertyId != "null") {
                 startActivity(propertyDetailsIntent)
             }
@@ -432,7 +435,9 @@ class MapFragment: Fragment(), OnMapReadyCallback {
             val address = property!!.address
             val latLng: LatLng = getLatLngFromPropertyFormattedAddress(address, requireContext())
             val price = property.price.toString()
-            val propertyId = property.id
+
+            val propertyId = property.id.toString()
+            val propertyRealtorId = property.realtor.id
 
             // Then, define marker options (property's title, address, position, icon)
             val markerOptions = MarkerOptions()
@@ -441,8 +446,9 @@ class MapFragment: Fragment(), OnMapReadyCallback {
                 .snippet(price)
                 .icon(BitmapDescriptorFactory.fromResource(propertyMarker))
 
-            // Set place id in tag (used to retrieve place info in details activity)
-            googleMap.addMarker(markerOptions)?.tag = propertyId
+            // Set property id & realtor id in tag (used to retrieve data in details activity)
+            googleMap.addMarker(markerOptions)?.tag = "$propertyId/$propertyRealtorId"
+
         }
     }
 

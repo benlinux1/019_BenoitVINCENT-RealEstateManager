@@ -395,8 +395,8 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private fun setPropertyDates(property: Property) {
         if (property.isAvailable) {
             dateOfPublication.text = property.creationDate
-            if (property.creationDate != property.updateDate.substring(0, 10)) {
-                dateOfUpdate.text = property.updateDate.substring(0, 10)
+            if (property.creationDate != property.updateDate) {
+                dateOfUpdate.text = property.updateDate
             } else {
                 dateOfUpdate.visibility = View.GONE
                 dateOfUpdateTitle.visibility = View.GONE

@@ -93,4 +93,5 @@ class InfoWindowForMapAdapter(var context: Context) : InfoWindowAdapter {
         // Returning the view containing InfoWindow contents
         return view
     }
+
 }
