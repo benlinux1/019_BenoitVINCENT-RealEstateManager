@@ -4,9 +4,8 @@ import kotlin.math.roundToInt
 
 
 /**
- * Conversion du prix d'un bien immobilier (Dollars vers Euros)
- * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
- * @param dollars
+ * Currency conversion (From Dollar to Euro)
+ * @param dollars the original value in dollars
  * @return euro conversion
  */
 fun convertDollarToEuro(dollars: Int): Int {
@@ -15,7 +14,7 @@ fun convertDollarToEuro(dollars: Int): Int {
 
 /**
  * Currency conversion (From Euro to Dollar)
- * @param euros
+ * @param euros the original value in euro
  * @return dollar conversion
  */
 fun convertEuroToDollar(euros: Int): Int {

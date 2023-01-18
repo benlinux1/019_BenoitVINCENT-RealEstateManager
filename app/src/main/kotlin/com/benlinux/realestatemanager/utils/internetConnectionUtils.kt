@@ -8,9 +8,8 @@ import android.os.Build
 
 
 /**
- * Vérification de la connexion réseau
- * NOTE : NE PAS SUPPRIMER, A MONTRER DURANT LA SOUTENANCE
- * @param context
+ * Check device's network abilities
+ * @param context the context of the application
  * @return Boolean that indicates if device has network capabilities
  */
 @SuppressLint("MissingPermission")
