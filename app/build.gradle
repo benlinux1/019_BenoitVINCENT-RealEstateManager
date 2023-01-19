@@ -37,8 +37,7 @@ android {
 
 dependencies {
 
-    androidTestImplementation 'com.linkedin.testbutler:test-butler-library:2.2.1'
-    androidTestUtil 'com.linkedin.testbutler:test-butler-app:2.2.1'
+    androidTestImplementation "androidx.test.uiautomator:uiautomator:2.2.0"
 
     testImplementation "org.robolectric:robolectric:4.2.1"
 
