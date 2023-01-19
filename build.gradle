@@ -12,9 +12,10 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.4.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.21"
         classpath 'com.google.gms:google-services:4.3.14'
         classpath 'androidx.arch.core:core-testing:2.1.0'
+        classpath 'com.linkedin.testbutler:test-butler-app:2.2.1'
     }
 }
 

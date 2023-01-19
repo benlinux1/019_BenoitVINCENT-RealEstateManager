@@ -36,6 +36,12 @@ android {
 }
 
 dependencies {
+
+    androidTestImplementation 'com.linkedin.testbutler:test-butler-library:2.2.1'
+    androidTestUtil 'com.linkedin.testbutler:test-butler-app:2.2.1'
+
+    testImplementation "org.robolectric:robolectric:4.2.1"
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //noinspection GradleCompatible
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'

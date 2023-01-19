@@ -1,12 +1,12 @@
 package com.benlinux.realestatemanager.utils
 
-import com.benlinux.realestatemanager.utils.*
 import org.junit.Assert
 import org.junit.Test
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
+
 
 class UtilsUnitTest {
 
@@ -36,7 +36,7 @@ class UtilsUnitTest {
     // Date format to defined pattern
     fun currentDateIsFormattedToPattern() {
         val today = Date()
-        val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
         val expectedFormattedDate = dateFormat.format(today)
         Assert.assertEquals(getTodayDate(), expectedFormattedDate)
     }
