@@ -47,7 +47,7 @@ L'application fonctionne hors-ligne (sans données mobiles ni wifi) :
 
 - Les biens immobiliers présents lors de votre précédente connexion seront affichés même si aucune connexion réseau n'est disponible.
 - Un agent immobilier peut également créer une nouvelle annonce de bien immobilier, hors-ligne, ou modifier une annonce qu'il a créée. 
-Tous les nouveaux biens ou biens modifiés seront automatiquement synchronisée avec la base de données distante, ainsi qu'avec tous les appareils, lorsque la connexion internet sera rétablie.
+Tous les nouveaux biens ou biens modifiés seront automatiquement synchronisés avec la base de données distante, ainsi qu'avec tous les appareils, lorsque la connexion internet sera rétablie.
 
 
 ## Tests
