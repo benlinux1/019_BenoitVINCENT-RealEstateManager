@@ -41,6 +41,15 @@ Elle permet aussi à un agent immobilier de :
 
 
 
+## Mode hors-ligne / en ligne
+
+L'application fonctionne hors-ligne (sans données mobiles ni wifi) :
+
+- Les biens immobiliers présents lors de votre précédente connexion seront affichés même si aucune connexion réseau n'est disponible.
+- Un agent immobilier peut également créer une nouvelle annonce de bien immobilier, hors-ligne, ou modifier une annonce qu'il a créée. 
+Tous les nouveaux biens ou biens modifiés seront automatiquement synchronisée avec la base de données distante, ainsi qu'avec tous les appareils, lorsque la connexion internet sera rétablie.
+
+
 ## Tests
 
 L'application a été testée par émulation sur les appareils suivants :
@@ -156,7 +165,15 @@ It also allows a realtor to :
 ![Features 2](https://user-images.githubusercontent.com/78255467/214597277-81cd544a-8c4f-48ca-b8d2-d97895c024a4.png)
 
 
+## Offline / Online modes
 
+This app works even without internet connection (LTE / Wifi) :
+
+- Properties that were displayed during your previous visit will appear, even if any internet connection is available.
+- A realtor can create a new property, when offline, or update one that he created.
+All new or updated properties will be synchronized with remote database, and all used devices, when network will be available.
+
+  
 ## Tests
 
 This app has been tested on following devices :
