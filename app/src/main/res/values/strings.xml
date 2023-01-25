@@ -15,7 +15,6 @@
     <string name="map_fragment_label">Properties Map</string>
     <string name="add_property_fragment_label">New property</string>
 
-
     // MAIN ACTIVITY
     <string name="main_activity_message">The first property costs&#160;</string>
     <string name="house_value_text">Here is the cost of a property :&#160;</string>
@@ -90,12 +89,11 @@
     <string name="property_details_pharmacy_title">Pharmacies :&#160;</string>
     <string name="property_details_bakery_title">Bakeries :&#160;</string>
     <string name="more_than_20_results">more than 20</string>
-
+    <string name="sold">Already sold…</string>
 
     // PROPERTY LIST
     <string name="list_properties_title">Here is the list of our properties</string>
     <string name="no_property_found">No property found at this time</string>
-
 
     // LOGIN ACTIVITY
     <string name="login_title">Here is the login activity</string>
@@ -175,7 +173,7 @@
     <string name="validate_realtor_button">CONFIRM</string>
     <string name="wrong_password">Agency password is not correct</string>
     <string name="zoom_close_content_description">close_picture</string>
-    <string name="sold">Already sold…</string>
+    <string name="sign_up_button">SIGN UP</string>
 
     // SETTINGS ACTIVITY
     <string name="settings_title_toolbar">Settings</string>
@@ -212,8 +210,7 @@
     <string name="add_camera_picture_content_description">Button to take a photo from camera</string>
     <string name="allow_camera_access">Please allow camera access</string>
 
-
-    // Filter dialog
+    // FILTER DIALOG
     <string name="filter_min">Min</string>
     <string name="filter_max">Max</string>
     <string name="filter_price_title">Price ($)</string>
@@ -237,6 +234,5 @@
     <string name="add_type_penthouse_trad">Villa</string>
     <string name="room_name_length_error">Please fix room name length</string>
     <string name="required_field">* Required field</string>
-
 
 </resources>

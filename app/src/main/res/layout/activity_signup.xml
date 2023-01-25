@@ -210,7 +210,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/small_margin"
                     android:backgroundTint="@color/colorPrimary"
-                    android:text="Sign Up"
+                    android:text="@string/sign_up_button"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/default_subtitle_size"
                     app:cornerRadius="12dp"

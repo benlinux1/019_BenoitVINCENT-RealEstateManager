@@ -79,7 +79,7 @@
     <string name="property_details_pharmacy_title">Pharmacie(s) :&#160;</string>
     <string name="property_details_bakery_title">Boulangerie(s) :&#160;</string>
     <string name="more_than_20_results">plus de 20</string>
-
+    <string name="sold">Vendu…</string>
 
     // PROPERTY LIST
     <string name="list_properties_title">Voici la liste de nos biens immobiliers</string>
@@ -91,7 +91,6 @@
     <string name="login_lastName_title">Nom *</string>
     <string name="login_email_title">Email *</string>
     <string name="login_password_title">Mot de passe *</string>
-
 
     // ADD PROPERTY FRAGMENT
     <string name="add_type_flat">Appartement</string>
@@ -141,11 +140,9 @@
     <string name="add_property_country">Pays *</string>
     <string name="sold_date_dialog_title">Veuillez indiquer la date de vente</string>
 
-
     // UPDATE PROPERTY FRAGMENT
     <string name="update_property_activity_title">Modification du bien</string>
     <string name="update_button_text">Mettre à jour</string>
-
 
     // INFO WINDOW MAP
     <string name="see_details_button">Fiche détaillée</string>
@@ -165,7 +162,7 @@
     <string name="validate_realtor_button">CONFIRMER</string>
     <string name="wrong_password">Le code agence est incorrect</string>
     <string name="zoom_close_content_description">close_picture</string>
-    <string name="sold">Vendu…</string>
+    <string name="sign_up_button">S\'INSCRIRE</string>
 
     // SETTINGS ACTIVITY
     <string name="settings_title_toolbar">Compte utilisateur</string>
@@ -184,8 +181,6 @@
     <string name="user_avatar_description">photo d\'un utilisateur</string>
     <string name="user_avatar_update">mise à jour de la photo d\'un utilisateur</string>
     <string name="login_title_toolbar">Connexion</string>
-
-
     <string name="please_provide_email">Veuillez saisir votre adresse email</string>
     <string name="please_provide_password">Veuillez saisir votre mot de passe</string>
     <string name="fields_empty">Les champs sont vides</string>
@@ -229,6 +224,5 @@
     <string name="add_type_penthouse_trad">Penthouse</string>
     <string name="room_name_length_error">Please fix room name length</string>
     <string name="required_field">* Champ requis</string>
-
 
 </resources>
