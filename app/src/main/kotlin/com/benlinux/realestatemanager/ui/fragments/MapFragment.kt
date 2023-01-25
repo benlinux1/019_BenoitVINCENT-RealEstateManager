@@ -92,10 +92,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
             ViewModelFactory.getInstance(requireContext())!!
         )[PropertyViewModel::class.java]
 
-        // Set observer on user location
-        propertyViewModel.currentLocation?.observe(viewLifecycleOwner) { location ->
-            userLocation = location
-        }
     }
 
     // Retrieve properties and set markers on google map for each

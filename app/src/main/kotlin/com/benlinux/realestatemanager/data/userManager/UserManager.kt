@@ -82,8 +82,5 @@ class UserManager {
             // Delete the user account from the Auth
             return UserRepository.deleteUserFromFirestore()
         }
-
     }
-
-
 }

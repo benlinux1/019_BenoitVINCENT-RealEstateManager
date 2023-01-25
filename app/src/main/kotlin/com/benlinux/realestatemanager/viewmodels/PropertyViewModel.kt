@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.benlinux.realestatemanager.repository.PropertyRepository
 import com.benlinux.realestatemanager.ui.models.Property
-import com.google.android.gms.maps.model.LatLng
 import java.util.concurrent.Executor
 
 class PropertyViewModel(propertyDataSource: PropertyRepository, executor: Executor) : ViewModel()  {
@@ -12,7 +11,6 @@ class PropertyViewModel(propertyDataSource: PropertyRepository, executor: Execut
     var currentProperties: LiveData<MutableList<Property?>>? = null
     var currentProperty: LiveData<Property>? = null
     var currentPropertyId: Int? = null
-    var currentLocation: LiveData<LatLng>? = null
 
     // REPOSITORIES
     private val propertyDataSource: PropertyRepository

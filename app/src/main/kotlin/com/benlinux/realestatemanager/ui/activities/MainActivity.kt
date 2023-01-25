@@ -28,7 +28,6 @@ package com.benlinux.realestatemanager.ui.activities
  import com.benlinux.realestatemanager.R
  import com.benlinux.realestatemanager.data.userManager.UserManager
  import com.benlinux.realestatemanager.ui.fragments.MapFragment
- import com.benlinux.realestatemanager.utils.isInternetAvailable
  import com.bumptech.glide.Glide
  import com.bumptech.glide.request.RequestOptions
  import com.google.android.gms.maps.model.LatLng
@@ -101,10 +100,10 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
         setSharedPreferences()
         setFragments()
         configureToolBar()
-        checkInternetConnection()
         setUpDrawerNavigation()
         setUpBottomNavigation()
         configureDrawerLayoutToggle()
+        setAddButton()
         setUserDataInDrawer()
         setUserOptionsInDrawer()
         setAddButton()
@@ -127,9 +126,6 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
         supportActionBar?.elevation  = 16f
     }
 
-    private fun checkInternetConnection() {
-        isInternetAvailable(applicationContext)
-    }
 
     // Configure Drawer Navigation
     private fun setUpDrawerNavigation() {
@@ -262,8 +258,7 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
             }
             // Update menu options in drawer according to user status
             setUserOptionsInDrawer()
-            // Set add button visibility according to user status
-            addPropertyButton.isVisible = isUserRealtor()
+
         }
         if (!isUserConnected()) {
             userName.text = getString(R.string.info_no_username_found)
@@ -273,6 +268,9 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
                 .load(R.mipmap.no_photo)
                 .apply(RequestOptions.circleCropTransform())
                 .into(userAvatar)
+
+            // Check realtor status in shared preferences
+            checkIfLastUserIsRealtorInSharedPreferences()
         }
         Log.d("DRAWER :", "user data updated" )
     }
@@ -291,6 +289,12 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
             putBoolean("realtor", status)
             commit()
         }
+    }
+
+    private fun checkIfLastUserIsRealtorInSharedPreferences() {
+        val sharedPreferences = this.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
+        userIsRealtor = sharedPreferences.getBoolean("realtor", true)
+        Log.d("REALTOR STATUS", userIsRealtor.toString())
     }
 
     // Check if it's user first connexion and save data in shared preferences
@@ -336,11 +340,17 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
     // Set Add Property Floating action Button
     private fun setAddButton() {
         addPropertyButton = findViewById(R.id.add_property_button)
+        setAddButtonVisibility()
         addPropertyButton.setOnClickListener {
             val addPropertyActivityIntent = Intent(this, AddPropertyActivity::class.java)
             startActivity(addPropertyActivityIntent)
             finish()
         }
+    }
+
+    // Set add button visibility according to user status
+    private fun setAddButtonVisibility() {
+        addPropertyButton.isVisible = isUserRealtor()
     }
 
 
@@ -352,7 +362,7 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
                 Log.d("LOGOUT :", "SUCCESS" )
                 setUserDataInDrawer()
                 setUserOptionsInDrawer()
-                hideAddButton()
+                setAddButtonVisibility()
             }
             .addOnFailureListener {
                 // On failure, show error toast
