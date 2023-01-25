@@ -36,7 +36,8 @@ Elle permet aussi à un agent immobilier de :
 
 ![Fonctionnalités FR](https://user-images.githubusercontent.com/78255467/212282207-b57fd68d-3451-4bce-97d5-0f69830974dd.png)
 
-![Fonctionnalités FR 2](https://user-images.githubusercontent.com/78255467/212282234-60c64a27-9648-425c-b4ca-7c8a2cca291e.png)
+![Fonctionnalités FR 2](https://user-images.githubusercontent.com/78255467/214577592-1b2d163a-8c71-4157-b1bf-049974381aba.png)
+
 
 
 ## Tests
@@ -151,7 +152,8 @@ It also allows a realtor to :
 
 ![Fonctionnalités GB](https://user-images.githubusercontent.com/78255467/212286298-82cb7b8d-b9a6-4ce2-a2ad-57c4ea1531ad.png)
 
-![Fonctionnalités GB 2](https://user-images.githubusercontent.com/78255467/212286371-7db0e7f2-bb0a-43ea-9a0b-7742855a7a4e.png)
+![Fonctionnalités GB 2](https://user-images.githubusercontent.com/78255467/214577659-f5cae01b-6fda-4412-9141-cf8977168056.png)
+
 
 
 ## Tests
