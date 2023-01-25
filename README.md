@@ -153,7 +153,7 @@ It also allows a realtor to :
 
 ![Features 1](https://user-images.githubusercontent.com/78255467/212286298-82cb7b8d-b9a6-4ce2-a2ad-57c4ea1531ad.png)
 
-![Features 2](https://user-images.githubusercontent.com/78255467/214577659-f5cae01b-6fda-4412-9141-cf8977168056.png)
+![Features 2](https://user-images.githubusercontent.com/78255467/214597277-81cd544a-8c4f-48ca-b8d2-d97895c024a4.png)
 
 
 
