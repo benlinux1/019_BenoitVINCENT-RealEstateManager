@@ -34,9 +34,9 @@ Elle permet aussi à un agent immobilier de :
 - Modifier un bien immobilier créé par ses soins
 - Afficher la liste des biens immobiliers dont il est en charge
 
-![Fonctionnalités FR](https://user-images.githubusercontent.com/78255467/212282207-b57fd68d-3451-4bce-97d5-0f69830974dd.png)
+![Fonctionnalités 1](../../../README P9/OK/Fonctionnalités FR.png)
 
-![Fonctionnalités FR 2](https://user-images.githubusercontent.com/78255467/214577592-1b2d163a-8c71-4157-b1bf-049974381aba.png)
+![Fonctionnalités 2](https://user-images.githubusercontent.com/78255467/214577592-1b2d163a-8c71-4157-b1bf-049974381aba.png)
 
 
 
@@ -94,7 +94,7 @@ Pour ce faire, rendez-vous dans le ruban à droite de la fenêtre puis "create d
 Vous pouvez également utiliser cette application sur votre smartphone personnel en choississant l'option "physical"
 Ensuite, lancez l'application en cliquant sur le bouton triangulaire "Run", comme ci-dessous :
 
-![Sans titre-2](https://user-images.githubusercontent.com/78255467/163193524-89842086-ca39-475c-afc2-e39e3e586f68.png)
+![Android Studio](https://user-images.githubusercontent.com/78255467/163193524-89842086-ca39-475c-afc2-e39e3e586f68.png)
 
 
 ## Contribuez au projet
@@ -150,9 +150,9 @@ It also allows a realtor to :
 - Update a property that he posted
 - Display all properties for which he's responsible
 
-![Fonctionnalités GB](https://user-images.githubusercontent.com/78255467/212286298-82cb7b8d-b9a6-4ce2-a2ad-57c4ea1531ad.png)
+![Features 1](https://user-images.githubusercontent.com/78255467/212286298-82cb7b8d-b9a6-4ce2-a2ad-57c4ea1531ad.png)
 
-![Fonctionnalités GB 2](https://user-images.githubusercontent.com/78255467/214577659-f5cae01b-6fda-4412-9141-cf8977168056.png)
+![Features 2](https://user-images.githubusercontent.com/78255467/214577659-f5cae01b-6fda-4412-9141-cf8977168056.png)
 
 
 
@@ -210,7 +210,7 @@ To do that, go to the tools ribbon in the right part of the window and click "cr
 You can also use this app with your own smartphone, choosing "physical" option in device manager,
 Then, launch app clicking on the green triangle button "Run", like in this example :
 
-![Sans titre-2](https://user-images.githubusercontent.com/78255467/163193524-89842086-ca39-475c-afc2-e39e3e586f68.png)
+![Android Studio](https://user-images.githubusercontent.com/78255467/163193524-89842086-ca39-475c-afc2-e39e3e586f68.png)
 
 
 ## Contribute to the project
