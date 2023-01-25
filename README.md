@@ -34,7 +34,8 @@ Elle permet aussi à un agent immobilier de :
 - Modifier un bien immobilier créé par ses soins
 - Afficher la liste des biens immobiliers dont il est en charge
 
-![Fonctionnalités 1](../../../README P9/OK/Fonctionnalités FR.png)
+
+![Fonctionnalités 1](https://user-images.githubusercontent.com/78255467/214594809-8d521a28-7e3e-4c74-8638-730af7b3884a.png)
 
 ![Fonctionnalités 2](https://user-images.githubusercontent.com/78255467/214577592-1b2d163a-8c71-4157-b1bf-049974381aba.png)
 
