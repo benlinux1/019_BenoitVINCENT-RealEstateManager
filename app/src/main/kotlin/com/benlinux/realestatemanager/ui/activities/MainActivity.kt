@@ -255,9 +255,12 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
                 // Check / save user first connexion in shared preferences with id
                 checkAndSaveUserConnexionInSharedPreferences(user.id, user.firstName, user.lastName)
 
+                saveUserIdInSharedPreferences(user.id)
+
             }
             // Update menu options in drawer according to user status
             setUserOptionsInDrawer()
+            setAddButtonVisibility()
 
         }
         if (!isUserConnected()) {
@@ -272,6 +275,7 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
             // Check realtor status in shared preferences
             checkIfLastUserIsRealtorInSharedPreferences()
         }
+
         Log.d("DRAWER :", "user data updated" )
     }
 
@@ -287,6 +291,13 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
     private fun saveUserStatusInSharedPreferences(status: Boolean) {
         with(preferencesEditor) {
             putBoolean("realtor", status)
+            commit()
+        }
+    }
+
+    private fun saveUserIdInSharedPreferences(userId: String) {
+        with(preferencesEditor) {
+            putString("userId", userId)
             commit()
         }
     }

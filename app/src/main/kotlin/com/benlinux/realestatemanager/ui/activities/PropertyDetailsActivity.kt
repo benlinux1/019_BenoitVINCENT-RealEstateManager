@@ -93,6 +93,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
     private var userIsRealtor = false
     private var propertyIsInFavorites = false
     private var creatorId: String? = ""
+    private var userId: String? = ""
 
     // Slider Image
     private lateinit var imageSlider: SliderView
@@ -157,6 +158,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
         setToolbar()
         setViews()
+        checkUserIdInSharedPreferences()
         setMap()
         setViewModel()
         retrievePropertyId()
@@ -551,7 +553,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
     // Change floating button according to user status (5 possibilities)
     private fun setFloatingButton() {
         if (userIsRealtor) {
-            if ( creatorId == UserManager.getCurrentUser()?.uid ) {
+            if ( creatorId == UserManager.getCurrentUser()?.uid || creatorId == userId ) {
                 updateButton.setImageResource(R.drawable.ic_details_edit_24) // Edition button if realtor & creator
             } else {
                 updateButton.visibility = View.GONE // invisible button if realtor is not creator
@@ -573,6 +575,12 @@ class PropertyDetailsActivity: AppCompatActivity() {
                 updateButton.visibility = View.GONE // invisible button if user not logged
             }
         }
+    }
+
+    private fun checkUserIdInSharedPreferences() {
+        val sharedPreferences = this.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
+        userId = sharedPreferences.getString("userId", "")
+        userId?.let { Log.d("USER ID", it) }
     }
 
     // Set floating button actions on click
