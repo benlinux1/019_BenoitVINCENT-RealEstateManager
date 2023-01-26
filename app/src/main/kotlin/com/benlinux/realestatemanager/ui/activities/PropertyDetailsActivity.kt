@@ -32,6 +32,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.ms.square.android.expandabletextview.ExpandableTextView
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -105,50 +106,50 @@ class PropertyDetailsActivity: AppCompatActivity() {
     // Primary Schools
     private lateinit var primarySchoolTitle: TextView
     private lateinit var primarySchoolCounter: TextView
-    private lateinit var primarySchoolExamples: TextView
+    private lateinit var primarySchoolExamples: ExpandableTextView
     private var primarySchoolList: MutableList<String> = mutableListOf()
 
 
     // Secondary schools
     private lateinit var secondarySchoolTitle: TextView
     private lateinit var secondarySchoolCounter: TextView
-    private lateinit var secondarySchoolExamples: TextView
+    private lateinit var secondarySchoolExamples: ExpandableTextView
     private var secondarySchoolList: MutableList<String> = mutableListOf()
 
     // Parks
     private lateinit var parkTitle: TextView
     private lateinit var parkCounter: TextView
-    private lateinit var parkExamples: TextView
+    private lateinit var parkExamples: ExpandableTextView
     private var parkList: MutableList<String> = mutableListOf()
 
     // Supermarkets
     private lateinit var supermarketTitle: TextView
     private lateinit var supermarketCounter: TextView
-    private lateinit var supermarketExamples: TextView
+    private lateinit var supermarketExamples: ExpandableTextView
     private var supermarketList: MutableList<String> = mutableListOf()
 
     // Restaurants
     private lateinit var restaurantTitle: TextView
     private lateinit var restaurantCounter: TextView
-    private lateinit var restaurantExamples: TextView
+    private lateinit var restaurantExamples: ExpandableTextView
     private var restaurantList: MutableList<String> = mutableListOf()
 
     // Bakeries
     private lateinit var bakeryTitle: TextView
     private lateinit var bakeryCounter: TextView
-    private lateinit var bakeryExamples: TextView
+    private lateinit var bakeryExamples: ExpandableTextView
     private var bakeryList: MutableList<String> = mutableListOf()
 
     // Doctors
     private lateinit var doctorTitle: TextView
     private lateinit var doctorCounter: TextView
-    private lateinit var doctorExamples: TextView
+    private lateinit var doctorExamples: ExpandableTextView
     private var doctorList: MutableList<String> = mutableListOf()
 
     // Pharmacies
     private lateinit var pharmacyTitle: TextView
     private lateinit var pharmacyCounter: TextView
-    private lateinit var pharmacyExamples: TextView
+    private lateinit var pharmacyExamples: ExpandableTextView
     private var pharmacyList: MutableList<String> = mutableListOf()
 
 
@@ -300,6 +301,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
             setNearbyDataByType(latLng, "bakery", bakeryList, bakeryCounter, bakeryExamples, bakeryTitle)
             setNearbyDataByType(latLng, "doctor", doctorList, doctorCounter, doctorExamples, doctorTitle)
             setNearbyDataByType(latLng, "pharmacy", pharmacyList, pharmacyCounter, pharmacyExamples, pharmacyTitle)
+
         }
     }
 
@@ -617,7 +619,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
      * @param destinationType the view that displays the type of places
     */
     private fun setNearbyDataByType(latLng: LatLng?, type: String, placeList: MutableList<String>,
-        counterTextView: TextView, destinationTextView: TextView, destinationType: TextView) {
+        counterTextView: TextView, destinationTextView: ExpandableTextView, destinationType: TextView) {
         val apiKey: String = BuildConfig.MAPS_API_KEY
 
         // Build Place API request with URL
