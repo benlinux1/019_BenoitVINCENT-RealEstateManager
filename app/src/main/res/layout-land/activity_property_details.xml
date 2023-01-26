@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
     android:id="@+id/property_details_main_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -528,18 +529,38 @@
                         app:layout_constraintBottom_toBottomOf="@id/property_details_primary_school_title"
                         app:layout_constraintTop_toTopOf="@id/property_details_primary_school_title" />
 
-                    <TextView
+                    <!--  Primary School Examples -->
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
                         android:id="@+id/property_details_primary_school_example"
-                        style="@style/pointOfInterestExample"
-                        android:text="@string/property_details_place_example"
-                        android:ellipsize="end"
-                        android:maxLines="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
+                        android:text="@string/property_details_place_example"
+                        android:ellipsize="end"
+                        expandableTextView:animDuration="100"
+                        expandableTextView:maxCollapsedLines="2"
+                        expandableTextView:expandDrawable="@drawable/ic_arrow_down"
+                        expandableTextView:collapseDrawable="@drawable/ic_arrow_up"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/property_details_primary_school_title" />
+                        app:layout_constraintTop_toBottomOf="@id/property_details_primary_school_title" >
+
+                        <!-- simple text view  -->
+                        <TextView
+                            android:id="@+id/expandable_text"
+                            style="@style/pointOfInterestExample"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="16dp" />
+
+                        <!-- expandable ImageButton -->
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center"
+                            android:background="@android:color/transparent" />
+
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
 
                     <!-- SECONDARY SCHOOLS -->
                     <TextView
@@ -564,18 +585,39 @@
                         app:layout_constraintBottom_toBottomOf="@id/property_details_secondary_school_title"
                         app:layout_constraintTop_toTopOf="@id/property_details_secondary_school_title" />
 
-                    <TextView
+                    <!--  Secondary School Examples -->
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
                         android:id="@+id/property_details_secondary_school_example"
-                        style="@style/pointOfInterestExample"
-                        android:text="@string/property_details_place_example"
-                        android:ellipsize="end"
-                        android:maxLines="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
+                        expandableTextView:animDuration="100"
+                        expandableTextView:maxCollapsedLines="2"
+                        expandableTextView:expandDrawable="@drawable/ic_arrow_down"
+                        expandableTextView:collapseDrawable="@drawable/ic_arrow_up"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/property_details_secondary_school_title" />
+                        app:layout_constraintTop_toBottomOf="@id/property_details_secondary_school_title" >
+
+                        <!-- simple text view  -->
+                        <TextView
+                            android:id="@+id/expandable_text"
+                            style="@style/pointOfInterestExample"
+                            android:text="@string/property_details_place_example"
+                            android:ellipsize="end"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="16dp" />
+
+                        <!-- expandable ImageButton -->
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center"
+                            android:background="@android:color/transparent" />
+
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
+
 
                     <!-- PARKS -->
                     <TextView
@@ -600,18 +642,38 @@
                         app:layout_constraintBottom_toBottomOf="@id/property_details_park_title"
                         app:layout_constraintTop_toTopOf="@id/property_details_park_title" />
 
-                    <TextView
+                    <!-- Parks examples -->
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
                         android:id="@+id/property_details_park_example"
-                        style="@style/pointOfInterestExample"
-                        android:text="@string/property_details_place_example"
-                        android:ellipsize="end"
-                        android:maxLines="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
+                        expandableTextView:animDuration="100"
+                        expandableTextView:maxCollapsedLines="2"
+                        expandableTextView:expandDrawable="@drawable/ic_arrow_down"
+                        expandableTextView:collapseDrawable="@drawable/ic_arrow_up"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/property_details_park_title" />
+                        app:layout_constraintTop_toBottomOf="@id/property_details_park_title" >
+
+                        <!-- simple text view  -->
+                        <TextView
+                            android:id="@+id/expandable_text"
+                            style="@style/pointOfInterestExample"
+                            android:text="@string/property_details_place_example"
+                            android:ellipsize="end"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="16dp" />
+
+                        <!-- expandable ImageButton -->
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center"
+                            android:background="@android:color/transparent" />
+
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
 
                     <!-- SUPERMARKETS -->
                     <TextView
@@ -636,18 +698,38 @@
                         app:layout_constraintBottom_toBottomOf="@id/property_details_supermarket_title"
                         app:layout_constraintTop_toTopOf="@id/property_details_supermarket_title" />
 
-                    <TextView
+                    <!-- Supermarkets examples -->
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
                         android:id="@+id/property_details_supermarket_example"
-                        style="@style/pointOfInterestExample"
-                        android:text="@string/property_details_place_example"
-                        android:ellipsize="end"
-                        android:maxLines="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
+                        expandableTextView:animDuration="100"
+                        expandableTextView:maxCollapsedLines="2"
+                        expandableTextView:expandDrawable="@drawable/ic_arrow_down"
+                        expandableTextView:collapseDrawable="@drawable/ic_arrow_up"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/property_details_supermarket_title" />
+                        app:layout_constraintTop_toBottomOf="@id/property_details_supermarket_title" >
+
+                        <!-- simple text view  -->
+                        <TextView
+                            android:id="@+id/expandable_text"
+                            style="@style/pointOfInterestExample"
+                            android:text="@string/property_details_place_example"
+                            android:ellipsize="end"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="16dp" />
+
+                        <!-- expandable ImageButton -->
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center"
+                            android:background="@android:color/transparent" />
+
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
 
                     <!-- RESTAURANTS -->
                     <TextView
@@ -672,18 +754,38 @@
                         app:layout_constraintBottom_toBottomOf="@id/property_details_restaurant_title"
                         app:layout_constraintTop_toTopOf="@id/property_details_restaurant_title" />
 
-                    <TextView
+                    <!-- Restaurants examples -->
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
                         android:id="@+id/property_details_restaurant_example"
-                        style="@style/pointOfInterestExample"
-                        android:text="@string/property_details_place_example"
-                        android:ellipsize="end"
-                        android:maxLines="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
+                        expandableTextView:animDuration="100"
+                        expandableTextView:maxCollapsedLines="2"
+                        expandableTextView:expandDrawable="@drawable/ic_arrow_down"
+                        expandableTextView:collapseDrawable="@drawable/ic_arrow_up"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/property_details_restaurant_title" />
+                        app:layout_constraintTop_toBottomOf="@id/property_details_restaurant_title" >
+
+                        <!-- simple text view  -->
+                        <TextView
+                            android:id="@+id/expandable_text"
+                            style="@style/pointOfInterestExample"
+                            android:text="@string/property_details_place_example"
+                            android:ellipsize="end"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="16dp" />
+
+                        <!-- expandable ImageButton -->
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center"
+                            android:background="@android:color/transparent" />
+
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
 
 
                     <!-- Bakery -->
@@ -709,18 +811,38 @@
                         app:layout_constraintBottom_toBottomOf="@id/property_details_bakery_title"
                         app:layout_constraintTop_toTopOf="@id/property_details_bakery_title" />
 
-                    <TextView
+                    <!-- Bakeries examples -->
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
                         android:id="@+id/property_details_bakery_example"
-                        style="@style/pointOfInterestExample"
-                        android:text="@string/property_details_place_example"
-                        android:ellipsize="end"
-                        android:maxLines="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
+                        expandableTextView:animDuration="100"
+                        expandableTextView:maxCollapsedLines="2"
+                        expandableTextView:expandDrawable="@drawable/ic_arrow_down"
+                        expandableTextView:collapseDrawable="@drawable/ic_arrow_up"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/property_details_bakery_title" />
+                        app:layout_constraintTop_toBottomOf="@id/property_details_bakery_title" >
+
+                        <!-- simple text view  -->
+                        <TextView
+                            android:id="@+id/expandable_text"
+                            style="@style/pointOfInterestExample"
+                            android:text="@string/property_details_place_example"
+                            android:ellipsize="end"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="16dp" />
+
+                        <!-- expandable ImageButton -->
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center"
+                            android:background="@android:color/transparent" />
+
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
 
                     <!-- Doctors -->
                     <TextView
@@ -745,18 +867,38 @@
                         app:layout_constraintBottom_toBottomOf="@id/property_details_doctor_title"
                         app:layout_constraintTop_toTopOf="@id/property_details_doctor_title" />
 
-                    <TextView
+                    <!-- Doctors examples -->
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
                         android:id="@+id/property_details_doctor_example"
-                        style="@style/pointOfInterestExample"
-                        android:text="@string/property_details_place_example"
-                        android:ellipsize="end"
-                        android:maxLines="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
+                        expandableTextView:animDuration="100"
+                        expandableTextView:maxCollapsedLines="2"
+                        expandableTextView:expandDrawable="@drawable/ic_arrow_down"
+                        expandableTextView:collapseDrawable="@drawable/ic_arrow_up"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/property_details_doctor_title" />
+                        app:layout_constraintTop_toBottomOf="@id/property_details_doctor_title" >
+
+                        <!-- simple text view  -->
+                        <TextView
+                            android:id="@+id/expandable_text"
+                            style="@style/pointOfInterestExample"
+                            android:text="@string/property_details_place_example"
+                            android:ellipsize="end"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="16dp" />
+
+                        <!-- expandable ImageButton -->
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center"
+                            android:background="@android:color/transparent" />
+
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
 
 
                     <!-- Pharmacies -->
@@ -782,18 +924,38 @@
                         app:layout_constraintBottom_toBottomOf="@id/property_details_pharmacy_title"
                         app:layout_constraintTop_toTopOf="@id/property_details_pharmacy_title" />
 
-                    <TextView
+                    <!-- Pharmacies examples -->
+                    <com.ms.square.android.expandabletextview.ExpandableTextView
                         android:id="@+id/property_details_pharmacy_example"
-                        style="@style/pointOfInterestExample"
-                        android:text="@string/property_details_place_example"
-                        android:ellipsize="end"
-                        android:maxLines="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
+                        expandableTextView:animDuration="100"
+                        expandableTextView:maxCollapsedLines="2"
+                        expandableTextView:expandDrawable="@drawable/ic_arrow_down"
+                        expandableTextView:collapseDrawable="@drawable/ic_arrow_up"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/property_details_pharmacy_title" />
+                        app:layout_constraintTop_toBottomOf="@id/property_details_pharmacy_title" >
+
+                        <!-- simple text view  -->
+                        <TextView
+                            android:id="@+id/expandable_text"
+                            style="@style/pointOfInterestExample"
+                            android:text="@string/property_details_place_example"
+                            android:ellipsize="end"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="16dp" />
+
+                        <!-- expandable ImageButton -->
+                        <ImageButton
+                            android:id="@id/expand_collapse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center"
+                            android:background="@android:color/transparent" />
+
+                    </com.ms.square.android.expandabletextview.ExpandableTextView>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>

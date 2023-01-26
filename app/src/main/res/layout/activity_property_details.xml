@@ -329,6 +329,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     map:cameraZoom="15"
+                                    android:contentDescription="Property location on map"
                                     map:liteMode="true" />
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>
