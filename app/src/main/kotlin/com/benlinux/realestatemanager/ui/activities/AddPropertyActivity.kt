@@ -105,6 +105,7 @@ class AddPropertyActivity: AppCompatActivity() {
 
     // Current realtor
     private var realtor: User? = null
+    private var userId: String? = null
 
     // Property status checkboxes
     private lateinit var availableButton: RadioButton
@@ -119,6 +120,8 @@ class AddPropertyActivity: AppCompatActivity() {
         setContentView(R.layout.activity_add_proprerty)
 
         setToolbar()
+        checkUserIdInSharedPreferences()
+        getCurrentRealtor()
         setTypeRadioButtons()
         configureViewModel()
         setViews()
@@ -128,7 +131,6 @@ class AddPropertyActivity: AppCompatActivity() {
         setListenerOnCreateButton()
         setAddPictureButtonListener()
         configureRecyclerView()
-        getCurrentRealtor()
         setListenerOnSoldChecked()
     }
 
@@ -139,6 +141,17 @@ class AddPropertyActivity: AppCompatActivity() {
                     user.id, user.email, user.firstName, user.lastName,
                     user.avatarUrl, user.favorites, user.isRealtor, user.realtorProperties
                 )
+            }
+        }
+        if (realtor == null) {
+            UserManager.getUserDataById(userId!!).addOnSuccessListener { userById ->
+                Log.d("REALTOR BY ID", userById.toString())
+                if (userById != null) {
+                    realtor = User(
+                        userById.id, userById.email, userById.firstName, userById.lastName,
+                        userById.avatarUrl, userById.favorites, userById.isRealtor, userById.realtorProperties
+                    )
+                }
             }
         }
     }
@@ -253,6 +266,12 @@ class AddPropertyActivity: AppCompatActivity() {
         property.address = getPropertyAddress()
         property.id = System.currentTimeMillis().toInt()
         property.pictures = picturesList
+    }
+
+    private fun checkUserIdInSharedPreferences() {
+        val sharedPreferences = this.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
+        userId = sharedPreferences.getString("userId", "")
+        userId?.let { Log.d("USER ID", it) }
     }
 
     // Fields validation

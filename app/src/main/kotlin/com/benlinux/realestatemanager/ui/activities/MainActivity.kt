@@ -34,7 +34,6 @@ package com.benlinux.realestatemanager.ui.activities
  import com.google.android.material.bottomnavigation.BottomNavigationView
  import com.google.android.material.floatingactionbutton.FloatingActionButton
  import com.google.android.material.navigation.NavigationView
- import java.util.*
 
 
 open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -300,11 +299,12 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
             putString("userId", userId)
             commit()
         }
+        Log.d("USER ID", userId)
     }
 
     private fun checkIfLastUserIsRealtorInSharedPreferences() {
         val sharedPreferences = this.getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
-        userIsRealtor = sharedPreferences.getBoolean("realtor", true)
+        userIsRealtor = sharedPreferences.getBoolean("realtor", false)
         Log.d("REALTOR STATUS", userIsRealtor.toString())
     }
 

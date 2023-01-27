@@ -485,7 +485,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
                 imageList.add(picture)
             }
         } else {
-            imageList.add(Picture("http://www.dunstableroadrunners.org/wp-content/uploads/2019/04/image-coming-soon.jpg", "No internet connexion"))
+            imageList.add(Picture("https://www.democraticstuff.com/Shared/Images/Product/Coming-Soon/camera.png", getString(R.string.photo_coming_soon)))
         }
         sliderAdapter = SliderAdapter(imageList, this)
         imageSlider.setSliderAdapter(sliderAdapter)

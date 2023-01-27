@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.benlinux.realestatemanager.R
+import com.benlinux.realestatemanager.R.string.no_network
 import com.benlinux.realestatemanager.ui.models.Picture
+import com.benlinux.realestatemanager.utils.isInternetAvailable
 import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.SliderViewAdapter
 
@@ -55,6 +57,16 @@ class SliderAdapter(pictures: MutableList<Picture?>, context: Context) :
 
             // Set picture's description into dedicated textview
             viewHolder.imageDescription.text = picturesList[position]!!.room
+
+            // Set slider view when no network
+            if (!isInternetAvailable(localContext)) {
+                Glide.with(viewHolder.itemView)
+                    .load(R.mipmap.no_photo)
+                    .fitCenter()
+                    .into(viewHolder.imageView)
+
+                viewHolder.imageDescription.text = localContext.getString(no_network)
+            }
         }
     }
 

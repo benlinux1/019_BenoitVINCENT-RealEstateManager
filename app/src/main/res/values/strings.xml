@@ -90,6 +90,8 @@
     <string name="property_details_bakery_title">Bakeries :&#160;</string>
     <string name="more_than_20_results">more than 20</string>
     <string name="sold">Already sold…</string>
+    <string name="photo_coming_soon">Photo coming soon</string>
+    <string name="no_network">Network is not available</string>
 
     // PROPERTY LIST
     <string name="list_properties_title">Here is the list of our properties</string>
@@ -234,5 +236,6 @@
     <string name="add_type_penthouse_trad">Villa</string>
     <string name="room_name_length_error">Please fix room name length</string>
     <string name="required_field">* Required field</string>
+
 
 </resources>

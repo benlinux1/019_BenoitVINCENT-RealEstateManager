@@ -111,7 +111,7 @@ class ListFragment: Fragment() {
                 for (firebaseProperty in firebaseList!!) {
                     // If remote property is not in Room Database
                     if (!localList.contains(firebaseProperty)) {
-                        // If property is really absent, save it in Firebase Firestore, and update realtor account
+                        // If property is really absent, save it in local Room Database, and update realtor account
                         if (firebaseProperty != null && !localList.any { it!!.id == firebaseProperty.id }) {
                             propertyViewModel.saveProperty(firebaseProperty)
                             UserManager.addPropertyToRealtorProperties(firebaseProperty.id.toString())
@@ -148,11 +148,23 @@ class ListFragment: Fragment() {
                 for (localProperty in localProperties) {
                     // If local property is not on Firebase, save it
                     if (!firebaseList.contains(localProperty)) {
-                        // If property is really absent, save it in local Room database, and update realtor account
+                        // If property is really absent, save it in Firebase database, and update realtor account
                         if (localProperty != null && !firebaseList.any { it!!.id == localProperty.id }) {
-                            PropertyManager.createProperty(localProperty)
-                            UserManager.addPropertyToRealtorProperties(localProperty.id.toString())
-                            // Else, it means that property was updated
+                            // if realtor created property without internet connexion, update also realtor data
+                            if (localProperty.realtor.email.isEmpty()) {
+                                UserManager.getUserDataById(localProperty.realtor.id)
+                                    .addOnSuccessListener { user ->
+                                        localProperty.realtor = user!!
+                                        propertyViewModel.updateProperty(localProperty)
+                                        PropertyManager.createProperty(localProperty)
+                                        UserManager.addPropertyToRealtorProperties(localProperty.id.toString())
+                                }
+                            // If realtor is already stored, only save property in firebase
+                            } else {
+                                PropertyManager.createProperty(localProperty)
+                                UserManager.addPropertyToRealtorProperties(localProperty.id.toString())
+                            }
+                        // Else, it means that property was updated
                         } else {
                             // check date of update
                             for (firebaseProperty in firebaseList) {

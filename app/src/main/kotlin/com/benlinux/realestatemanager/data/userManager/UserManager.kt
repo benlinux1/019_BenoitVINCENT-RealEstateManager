@@ -42,6 +42,15 @@ class UserManager {
             }
         }
 
+        fun getUserDataById(userId: String): Task<User?> {
+            // Get the user from Firestore and cast it to a User model Object
+            return UserRepository.getUserDataById(userId).continueWith { task ->
+                task.result?.toObject(
+                    User::class.java
+                )
+            }
+        }
+
         fun updateUserEmailInFirestore(email: String?) {
             UserRepository.updateUserEmailInFirestore(email)
         }

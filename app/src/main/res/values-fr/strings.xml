@@ -80,6 +80,8 @@
     <string name="property_details_bakery_title">Boulangerie(s) :&#160;</string>
     <string name="more_than_20_results">plus de 20</string>
     <string name="sold">Vendu…</string>
+    <string name="photo_coming_soon">Image prochainement disponible</string>
+    <string name="no_network">Aucune connexion internet</string>
 
     // PROPERTY LIST
     <string name="list_properties_title">Voici la liste de nos biens immobiliers</string>

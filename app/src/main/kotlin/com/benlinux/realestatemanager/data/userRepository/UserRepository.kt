@@ -104,6 +104,11 @@ class UserRepository {
             }
         }
 
+        // Get user data according to his Id
+        fun getUserDataById(userId: String) : Task<DocumentSnapshot?> {
+            return getUsersCollection().document(userId).get()
+        }
+
 
         // Get all users from Firestore
         private fun getAllUsersData(): Task<QuerySnapshot> {
