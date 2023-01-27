@@ -81,6 +81,7 @@ Cette application utilise les bibliothèques / API suivantes :
 - Smarteist (Image slider)
 - OK HTTP 3
 - Room (SQLite database)
+- Expandable Textview
 
 
 ## Installation
@@ -206,6 +207,7 @@ This app uses the following libraries / API :
 - Smarteist (Image slider)
 - OK HTTP 3
 - Room (SQLite database)
+- Expandable Textview
 
 
 ## Install
