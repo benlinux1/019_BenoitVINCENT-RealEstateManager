@@ -234,7 +234,7 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
                 // Set user email
                 userEmail.text = user.email
                 // Set avatar
-                if (user.avatarUrl.isEmpty()) {
+                if (user.avatarUrl.toString().isEmpty()) {
                     Glide.with(this)
                         .load(R.mipmap.no_photo)
                         .apply(RequestOptions.circleCropTransform())
@@ -252,7 +252,9 @@ open class MainActivity: AppCompatActivity(), NavigationView.OnNavigationItemSel
                 saveUserStatusInSharedPreferences(user.isRealtor)
 
                 // Check / save user first connexion in shared preferences with id
-                checkAndSaveUserConnexionInSharedPreferences(user.id, user.firstName, user.lastName)
+                checkAndSaveUserConnexionInSharedPreferences(user.id,
+                    user.firstName.toString(), user.lastName.toString()
+                )
 
                 saveUserIdInSharedPreferences(user.id)
 

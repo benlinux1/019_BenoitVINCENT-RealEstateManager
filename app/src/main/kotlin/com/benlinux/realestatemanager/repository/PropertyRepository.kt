@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.benlinux.realestatemanager.dao.PropertyDao
 import com.benlinux.realestatemanager.ui.models.Property
 
+
 class PropertyRepository(propertyDao: PropertyDao) {
 
     private val propertyDao: PropertyDao

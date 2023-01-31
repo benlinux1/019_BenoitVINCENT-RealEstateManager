@@ -137,7 +137,7 @@ class MyPropertiesActivity: AppCompatActivity() {
                     showMessageIfNoPropertiesInList()
                 } else {
                     for (favorite in favorites) {
-                        propertyViewModel.getPropertyById(favorite.toInt()).observe(this) {
+                        propertyViewModel.getPropertyById(favorite!!.toInt()).observe(this) {
                             val property = it
                             Log.d("FAVORITE", property.toString())
                             propertiesList.add(property)
@@ -160,7 +160,7 @@ class MyPropertiesActivity: AppCompatActivity() {
                     showMessageIfNoPropertiesInList()
                 } else {
                     for (realtorProperty in realtorProperties) {
-                        propertyViewModel.getPropertyById(realtorProperty.toInt()).observe(this) {
+                        propertyViewModel.getPropertyById(realtorProperty!!.toInt()).observe(this) {
                             val property = it
                             if (it != null) {
                                 Log.d("REALTOR PROPERTY", it.toString())

@@ -257,17 +257,17 @@ class UpdatePropertyActivity: AppCompatActivity() {
         surface.text = property.surface.toEditable()
         description.text = property.description.toEditable()
         streetNumber.text = property.address.streetNumber!!.toEditable()
-        streetName.text = property.address.streetName!!.toEditable()
+        streetName.text = property.address.streetName.toEditable()
         addressComplement.text = property.address.complement!!.toEditable()
-        postalCode.text = property.address.postalCode!!.toEditable()
-        city.text = property.address.city!!.toEditable()
-        country.text = property.address.country!!.toEditable()
-        setRoomsSpinners(property.numberOfRooms)
-        setBedroomsSpinners(property.numberOfBedrooms)
-        setBathroomsSpinners(property.numberOfBathrooms)
+        postalCode.text = property.address.postalCode.toEditable()
+        city.text = property.address.city.toEditable()
+        country.text = property.address.country.toEditable()
+        property.numberOfRooms?.let { setRoomsSpinners(it) }
+        property.numberOfBedrooms?.let { setBedroomsSpinners(it) }
+        property.numberOfBathrooms?.let { setBathroomsSpinners(it) }
         setAvailability(property.isAvailable)
         // Set date of sold if existing data (used if realtor updates data after property sold)
-        if (property.soldDate.isNotEmpty()) {
+        if (property.soldDate!!.isNotEmpty()) {
             dateOfSold = property.soldDate
         }
     }

@@ -444,7 +444,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
     // Display or Hide number of rooms / bathrooms / bedrooms according to data
     private fun setRooms(property: Property) {
-        if (property.numberOfRooms > 0) {
+        if (property.numberOfRooms!! > 0) {
             numberOfRooms.text = property.numberOfRooms.toString()
             titleRooms.visibility = View.VISIBLE
         } else {
@@ -455,7 +455,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
     // Display or Hide number of bedrooms according to data
     private fun setBedrooms(property: Property) {
-        if (property.numberOfBedrooms > 0) {
+        if (property.numberOfBedrooms!! > 0) {
             numberOfBedrooms.text = property.numberOfBedrooms.toString()
             titleBedrooms.visibility = View.VISIBLE
         } else {
@@ -466,7 +466,7 @@ class PropertyDetailsActivity: AppCompatActivity() {
 
     // Display or Hide number of bathrooms according to data
     private fun setBathrooms(property: Property) {
-        if (property.numberOfBathrooms > 0) {
+        if (property.numberOfBathrooms!! > 0) {
             numberOfBathrooms.text = property.numberOfBathrooms.toString()
             titleBathrooms.visibility = View.VISIBLE
         } else {
@@ -514,11 +514,11 @@ class PropertyDetailsActivity: AppCompatActivity() {
         postalCodeAndCity.text = buildString {
             append(property.address.postalCode)
             append(" ")
-            append(property.address.city!!.uppercase())
+            append(property.address.city.uppercase())
         }
 
         // Country
-        country.text = property.address.country!!.uppercase()
+        country.text = property.address.country.uppercase()
     }
 
 

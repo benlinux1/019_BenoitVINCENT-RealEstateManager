@@ -49,6 +49,7 @@ abstract class REMDatabase : RoomDatabase() {
         // Create 4 properties in room database
         private fun populateDatabase(db: REMDatabase) {
             val propertyDao = db.propertyDao()
+            val emptyList = mutableListOf<String?>()
             subscribeOnBackground {
                 propertyDao.insertProperty(Property(1, "Flat", "Marvellous flat", "Paris", 1200000,
                     250, "Marvellous flat in Manhattan with tremendous options...",
@@ -57,7 +58,7 @@ abstract class REMDatabase : RoomDatabase() {
                         "Lounge")),
                     PropertyAddress("12", "rue de la Paix", "", "75000", "Paris","France"),
                     true, "28/11/2022", "", "",
-                    User("1", "ben@test.com", "Ben", "Linux",""), 0,0,0  )
+                    User("1", "ben@test.com", "Ben", "Linux","", emptyList, true, emptyList), 0,0,0  )
                 )
                 propertyDao.insertProperty(Property(2, "Duplex", "Fabulous duplex", "London", 2200000,
                     300, "Fabulous Duplex in London with tremendous options...", mutableListOf(Picture(
@@ -65,7 +66,7 @@ abstract class REMDatabase : RoomDatabase() {
                         "Exterior")),
                     PropertyAddress("10", "Downing Street", "", "SW1", "London","United Kingdom"),
                     true, "28/11/2022", "", "",
-                    User("1", "ben@test.com", "Ben", "Linux",""),0,0,0)
+                    User("1", "ben@test.com", "Ben", "Linux","", emptyList, true, emptyList),0,0,0)
                 )
                 propertyDao.insertProperty(Property(3, "Penthouse", "Exceptional penthouse", "Manhattan", 5200000,
                     300, "Exceptional penthouse in Manhattan with tremendous options...", mutableListOf(Picture(
@@ -81,7 +82,7 @@ abstract class REMDatabase : RoomDatabase() {
                             "Pool 2")),
                     PropertyAddress("66", "Perry Street", "", "NY 10014", "New York", "United States"),
                     true, "28/11/2022", "", "12/01/2023 18:43:00",
-                    User("2eLNnlU4v4VRfZJ8EarjPzOCNi02", "franck@test.com", "Franck", "Black",""),0,0,0 )
+                    User("2eLNnlU4v4VRfZJ8EarjPzOCNi02", "franck@test.com", "Franck", "Black","", emptyList, true, emptyList),0,0,0 )
                 )
                 propertyDao.insertProperty(Property(4, "Penthouse", "Unbelievable penthouse", "GooglePlex", 4300000,
                     300, "Unbelievable penthouse near GooglePlex with tremendous options...",
@@ -90,7 +91,7 @@ abstract class REMDatabase : RoomDatabase() {
                         "Exterior")),
                     PropertyAddress("1024", "Alta avenue", "", "94043", "Mountain View","United States"),
                     true, "13/12/2022", "", "",
-                    User("1", "ben@test.com", "Ben", "Linux",""), 0,0,0  )
+                    User("1", "ben@test.com", "Ben", "Linux","", emptyList, true, emptyList), 0,0,0  )
                 )
             }
         }

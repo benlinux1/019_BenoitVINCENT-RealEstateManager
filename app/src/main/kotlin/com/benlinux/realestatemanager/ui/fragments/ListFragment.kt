@@ -4,7 +4,6 @@ import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -17,8 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.benlinux.realestatemanager.R
-import com.benlinux.realestatemanager.data.propertyManager.PropertyManager
-import com.benlinux.realestatemanager.data.userManager.UserManager
 import com.benlinux.realestatemanager.injections.ViewModelFactory
 import com.benlinux.realestatemanager.ui.adapters.ListAdapter
 import com.benlinux.realestatemanager.ui.models.Property
@@ -88,7 +85,7 @@ class ListFragment: Fragment() {
 
             // Synchronize local and remote databases if internet is available
             if (isInternetAvailable(requireContext())) {
-                syncFirestoreWithRoomDatabases(mProperties)
+                propertyViewModel.syncLocalAndRemoteDatabases()
             }
 
             // Update properties in recycler view adapter
@@ -96,103 +93,6 @@ class ListFragment: Fragment() {
 
             // Display / hide no property label according to situation
             setTextViews()
-        }
-    }
-
-    // Synchronize properties data with local Room database & remote Firestore Database
-    private fun syncFirestoreWithRoomDatabases(localProperties: MutableList<Property?>) {
-        // Call remote firestore properties data
-        PropertyManager.getAllPropertiesData().addOnCompleteListener { task ->
-            val firebaseList = task.result
-            val localList = mProperties
-
-            if (firebaseList != localList) {
-                // Check if remote properties are on local database
-                for (firebaseProperty in firebaseList!!) {
-                    // If remote property is not in Room Database
-                    if (!localList.contains(firebaseProperty)) {
-                        // If property is really absent, save it in local Room Database, and update realtor account
-                        if (firebaseProperty != null && !localList.any { it!!.id == firebaseProperty.id }) {
-                            propertyViewModel.saveProperty(firebaseProperty)
-                            UserManager.addPropertyToRealtorProperties(firebaseProperty.id.toString())
-                        // else, it means that property has been updated
-                        } else {
-                            // check date of update
-                            for (localProperty in localList) {
-                                val localPropertyDateOfUpdate: Date? = if (localProperty!!.updateDate.isNotEmpty()) {
-                                    convertStringToDate(localProperty.updateDate)
-                                } else {
-                                    Date(0)
-                                }
-                                val firebasePropertyDateOfUpdate: Date? =  if (firebaseProperty!!.updateDate.isNotEmpty()) {
-                                    convertStringToDate(firebaseProperty.updateDate)
-                                } else {
-                                    Date(0)
-                                }
-
-                                if (localProperty.id == firebaseProperty.id) {
-                                    // Update property in local or remote database according to last update
-                                    if (localPropertyDateOfUpdate!!.before(firebasePropertyDateOfUpdate) ) {
-                                        propertyViewModel.updateProperty(firebaseProperty)
-                                    } else {
-                                        PropertyManager.updateProperty(localProperty).addOnCompleteListener {
-                                            Log.d("FIREBASE UPDATE", "Room property imported")
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                // Check if local properties are on Firebase
-                for (localProperty in localProperties) {
-                    // If local property is not on Firebase, save it
-                    if (!firebaseList.contains(localProperty)) {
-                        // If property is really absent, save it in Firebase database, and update realtor account
-                        if (localProperty != null && !firebaseList.any { it!!.id == localProperty.id }) {
-                            // if realtor created property without internet connexion, update also realtor data
-                            if (localProperty.realtor.email.isEmpty()) {
-                                UserManager.getUserDataById(localProperty.realtor.id)
-                                    .addOnSuccessListener { user ->
-                                        localProperty.realtor = user!!
-                                        propertyViewModel.updateProperty(localProperty)
-                                        PropertyManager.createProperty(localProperty)
-                                        UserManager.addPropertyToRealtorProperties(localProperty.id.toString())
-                                }
-                            // If realtor is already stored, only save property in firebase
-                            } else {
-                                PropertyManager.createProperty(localProperty)
-                                UserManager.addPropertyToRealtorProperties(localProperty.id.toString())
-                            }
-                        // Else, it means that property was updated
-                        } else {
-                            // check date of update
-                            for (firebaseProperty in firebaseList) {
-                                val localPropertyDateOfUpdate: Date? = if (localProperty!!.updateDate.isNotEmpty()) {
-                                    convertStringToDate(localProperty.updateDate)
-                                } else {
-                                    Date(0)
-                                }
-                                val firebasePropertyDateOfUpdate: Date? =  if (firebaseProperty!!.updateDate.isNotEmpty()) {
-                                    convertStringToDate(firebaseProperty.updateDate)
-                                } else {
-                                    Date(0)
-                                }
-                                if (localProperty.id == firebaseProperty.id) {
-                                    // Update property in local or remote database according to last update
-                                    if (localPropertyDateOfUpdate!!.before(firebasePropertyDateOfUpdate) ) {
-                                        propertyViewModel.updateProperty(firebaseProperty)
-                                    } else {
-                                        PropertyManager.updateProperty(localProperty).addOnCompleteListener {
-                                            Log.d("FIREBASE UPDATE", "Room property imported")
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -451,7 +351,7 @@ class ListFragment: Fragment() {
             } else { null }
 
             val soldDate = if (property?.soldDate?.isNotEmpty() == true) {
-                convertStringToShortDate(property.soldDate)
+                convertStringToShortDate(property.soldDate!!)
             } else { null }
 
             // Check dates

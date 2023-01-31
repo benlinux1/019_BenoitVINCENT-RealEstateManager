@@ -162,8 +162,8 @@ class SettingsActivity: AppCompatActivity() {
         UserManager.getUserData()?.addOnSuccessListener { user ->
             if (user != null) {
                 // Set user name
-                userFirstName.text = user.firstName.toEditable()
-                userLastName.text = user.lastName.toEditable()
+                userFirstName.text = user.firstName!!.toEditable()
+                userLastName.text = user.lastName!!.toEditable()
                 // User email
                 userEmail.text = user.email.toEditable()
                 // Set realtor switch

@@ -93,7 +93,7 @@ class AddPropertyActivity: AppCompatActivity() {
     private lateinit var pictureAdapter: PictureAdapter
 
     // Created Property
-    private var property: Property = Property()
+    private var property: Property? = null
 
     // Spinners
     private lateinit var roomSpinner: Spinner
@@ -165,7 +165,7 @@ class AddPropertyActivity: AppCompatActivity() {
     }
 
 
-     // Close current activity and turn back to main activity if back button is clicked
+    // Close current activity and turn back to main activity if back button is clicked
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             val mainActivityIntent = Intent(this, MainActivity::class.java)
@@ -197,13 +197,13 @@ class AddPropertyActivity: AppCompatActivity() {
                 // Create property object with data in fields
                 collectPropertyData()
                 // save property in local Room database
-                propertyViewModel.saveProperty(property)
+                propertyViewModel.saveProperty(property!!)
                 Log.d("PROPERTY CREATED", property.toString())
                 // Update realtor properties list
                 if (isInternetAvailable(this)) {
-                    UserManager.addPropertyToRealtorProperties(property.id.toString())
+                    UserManager.addPropertyToRealtorProperties(property!!.id.toString())
                 }
-                Log.d("REALTOR UPDATE ADD", property.id.toString())
+                Log.d("REALTOR UPDATE ADD", property!!.id.toString())
                 // Go to Main Activity
                 val mainActivityIntent = Intent(this, MainActivity::class.java)
                 startActivity(mainActivityIntent)
@@ -250,22 +250,22 @@ class AddPropertyActivity: AppCompatActivity() {
 
     // Create property action that retrieves all data
     private fun collectPropertyData() {
-        property.name = title.text.toString()
-        property.area = area.text.toString()
-        property.type = getPropertyType()
+        property!!.name = title.text.toString()
+        property!!.area = area.text.toString()
+        property!!.type = getPropertyType()
         getPropertyPrice()
         getPropertySurface()
-        property.description = description.text.toString()
-        property.isAvailable = isPropertyAvailable()
-        property.creationDate = getTodayDate()
-        property.updateDate = getTodayDate()
-        if (!property.isAvailable) {
-            property.soldDate = dateOfSold!!
+        property!!.description = description.text.toString()
+        property!!.isAvailable = isPropertyAvailable()
+        property!!.creationDate = getTodayDate()
+        property!!.updateDate = getTodayDate()
+        if (!property!!.isAvailable) {
+            property!!.soldDate = dateOfSold!!
         }
-        property.realtor = realtor!!
-        property.address = getPropertyAddress()
-        property.id = System.currentTimeMillis().toInt()
-        property.pictures = picturesList
+        property!!.realtor = realtor!!
+        property!!.address = getPropertyAddress()
+        property!!.id = System.currentTimeMillis().toInt()
+        property!!.pictures = picturesList
     }
 
     private fun checkUserIdInSharedPreferences() {
@@ -306,7 +306,7 @@ class AddPropertyActivity: AppCompatActivity() {
                 val selectedText = parent!!.getChildAt(0) as TextView
                 selectedText.setTextColor(
                     ContextCompat.getColor(applicationContext, R.color.colorAccent))
-                property.numberOfRooms = roomAdapter.getItem(position) as Int
+                property!!.numberOfRooms = roomAdapter.getItem(position) as Int
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -336,7 +336,7 @@ class AddPropertyActivity: AppCompatActivity() {
                 val selectedText = parent!!.getChildAt(0) as TextView
                 selectedText.setTextColor(
                     ContextCompat.getColor(applicationContext, R.color.colorAccent))
-                property.numberOfBedrooms = bedroomAdapter.getItem(position) as Int
+                property!!.numberOfBedrooms = bedroomAdapter.getItem(position) as Int
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -363,7 +363,7 @@ class AddPropertyActivity: AppCompatActivity() {
                 val selectedText = parent!!.getChildAt(0) as TextView
                 selectedText.setTextColor(
                     ContextCompat.getColor(applicationContext, R.color.colorAccent))
-                property.numberOfBathrooms = bathroomAdapter.getItem(position) as Int
+                property!!.numberOfBathrooms = bathroomAdapter.getItem(position) as Int
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -390,7 +390,7 @@ class AddPropertyActivity: AppCompatActivity() {
     private fun getPropertyPrice() {
         val priceValue = price.text.toString()
         try {
-            property.price = priceValue.toInt()
+            property!!.price = priceValue.toInt()
         } catch (e: NumberFormatException) {
             Log.d("ERROR PRICE CONVERSION", e.toString())
         }
@@ -400,7 +400,7 @@ class AddPropertyActivity: AppCompatActivity() {
     private fun getPropertySurface() {
         val surfaceValue = surface.text.toString()
         try {
-            property.surface = surfaceValue.toInt()
+            property!!.surface = surfaceValue.toInt()
         } catch (e: NumberFormatException) {
             Log.d("ERROR SURFACE", e.toString())
         }
@@ -675,12 +675,12 @@ class AddPropertyActivity: AppCompatActivity() {
     // Create property Address
     private fun getPropertyAddress(): PropertyAddress {
         return PropertyAddress(
-                streetNumber.text.toString(),
-                streetName.text.toString(),
-                addressComplement.text.toString(),
-                postalCode.text.toString(),
-                city.text.toString(),
-                country.text.toString()
+            streetNumber.text.toString(),
+            streetName.text.toString(),
+            addressComplement.text.toString(),
+            postalCode.text.toString(),
+            city.text.toString(),
+            country.text.toString()
         )
     }
 
