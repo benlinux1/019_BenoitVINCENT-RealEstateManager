@@ -1,9 +1,13 @@
 package com.benlinux.realestatemanager.ui.activities
 
-import android.app.DatePickerDialog
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.*
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -19,6 +23,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -93,7 +99,7 @@ class AddPropertyActivity: AppCompatActivity() {
     private lateinit var pictureAdapter: PictureAdapter
 
     // Created Property
-    private var property: Property? = null
+    private var property: Property = Property()
 
     // Spinners
     private lateinit var roomSpinner: Spinner
@@ -114,11 +120,17 @@ class AddPropertyActivity: AppCompatActivity() {
     // Date of sold
     private var dateOfSold: String? = null
 
+    // Notification
+    private lateinit var channelId: String
+    private lateinit var channelName: String
+    private var notificationPermissionIsGranted = true
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_proprerty)
 
+        checkNotificationPermissions()
         setToolbar()
         checkUserIdInSharedPreferences()
         getCurrentRealtor()
@@ -196,14 +208,19 @@ class AddPropertyActivity: AppCompatActivity() {
             if (checkPropertyFields()) {
                 // Create property object with data in fields
                 collectPropertyData()
+
                 // save property in local Room database
-                propertyViewModel.saveProperty(property!!)
+                propertyViewModel.saveProperty(property)
                 Log.d("PROPERTY CREATED", property.toString())
+
+                // Send notification
+                sendCreationNotification(property.name)
+
                 // Update realtor properties list
                 if (isInternetAvailable(this)) {
-                    UserManager.addPropertyToRealtorProperties(property!!.id.toString())
+                    UserManager.addPropertyToRealtorProperties(property.id.toString())
                 }
-                Log.d("REALTOR UPDATE ADD", property!!.id.toString())
+                
                 // Go to Main Activity
                 val mainActivityIntent = Intent(this, MainActivity::class.java)
                 startActivity(mainActivityIntent)
@@ -250,22 +267,22 @@ class AddPropertyActivity: AppCompatActivity() {
 
     // Create property action that retrieves all data
     private fun collectPropertyData() {
-        property!!.name = title.text.toString()
-        property!!.area = area.text.toString()
-        property!!.type = getPropertyType()
+        property.name = title.text.toString()
+        property.area = area.text.toString()
+        property.type = getPropertyType()
         getPropertyPrice()
         getPropertySurface()
-        property!!.description = description.text.toString()
-        property!!.isAvailable = isPropertyAvailable()
-        property!!.creationDate = getTodayDate()
-        property!!.updateDate = getTodayDate()
-        if (!property!!.isAvailable) {
-            property!!.soldDate = dateOfSold!!
+        property.description = description.text.toString()
+        property.isAvailable = isPropertyAvailable()
+        property.creationDate = getTodayDate()
+        property.updateDate = getTodayDate()
+        if (!property.isAvailable) {
+            property.soldDate = dateOfSold
         }
-        property!!.realtor = realtor!!
-        property!!.address = getPropertyAddress()
-        property!!.id = System.currentTimeMillis().toInt()
-        property!!.pictures = picturesList
+        property.realtor = realtor!!
+        property.address = getPropertyAddress()
+        property.id = System.currentTimeMillis().toInt()
+        property.pictures = picturesList
     }
 
     private fun checkUserIdInSharedPreferences() {
@@ -306,7 +323,7 @@ class AddPropertyActivity: AppCompatActivity() {
                 val selectedText = parent!!.getChildAt(0) as TextView
                 selectedText.setTextColor(
                     ContextCompat.getColor(applicationContext, R.color.colorAccent))
-                property!!.numberOfRooms = roomAdapter.getItem(position) as Int
+                property.numberOfRooms = roomAdapter.getItem(position) as Int
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -336,7 +353,7 @@ class AddPropertyActivity: AppCompatActivity() {
                 val selectedText = parent!!.getChildAt(0) as TextView
                 selectedText.setTextColor(
                     ContextCompat.getColor(applicationContext, R.color.colorAccent))
-                property!!.numberOfBedrooms = bedroomAdapter.getItem(position) as Int
+                property.numberOfBedrooms = bedroomAdapter.getItem(position) as Int
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -363,7 +380,7 @@ class AddPropertyActivity: AppCompatActivity() {
                 val selectedText = parent!!.getChildAt(0) as TextView
                 selectedText.setTextColor(
                     ContextCompat.getColor(applicationContext, R.color.colorAccent))
-                property!!.numberOfBathrooms = bathroomAdapter.getItem(position) as Int
+                property.numberOfBathrooms = bathroomAdapter.getItem(position) as Int
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -390,7 +407,7 @@ class AddPropertyActivity: AppCompatActivity() {
     private fun getPropertyPrice() {
         val priceValue = price.text.toString()
         try {
-            property!!.price = priceValue.toInt()
+            property.price = priceValue.toInt()
         } catch (e: NumberFormatException) {
             Log.d("ERROR PRICE CONVERSION", e.toString())
         }
@@ -400,7 +417,7 @@ class AddPropertyActivity: AppCompatActivity() {
     private fun getPropertySurface() {
         val surfaceValue = surface.text.toString()
         try {
-            property!!.surface = surfaceValue.toInt()
+            property.surface = surfaceValue.toInt()
         } catch (e: NumberFormatException) {
             Log.d("ERROR SURFACE", e.toString())
         }
@@ -744,5 +761,109 @@ class AddPropertyActivity: AppCompatActivity() {
 
         // Show date dialog
         datePickerDialog.show()
+    }
+
+    // Create notification channel for API 26+
+    private fun createNotificationChannel() {
+        channelId = resources.getString(R.string.app_name)
+        channelName = resources.getString(R.string.app_name)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT).apply {
+                lightColor = Color.BLUE
+                enableLights(true)
+            }
+            val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            manager.createNotificationChannel(channel)
+        }
+    }
+
+    @SuppressLint("MissingPermission", "UnspecifiedImmutableFlag")
+    private fun sendCreationNotification(notificationText: String) {
+        // Create channel
+        createNotificationChannel()
+
+        // Define intent on notification click
+        val notificationIntent = Intent(this, MainActivity::class.java)
+        // Define intent with flag that update current activity if app is open
+
+        // Define intent with flag that update current activity if app is open
+        val contentIntent: PendingIntent? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // For API 31+
+            PendingIntent.getActivity(
+                this,
+                0,
+                notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+            )
+        } else {
+            // For API 30 and less
+            PendingIntent.getActivity(
+                this,
+                0,
+                notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        }
+
+        // Define notification text message
+        val notificationMessage = buildString {
+            append(getString(R.string.notification_message))
+            append(notificationText)
+        }
+
+        // Build notification attributes
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setContentTitle(getString(R.string.notification_title))
+            .setContentText(notificationMessage)
+            .setSmallIcon(R.mipmap.drawer_logo)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(contentIntent)
+            .setAutoCancel(false)
+            .setOnlyAlertOnce(true)
+            .build()
+
+
+        val notificationManager = NotificationManagerCompat.from(this)
+
+        // Notify user
+        if (notificationPermissionIsGranted) {
+            notificationManager.notify(1, notification)
+        }
+    }
+
+    // Check for location permission
+    private fun checkNotificationPermissions() {
+        // Callback for notification permission
+        if (Build.VERSION.SDK_INT <= 33) {
+            val requestPermission =
+                registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+
+                    if (isGranted) { // If permission is granted
+                        notificationPermissionIsGranted = true
+                        Log.d("LOG_TAG", "notification permission granted by the user")
+
+                    } else { // If permission is not granted
+                        notificationPermissionIsGranted = false
+                        Log.d("LOG_TAG", "notification permission denied by the user")
+                    }
+                }
+            // If location permission is not granted yet
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // Prompt user for location permission if not granted yet
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    requestPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+                }
+                // Else, location has been granted
+            } else {
+                notificationPermissionIsGranted = true
+                Log.d("LOG_TAG", "notification permission granted by the user yet")
+            }
+        } else {
+            notificationPermissionIsGranted = true
+        }
     }
 }

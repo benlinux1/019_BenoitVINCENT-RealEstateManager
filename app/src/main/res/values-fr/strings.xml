@@ -227,4 +227,7 @@
     <string name="room_name_length_error">Please fix room name length</string>
     <string name="required_field">* Champ requis</string>
 
+    <string name="notification_title">Annonce créée avec succès</string>
+    <string name="notification_message">Le bien suivant a été créé :&#160;</string>
+
 </resources>

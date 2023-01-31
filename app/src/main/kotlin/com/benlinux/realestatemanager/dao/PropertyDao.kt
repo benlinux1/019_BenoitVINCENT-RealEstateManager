@@ -1,5 +1,6 @@
 package com.benlinux.realestatemanager.dao
 
+import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.benlinux.realestatemanager.ui.models.Property
@@ -39,5 +40,10 @@ interface PropertyDao {
     // Gets a given property by id
     @Query("SELECT * FROM property_table WHERE property_id = :id")
     fun getPropertyById(id: Int): LiveData<Property>
+
+
+    // Gets a given property by id with cursor, for content provider
+    @Query("SELECT * FROM property_table WHERE property_id = :id")
+    fun getPropertyWithCursor(propertyId: Int): Cursor?
 
 }
