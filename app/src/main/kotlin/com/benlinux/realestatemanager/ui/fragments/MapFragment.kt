@@ -448,6 +448,7 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
+        // Call map when ready
         mapFragment.getMapAsync(this)
     }
 }
