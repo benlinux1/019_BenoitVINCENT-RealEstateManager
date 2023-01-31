@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.*
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -34,7 +33,6 @@ import com.google.android.gms.maps.GoogleMap.*
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import java.util.*
 
 
 class MapFragment: Fragment(), OnMapReadyCallback {
@@ -450,18 +448,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
     override fun onResume() {
         super.onResume()
-        // Get current location if not set yet
-        if (locationPermissionIsGranted) {
-            if (userLocation == null) {
-                getCurrentLocation()
-            // if user has already been located, animate camera on his position
-            } else {
-                setMarkerForUserLocation(mGoogleMap, userLocation!!, "last")
-                moveCamera(mGoogleMap, userLocation!!)
-                animateCamera(mGoogleMap, userLocation!!, 15f)
-            }
-            updateLocationUI()
-        }
+        mapFragment.getMapAsync(this)
     }
-
 }
