@@ -50,7 +50,7 @@ class PropertyDaoUnitTest {
         // Create property
         val picturesList = mutableListOf<Picture?>()
         val address1 = PropertyAddress("number 1", "street 1", "complement 1", "postal code 1", "city 1", "country 1")
-        val realtor = User("1", "realtor1@test.com", "first name 1", "last name 1", "avatar url 1")
+        val realtor = User("1", "realtor1@test.com", "first name 1", "last name 1", "avatar url 1", mutableListOf(),true, mutableListOf())
         val property = Property(1, "flat", "name 1", "area 1", 1000000, 100, "description 1", picturesList, address1, true, "06/01/2023", "", "06/01/2023 08:00:00", realtor, 10, 2, 5)
 
         // Insert property in room database
@@ -71,7 +71,7 @@ class PropertyDaoUnitTest {
         // Create property
         val picturesList = mutableListOf<Picture?>()
         val address1 = PropertyAddress("number 1", "street 1", "complement 1", "postal code 1", "city 1", "country 1")
-        val realtor = User("1", "realtor1@test.com", "first name 1", "last name 1", "avatar url 1")
+        val realtor = User("1", "realtor1@test.com", "first name 1", "last name 1", "avatar url 1", mutableListOf(),true, mutableListOf())
         val propertyOriginal = Property(1, "flat", "name 1", "area 1", 1000000, 100, "description 1", picturesList, address1, true, "06/01/2023", "", "06/01/2023 08:00:00", realtor, 10, 2, 5)
 
         // Update property data with new price (990000)

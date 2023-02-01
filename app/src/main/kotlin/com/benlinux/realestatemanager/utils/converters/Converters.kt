@@ -59,4 +59,34 @@ class Converters {
         return Gson().fromJson(data, stringType)
     }
 
+    companion object {
+
+        fun stringToRealtor(data: String): User {
+            val userType = object : TypeToken<User>() {}.type
+            return Gson().fromJson(data, userType)
+        }
+
+        fun realtorToString(user: User): String {
+            return Gson().toJson(user)
+        }
+
+        fun stringToPicturesList(data : String) : MutableList<Picture?> {
+            val typeToken = object : TypeToken<List<Picture>>() {}.type
+            return Gson().fromJson(data, typeToken)
+        }
+
+        fun stringToAddress(data: String): PropertyAddress {
+            val addressType = object : TypeToken<PropertyAddress>() {}.type
+            return Gson().fromJson(data, addressType)
+        }
+
+        fun addressToString(address: PropertyAddress): String {
+            return Gson().toJson(address)
+        }
+
+        fun picturesToString(list : MutableList<Picture?>): String {
+            return Gson().toJson(list)
+        }
+    }
+
 }

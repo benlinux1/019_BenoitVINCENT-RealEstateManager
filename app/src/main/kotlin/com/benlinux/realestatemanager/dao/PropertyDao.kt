@@ -34,7 +34,7 @@ interface PropertyDao {
     fun deletePropertyById(id: Int): Int
 
     // Get all properties from the table
-    @Query("select * from property_table order by property_id asc")
+    @Query("select * from property_table ORDER BY property_id asc")
     fun getAllProperties(): LiveData<MutableList<Property?>>
 
     // Gets a given property by id
@@ -44,6 +44,10 @@ interface PropertyDao {
 
     // Gets a given property by id with cursor, for content provider
     @Query("SELECT * FROM property_table WHERE property_id = :id")
-    fun getPropertyWithCursor(propertyId: Int): Cursor?
+    fun getPropertyWithCursor(id: Int): Cursor?
+
+    // Get all properties with cursor, for content provider
+    @Query("SELECT * FROM property_table ORDER BY property_id asc")
+    fun getAllPropertiesWithCursor(): Cursor
 
 }

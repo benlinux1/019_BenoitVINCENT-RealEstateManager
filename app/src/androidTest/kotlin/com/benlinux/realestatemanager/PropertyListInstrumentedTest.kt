@@ -16,7 +16,6 @@ import com.benlinux.realestatemanager.ui.models.Picture
 import com.benlinux.realestatemanager.ui.models.Property
 import com.benlinux.realestatemanager.ui.models.PropertyAddress
 import com.benlinux.realestatemanager.ui.models.User
-import kotlinx.coroutines.*
 import org.hamcrest.Matchers
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -42,7 +41,7 @@ class PropertyListInstrumentedTest {
                 "Pool 2")),
         PropertyAddress("66", "Perry Street", "", "NY 10014", "New York", "United States"),
         true, "28/11/2022", "", "12/01/2023 18:43:00",
-        User("2eLNnlU4v4VRfZJ8EarjPzOCNi02", "franck@test.com", "Franck", "Black",""),0,0,0 )
+        User("2eLNnlU4v4VRfZJ8EarjPzOCNi02", "franck@test.com", "Franck", "Black","", mutableListOf(), true, mutableListOf()),0,0,0 )
 
 
     @Test

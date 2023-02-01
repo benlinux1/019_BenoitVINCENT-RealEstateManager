@@ -4,6 +4,14 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import com.benlinux.realestatemanager.ui.models.User
+import com.benlinux.realestatemanager.utils.Constants.Companion.AVATAR_FIELD
+import com.benlinux.realestatemanager.utils.Constants.Companion.COLLECTION_USERS
+import com.benlinux.realestatemanager.utils.Constants.Companion.EMAIL_FIELD
+import com.benlinux.realestatemanager.utils.Constants.Companion.FAVORITES_FIELD
+import com.benlinux.realestatemanager.utils.Constants.Companion.FIRSTNAME_FIELD
+import com.benlinux.realestatemanager.utils.Constants.Companion.LASTNAME_FIELD
+import com.benlinux.realestatemanager.utils.Constants.Companion.PROPERTIES_FIELD
+import com.benlinux.realestatemanager.utils.Constants.Companion.REALTOR_FIELD
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -16,15 +24,6 @@ import java.util.*
 class UserRepository {
 
     companion object {
-        // FIRESTORE DATA
-        private const val COLLECTION_NAME = "users"
-        private const val FIRSTNAME_FIELD = "firstName"
-        private const val LASTNAME_FIELD = "lastName"
-        private const val EMAIL_FIELD = "email"
-        private const val AVATAR_FIELD = "avatarUrl"
-        private const val REALTOR_FIELD = "realtor"
-        private const val FAVORITES_FIELD = "favorites"
-        private const val PROPERTIES_FIELD = "realtorProperties"
 
         fun getCurrentUser(): FirebaseUser? {
             return FirebaseAuth.getInstance().currentUser
@@ -46,7 +45,7 @@ class UserRepository {
 
         // Get the Collection Reference in Firestore Database
         private fun getUsersCollection(): CollectionReference {
-            return FirebaseFirestore.getInstance().collection(COLLECTION_NAME)
+            return FirebaseFirestore.getInstance().collection(COLLECTION_USERS)
         }
 
         // Create User in Firestore
@@ -199,8 +198,5 @@ class UserRepository {
             val uid = getCurrentUserUID()!!
             return getUsersCollection().document(uid).delete()
         }
-
     }
-
-
 }

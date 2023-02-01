@@ -158,7 +158,7 @@ class PictureAdapter(pictures: MutableList<Picture?>, context: Context, userIsRe
             title.text = picture.room
 
             // Set property picture
-            if (picture.url!!.isNotEmpty()) {
+            if (picture.url.isNotEmpty()) {
                 Glide.with(localContext)
                     .load(picture.url)
                     .apply(RequestOptions.centerCropTransform())

@@ -220,7 +220,7 @@ class AddPropertyActivity: AppCompatActivity() {
                 if (isInternetAvailable(this)) {
                     UserManager.addPropertyToRealtorProperties(property.id.toString())
                 }
-                
+
                 // Go to Main Activity
                 val mainActivityIntent = Intent(this, MainActivity::class.java)
                 startActivity(mainActivityIntent)

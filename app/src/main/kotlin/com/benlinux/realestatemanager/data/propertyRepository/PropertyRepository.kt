@@ -3,6 +3,8 @@ package com.benlinux.realestatemanager.data.propertyRepository
 import android.net.Uri
 import android.util.Log
 import com.benlinux.realestatemanager.ui.models.Property
+import com.benlinux.realestatemanager.utils.Constants.Companion.COLLECTION_PROPERTIES
+import com.benlinux.realestatemanager.utils.Constants.Companion.PICTURES_FOLDER
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,13 +17,9 @@ class PropertyRepository {
 
     companion object {
 
-        // FIRESTORE DATA
-        private const val COLLECTION_NAME = "properties"
-        private const val PICTURES_FOLDER = "pictures"
-
         // Get the Collection Reference in Firestore Database
         private fun getPropertiesCollection(): CollectionReference {
-            return FirebaseFirestore.getInstance().collection(COLLECTION_NAME)
+            return FirebaseFirestore.getInstance().collection(COLLECTION_PROPERTIES)
         }
 
         // Get all properties from Firestore
