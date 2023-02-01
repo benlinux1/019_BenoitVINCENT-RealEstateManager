@@ -34,4 +34,3 @@ fun convertStringToShortDate(string: String): Date? {
     val formatter = SimpleDateFormat("dd/MM/yyyy")
     return formatter.parse(string)
 }
-

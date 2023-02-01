@@ -237,8 +237,8 @@
     <string name="room_name_length_error">Please fix room name length</string>
     <string name="required_field">* Required field</string>
 
-    <string name="notification_title">Creation successful</string>
-    <string name="notification_message">This property has been created :&#160;</string>
+    <string name="notification_title">REAL ESTATE MANAGER</string>
+    <string name="notification_message">Property created successfully :&#160;</string>
 
 
 </resources>
