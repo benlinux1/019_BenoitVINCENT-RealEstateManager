@@ -14,6 +14,7 @@ import androidx.core.app.NotificationManagerCompat
 import com.benlinux.realestatemanager.R
 
 // Create notification channel for API 26+
+// Useful for user who want to configure notifications settings on his device
 fun createNotificationChannel(context: Context, channelId: String ) {
     val channelName = context.resources.getString(R.string.app_name)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

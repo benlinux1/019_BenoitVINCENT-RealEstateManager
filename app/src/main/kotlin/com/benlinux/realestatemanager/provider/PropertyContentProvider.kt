@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
+import android.util.Log
 import com.benlinux.realestatemanager.database.REMDatabase
 import com.benlinux.realestatemanager.utils.Constants.Companion.AUTHORITY
 import com.benlinux.realestatemanager.utils.Constants.Companion.CODE_PROPERTY_DIR
@@ -16,6 +17,7 @@ class PropertyContentProvider : ContentProvider() {
 
     companion object{
         val URI_ITEM: Uri = Uri.parse("content://$AUTHORITY/$COLLECTION_PROPERTIES")
+        val URI_COLLECTION: Uri = Uri.parse("content://$AUTHORITY/$COLLECTION_PROPERTIES")
     }
 
     private val uriMatcher = UriMatcher(UriMatcher.NO_MATCH).apply {
@@ -37,7 +39,12 @@ class PropertyContentProvider : ContentProvider() {
         selectionArgs: Array<String?>?,
         sortOrder: String?
     ): Cursor? {
-        val id = uri.lastPathSegment?.toInt()
+        var id: Int? = null
+        try {
+            id = uri.lastPathSegment?.toInt()
+        } catch (e: Exception) {
+            Log.d("Parse Int", "no ID to convert")
+        }
         val database = REMDatabase.getInstance(context!!)
         return when(uriMatcher.match(uri)){
             CODE_PROPERTY_ITEM -> id?.let { database.propertyDao().getPropertyWithCursor(id) }

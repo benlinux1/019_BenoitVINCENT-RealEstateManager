@@ -49,6 +49,7 @@ class ContentProviderTest {
     }
 
     @Test
+    // Test to retrieve a given property values with Content Provider
     fun getFirstPropertyValues() {
 
         // TEST
@@ -155,6 +156,21 @@ class ContentProviderTest {
             (0)
         )
     }
+
+    @Test
+    // Test that content provider retrieve the right count in actual database (9)
+    fun getPropertiesCount() {
+
+        // Define cursor with query on properties collection
+        val cursor: Cursor? = mContentResolver!!.query(
+            PropertyContentProvider.URI_COLLECTION, null, null, null, null
+        )
+
+        Assert.assertEquals(9,
+            cursor!!.count,
+        )
+    }
+
 
     companion object {
         // DATA SET FOR TEST
