@@ -1,12 +1,13 @@
-![da-android-real-estate-manager](https://user-images.githubusercontent.com/78255467/211861909-49492dc9-09db-42f3-bde8-e7b3d0c7c7b9.svg)
-[![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
+![benoit-vincent-real-estate-manager](https://github.com/benlinux1/DA_ANDROID_REAL_ESTATE_MANAGER/assets/78255467/39744942-3eb7-47ec-9d5d-6de8ba7db600)![android-app-100_-kotlin](https://github.com/benlinux1/DA_ANDROID_REAL_ESTATE_MANAGER/assets/78255467/ce5a2080-50bb-4ea4-963d-915f3f8e8c2b)
 
 # VERSION FRANCAISE
 (English translation in the 2nd part of the documentation below)
 
 
 # REAL ESTATE MANAGER
-Ce dépôt contient une application pour le P9 du parcours **DA ANDROID**, intitulée **Real Estate Manager**.
+Ce dépôt contient une application Android intitulée **Real Estate Manager**, pour une grande agence new-yorkaise spécialisée dans la vente de biens d’exception : duplex, lofts, penthouse et manoirs.
+
+Cette application devait permettre aux agents de pouvoir accéder aux fiches des différents biens immobiliers depuis leur équipement mobile.
 
 
 ## Technologies
@@ -48,6 +49,24 @@ L'application fonctionne hors-ligne (sans données mobiles ni wifi) :
 - Les biens immobiliers présents lors de votre précédente connexion seront affichés même si aucune connexion réseau n'est disponible.
 - Un agent immobilier peut également créer une nouvelle annonce de bien immobilier, hors-ligne, ou modifier une annonce qu'il a créée. 
 Tous les nouveaux biens ou biens modifiés seront automatiquement synchronisés avec la base de données distante, ainsi qu'avec tous les appareils, lorsque la connexion internet sera rétablie.
+
+
+## Cahier des charges
+
+- Design de l'application
+- Respecter au maximum les directives et les recommandations du Material Design de Google, afin de garantir la meilleure expérience utilisateur possible
+- L’application doit fonctionner à la fois sur smartphone et tablette, et doit donc prévoir un affichage adapté sur ces deux équipements
+- Conversion d'un prix d'un bien immobilier (Dollars vers Euros)
+- Vérification de la connexion réseau
+- Mode hors-ligne / en ligne
+- Attributs exhaustifs d'un bien immobilier  (surface, prix, nombre de pièces, date de publication, adresse, services de proximité...)
+- Gestion complète des biens immobiliers
+- Géo-localisation
+- Moteur de recherche
+- Recherche multi-critères
+- Synchroniser l'ensemble des biens sur un Back-end comme Firebase
+- Code est entièrement écrit en anglais
+- L'application doit supporter Android 5.0 et les versions supérieures
 
 
 ## Tests
@@ -122,8 +141,7 @@ Notre équipe : BenLinux & FranckBlack
 ==========================================================================================
 
 
-![da-android-real-estate-manager](https://user-images.githubusercontent.com/78255467/211861909-49492dc9-09db-42f3-bde8-e7b3d0c7c7b9.svg)
-[![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
+![android-app-100_-kotlin](https://github.com/benlinux1/DA_ANDROID_REAL_ESTATE_MANAGER/assets/78255467/ce5a2080-50bb-4ea4-963d-915f3f8e8c2b)!
 
 
 # ENGLISH VERSION
@@ -132,8 +150,9 @@ Notre équipe : BenLinux & FranckBlack
 
 # Real Estate Manager
 
-This repository contains a mini app for the **DA Android** 9th projet, untitled **Real Estate Manager**.
+This repository contains an Android application entitled **Real Estate Manager**, for a large New York agency specializing in the sale of exceptional properties: duplexes, lofts, penthouses and mansions.
 
+The aim of this application was to allow agents to access the files of the various real estate properties from their mobile equipment.
 
 ## Technologies
 
@@ -173,6 +192,24 @@ This app works even without internet connection (LTE / Wifi) :
 - Properties that were displayed during your previous visit will appear, even if any internet connection is available.
 - A realtor can create a new property, when offline, or update one that he created.
 All new or updated properties will be synchronized with remote database, and all used devices, when network will be available.
+
+
+## Specifications
+
+- App design
+- Comply with Google's Material Design guidelines and recommendations as much as possible, in order to guarantee the best possible user experience
+- The application must work on both smartphone and tablet, and must therefore provide a suitable display on these two devices
+- Conversion of a price of a property (Dollars to Euros)
+- Checking the network connection
+- Offline/online mode
+- Exhaustive attributes of a property (surface, price, number of rooms, publication date, address, local services, etc.)
+- Complete property management
+- Geo-location
+- Search engine
+- Multi-criteria search
+- Synchronize all assets on a Back-end like Firebase
+- Code is entirely written in English
+- The application must support Android 5.0 and higher versions
 
   
 ## Tests
