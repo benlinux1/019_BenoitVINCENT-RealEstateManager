@@ -14,6 +14,24 @@ Cette application devait permettre aux agents de pouvoir accéder aux fiches des
 **100% KOTLIN**, ce projet a été réalisé à partir de l'IDE Android Studio.
 
 
+## Cahier des charges
+
+- **Design de l'application**
+- Respecter au maximum les directives et les recommandations du **Material Design** de Google, afin de garantir la meilleure expérience utilisateur possible
+- L’application doit fonctionner à la fois sur **smartphone et tablette**, et doit donc prévoir un affichage adapté sur ces deux équipements
+- Conversion d'un prix d'un bien immobilier (Dollars vers Euros)
+- Vérification de la **connexion réseau**
+- **Mode hors-ligne / en ligne**
+- Attributs exhaustifs d'un bien immobilier  (surface, prix, nombre de pièces, date de publication, adresse, services de proximité...)
+- **Gestion complète** des biens immobiliers
+- **Géo-localisation**
+- **Moteur de recherche**
+- **Recherche multi-critères**
+- Synchroniser l'ensemble des biens sur un **Back-end** comme Firebase
+- Code est entièrement écrit en anglais
+- L'application doit supporter Android 5.0 et les versions supérieures
+
+
 ## Fonctionnalités
 
 Cette applcation permet à un utilisateur de :
@@ -49,24 +67,6 @@ L'application fonctionne hors-ligne (sans données mobiles ni wifi) :
 - Les biens immobiliers présents lors de votre précédente connexion seront affichés même si aucune connexion réseau n'est disponible.
 - Un agent immobilier peut également créer une nouvelle annonce de bien immobilier, hors-ligne, ou modifier une annonce qu'il a créée. 
 Tous les nouveaux biens ou biens modifiés seront automatiquement synchronisés avec la base de données distante, ainsi qu'avec tous les appareils, lorsque la connexion internet sera rétablie.
-
-
-## Cahier des charges
-
-- **Design de l'application**
-- Respecter au maximum les directives et les recommandations du **Material Design** de Google, afin de garantir la meilleure expérience utilisateur possible
-- L’application doit fonctionner à la fois sur **smartphone et tablette**, et doit donc prévoir un affichage adapté sur ces deux équipements
-- Conversion d'un prix d'un bien immobilier (Dollars vers Euros)
-- Vérification de la **connexion réseau**
-- **Mode hors-ligne / en ligne**
-- Attributs exhaustifs d'un bien immobilier  (surface, prix, nombre de pièces, date de publication, adresse, services de proximité...)
-- **Gestion complète** des biens immobiliers
-- **Géo-localisation**
-- **Moteur de recherche**
-- **Recherche multi-critères**
-- Synchroniser l'ensemble des biens sur un **Back-end** comme Firebase
-- Code est entièrement écrit en anglais
-- L'application doit supporter Android 5.0 et les versions supérieures
 
 
 ## Tests
@@ -159,6 +159,24 @@ The aim of this application was to allow agents to access the files of the vario
 **100% KOTLIN**, this project was made with Android Studio IDE.
 
 
+## Specifications
+
+- **App design**
+- Comply with Google's **Material Design** guidelines and recommendations as much as possible, in order to guarantee the best possible user experience
+- The application must work on both **smartphone and tablet**, and must therefore provide a suitable display on these two devices
+- Conversion of a price of a property (Dollars to Euros)
+- Checking the **network connection**
+- **Offline / online mode**
+- **Exhaustive attributes** of a property (surface, price, number of rooms, publication date, address, local services, etc.)
+- **Complete property management**
+- **Geo-location**
+- **Search engine**
+- **Multi-criteria search**
+- Synchronize all assets on a **Back-end** like Firebase
+- Code is entirely written in English
+- The application must support Android 5.0 and higher versions
+
+
 ## Features
 
 This app allows an user to :
@@ -192,24 +210,6 @@ This app works even without internet connection (LTE / Wifi) :
 - Properties that were displayed during your previous visit will appear, even if any internet connection is available.
 - A realtor can create a new property, when offline, or update one that he created.
 All new or updated properties will be synchronized with remote database, and all used devices, when network will be available.
-
-
-## Specifications
-
-- **App design**
-- Comply with Google's **Material Design** guidelines and recommendations as much as possible, in order to guarantee the best possible user experience
-- The application must work on both **smartphone and tablet**, and must therefore provide a suitable display on these two devices
-- Conversion of a price of a property (Dollars to Euros)
-- Checking the **network connection**
-- **Offline / online mode**
-- **Exhaustive attributes** of a property (surface, price, number of rooms, publication date, address, local services, etc.)
-- **Complete property management**
-- **Geo-location**
-- **Search engine**
-- **Multi-criteria search**
-- Synchronize all assets on a **Back-end** like Firebase
-- Code is entirely written in English
-- The application must support Android 5.0 and higher versions
 
   
 ## Tests
