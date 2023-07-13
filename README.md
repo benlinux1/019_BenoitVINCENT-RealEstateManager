@@ -53,18 +53,18 @@ Tous les nouveaux biens ou biens modifiés seront automatiquement synchronisés 
 
 ## Cahier des charges
 
-- Design de l'application
-- Respecter au maximum les directives et les recommandations du Material Design de Google, afin de garantir la meilleure expérience utilisateur possible
-- L’application doit fonctionner à la fois sur smartphone et tablette, et doit donc prévoir un affichage adapté sur ces deux équipements
+- **Design de l'application**
+- Respecter au maximum les directives et les recommandations du **Material Design** de Google, afin de garantir la meilleure expérience utilisateur possible
+- L’application doit fonctionner à la fois sur **smartphone et tablette**, et doit donc prévoir un affichage adapté sur ces deux équipements
 - Conversion d'un prix d'un bien immobilier (Dollars vers Euros)
-- Vérification de la connexion réseau
-- Mode hors-ligne / en ligne
+- Vérification de la **connexion réseau**
+- **Mode hors-ligne / en ligne**
 - Attributs exhaustifs d'un bien immobilier  (surface, prix, nombre de pièces, date de publication, adresse, services de proximité...)
-- Gestion complète des biens immobiliers
-- Géo-localisation
-- Moteur de recherche
-- Recherche multi-critères
-- Synchroniser l'ensemble des biens sur un Back-end comme Firebase
+- **Gestion complète** des biens immobiliers
+- **Géo-localisation**
+- **Moteur de recherche**
+- **Recherche multi-critères**
+- Synchroniser l'ensemble des biens sur un **Back-end** comme Firebase
 - Code est entièrement écrit en anglais
 - L'application doit supporter Android 5.0 et les versions supérieures
 
@@ -196,18 +196,18 @@ All new or updated properties will be synchronized with remote database, and all
 
 ## Specifications
 
-- App design
-- Comply with Google's Material Design guidelines and recommendations as much as possible, in order to guarantee the best possible user experience
-- The application must work on both smartphone and tablet, and must therefore provide a suitable display on these two devices
+- **App design**
+- Comply with Google's **Material Design** guidelines and recommendations as much as possible, in order to guarantee the best possible user experience
+- The application must work on both **smartphone and tablet**, and must therefore provide a suitable display on these two devices
 - Conversion of a price of a property (Dollars to Euros)
-- Checking the network connection
-- Offline/online mode
-- Exhaustive attributes of a property (surface, price, number of rooms, publication date, address, local services, etc.)
-- Complete property management
-- Geo-location
-- Search engine
-- Multi-criteria search
-- Synchronize all assets on a Back-end like Firebase
+- Checking the **network connection**
+- **Offline / online mode**
+- **Exhaustive attributes** of a property (surface, price, number of rooms, publication date, address, local services, etc.)
+- **Complete property management**
+- **Geo-location**
+- **Search engine**
+- **Multi-criteria search**
+- Synchronize all assets on a **Back-end** like Firebase
 - Code is entirely written in English
 - The application must support Android 5.0 and higher versions
 
