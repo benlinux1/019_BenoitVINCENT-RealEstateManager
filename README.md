@@ -141,7 +141,7 @@ Notre équipe : BenLinux & FranckBlack
 ==========================================================================================
 
 
-![android-app-100_-kotlin](https://github.com/benlinux1/DA_ANDROID_REAL_ESTATE_MANAGER/assets/78255467/ce5a2080-50bb-4ea4-963d-915f3f8e8c2b)!
+![benoit-vincent-real-estate-manager](https://github.com/benlinux1/DA_ANDROID_REAL_ESTATE_MANAGER/assets/78255467/39744942-3eb7-47ec-9d5d-6de8ba7db600)![android-app-100_-kotlin](https://github.com/benlinux1/DA_ANDROID_REAL_ESTATE_MANAGER/assets/78255467/ce5a2080-50bb-4ea4-963d-915f3f8e8c2b)b)!
 
 
 # ENGLISH VERSION
